@@ -1,6 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:TabbedViewNavigatorApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
 								  xmlns:s="library://ns.adobe.com/flex/spark"
+								  width="100%"
+								  height="100%"
 								  >
 	
+	<s:ViewNavigator id="counterViewNavigator"
+					 firstView="info.tiefenauer.jasskass.addon.counter.views.CounterHomeView"
+					 label="Counter"
+					 width="100%"
+					 height="100%"
+					 >
+		<s:icon>
+			<s:MultiDPIBitmapSource source160dpi="@Embed('assets/icons/ico_cards_64.png')"
+									source240dpi="@Embed('assets/icons/ico_cards_96.png')"
+									source320dpi="@Embed('assets/icons/ico_cards_128.png')"
+									source480dpi="@Embed('assets/icons/ico_cards_256.png')"
+									/>
+		</s:icon>
+	</s:ViewNavigator>
+	
+	<s:ViewNavigator id="balanceViewNavigator"
+					 firstView="info.tiefenauer.jasskass.addon.balance.views.BalanceHomeView"
+					 label="Balance"
+					 width="100%"
+					 height="100%"
+					 >
+		<s:icon>
+			<s:MultiDPIBitmapSource source160dpi="@Embed('assets/icons/ico_cash_64.png')"
+									source240dpi="@Embed('assets/icons/ico_cash_96.png')"
+									source320dpi="@Embed('assets/icons/ico_cash_128.png')"
+									source480dpi="@Embed('assets/icons/ico_cash_256.png')"
+									/>
+		</s:icon>
+	</s:ViewNavigator>
+	
+	<s:ViewNavigator id="statisticsViewNavigator"
+					 firstView="info.tiefenauer.jasskass.addon.statistic.views.StatisticHomeView"
+					 label="Statistics"
+					 width="100%"
+					 height="100%"
+					 >
+		<s:icon>
+			<s:MultiDPIBitmapSource source160dpi="@Embed('assets/icons/ico_statistic_64.png')"
+									source240dpi="@Embed('assets/icons/ico_statistic_96.png')"
+									source320dpi="@Embed('assets/icons/ico_statistic_128.png')"
+									source480dpi="@Embed('assets/icons/ico_statistic_256.png')"
+									/>
+		</s:icon>
+	</s:ViewNavigator>
+	
+	<s:ViewNavigator id="profileViewNavigator"
+					 firstView="info.tiefenauer.jasskass.addon.profile.views.ProfileHomeView"
+					 label="Profile"
+					 width="100%"
+					 height="100%"
+					 >
+		<s:icon>
+			<s:MultiDPIBitmapSource source160dpi="@Embed('assets/icons/ico_profile_64.png')"
+									source240dpi="@Embed('assets/icons/ico_profile_96.png')"
+									source320dpi="@Embed('assets/icons/ico_profile_128.png')"
+									source480dpi="@Embed('assets/icons/ico_profile_256.png')"
+									/>
+		</s:icon>
+		
+	</s:ViewNavigator>
 </s:TabbedViewNavigatorApplication>
