@@ -2,7 +2,7 @@ package info.tiefenauer.jasskass.app.controller
 {
 	import avmplus.getQualifiedClassName;
 	
-	import org.robotlegs.mvcs.Command;
+	import robotlegs.bender.bundles.mvcs.Command;
 
 	/**
 	 * Base class for commands 
