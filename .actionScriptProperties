@@ -35,8 +35,6 @@
       <libraryPathEntry kind="1" linkType="1" path="${FLEXUNIT_LIB_LOCATION}/version4libs/FlexProject"/>
       <libraryPathEntry kind="1" linkType="1" path="${FLEXUNIT_LIB_LOCATION}/version4libs/FlexProject_Extended"/>
       <libraryPathEntry kind="1" linkType="1" path="${FLEXUNIT_LOCALE_LOCATION}"/>
-      <libraryPathEntry kind="3" linkType="1" path="D:/workspace/flex/robotlegs-framework-v2.1.0/bin/robotlegs-framework-v2.1.0.swc" useDefaultLinkType="false"/>
-      <libraryPathEntry kind="3" linkType="1" path="D:/workspace/flex/OAuth/libs/oauth-as3.swc" useDefaultLinkType="false"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>

@@ -4,8 +4,12 @@ package info.tiefenauer.jasskass.app
 	import info.tiefenauer.jasskass.addon.balance.views.interfaces.IBalanceView;
 	import info.tiefenauer.jasskass.addon.balance.views.phone.BalanceView;
 	import info.tiefenauer.jasskass.addon.counter.views.CounterViewMediator;
+	import info.tiefenauer.jasskass.addon.counter.views.OAuthRequestViewMediator;
+	import info.tiefenauer.jasskass.addon.counter.views.OAuthResponseViewMediator;
 	import info.tiefenauer.jasskass.addon.counter.views.interfaces.ICounterView;
 	import info.tiefenauer.jasskass.addon.counter.views.phone.CounterView;
+	import info.tiefenauer.jasskass.addon.counter.views.phone.OAuthRequestView;
+	import info.tiefenauer.jasskass.addon.counter.views.phone.OAuthResponseView;
 	import info.tiefenauer.jasskass.addon.profile.views.ProfileViewMediator;
 	import info.tiefenauer.jasskass.addon.profile.views.interfaces.IProfileView;
 	import info.tiefenauer.jasskass.addon.profile.views.phone.ProfileView;
@@ -39,6 +43,8 @@ package info.tiefenauer.jasskass.app
 			mediatorMap.map(IBalanceView).toMediator(BalanceViewMediator);
 			mediatorMap.map(IProfileView).toMediator(ProfileViewMediator);
 			mediatorMap.map(IStatisticsView).toMediator(StatisticsViewMediator);
+			mediatorMap.map(OAuthRequestView).toMediator(OAuthRequestViewMediator);
+			mediatorMap.map(OAuthResponseView).toMediator(OAuthResponseViewMediator);
 		}
 	}
 }
