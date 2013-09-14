@@ -1,5 +1,7 @@
 package flexUnitTests
 {
+	import org.flexunit.asserts.assertTrue;
+
 	public class SampleTest
 	{		
 		[Before]
@@ -22,6 +24,10 @@ package flexUnitTests
 		{
 		}
 		
+		[Test]
+		public function testSomething():void{
+			assertTrue(true);
+		}
 		
 	}
 }

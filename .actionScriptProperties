@@ -47,6 +47,9 @@
     <application path="FlexUnitCompilerApplication.mxml">
       <airExcludes/>
     </application>
+    <application path="FlexUnitApplication.mxml">
+      <airExcludes/>
+    </application>
   </applications>
   <modules/>
   <workers/>
