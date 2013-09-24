@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testrun name="" >
 <testsuite  name="Default Test Suite" project="JassKass">
-<testsuite name="flexUnitTests:SampleTest" type="testsuiteclass"/>
+<testsuite name="flexUnitTests.controllers:SaveOAuth2AccessTokenTest" type="testsuiteclass"/>
 </testsuite>
 <portNumber value="8765" />
 </testrun>

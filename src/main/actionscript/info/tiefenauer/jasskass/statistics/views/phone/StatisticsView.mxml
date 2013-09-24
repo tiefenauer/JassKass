@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<views:MobileView xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				  xmlns:s="library://ns.adobe.com/flex/spark" 
+				  xmlns:views="info.tiefenauer.jasskass.app.views.*"
+				  implements="info.tiefenauer.jasskass.statistics.views.interfaces.IStatisticsView"
+				  title="Statistics"
+				  >
+	
+	<fx:Script>
+		<![CDATA[
+			import info.tiefenauer.jasskass.statistics.model.interfaces.IStatistics;
+			public function get statistics():IStatistics{
+				if (data is IStatistics)
+					return data as IStatistics;
+				return null;
+			}
+			public function set statistics(value:IStatistics):void{
+				data = value;
+			}
+		]]>
+	</fx:Script>
+</views:MobileView>

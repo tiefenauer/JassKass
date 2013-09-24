@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<views:MobileView xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				  xmlns:s="library://ns.adobe.com/flex/spark" 
+				  xmlns:views="info.tiefenauer.jasskass.app.views.*" 
+				  xmlns:tags="org.flemit.tags.*"
+				  creationComplete="onCreationComplete(event)"
+				  title="oAuth response"
+				  >
+	
+	<fx:Script>
+		<![CDATA[
+			import com.adobe.protocols.oauth2.event.GetAccessTokenEvent;
+			
+			import mx.events.FlexEvent;
+			public function get getAccessTokenEvent():GetAccessTokenEvent{
+				if (data is GetAccessTokenEvent)
+					return data as GetAccessTokenEvent;
+				return null
+			}
+			public function set getAccessTokenEvent(value:GetAccessTokenEvent):void{
+				data = value;
+			}
+			
+			protected function onCreationComplete(event:FlexEvent):void
+			{
+				// show the contents of the response in the results page
+				accessToken.text = getAccessTokenEvent.accessToken;
+				refreshToken.text = getAccessTokenEvent.refreshToken;
+				tokenType.text = getAccessTokenEvent.tokenType;
+				expiresIn.text = getAccessTokenEvent.expiresIn + "";
+				scope.text = getAccessTokenEvent.scope;
+				state.text = getAccessTokenEvent.state;			
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:VGroup id="resultsBox" 
+			  width="100%" 
+			  height="100%" 
+			  horizontalAlign="center" 
+			  verticalAlign="middle"
+			  >
+		
+		<s:Label text="Get-Access-Token Response" 
+				 fontWeight="bold" 
+				 />
+		
+		<s:Spacer height="25" />
+		
+		<s:Scroller left="5" 
+					right="5" top="5" bottom="5">
+			<s:Group>
+				<s:Label x="10" y="10" text="Access Token"/>
+				<s:TextInput id="accessToken" y="41" width="95%" horizontalCenter="0" />
+				<s:Label x="10" y="104" text="Refresh Token"/>
+				<s:TextInput id="refreshToken" y="135" width="95%" horizontalCenter="0" />
+				<s:Label x="10" y="198" text="Token Type"/>
+				<s:TextInput id="tokenType" y="229" width="95%" horizontalCenter="0" />
+				<s:Label x="10" y="292" text="Expires In"/>
+				<s:TextInput id="expiresIn" y="323" width="95%" horizontalCenter="0" />
+				<s:Label x="10" y="386" text="Scope"/>
+				<s:TextInput id="scope" y="417" width="95%" horizontalCenter="0" />
+				<s:Label x="10" y="480" text="State"/>
+				<s:TextInput id="state" y="511" width="95%" horizontalCenter="0" />
+			</s:Group>
+		</s:Scroller>
+	</s:VGroup>
+	
+</views:MobileView>
