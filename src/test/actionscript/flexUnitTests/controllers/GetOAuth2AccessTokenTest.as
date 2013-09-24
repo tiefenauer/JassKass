@@ -9,7 +9,6 @@ package flexUnitTests.controllers
 	import flash.events.EventDispatcher;
 	import flash.utils.ByteArray;
 	
-	import info.tiefenauer.jasskass.app.JassKassConfig;
 	import info.tiefenauer.jasskass.app.controller.startup.GetOAuth2AccessToken;
 	import info.tiefenauer.jasskass.app.event.GoogleAuthEvent;
 	import info.tiefenauer.jasskass.app.model.ConfigProxy;
@@ -74,7 +73,7 @@ package flexUnitTests.controllers
 		/*============================================================================*/
 		/* Tests                                                                      */
 		/*============================================================================*/  
-		[Test(async,timeout="1000")]
+		[Test(async,timeout="2000")]
 		public function testCommand():void{
 			Async.proceedOnEvent(this, command.eventDispatcher, GoogleAuthEvent.ACCESS_TOKEN_RECEIVED);
 			command.execute();

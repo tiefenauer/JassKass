@@ -11,12 +11,38 @@
 	<fx:Script>
 		<![CDATA[
 			import flexunit.flexui.FirstViewDataVO;
+			import com.adobe.protocols.oauth2.OAuth2Test;
+			
+			import flexUnitTests.controllers.GetOAuth2AccessTokenTest;
+			import flexUnitTests.controllers.LoadAppConfigurationTest;
 			import flexUnitTests.controllers.SaveOAuth2AccessTokenTest;
+			import flexUnitTests.models.ConfigProxyTest;
+			import flexUnitTests.models.FileServiceTest;
+			import flexUnitTests.models.SettingProxyTest;
+			import flexUnitTests.models.TextFileServiceTest;
+			import flexUnitTests.models.vo.AppConfigurationTest;
+			import flexUnitTests.models.vo.ConfigFileTest;
+			import flexUnitTests.models.vo.SettingTest;
+			
+			import org.floxy.ProxyRepositoryTest;
+			import org.floxy.event.ProxyClassEventTest;
 			
 			public function currentRunTestSuite():Array
 			{
 				var testsToRun:Array = new Array();
+				testsToRun.push(com.adobe.protocols.oauth2.OAuth2Test);
+				testsToRun.push(flexUnitTests.controllers.LoadAppConfigurationTest);
+				testsToRun.push(flexUnitTests.models.FileServiceTest);
+				testsToRun.push(org.floxy.ProxyRepositoryTest);
+				testsToRun.push(flexUnitTests.models.TextFileServiceTest);
+				testsToRun.push(org.floxy.event.ProxyClassEventTest);
 				testsToRun.push(flexUnitTests.controllers.SaveOAuth2AccessTokenTest);
+				testsToRun.push(flexUnitTests.models.ConfigProxyTest);
+				testsToRun.push(flexUnitTests.controllers.GetOAuth2AccessTokenTest);
+				testsToRun.push(flexUnitTests.models.SettingProxyTest);
+				testsToRun.push(flexUnitTests.models.vo.ConfigFileTest);
+				testsToRun.push(flexUnitTests.models.vo.SettingTest);
+				testsToRun.push(flexUnitTests.models.vo.AppConfigurationTest);
 				return testsToRun;
 			}
 			
