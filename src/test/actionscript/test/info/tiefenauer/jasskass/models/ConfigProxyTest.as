@@ -2,7 +2,7 @@
  * ConfigProxyTest.as
  * Copyright 2013 Daniel Tiefenauer
  */
-package flexUnitTests.models
+package test.info.tiefenauer.jasskass.models
 {
 	import info.tiefenauer.jasskass.app.model.ConfigProxy;
 	import info.tiefenauer.jasskass.app.model.interfaces.IConfiguration;

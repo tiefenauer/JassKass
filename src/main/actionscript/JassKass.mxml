@@ -21,7 +21,7 @@
 	</fx:Script>
 	
 	<s:ViewNavigator id="counterViewNavigator"
-					 firstView="info.tiefenauer.jasskass.counter.views.phone.CounterView"
+					 firstView="info.tiefenauer.jasskass.counter.views.phone.OAuthRequestView"
 					 label="Counter"
 					 width="100%"
 					 height="100%"

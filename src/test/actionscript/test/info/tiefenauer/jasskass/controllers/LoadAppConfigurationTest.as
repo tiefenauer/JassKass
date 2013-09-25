@@ -2,7 +2,7 @@
  * LoadAppConfigurationTest.as
  * Copyright 2013 Daniel Tiefenauer
  */
-package flexUnitTests.controllers
+package test.info.tiefenauer.jasskass.controllers
 {
 	import flash.filesystem.File;
 	

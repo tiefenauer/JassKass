@@ -1,23 +1,21 @@
 /**
- * ConfigFileTest.as
+ * AppConfigurationTest.as
  * Copyright 2013 Daniel Tiefenauer
  */
-package flexUnitTests.models.vo
+package test.info.tiefenauer.jasskass.models.vo
 {
-	import flash.filesystem.File;
+	import info.tiefenauer.jasskass.app.model.vo.AppConfiguration;
 	
-	import info.tiefenauer.jasskass.app.model.vo.ConfigFile;
-	
-	import org.flexunit.asserts.assertFalse;
+	import org.flexunit.asserts.assertEquals;
 	import org.flexunit.asserts.assertNull;
-	import org.flexunit.asserts.assertTrue;
 
-	public class ConfigFileTest
+	public class AppConfigurationTest
 	{		
 		/*============================================================================*/
 		/* Private Properties                                                         */
 		/*============================================================================*/
-		private var configFile:ConfigFile;
+		private var config:AppConfiguration;
+		private var configXML:XML = <config key="someKey">someValue</config>;
 		
 		/*============================================================================*/
 		/* Test Setup and Teardown                                                    */
@@ -25,13 +23,13 @@ package flexUnitTests.models.vo
 		[Before]
 		public function setUp():void
 		{
-			configFile = new ConfigFile();
+			config = new AppConfiguration();
 		}
 		
 		[After]
 		public function tearDown():void
 		{
-			configFile = null;
+			config = null;
 		}
 		
 		[BeforeClass]
@@ -48,13 +46,26 @@ package flexUnitTests.models.vo
 		/* Tests                                                                      */
 		/*============================================================================*/  
 		[Test]
-		public function testExistingPath():void{
-			configFile = new ConfigFile(File.applicationDirectory.resolvePath('assets/sampleConfig.xml').nativePath);
-			assertTrue(configFile.exists);
+		public function testDefaults():void{
+			assertNull(config.key);
+			assertNull(config.value);
+			config = new AppConfiguration('someKey', 'someValue');
+			assertEquals('someKey', config.key);
+			assertEquals('someValue', config.value);
 		}
-		[Test(expects="Error")]
-		public function testInexistentPath():void{
-			configFile = new ConfigFile('path/to/nirvana.xml');
+		[Test]
+		public function testFromXML():void{
+			config.fromXML(configXML);
+			assertEquals(configXML.@key, config.key);
+			assertEquals(configXML.text(), config.value);
+		}
+		[Test]
+		public function testToXML():void{
+			config.key = 'someKey';
+			config.value = 'someValue';
+			var xml:XML = config.toXML();
+			assertEquals(configXML.@key, xml.@key);
+			assertEquals(configXML.text(), xml.text());
 		}
 	}
 }

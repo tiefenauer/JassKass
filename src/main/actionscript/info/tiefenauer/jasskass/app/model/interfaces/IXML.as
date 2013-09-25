@@ -7,6 +7,6 @@ package info.tiefenauer.jasskass.app.model.interfaces
 	public interface IXML
 	{
 		function toXML():XML;
-		function fromXML(value:XML):void;
+		function fromXML(xml:XML):void;
 	}
 }

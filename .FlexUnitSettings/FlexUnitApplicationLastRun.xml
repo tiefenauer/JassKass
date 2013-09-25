@@ -2,18 +2,24 @@
 <testrun name="" >
 <testsuite  name="Default Test Suite" project="JassKass">
 <testsuite name="com.adobe.protocols.oauth2:OAuth2Test" type="testsuiteclass"/>
-<testsuite name="flexUnitTests.controllers:LoadAppConfigurationTest" type="testsuiteclass"/>
-<testsuite name="flexUnitTests.models:FileServiceTest" type="testsuiteclass"/>
+<testsuite name="test.info.tiefenauer.gdas3:SpreadsheetLinkTest" type="testsuiteclass"/>
+<testsuite name="test.info.tiefenauer.gdas3:SpreadsheetCategoryTest" type="testsuiteclass"/>
+<testsuite name="test.info.tiefenauer.jasskass.controllers:LoadAppConfigurationTest" type="testsuiteclass"/>
+<testsuite name="test.info.tiefenauer.jasskass.models:FileServiceTest" type="testsuiteclass"/>
+<testsuite name="test.info.tiefenauer.gdas3:SpreadsheetServiceTest" type="testsuiteclass"/>
 <testsuite name="org.floxy:ProxyRepositoryTest" type="testsuiteclass"/>
-<testsuite name="flexUnitTests.models:TextFileServiceTest" type="testsuiteclass"/>
+<testsuite name="test.info.tiefenauer.jasskass.models:TextFileServiceTest" type="testsuiteclass"/>
 <testsuite name="org.floxy.event:ProxyClassEventTest" type="testsuiteclass"/>
-<testsuite name="flexUnitTests.controllers:SaveOAuth2AccessTokenTest" type="testsuiteclass"/>
-<testsuite name="flexUnitTests.models:ConfigProxyTest" type="testsuiteclass"/>
-<testsuite name="flexUnitTests.controllers:GetOAuth2AccessTokenTest" type="testsuiteclass"/>
-<testsuite name="flexUnitTests.models:SettingProxyTest" type="testsuiteclass"/>
-<testsuite name="flexUnitTests.models.vo:ConfigFileTest" type="testsuiteclass"/>
-<testsuite name="flexUnitTests.models.vo:SettingTest" type="testsuiteclass"/>
-<testsuite name="flexUnitTests.models.vo:AppConfigurationTest" type="testsuiteclass"/>
+<testsuite name="test.info.tiefenauer.gdas3:SpreadsheetTest" type="testsuiteclass"/>
+<testsuite name="test.info.tiefenauer.jasskass.controllers:SaveOAuth2AccessTokenTest" type="testsuiteclass"/>
+<testsuite name="test.info.tiefenauer.jasskass.models:ConfigProxyTest" type="testsuiteclass"/>
+<testsuite name="test.info.tiefenauer.jasskass.controllers:GetOAuth2AccessTokenTest" type="testsuiteclass"/>
+<testsuite name="test.info.tiefenauer.jasskass.models:SettingProxyTest" type="testsuiteclass"/>
+<testsuite name="test.info.tiefenauer.gdas3:SpreadsheetAuthorTest" type="testsuiteclass"/>
+<testsuite name="test.info.tiefenauer.jasskass.models.vo:ConfigFileTest" type="testsuiteclass"/>
+<testsuite name="test.info.tiefenauer.gdas3:SpreadsheetContentTest" type="testsuiteclass"/>
+<testsuite name="test.info.tiefenauer.jasskass.models.vo:SettingTest" type="testsuiteclass"/>
+<testsuite name="test.info.tiefenauer.jasskass.models.vo:AppConfigurationTest" type="testsuiteclass"/>
 </testsuite>
 <portNumber value="8765" />
 </testrun>

@@ -2,7 +2,7 @@
  * SaveOAuth2AccessTokenTest.as
  * Copyright 2013 Daniel Tiefenauer
  */
-package flexUnitTests.controllers
+package test.info.tiefenauer.jasskass.controllers
 {
 	import info.tiefenauer.jasskass.app.controller.startup.SaveOAuth2AccessToken;
 	import info.tiefenauer.jasskass.app.event.GoogleAuthEvent;

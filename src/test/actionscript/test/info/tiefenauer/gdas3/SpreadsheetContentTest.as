@@ -1,21 +1,26 @@
 /**
- * SettingTest.as
+ * SpreadsheetContentTest.as
  * Copyright 2013 Daniel Tiefenauer
  */
-package flexUnitTests.models.vo
+package test.info.tiefenauer.gdas3
 {
-	import info.tiefenauer.jasskass.app.model.vo.Setting;
+	import flash.utils.ByteArray;
+	
+	import info.tiefenauer.gdas3.model.SpreadsheetContent;
 	
 	import org.flexunit.asserts.assertEquals;
 	import org.flexunit.asserts.assertNull;
 
-	public class SettingTest
+	public class SpreadsheetContentTest
 	{		
 		/*============================================================================*/
 		/* Private Properties                                                         */
 		/*============================================================================*/
-		private var setting:Setting;
-		private var settingXML:XML;
+		private var content:SpreadsheetContent;
+		private var contentXML:XML;
+		
+		[Embed(source='assets/spreadsheetContent.xml', mimeType='application/octet-stream')]
+		private static const XMLContentFile:Class;
 		
 		/*============================================================================*/
 		/* Test Setup and Teardown                                                    */
@@ -23,15 +28,15 @@ package flexUnitTests.models.vo
 		[Before]
 		public function setUp():void
 		{
-			setting = new Setting('someKey', 'someValue');
-			settingXML = <setting key="someKey">someValue</setting>;
+			var contentXMLContent:ByteArray = new XMLContentFile() as ByteArray;
+			contentXML = XML(contentXMLContent.readUTFBytes(contentXMLContent.length));
+			
+			content = new SpreadsheetContent();
 		}
 		
 		[After]
 		public function tearDown():void
 		{
-			setting = null;
-			settingXML = null;
 		}
 		
 		[BeforeClass]
@@ -46,27 +51,30 @@ package flexUnitTests.models.vo
 		
 		/*============================================================================*/
 		/* Tests                                                                      */
-		/*============================================================================*/
+		/*============================================================================*/  
 		[Test]
 		public function testDefaults():void{
-			assertEquals('someKey', setting.key);
-			assertEquals('someValue', setting.value);
-			setting = new Setting();
-			assertNull(setting.key);
-			assertNull(setting.value);
+			assertNull(content.src);
+			assertNull(content.type);
+		}
+		[Test]
+		public function testAttributes():void{
+			content = new SpreadsheetContent('type', 'src');
+			assertEquals('type', content.type);
+			assertEquals('src', content.src);
 		}
 		[Test]
 		public function testFromXML():void{
-			setting = new Setting();
-			setting.fromXML(settingXML);
-			assertEquals('someKey', setting.key);
-			assertEquals('someValue', setting.value);
+			content.fromXML(contentXML);
+			assertEquals(contentXML.@type, content.type);
+			assertEquals(contentXML.@src, content.src);
 		}
 		[Test]
 		public function testToXML():void{
-			var xml:XML = setting.toXML();
-			assertEquals('someKey', xml.@key);
-			assertEquals('someValue', xml.text());
+			testFromXML();
+			var xml:XML = content.toXML();
+			assertEquals(content.type, xml.@type);
+			assertEquals(content.src, xml.@src);
 		}
 	}
 }

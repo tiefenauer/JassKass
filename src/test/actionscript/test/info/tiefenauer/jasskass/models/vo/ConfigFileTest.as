@@ -1,23 +1,23 @@
 /**
- * FileServiceTest.as
+ * ConfigFileTest.as
  * Copyright 2013 Daniel Tiefenauer
  */
-package flexUnitTests.models
+package test.info.tiefenauer.jasskass.models.vo
 {
 	import flash.filesystem.File;
 	
-	import info.tiefenauer.jasskass.app.model.FileService;
+	import info.tiefenauer.jasskass.app.model.vo.ConfigFile;
 	
-	import org.flexunit.asserts.assertEquals;
-	import org.flexunit.asserts.assertNotNull;
+	import org.flexunit.asserts.assertFalse;
 	import org.flexunit.asserts.assertNull;
+	import org.flexunit.asserts.assertTrue;
 
-	public class FileServiceTest
+	public class ConfigFileTest
 	{		
 		/*============================================================================*/
 		/* Private Properties                                                         */
 		/*============================================================================*/
-		private var fileService:FileService;
+		private var configFile:ConfigFile;
 		
 		/*============================================================================*/
 		/* Test Setup and Teardown                                                    */
@@ -25,13 +25,13 @@ package flexUnitTests.models
 		[Before]
 		public function setUp():void
 		{
-			fileService = new FileService();
+			configFile = new ConfigFile();
 		}
 		
 		[After]
 		public function tearDown():void
 		{
-			fileService = null;
+			configFile = null;
 		}
 		
 		[BeforeClass]
@@ -46,20 +46,15 @@ package flexUnitTests.models
 		
 		/*============================================================================*/
 		/* Tests                                                                      */
-		/*============================================================================*/
+		/*============================================================================*/  
 		[Test]
-		public function testDefaults():void{
-			assertNull(fileService.file);
-			assertNotNull(fileService.onDataLodaded);
-			assertNotNull(fileService.onDataSaved);
-			assertNotNull(fileService.onLoadError);
-			assertNotNull(fileService.onSaveError);
+		public function testExistingPath():void{
+			configFile = new ConfigFile(File.applicationDirectory.resolvePath('assets/sampleConfig.xml').nativePath);
+			assertTrue(configFile.exists);
 		}
-		[Test]
-		public function testGetterSetter():void{
-			fileService.file = File.applicationDirectory.resolvePath('path/to/some/file.txt');
-			assertNotNull(fileService.file);
-			assertEquals('app:/path/to/some/file.txt', fileService.file.url);
+		[Test(expects="Error")]
+		public function testInexistentPath():void{
+			configFile = new ConfigFile('path/to/nirvana.xml');
 		}
 	}
 }

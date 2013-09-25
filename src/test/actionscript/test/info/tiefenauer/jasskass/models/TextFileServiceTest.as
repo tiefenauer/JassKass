@@ -2,7 +2,7 @@
  * TextFileServiceTest.as
  * Copyright 2013 Daniel Tiefenauer
  */
-package flexUnitTests.models
+package test.info.tiefenauer.jasskass.models
 {
 	import flash.filesystem.File;
 	import flash.filesystem.FileMode;

@@ -13,36 +13,48 @@
 			import flexunit.flexui.FirstViewDataVO;
 			import com.adobe.protocols.oauth2.OAuth2Test;
 			
-			import flexUnitTests.controllers.GetOAuth2AccessTokenTest;
-			import flexUnitTests.controllers.LoadAppConfigurationTest;
-			import flexUnitTests.controllers.SaveOAuth2AccessTokenTest;
-			import flexUnitTests.models.ConfigProxyTest;
-			import flexUnitTests.models.FileServiceTest;
-			import flexUnitTests.models.SettingProxyTest;
-			import flexUnitTests.models.TextFileServiceTest;
-			import flexUnitTests.models.vo.AppConfigurationTest;
-			import flexUnitTests.models.vo.ConfigFileTest;
-			import flexUnitTests.models.vo.SettingTest;
-			
 			import org.floxy.ProxyRepositoryTest;
 			import org.floxy.event.ProxyClassEventTest;
+			
+			import test.info.tiefenauer.gdas3.SpreadsheetAuthorTest;
+			import test.info.tiefenauer.gdas3.SpreadsheetCategoryTest;
+			import test.info.tiefenauer.gdas3.SpreadsheetContentTest;
+			import test.info.tiefenauer.gdas3.SpreadsheetLinkTest;
+			import test.info.tiefenauer.gdas3.SpreadsheetServiceTest;
+			import test.info.tiefenauer.gdas3.SpreadsheetTest;
+			import test.info.tiefenauer.jasskass.controllers.GetOAuth2AccessTokenTest;
+			import test.info.tiefenauer.jasskass.controllers.LoadAppConfigurationTest;
+			import test.info.tiefenauer.jasskass.controllers.SaveOAuth2AccessTokenTest;
+			import test.info.tiefenauer.jasskass.models.ConfigProxyTest;
+			import test.info.tiefenauer.jasskass.models.FileServiceTest;
+			import test.info.tiefenauer.jasskass.models.SettingProxyTest;
+			import test.info.tiefenauer.jasskass.models.TextFileServiceTest;
+			import test.info.tiefenauer.jasskass.models.vo.AppConfigurationTest;
+			import test.info.tiefenauer.jasskass.models.vo.ConfigFileTest;
+			import test.info.tiefenauer.jasskass.models.vo.SettingTest;
 			
 			public function currentRunTestSuite():Array
 			{
 				var testsToRun:Array = new Array();
 				testsToRun.push(com.adobe.protocols.oauth2.OAuth2Test);
-				testsToRun.push(flexUnitTests.controllers.LoadAppConfigurationTest);
-				testsToRun.push(flexUnitTests.models.FileServiceTest);
+				testsToRun.push(test.info.tiefenauer.gdas3.SpreadsheetLinkTest);
+				testsToRun.push(test.info.tiefenauer.gdas3.SpreadsheetCategoryTest);
+				testsToRun.push(test.info.tiefenauer.jasskass.controllers.LoadAppConfigurationTest);
+				testsToRun.push(test.info.tiefenauer.jasskass.models.FileServiceTest);
+				testsToRun.push(test.info.tiefenauer.gdas3.SpreadsheetServiceTest);
 				testsToRun.push(org.floxy.ProxyRepositoryTest);
-				testsToRun.push(flexUnitTests.models.TextFileServiceTest);
+				testsToRun.push(test.info.tiefenauer.jasskass.models.TextFileServiceTest);
 				testsToRun.push(org.floxy.event.ProxyClassEventTest);
-				testsToRun.push(flexUnitTests.controllers.SaveOAuth2AccessTokenTest);
-				testsToRun.push(flexUnitTests.models.ConfigProxyTest);
-				testsToRun.push(flexUnitTests.controllers.GetOAuth2AccessTokenTest);
-				testsToRun.push(flexUnitTests.models.SettingProxyTest);
-				testsToRun.push(flexUnitTests.models.vo.ConfigFileTest);
-				testsToRun.push(flexUnitTests.models.vo.SettingTest);
-				testsToRun.push(flexUnitTests.models.vo.AppConfigurationTest);
+				testsToRun.push(test.info.tiefenauer.gdas3.SpreadsheetTest);
+				testsToRun.push(test.info.tiefenauer.jasskass.controllers.SaveOAuth2AccessTokenTest);
+				testsToRun.push(test.info.tiefenauer.jasskass.models.ConfigProxyTest);
+				testsToRun.push(test.info.tiefenauer.jasskass.controllers.GetOAuth2AccessTokenTest);
+				testsToRun.push(test.info.tiefenauer.jasskass.models.SettingProxyTest);
+				testsToRun.push(test.info.tiefenauer.gdas3.SpreadsheetAuthorTest);
+				testsToRun.push(test.info.tiefenauer.jasskass.models.vo.ConfigFileTest);
+				testsToRun.push(test.info.tiefenauer.gdas3.SpreadsheetContentTest);
+				testsToRun.push(test.info.tiefenauer.jasskass.models.vo.SettingTest);
+				testsToRun.push(test.info.tiefenauer.jasskass.models.vo.AppConfigurationTest);
 				return testsToRun;
 			}
 			

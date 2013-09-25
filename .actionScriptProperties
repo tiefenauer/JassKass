@@ -37,6 +37,7 @@
       <libraryPathEntry kind="1" linkType="1" path="libs"/>
     </libraryPath>
     <sourceAttachmentPath>
+      <sourceAttachmentPathEntry kind="3" linkType="1" path="D:/workspace/flex/JassKass/libs/actionscript-oauth2.swc" sourcepath="D:/workspace/flex/actionscript-oauth2/src/main/actionscript" useDefaultLinkType="false"/>
       <sourceAttachmentPathEntry kind="3" linkType="1" path="D:/workspace/flex/JassKass/libs/robotlegs-framework-v2.1.0.swc" sourcepath="D:/workspace/flex/robotlegs-framework-v2.1.0/src" useDefaultLinkType="false"/>
     </sourceAttachmentPath>
   </compiler>
