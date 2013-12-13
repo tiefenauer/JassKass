@@ -2,7 +2,7 @@ JassKass
 ========
 ## What is it?
 Jasskass is (will be, that is...) an iOS/Android app for Jass players.
-In case you aren't Swiss: Jass is a very popular, tradiional Swiss card game. It mainly distinguishes itself from other card games in that not the Ace is the highest card in the game, but the peasant (this also reflects a typical Swiss attitude whereas the saying goes that Swiss historically don't want "foreign judges" :-) )
+In case you aren't Swiss: Jass is a very popular, traditional Swiss card game. It stands apart from other card games in that not the Ace is the highest card in the game, but the peasant (this also reflects a typical Swiss attitude whereas the saying goes that Swiss historically don't want "foreign judges" :-) )
 
 ## What CAN I do with it?
 
