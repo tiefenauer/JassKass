@@ -1,0 +1,18 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace components "info.tiefenauer.jasskass.jass.views.components.*";
+
+/*****************************************************************
+* GLOBAL STYLES
+*****************************************************************/
+global {
+	modalTransparency: 0.5;
+	modalTransparencyBlur: 2;
+	modalTransparencyColor: #000000;
+	modalTransparencyDuration: 100;
+}
+
+
+components|JassTafelVorne{
+	skinClass: ClassReference("info.tiefenauer.jasskass.skins.JassTafelSkin");
+}

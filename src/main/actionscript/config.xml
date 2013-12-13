@@ -1,3 +1,5 @@
 <configs>
 	<config key='Google_API_Config'>{"web":{"auth_uri":"https://accounts.google.com/o/oauth2/auth","client_secret":"dMwAEeWaIu3sINNgI3Hm0-y3","token_uri":"https://accounts.google.com/o/oauth2/token","client_email":"583687796852-hdb9bf2gpp3c3t3jq30krr9jfnn9upkb@developer.gserviceaccount.com","redirect_uris":["http://www.adobe.com"],"client_x509_cert_url":"https://www.googleapis.com/robot/v1/metadata/x509/583687796852-hdb9bf2gpp3c3t3jq30krr9jfnn9upkb@developer.gserviceaccount.com","client_id":"583687796852-hdb9bf2gpp3c3t3jq30krr9jfnn9upkb.apps.googleusercontent.com","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs"}}</config>
+	<config key='Google_API_Token'>{"scope":null,"expiresIn":3600,"timestamp":1380651693639,"accessToken":"ya29.AHES6ZStLKlYjdJIsBJclzAIootmOvlYKmh0_d9nGEOW1jw","state":null,"refreshToken":"1/kwXjLN8yPGLFeC1xcPjmpWRhhWhyPuP5m63_XIRMoVk"}</config>
+	<config key='Google_API_Scope'>https://spreadsheets.google.com/feeds https://docs.google.com/feeds https://www.googleapis.com/auth/drive</config>
 </configs>

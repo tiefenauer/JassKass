@@ -4,7 +4,8 @@
 								  width="100%"
 								  height="100%"
 								  >
-	
+
+	<fx:Style source="style.css" />
 	<fx:Script>
 		<![CDATA[
 			import info.tiefenauer.jasskass.app.JassKassConfig;
@@ -17,67 +18,71 @@
 											.install(MVCSBundle)
 											.configure(JassKassConfig)
 											.configure(new ContextView(this as DisplayObjectContainer));
+			
+			public function get activeNavigator():ViewNavigator{
+				return tabbedNavigator.selectedNavigator as ViewNavigator;
+			}
 		]]>
 	</fx:Script>
 	
 	<s:ViewNavigator id="counterViewNavigator"
-					 firstView="info.tiefenauer.jasskass.counter.views.phone.OAuthRequestView"
-					 label="Counter"
+					 firstView="info.tiefenauer.jasskass.jass.views.phone.JassListView"
+					 label="Jassen"
 					 width="100%"
 					 height="100%"
 					 >
-		<s:icon>
+<!--		<s:icon>
 			<s:MultiDPIBitmapSource source160dpi="@Embed('assets/icons/ico_cards_64.png')"
 									source240dpi="@Embed('assets/icons/ico_cards_96.png')"
 									source320dpi="@Embed('assets/icons/ico_cards_128.png')"
 									source480dpi="@Embed('assets/icons/ico_cards_256.png')"
 									/>
-		</s:icon>
+		</s:icon>-->
 	</s:ViewNavigator>
 	
 	<s:ViewNavigator id="balanceViewNavigator"
 					 firstView="info.tiefenauer.jasskass.balance.views.phone.BalanceView"
-					 label="Balance"
+					 label="Kasse"
 					 width="100%"
 					 height="100%"
 					 >
-		<s:icon>
+<!--		<s:icon>
 			<s:MultiDPIBitmapSource source160dpi="@Embed('assets/icons/ico_cash_64.png')"
 									source240dpi="@Embed('assets/icons/ico_cash_96.png')"
 									source320dpi="@Embed('assets/icons/ico_cash_128.png')"
 									source480dpi="@Embed('assets/icons/ico_cash_256.png')"
 									/>
-		</s:icon>
+		</s:icon>-->
 	</s:ViewNavigator>
 	
 	<s:ViewNavigator id="statisticsViewNavigator"
 					 firstView="info.tiefenauer.jasskass.statistics.views.phone.StatisticsView"
-					 label="Statistics"
+					 label="Statistik"
 					 width="100%"
 					 height="100%"
 					 >
-		<s:icon>
+<!--		<s:icon>
 			<s:MultiDPIBitmapSource source160dpi="@Embed('assets/icons/ico_statistic_64.png')"
 									source240dpi="@Embed('assets/icons/ico_statistic_96.png')"
 									source320dpi="@Embed('assets/icons/ico_statistic_128.png')"
 									source480dpi="@Embed('assets/icons/ico_statistic_256.png')"
 									/>
-		</s:icon>
+		</s:icon>-->
 	</s:ViewNavigator>
 	
 	<s:ViewNavigator id="profileViewNavigator"
-					 firstView="info.tiefenauer.jasskass.profile.views.phone.ProfileView"
-					 label="Profile"
+					 firstView="info.tiefenauer.jasskass.jass.views.phone.OAuthRequestView"
+					 label="Profil"
 					 width="100%"
 					 height="100%"
 					 >
-		<s:icon>
+<!--		<s:icon>
 			<s:MultiDPIBitmapSource source160dpi="@Embed('assets/icons/ico_profile_64.png')"
 									source240dpi="@Embed('assets/icons/ico_profile_96.png')"
 									source320dpi="@Embed('assets/icons/ico_profile_128.png')"
 									source480dpi="@Embed('assets/icons/ico_profile_256.png')"
 									/>
-		</s:icon>
+		</s:icon>-->
 		
 	</s:ViewNavigator>
 </s:TabbedViewNavigatorApplication>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<views:MobileView xmlns:fx="http://ns.adobe.com/mxml/2009"
+				  xmlns:s="library://ns.adobe.com/flex/spark"
+				  xmlns:views="info.tiefenauer.jasskass.app.views.*"
+				  creationComplete="onCreationComplete(event)" title="oAuth Test" >
+	<fx:Script>
+		<![CDATA[
+			import com.adobe.protocols.oauth2.OAuth2;
+			import com.adobe.protocols.oauth2.event.GetAccessTokenEvent;
+			import com.adobe.protocols.oauth2.grant.AuthorizationCodeGrant;
+			import com.adobe.protocols.oauth2.grant.IGrantType;
+			import com.adobe.protocols.oauth2.grant.ImplicitGrant;
+			
+			import mx.core.FlexGlobals;
+			import mx.events.FlexEvent;
+			
+			import org.as3commons.logging.setup.LogSetupLevel;
+			
+			private var stageWebView:StageWebView;
+			//-----------------------------------------
+			// Event handlers
+			//-----------------------------------------
+			protected function onCreationComplete(event:FlexEvent):void{
+				stageWebView = new StageWebView();
+				var rectangle:Rectangle = new Rectangle(0,0,FlexGlobals.topLevelApplication.width, FlexGlobals.topLevelApplication.height);
+				if (rectangle.width > 0 && rectangle.height > 0){
+					stageWebView.viewPort = rectangle;
+				}  
+			}
+			
+			protected function onGetAccessTokenBtnClick(event:MouseEvent):void{
+				stageWebView.stage = stage;
+				
+				var oauth2:OAuth2 = new OAuth2("https://accounts.google.com/o/oauth2/auth", "https://accounts.google.com/o/oauth2/token", LogSetupLevel.ALL);
+				//var grant:IGrantType = new AuthorizationCodeGrant(stageWebView, "INSERT_CLIENT_ID_HERE", "INSERT_CLIENT_SECRET_HERE", "http://www.mysite.com", "https://www.googleapis.com/auth/userinfo.profile");
+				//var grant:IGrantType = new ImplicitGrant(stageWebView, "64530189872.apps.googleusercontent.com", "http://www.adobe.com", "https://www.googleapis.com/auth/userinfo.profile");
+				//var grant:IGrantType = new ImplicitGrant(stageWebView, "583687796852-hdb9bf2gpp3c3t3jq30krr9jfnn9upkb.apps.googleusercontent.com", "http://www.adobe.com", "https://www.googleapis.com/auth/userinfo.profile");
+				//var grant:IGrantType = new ImplicitGrant(stageWebView, "583687796852-hdb9bf2gpp3c3t3jq30krr9jfnn9upkb.apps.googleusercontent.com", "http://www.adobe.com", "https://spreadsheets.google.com/feeds https://docs.google.com/feeds", null, {approval_prompt: "force", access_type:"offline"});
+				//var grant:IGrantType = new AuthorizationCodeGrant(stageWebView,"583687796852-hdb9bf2gpp3c3t3jq30krr9jfnn9upkb.apps.googleusercontent.com", "9hyH_LoBwIRGjA-viiRHXsp2", "urn:ietf:wg:oauth:2.0:oob", "https://spreadsheets.google.com/feeds https://docs.google.com/feeds", null, {approval_prompt: "force", access_type:"offline"}); 
+				var grant:IGrantType = new AuthorizationCodeGrant(stageWebView,	"583687796852.apps.googleusercontent.com", "9hyH_LoBwIRGjA-viiRHXsp2", "urn:ietf:wg:oauth:2.0:oob",	"https://spreadsheets.google.com/feeds https://docs.google.com/feeds https://www.googleapis.com/auth/drive");
+				//var grant:IGrantType = new ResourceOwnerCredentialsGrant('583687796852.apps.googleusercontent.com', '9hyH_LoBwIRGjA-viiRHXsp2', 'jass.kass.app@gmail.com', 'IPex6004', 'openid');
+				//var grant:IGrantType = new ImplicitGrant(stageWebView, "583687796852.apps.googleusercontent.com", "http://www.tiefenauer.info", "https://www.googleapis.com/auth/userinfo.profile");
+				/*
+				var queryParms:Object = new Object();
+				queryParms.response_type = 'code';
+				var grant:IGrantType = new ImplicitGrant(stageWebView, '583687796852.apps.googleusercontent.com', 'urn:ietf:wg:oauth:2.0:oob', 'https://www.googleapis.com/auth/userinfo.profile', null, queryParms);
+				*/
+				oauth2.addEventListener(GetAccessTokenEvent.TYPE, onGetAccessToken);
+				oauth2.getAccessToken(grant);
+				
+				function onGetAccessToken(getAccessTokenEvent:GetAccessTokenEvent):void
+				{
+					stageWebView.dispose();
+					navigator.pushView(OAuthResponseView, getAccessTokenEvent);
+				}
+			}
+			
+			protected function onGetAccessCodeBtnClick(event:MouseEvent):void{
+				// oauth2:server:client_id:583687796852.apps.googleusercontent.com:api_scope:openid
+				var url:String = "https://accounts.google.com/o/oauth2/auth?";
+				url += "scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&";
+				url += "redirect_uri=urn:ietf:wg:oauth:2.0:oob&";
+				url += "response_type=code&";
+				url += "client_id=583687796852.apps.googleusercontent.com";
+				trace(url);
+				stageWebView.stage = stage;
+				stageWebView.addEventListener(Event.COMPLETE, function(event:Event):void{
+					stageWebView;
+				});
+				stageWebView.loadURL(url);
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<views:layout>
+		<s:VerticalLayout />
+	</views:layout>
+	<s:Button id="getAccessTokenBtn" 
+			  label="get access token"
+			  click="onGetAccessTokenBtnClick(event)"
+			  width="100%" 
+			  />
+	
+	<s:Button id="getAccesCode"
+			  label="get access code"
+			  click="onGetAccessCodeBtnClick(event)"
+			  width="100%"
+			  />
+	
+</views:MobileView>

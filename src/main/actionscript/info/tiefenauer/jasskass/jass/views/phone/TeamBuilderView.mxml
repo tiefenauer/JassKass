@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base:TeamBuilderViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
+						 xmlns:s="library://ns.adobe.com/flex/spark" 
+						 xmlns:base="info.tiefenauer.jasskass.jass.views.base.*"
+						 implements="info.tiefenauer.jasskass.jass.views.interfaces.ITeamBuilderView" 
+						 >
+	
+	<fx:Script>
+		<![CDATA[
+			
+			//---------------------
+			// Event handlers
+			//---------------------
+			protected function onDoneButtonClick(event:MouseEvent):void{
+				dispatchEvent(new Event(DONE_BUTTON_CLICKED));
+			}
+			
+			protected function onPlayer1ButtonClick(event:MouseEvent):void{
+				dispatchEvent(new Event(PLAYER1_BUTTON_CLICKED));
+			}
+			protected function onPlayer2ButtonClick(event:MouseEvent):void{
+				dispatchEvent(new Event(PLAYER2_BUTTON_CLICKED));
+			}
+			protected function onPlayer3ButtonClick(event:MouseEvent):void{
+				dispatchEvent(new Event(PLAYER3_BUTTON_CLICKED));
+			}
+			protected function onPlayer4ButtonClick(event:MouseEvent):void{
+				dispatchEvent(new Event(PLAYER4_BUTTON_CLICKED));
+			}
+			protected function onCancelButtonClick(event:MouseEvent):void{
+				dispatchEvent(new Event(CANCEL_BUTTON_CLICKED));
+			}
+			protected function onStartButtonClick(event:MouseEvent):void{
+				dispatchEvent(new Event(START_BUTTON_CLICKED));
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<base:layout>
+		<s:VerticalLayout />
+	</base:layout>
+	
+	<s:VGroup width="100%"
+			  height="100%"
+			  paddingLeft="10"
+			  paddingRight="10"
+			  paddingTop="10"
+			  paddingBottom="10"
+			  >
+		
+		<s:Label width="100%"
+				 text="Team 1"
+				 textAlign="center"
+				 />
+
+		<s:HGroup id="team1" width="100%" >
+			<s:Button id="player1Btn"
+					  label="{jass.team1.player1.firstName}"
+					  click="onPlayer1ButtonClick(event)"
+					  width="100%"
+					  />
+			<s:Button id="player2Btn"
+					  label="{jass.team1.player2.firstName}"
+					  click="onPlayer2ButtonClick(event)"
+					  width="100%"
+					  />
+		</s:HGroup>
+
+		<s:Label width="100%" text="Team 2" textAlign="center" />
+
+		<s:HGroup id="team2" width="100%" >
+			<s:Button id="player3Btn"
+					  label="{jass.team2.player1.firstName}"
+					  click="onPlayer3ButtonClick(event)"
+					  width="100%"
+					  />
+			<s:Button id="player4Btn"
+					  label="{jass.team2.player2.firstName}"
+					  click="onPlayer4ButtonClick(event)"
+					  width="100%"
+					  />
+		</s:HGroup>
+		
+		<s:Button id="cancelButton"
+				  label="Abbrechen"
+				  click="onCancelButtonClick(event)"
+				  width="100%"
+				  />
+		<s:Button id="doneButton"
+				  label="Fertig"
+				  click="onDoneButtonClick(event)"
+				  width="100%"
+				  />
+		<s:Button id="startButton"
+				  label="Start"
+				  click="onStartButtonClick(event)"
+				  width="100%"
+				  />
+
+	</s:VGroup>
+	
+	
+</base:TeamBuilderViewBase>

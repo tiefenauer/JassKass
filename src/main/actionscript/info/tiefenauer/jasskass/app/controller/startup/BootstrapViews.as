@@ -7,8 +7,14 @@ package info.tiefenauer.jasskass.app.controller.startup
 	import info.tiefenauer.jasskass.app.controller.SimpleCommand;
 	import info.tiefenauer.jasskass.balance.views.BalanceViewMediator;
 	import info.tiefenauer.jasskass.balance.views.interfaces.IBalanceView;
-	import info.tiefenauer.jasskass.counter.views.CounterViewMediator;
-	import info.tiefenauer.jasskass.counter.views.interfaces.ICounterView;
+	import info.tiefenauer.jasskass.jass.views.JassGameViewMediator;
+	import info.tiefenauer.jasskass.jass.views.JassListViewMediator;
+	import info.tiefenauer.jasskass.jass.views.JassScoreViewMediator;
+	import info.tiefenauer.jasskass.jass.views.TeamBuilderViewMediator;
+	import info.tiefenauer.jasskass.jass.views.interfaces.IJassGameView;
+	import info.tiefenauer.jasskass.jass.views.interfaces.IJassListView;
+	import info.tiefenauer.jasskass.jass.views.interfaces.IJassScoreView;
+	import info.tiefenauer.jasskass.jass.views.interfaces.ITeamBuilderView;
 	import info.tiefenauer.jasskass.profile.views.ProfileViewMediator;
 	import info.tiefenauer.jasskass.profile.views.interfaces.IProfileView;
 	import info.tiefenauer.jasskass.statistics.views.StatisticsViewMediator;
@@ -26,9 +32,19 @@ package info.tiefenauer.jasskass.app.controller.startup
 		
 		override public function execute():void{
 			super.execute();
-			mediatorMap.map(ICounterView).toMediator(CounterViewMediator);
+			// jass
+			mediatorMap.map(ITeamBuilderView).toMediator(TeamBuilderViewMediator);
+			mediatorMap.map(IJassListView).toMediator(JassListViewMediator);
+			mediatorMap.map(IJassGameView).toMediator(JassGameViewMediator);
+			mediatorMap.map(IJassScoreView).toMediator(JassScoreViewMediator);
+			
+			// balance
 			mediatorMap.map(IBalanceView).toMediator(BalanceViewMediator);
+			
+			// profile
 			mediatorMap.map(IProfileView).toMediator(ProfileViewMediator);
+			
+			// statistics
 			mediatorMap.map(IStatisticsView).toMediator(StatisticsViewMediator);
 		}
 	}

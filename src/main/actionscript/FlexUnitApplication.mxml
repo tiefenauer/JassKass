@@ -22,16 +22,16 @@
 			import test.info.tiefenauer.gdas3.SpreadsheetLinkTest;
 			import test.info.tiefenauer.gdas3.SpreadsheetServiceTest;
 			import test.info.tiefenauer.gdas3.SpreadsheetTest;
-			import test.info.tiefenauer.jasskass.controllers.GetOAuth2AccessTokenTest;
-			import test.info.tiefenauer.jasskass.controllers.LoadAppConfigurationTest;
-			import test.info.tiefenauer.jasskass.controllers.SaveOAuth2AccessTokenTest;
-			import test.info.tiefenauer.jasskass.models.ConfigProxyTest;
-			import test.info.tiefenauer.jasskass.models.FileServiceTest;
-			import test.info.tiefenauer.jasskass.models.SettingProxyTest;
-			import test.info.tiefenauer.jasskass.models.TextFileServiceTest;
-			import test.info.tiefenauer.jasskass.models.vo.AppConfigurationTest;
-			import test.info.tiefenauer.jasskass.models.vo.ConfigFileTest;
-			import test.info.tiefenauer.jasskass.models.vo.SettingTest;
+			import test.info.tiefenauer.jasskass.app.controllers.GetOAuth2AccessTokenTest;
+			import test.info.tiefenauer.jasskass.app.controllers.LoadAppConfigurationTest;
+			import test.info.tiefenauer.jasskass.app.controllers.SaveOAuth2AccessTokenTest;
+			import test.info.tiefenauer.jasskass.app.models.ConfigProxyTest;
+			import test.info.tiefenauer.jasskass.app.models.FileServiceTest;
+			import test.info.tiefenauer.jasskass.app.models.SettingProxyTest;
+			import test.info.tiefenauer.jasskass.app.models.TextFileServiceTest;
+			import test.info.tiefenauer.jasskass.app.models.vo.AppConfigurationTest;
+			import test.info.tiefenauer.jasskass.app.models.vo.ConfigFileTest;
+			import test.info.tiefenauer.jasskass.app.models.vo.SettingTest;
 			
 			public function currentRunTestSuite():Array
 			{
@@ -39,22 +39,22 @@
 				testsToRun.push(com.adobe.protocols.oauth2.OAuth2Test);
 				testsToRun.push(test.info.tiefenauer.gdas3.SpreadsheetLinkTest);
 				testsToRun.push(test.info.tiefenauer.gdas3.SpreadsheetCategoryTest);
-				testsToRun.push(test.info.tiefenauer.jasskass.controllers.LoadAppConfigurationTest);
-				testsToRun.push(test.info.tiefenauer.jasskass.models.FileServiceTest);
+				testsToRun.push(test.info.tiefenauer.jasskass.app.controllers.LoadAppConfigurationTest);
+				testsToRun.push(test.info.tiefenauer.jasskass.app.models.FileServiceTest);
 				testsToRun.push(test.info.tiefenauer.gdas3.SpreadsheetServiceTest);
 				testsToRun.push(org.floxy.ProxyRepositoryTest);
-				testsToRun.push(test.info.tiefenauer.jasskass.models.TextFileServiceTest);
+				testsToRun.push(test.info.tiefenauer.jasskass.app.models.TextFileServiceTest);
 				testsToRun.push(org.floxy.event.ProxyClassEventTest);
 				testsToRun.push(test.info.tiefenauer.gdas3.SpreadsheetTest);
-				testsToRun.push(test.info.tiefenauer.jasskass.controllers.SaveOAuth2AccessTokenTest);
-				testsToRun.push(test.info.tiefenauer.jasskass.models.ConfigProxyTest);
-				testsToRun.push(test.info.tiefenauer.jasskass.controllers.GetOAuth2AccessTokenTest);
-				testsToRun.push(test.info.tiefenauer.jasskass.models.SettingProxyTest);
+				testsToRun.push(test.info.tiefenauer.jasskass.app.controllers.SaveOAuth2AccessTokenTest);
+				testsToRun.push(test.info.tiefenauer.jasskass.app.models.ConfigProxyTest);
+				testsToRun.push(test.info.tiefenauer.jasskass.app.controllers.GetOAuth2AccessTokenTest);
+				testsToRun.push(test.info.tiefenauer.jasskass.app.models.SettingProxyTest);
 				testsToRun.push(test.info.tiefenauer.gdas3.SpreadsheetAuthorTest);
-				testsToRun.push(test.info.tiefenauer.jasskass.models.vo.ConfigFileTest);
+				testsToRun.push(test.info.tiefenauer.jasskass.app.models.vo.ConfigFileTest);
 				testsToRun.push(test.info.tiefenauer.gdas3.SpreadsheetContentTest);
-				testsToRun.push(test.info.tiefenauer.jasskass.models.vo.SettingTest);
-				testsToRun.push(test.info.tiefenauer.jasskass.models.vo.AppConfigurationTest);
+				testsToRun.push(test.info.tiefenauer.jasskass.app.models.vo.SettingTest);
+				testsToRun.push(test.info.tiefenauer.jasskass.app.models.vo.AppConfigurationTest);
 				return testsToRun;
 			}
 			

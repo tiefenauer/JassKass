@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base:JassDetailViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
+						 xmlns:s="library://ns.adobe.com/flex/spark" 
+						 xmlns:base="info.tiefenauer.jasskass.jass.views.base.*"
+						 creationComplete="onCreationComplete(event)"
+						 >
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			import info.tiefenauer.jasskass.app.util.translate;
+			
+			protected function onCreationComplete(event:FlexEvent):void{
+				title = translate('Jass vom') + ' ' + jass.date;
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:Scroller width="100%" height="100%">
+		<s:VGroup width="100%" height="100%" paddingLeft="10" paddingRight="10" paddingTop="10" paddingBottom="10" >
+			<s:HGroup width="100%" height="100%">
+				<s:Label width="50%" text="{translate('Punkte Team 1:')}" />
+				<s:Label width="50%" text="{translate('Punkte Team 2:')}" />
+			</s:HGroup>
+		</s:VGroup>
+	</s:Scroller>
+	
+</base:JassDetailViewBase>

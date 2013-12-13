@@ -6,14 +6,14 @@ package info.tiefenauer.jasskass.app.controller.startup
 {
 	import com.adobe.protocols.oauth2.OAuth2;
 	import com.adobe.protocols.oauth2.event.GetAccessTokenEvent;
-	import com.adobe.protocols.oauth2.grant.IGrantType;
-	import com.adobe.protocols.oauth2.grant.ImplicitGrant;
+	import com.adobe.protocols.oauth2.event.RefreshAccessTokenEvent;
 	
 	import flash.media.StageWebView;
 	
 	import info.tiefenauer.jasskass.app.controller.SimpleCommand;
-	import info.tiefenauer.jasskass.app.event.InitializationEvent;
 	import info.tiefenauer.jasskass.app.event.GoogleAuthEvent;
+	import info.tiefenauer.jasskass.app.event.InitializationEvent;
+	import info.tiefenauer.jasskass.app.model.GoogleApiToken;
 	import info.tiefenauer.jasskass.app.model.enum.ConfigKey;
 	import info.tiefenauer.jasskass.app.model.interfaces.IConfigProxy;
 	
@@ -32,15 +32,24 @@ package info.tiefenauer.jasskass.app.controller.startup
 		
 		override public function execute():void{
 			super.execute();
-			var bla:String = configProxy.getConfigurationByKey(ConfigKey.GOOGLE_API_CONFIG).value;
-			var googleObj:Object = JSON.parse(configProxy.getConfigurationByKey(ConfigKey.GOOGLE_API_CONFIG).value);
-			var clientID:String = googleObj['web']['client_id']?googleObj['web']['client_id']:'';
-			var redirectURI:String = googleObj['web']['redirect_uris']?(googleObj['web']['redirect_uris'] as Array)[0]:'';
 			
-			var grant:IGrantType = new ImplicitGrant(stageWebView, clientID, redirectURI, "https://www.googleapis.com/auth/userinfo.profile");
-			oAuth2.addEventListener(GetAccessTokenEvent.TYPE, onGetAccessToken);
-			detain();
-			oAuth2.getAccessToken(grant);
+			var tokenObj:Object = JSON.parse(configProxy.getConfigurationByKey(ConfigKey.GOOGLE_API_TOKEN).value);
+			var apiToken:GoogleApiToken = new GoogleApiToken();
+			apiToken.fromObject(tokenObj);
+			if (!apiToken.isValid){
+				var googleObj:Object = JSON.parse(configProxy.getConfigurationByKey(ConfigKey.GOOGLE_API_CONFIG).value);
+				var clientID:String = googleObj['web']['client_id']?googleObj['web']['client_id']:'';
+				var clientSecret:String = googleObj['web']['client_secret']?googleObj['web']['client_secret']:'';
+				var redirectURI:String = googleObj['web']['redirect_uris']?(googleObj['web']['redirect_uris'] as Array)[0]:'';
+				var scope:String = configProxy.getConfigurationByKey(ConfigKey.GOOGLE_API_SCOPE).value;
+				
+				/*var grant:IGrantType = new ImplicitGrant(stageWebView, clientID, redirectURI, scope);
+				oAuth2.addEventListener(GetAccessTokenEvent.TYPE, onGetAccessToken);
+				detain();
+				oAuth2.getAccessToken(grant);*/
+				oAuth2.addEventListener(RefreshAccessTokenEvent.TYPE, onRefreshAccessToken);
+				oAuth2.refreshAccessToken(apiToken.refreshToken, clientID, clientSecret, scope);
+			}
 
 		}
 		
@@ -48,6 +57,11 @@ package info.tiefenauer.jasskass.app.controller.startup
 			release();
 			stageWebView.dispose();
 			dispatch(new GoogleAuthEvent(GoogleAuthEvent.ACCESS_TOKEN_RECEIVED, getAccessTokenEvent.accessToken));
+		}
+		private  function onRefreshAccessToken(refreshAccessToken:RefreshAccessTokenEvent):void{
+			release();
+			stageWebView.dispose();
+			dispatch(new GoogleAuthEvent(GoogleAuthEvent.ACCESS_TOKEN_RECEIVED, refreshAccessToken.accessToken));
 		}
 	}
 }

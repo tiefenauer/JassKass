@@ -8,12 +8,18 @@ package info.tiefenauer.jasskass.app.controller.startup
 	
 	import flash.filesystem.File;
 	
+	import mx.core.FlexGlobals;
+	
 	import info.tiefenauer.jasskass.app.controller.SimpleCommand;
 	import info.tiefenauer.jasskass.app.model.ConfigProxy;
 	import info.tiefenauer.jasskass.app.model.TextFileService;
 	import info.tiefenauer.jasskass.app.model.interfaces.IConfigProxy;
 	import info.tiefenauer.jasskass.app.model.interfaces.ITextFileService;
 	import info.tiefenauer.jasskass.app.model.vo.ConfigFile;
+	import info.tiefenauer.jasskass.jass.model.JassProxy;
+	import info.tiefenauer.jasskass.jass.model.JassTeamProxy;
+	import info.tiefenauer.jasskass.jass.model.interfaces.IJassProxy;
+	import info.tiefenauer.jasskass.jass.model.interfaces.IJassTeamProxy;
 	
 	import org.as3commons.logging.setup.LogSetupLevel;
 	
@@ -34,6 +40,8 @@ package info.tiefenauer.jasskass.app.controller.startup
 			
 			// proxies
 			injector.map(IConfigProxy).toSingleton(ConfigProxy);
+			injector.map(IJassTeamProxy).toSingleton(JassTeamProxy);
+			injector.map(IJassProxy).toSingleton(JassProxy);
 			
 			// Services
 			injector.map(ITextFileService).toType(TextFileService);
@@ -43,6 +51,9 @@ package info.tiefenauer.jasskass.app.controller.startup
 			
 			// authorization
 			injector.map(OAuth2).toValue(new OAuth2("https://accounts.google.com/o/oauth2/auth", "https://accounts.google.com/o/oauth2/token", LogSetupLevel.ALL));
+			
+			// other
+			injector.map(JassKass).toValue(FlexGlobals.topLevelApplication);
 		}
 	}
 }

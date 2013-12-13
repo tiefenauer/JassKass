@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base:JassListViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:base="info.tiefenauer.jasskass.jass.views.base.*"
+					   implements="info.tiefenauer.jasskass.jass.views.interfaces.IJassListView" 
+					   backButtonEnabled="false"
+					   >
+	
+	<fx:Script>
+		<![CDATA[
+			import spark.events.IndexChangeEvent;
+			protected function onNewJassBtnClick(event:MouseEvent):void{
+				dispatchEvent(new Event(NEW_JASS_BUTTON_CLICKED));
+			}
+			
+			protected function onJassListSelectionChange(event:IndexChangeEvent):void{
+				dispatchEvent(new Event(JASS_SELECTED));
+			}
+			
+			//------------------
+			// Getter/Setter
+			//------------------
+			public function get jasses():List{
+				return jassList;
+			}
+			
+		]]>
+	</fx:Script>
+	
+	
+	<base:layout>
+		<s:VerticalLayout />
+	</base:layout>
+	
+	<base:actionContent>
+		<s:Button id="newJassBtn"
+				  label="neuer Jass"
+				  click="onNewJassBtnClick(event)"
+				  width="100%"
+				  />
+	</base:actionContent>
+	
+	<!-- list to display jasses -->
+	<s:List id="jassList"
+			dataProvider="{jassListDataProvider}"
+			itemRenderer="info.tiefenauer.jasskass.jass.views.components.JassItemRenderer"
+			change="onJassListSelectionChange(event)"
+			width="100%"
+			height="100%"
+			>
+	</s:List>
+	
+</base:JassListViewBase>

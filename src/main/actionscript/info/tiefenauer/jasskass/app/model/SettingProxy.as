@@ -4,7 +4,6 @@
  */
 package info.tiefenauer.jasskass.app.model
 {
-	import info.tiefenauer.jasskass.app.model.interfaces.IConfiguration;
 	import info.tiefenauer.jasskass.app.model.interfaces.ISetting;
 	import info.tiefenauer.jasskass.app.model.interfaces.ISettingProxy;
 	

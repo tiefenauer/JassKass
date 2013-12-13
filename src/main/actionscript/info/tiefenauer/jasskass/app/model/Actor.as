@@ -59,7 +59,7 @@ package info.tiefenauer.jasskass.app.model
 		 */
 		protected function get eventMap():IEventMap
 		{
-			return _eventMap || (_eventMap = new EventMap(eventDispatcher));
+			return _eventMap || (_eventMap = new EventMap());
 		}
 		
 		/**

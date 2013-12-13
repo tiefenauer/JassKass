@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <actionScriptProperties analytics="false" mainApplicationPath="/JassKass/src/test/actionscript/flexUnitTests/models/vo/GetOAuth2AccessTokenTest.as" projectUUID="c406d6ee-8879-4a8b-9255-4750f2a56871" version="11">
-  <compiler additionalCompilerArguments="-locale en_US -keep-as3-metadata+=Inject,PostConstruct" autoRSLOrdering="true" copyDependentFiles="true" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" removeUnusedRSL="true" sourceFolderPath="src/main/actionscript" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="true" useDebugRSLSwfs="true" useFlashSDK="false" verifyDigests="true" warn="true">
+  <compiler additionalCompilerArguments="-locale en_US -keep-as3-metadata+=Inject,PostConstruct" autoRSLOrdering="true" copyDependentFiles="true" flexSDK="Apache Flex 4.11.0 FP 11.9 AIR 3.9 en_US" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" removeUnusedRSL="true" sourceFolderPath="src/main/actionscript" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="true" useDebugRSLSwfs="true" useFlashSDK="false" verifyDigests="true" warn="true">
     <compilerSourcePath>
       <compilerSourcePathEntry kind="1" linkType="1" path="src/main/actionscript"/>
       <compilerSourcePathEntry kind="1" linkType="1" path="src/test/actionscript"/>
+      <compilerSourcePathEntry kind="1" linkType="1" path="src/main/assets"/>
+      <compilerSourcePathEntry kind="1" linkType="1" path="src/main/skins"/>
     </compilerSourcePath>
     <libraryPath defaultLinkType="0">
       <libraryPathEntry kind="4" path="">
@@ -24,9 +26,9 @@
           <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/spark_dmv.swc" useDefaultLinkType="false"/>
           <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/automation.swc" useDefaultLinkType="false"/>
           <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/automation_dmv.swc" useDefaultLinkType="false"/>
-          <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/air/airframework.swc" useDefaultLinkType="false"/>
-          <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/air/applicationupdater_ui.swc" useDefaultLinkType="false"/>
           <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/automation_flashflexkit.swc" useDefaultLinkType="false"/>
+          <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/air/applicationupdater_ui.swc" useDefaultLinkType="false"/>
+          <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/air/airframework.swc" useDefaultLinkType="false"/>
           <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/automation_agent.swc" useDefaultLinkType="false"/>
         </excludedEntries>
       </libraryPathEntry>
@@ -42,25 +44,22 @@
     </sourceAttachmentPath>
   </compiler>
   <applications>
-    <application path="/JassKass/src/test/actionscript/flexUnitTests/models/vo/GetOAuth2AccessTokenTest.as">
-      <airExcludes/>
-    </application>
-    <application path="FlexUnitApplication.mxml">
-      <airExcludes/>
-    </application>
-    <application path="FlexUnitCompilerApplication.mxml">
-      <airExcludes/>
-    </application>
     <application path="JassKass.mxml">
-      <airExcludes/>
-    </application>
-    <application path="main/actionscript/FlexUnitCompilerApplication.mxml">
       <airExcludes/>
     </application>
     <application path="main/actionscript/FlexUnitApplication.mxml">
       <airExcludes/>
     </application>
+    <application path="main/actionscript/FlexUnitCompilerApplication.mxml">
+      <airExcludes/>
+    </application>
+    <application path="/JassKass/src/test/actionscript/flexUnitTests/models/vo/GetOAuth2AccessTokenTest.as">
+      <airExcludes/>
+    </application>
     <application path="main/actionscript/JassKass.mxml">
+      <airExcludes/>
+    </application>
+    <application path="FlexUnitApplication.mxml">
       <airExcludes/>
     </application>
   </applications>

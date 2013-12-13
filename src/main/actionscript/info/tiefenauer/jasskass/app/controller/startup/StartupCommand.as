@@ -6,6 +6,7 @@ package info.tiefenauer.jasskass.app.controller.startup
 {
 	import info.tiefenauer.jasskass.app.controller.SimpleCommand;
 	import info.tiefenauer.jasskass.app.event.InitializationEvent;
+	import info.tiefenauer.jasskass.jass.model.JassProxyEvent;
 	
 	/**
 	 * Startup/initialize app 
@@ -17,6 +18,8 @@ package info.tiefenauer.jasskass.app.controller.startup
 			super.execute();
 			dispatch(new InitializationEvent(InitializationEvent.LOAD_APP_CONFIG));
 			dispatch(new InitializationEvent(InitializationEvent.GET_GOOGLE_API_TOKEN));
+			
+			dispatch(new JassProxyEvent(JassProxyEvent.LOAD_JASSES));
 		}
 	}
 }

@@ -4,22 +4,22 @@
 <testsuite name="com.adobe.protocols.oauth2:OAuth2Test" type="testsuiteclass"/>
 <testsuite name="test.info.tiefenauer.gdas3:SpreadsheetLinkTest" type="testsuiteclass"/>
 <testsuite name="test.info.tiefenauer.gdas3:SpreadsheetCategoryTest" type="testsuiteclass"/>
-<testsuite name="test.info.tiefenauer.jasskass.controllers:LoadAppConfigurationTest" type="testsuiteclass"/>
-<testsuite name="test.info.tiefenauer.jasskass.models:FileServiceTest" type="testsuiteclass"/>
+<testsuite name="test.info.tiefenauer.jasskass.app.controllers:LoadAppConfigurationTest" type="testsuiteclass"/>
+<testsuite name="test.info.tiefenauer.jasskass.app.models:FileServiceTest" type="testsuiteclass"/>
 <testsuite name="test.info.tiefenauer.gdas3:SpreadsheetServiceTest" type="testsuiteclass"/>
 <testsuite name="org.floxy:ProxyRepositoryTest" type="testsuiteclass"/>
-<testsuite name="test.info.tiefenauer.jasskass.models:TextFileServiceTest" type="testsuiteclass"/>
+<testsuite name="test.info.tiefenauer.jasskass.app.models:TextFileServiceTest" type="testsuiteclass"/>
 <testsuite name="org.floxy.event:ProxyClassEventTest" type="testsuiteclass"/>
 <testsuite name="test.info.tiefenauer.gdas3:SpreadsheetTest" type="testsuiteclass"/>
-<testsuite name="test.info.tiefenauer.jasskass.controllers:SaveOAuth2AccessTokenTest" type="testsuiteclass"/>
-<testsuite name="test.info.tiefenauer.jasskass.models:ConfigProxyTest" type="testsuiteclass"/>
-<testsuite name="test.info.tiefenauer.jasskass.controllers:GetOAuth2AccessTokenTest" type="testsuiteclass"/>
-<testsuite name="test.info.tiefenauer.jasskass.models:SettingProxyTest" type="testsuiteclass"/>
+<testsuite name="test.info.tiefenauer.jasskass.app.controllers:SaveOAuth2AccessTokenTest" type="testsuiteclass"/>
+<testsuite name="test.info.tiefenauer.jasskass.app.models:ConfigProxyTest" type="testsuiteclass"/>
+<testsuite name="test.info.tiefenauer.jasskass.app.controllers:GetOAuth2AccessTokenTest" type="testsuiteclass"/>
+<testsuite name="test.info.tiefenauer.jasskass.app.models:SettingProxyTest" type="testsuiteclass"/>
 <testsuite name="test.info.tiefenauer.gdas3:SpreadsheetAuthorTest" type="testsuiteclass"/>
-<testsuite name="test.info.tiefenauer.jasskass.models.vo:ConfigFileTest" type="testsuiteclass"/>
+<testsuite name="test.info.tiefenauer.jasskass.app.models.vo:ConfigFileTest" type="testsuiteclass"/>
 <testsuite name="test.info.tiefenauer.gdas3:SpreadsheetContentTest" type="testsuiteclass"/>
-<testsuite name="test.info.tiefenauer.jasskass.models.vo:SettingTest" type="testsuiteclass"/>
-<testsuite name="test.info.tiefenauer.jasskass.models.vo:AppConfigurationTest" type="testsuiteclass"/>
+<testsuite name="test.info.tiefenauer.jasskass.app.models.vo:SettingTest" type="testsuiteclass"/>
+<testsuite name="test.info.tiefenauer.jasskass.app.models.vo:AppConfigurationTest" type="testsuiteclass"/>
 </testsuite>
 <portNumber value="8765" />
 </testrun>

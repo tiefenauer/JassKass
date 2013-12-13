@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SkinnablePopUpContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+						   xmlns:s="library://ns.adobe.com/flex/spark" xmlns:vo="info.tiefenauer.jasskass.jass.model.vo.*" 
+						   >
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.core.FlexGlobals;
+			import mx.managers.PopUpManager;
+			
+			import info.tiefenauer.jasskass.jass.model.enum.WysType;
+			import info.tiefenauer.jasskass.jass.model.interfaces.IWys;
+			
+			public function show():void{
+				super.open((FlexGlobals.topLevelApplication as JassKass), true);
+				width = FlexGlobals.topLevelApplication.width - 30;
+				height = FlexGlobals.topLevelApplication.height - 30;
+				
+				PopUpManager.centerPopUp(this);
+			}
+			
+			protected function onOkButtonClick(event:MouseEvent):void{
+				var wyses:Vector.<IWys> = new Vector.<IWys>();
+				for each(var wys:IWys in wysList.selectedItems) wyses.push(wys);
+				close(true, wyses);
+			}
+			
+			protected function onCancelButtonCLick(event:MouseEvent):void{
+				close();
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:layout>
+		<s:VerticalLayout paddingLeft="10" paddingRight="10" paddingTop="10" paddingBottom="10" gap="10"/>
+	</s:layout>
+	
+	<s:List id="wysList"
+			allowMultipleSelection="true"
+			width="100%"
+			height="100%"
+			>
+		<s:itemRenderer>
+			<fx:Component>
+				<s:IconItemRenderer labelField="type"
+									messageFunction="getMessage"
+									>
+					<fx:Script>
+						<![CDATA[
+							private function getMessage(item:Object):String{
+								return '(' + item.value + ' Punkte)';
+							}
+						]]>
+					</fx:Script>
+				</s:IconItemRenderer>
+			</fx:Component>
+		</s:itemRenderer>
+		<s:dataProvider>
+			<s:ArrayCollection>
+				<vo:Wys type="{WysType.DREIBLATT}" />
+				<vo:Wys type="{WysType.VIERBLATT}" />
+				<vo:Wys type="{WysType.FUENFBLATT}" />
+				<vo:Wys type="{WysType.SECHSBLATT}" />
+				<vo:Wys type="{WysType.SIEBENBLATT}" />
+				<vo:Wys type="{WysType.ACHTBLATT}" />
+				<vo:Wys type="{WysType.NEUNBLATT}" />
+				<vo:Wys type="{WysType.VIER_GLEICHE}" />
+				<vo:Wys type="{WysType.VIER_NEUNEN}" />
+				<vo:Wys type="{WysType.VIER_BAUERN}" />
+			</s:ArrayCollection>
+		</s:dataProvider>
+	</s:List>
+	
+	<s:Button id="okButton"
+			  label="OK"
+			  click="onOkButtonClick(event)"
+			  width="100%"
+			  />
+	
+	<s:Button id="cancelButton"
+			  label="Abbrechen"
+			  click="onCancelButtonCLick(event)"
+			  width="100%"
+			  />
+	
+	
+</s:SkinnablePopUpContainer>

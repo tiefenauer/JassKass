@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark"
+		  paddingLeft="10"
+		  paddingRight="10"
+		  paddingTop="10"
+		  paddingBottom="10"
+		  gap="10"
+		  width="100%"
+		  height="100%"
+		  >
+	
+	<fx:Script>
+		<![CDATA[
+			
+			
+			// private variables
+			private static const MATCH:Number = 257;
+			[Bindable] private var pointsTeam1:Number = 0;
+			[Bindable] private var pointsTeam2:Number = 0;
+			
+			//---------------------------------
+			// Event handleres
+			//---------------------------------
+			protected function onSliderValueChange(event:Event):void{
+				switch(true){
+					// team 1 hat match
+					case jassSlider.value == jassSlider.minimum:
+						pointsTeam1 = MATCH;
+						pointsTeam2 = 0;
+						break;
+					case jassSlider.value == jassSlider.maximum:
+						pointsTeam1 = MATCH;
+						pointsTeam2 = 0;
+						break;
+					default:
+						pointsTeam1 = jassSlider.value;
+						pointsTeam2 = 157 - jassSlider.value;
+						break;
+				}
+			}
+			protected function onSubmitButtonClick(event:MouseEvent):void{
+			}
+			protected function onCancelButtonClick(event:MouseEvent):void{
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<s:RadioButtonGroup id="factorGroup" />
+	</fx:Declarations>
+	
+	<s:Label id="team1PointsLbl" width="100%" text="{pointsTeam1 + ' Punkte (Total: ' + Number(factorGroup.selectedValue) * pointsTeam1 + ')'}" />
+	
+	<s:VSlider id="jassSlider" 
+			   minimum="0" 
+			   maximum="157"
+			   value="78"
+			   change="onSliderValueChange(event)"
+			   horizontalCenter="0"
+			   width="100%"
+			   height="100%"
+			   />
+	
+	<s:Label id="team2PointsLbl" width="100%" text="{pointsTeam2 + ' Punkte (Total: ' + Number(factorGroup.selectedValue) * pointsTeam2 + ')'}" />
+	
+	
+	<s:HGroup width="100%">
+		<s:RadioButton id="single" 
+					   groupName="factorGroup"
+					   label="x1"
+					   value="1"
+					   selected="true"
+					   width="100%"
+					   />
+		<s:RadioButton id="double" 
+					   groupName="factorGroup"
+					   label="x2"
+					   value="2"
+					   width="100%"
+					   />
+		<s:RadioButton id="triple" 
+					   groupName="factorGroup"
+					   label="x3"
+					   value="3"
+					   width="100%"
+					   />
+	</s:HGroup>
+	
+	<s:Button id="submitButton"
+			  label="Fertig"
+			  click="onSubmitButtonClick(event)"
+			  width="100%"
+			  />
+	
+	<s:Button id="cancelButton"
+			  label="Abbrechen"
+			  click="onCancelButtonClick(event)"
+			  width="100%"
+			  />
+	
+</s:VGroup>
