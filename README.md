@@ -25,5 +25,4 @@ Nowhere yet. You'll have to wait until the app is finished (or clone this repo a
 ## Anything else?
 If you like the App, drop be a line on [my blog][blog]
 
-[web-app]:http://todo.tiefenauer.info
 [blog]:http://www.tiefenauer.info/?page_id=22
