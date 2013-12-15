@@ -20,9 +20,9 @@ package info.tiefenauer.jasskass.jass.controller
 		
 		override public function execute():void{
 			super.execute();
-			var jsonContent:String = '';
+			var jassArr:Array = new Array();
 			for each(var jass:IJass in jassProxy.jassList){
-				jsonContent += JSON.stringify(jass.toObject());
+				jassArr.push(jass.toObject());
 			}
 			var file:File = File.applicationStorageDirectory.resolvePath('jasses.json');
 			if (file.exists)
@@ -30,7 +30,7 @@ package info.tiefenauer.jasskass.jass.controller
 			
 			var fs:FileStream = new FileStream();
 			fs.open(file, FileMode.WRITE);
-			fs.writeUTFBytes(jsonContent);
+			fs.writeUTFBytes(JSON.stringify(jassArr));
 			fs.close();
 		}
 	}

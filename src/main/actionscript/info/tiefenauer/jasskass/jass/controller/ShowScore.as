@@ -10,7 +10,7 @@ package info.tiefenauer.jasskass.jass.controller
 	import info.tiefenauer.jasskass.app.controller.SimpleCommand;
 	import info.tiefenauer.jasskass.jass.event.JassEvent;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJassProxy;
-	import info.tiefenauer.jasskass.jass.views.phone.JassScoreView;
+	import info.tiefenauer.jasskass.jass.views.phone.JassPenaltyView;
 	
 	/**
 	 * Show Penalty for current JassGame 
@@ -27,7 +27,7 @@ package info.tiefenauer.jasskass.jass.controller
 			super.execute();
 			var transition:FlipViewTransition = new FlipViewTransition();
 			transition.direction = ViewTransitionDirection.LEFT;
-			application.activeNavigator.pushView(JassScoreView, jassProxy.currentJass, null, transition);
+			application.activeNavigator.pushView(JassPenaltyView, jassProxy.currentJass, null, transition);
 		}
 	}
 }

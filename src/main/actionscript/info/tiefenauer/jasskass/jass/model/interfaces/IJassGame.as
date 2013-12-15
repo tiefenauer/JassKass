@@ -9,6 +9,8 @@ package info.tiefenauer.jasskass.jass.model.interfaces
 	[Bindable]
 	public interface IJassGame extends IJSON
 	{
+		function get jass():IJass;
+		
 		function get factor():Number;
 		function set factor(value:Number):void;
 		

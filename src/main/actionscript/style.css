@@ -13,6 +13,14 @@ global {
 }
 
 
-components|JassTafelVorne{
+components|JassTafel
+{
 	skinClass: ClassReference("info.tiefenauer.jasskass.skins.JassTafelSkin");
+	color: #FFFFFF;
 }
+
+components|ZGroup
+{
+	skinClass: ClassReference("info.tiefenauer.jasskass.skins.ZGroupSkin");
+}
+

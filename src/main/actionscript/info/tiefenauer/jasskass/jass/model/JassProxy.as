@@ -11,7 +11,6 @@ package info.tiefenauer.jasskass.jass.model
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJassProxy;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJassTeam;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IWys;
-	import info.tiefenauer.jasskass.jass.model.vo.Jass;
 	
 	/**
 	 * Proxy to maintain jasses 
@@ -27,11 +26,16 @@ package info.tiefenauer.jasskass.jass.model
 		 * Add a jass 
 		 * @param jass
 		 */
-		public function newJass():IJass{
-			var jass:IJass = new Jass();
-			_jassList.push(jass);
-			_currentJass = jass;
-			return jass;
+		public function addJass(value:IJass):void{
+			var filterByID:Function = function(item:IJass, index:int, vector:Vector.<IJass>):Boolean{
+				return item.id == value.id;
+			};
+			if (_jassList.filter(filterByID).length == 0)
+				_jassList.push(value);
+		}
+		
+		public function removeJass(id:String):void{
+			
 		}
 		
 		/**
@@ -83,10 +87,10 @@ package info.tiefenauer.jasskass.jass.model
 		public function addStrichToCurrentJass(team:IJassTeam, count:Number):void{
 			switch(team){
 				case _currentJass.team1:
-					_currentJass.team1Score += count;
+					_currentJass.team1Penalty += count;
 					break;
 				case _currentJass.team2:
-					_currentJass.team2Score += count;
+					_currentJass.team2Penalty += count;
 					break;
 			}
 			dispatch(new JassProxyEvent(JassProxyEvent.CURRENT_STRICHE_CHANGED));

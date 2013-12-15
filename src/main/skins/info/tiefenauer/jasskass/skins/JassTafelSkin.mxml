@@ -1,55 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		xmlns:s="library://ns.adobe.com/flex/spark"
-		initialize="onInitialize(event)"
+		xmlns:components="info.tiefenauer.jasskass.jass.views.components.*"
 		>
 	<!-- host component -->
 	<fx:Metadata>
-		[HostComponent("info.tiefenauer.jasskass.jass.views.components.JassTafelVorne")]
+		[HostComponent("info.tiefenauer.jasskass.jass.views.components.JassTafel")]
 	</fx:Metadata>
-	<fx:Script>
-		<![CDATA[
-			import mx.core.DPIClassification;
-			import mx.core.FlexGlobals;
-			import mx.events.FlexEvent;
-			
-			[Bindable] private var _frameWidth:Number;
-			
-			protected function onInitialize(event:FlexEvent):void{
-				switch(FlexGlobals.topLevelApplication.applicationDPI){
-					case DPIClassification.DPI_160:
-						_frameWidth = 30;
-						break;
-					case DPIClassification.DPI_240:
-						_frameWidth = 25;
-						break;
-					case DPIClassification.DPI_320:
-						_frameWidth = 60;
-						break;
-					case DPIClassification.DPI_480:
-						_frameWidth = 90;
-						break;
-				}
-			}
-			
-		]]>
-	</fx:Script>
-	
 	<!-- states -->
 	<s:states>
-		<s:State name="normal" />
 		<s:State name="disabled" />
+		<s:State name="normal" />
 	</s:states>
 	
 	<!-- SkinParts
-	name=team2ScoreDisplay, type=spark.core.IDisplayText, required=true
-	name=team1ScoreDisplay, type=spark.core.IDisplayText, required=true
+	name=contentGroup, type=spark.components.Group, required=false
+	name=team2LabelDisplay, type=spark.core.IDisplayText, required=true
+	name=team1LabelDisplay, type=spark.core.IDisplayText, required=true
 	-->
-	
+
+	<!-- background -->
 	<s:Rect id="background" width="100%" height="100%">
-		<s:stroke>
-			<s:SolidColorStroke color="0xAA8E5E" weight="{_frameWidth}" />
-		</s:stroke>
 		<s:fill>
 			<s:LinearGradient>
 				<s:GradientEntry color="0x316541" />
@@ -57,24 +28,32 @@
 			</s:LinearGradient>
 		</s:fill>
 	</s:Rect>
-
-	<s:VGroup paddingTop="{_frameWidth}"
-			  paddingBottom="{_frameWidth}"
-			  paddingLeft="{_frameWidth}"
-			  paddingRight="{_frameWidth}"
-			  >
-		<s:Label id="team1ScoreDisplay"
-				 color="#FFFFFF"
-				 textAlign="center"
-				 top="0"
-				 width="100%"
-				 />
+	
+	<s:Path>
 		
-		<s:Label id="team2ScoreDisplay"
-				 color="#FFFFFF"
-				 textAlign="center"
-				 bottom="0"
-				 width="100%"
-				 />
+	</s:Path>
+	
+	<!-- Z with team labels-->
+	<s:VGroup width="100%" height="100%">
+		<components:ZGroup id="team1Area" width="100%" height="50%" />
+		
+		<s:VGroup width="100%" id="middleArea">
+			
+			<s:Label id="team1LabelDisplay" width="100%" rotation="180" />
+			<s:Line width="100%" verticalCenter="0">
+				<s:stroke>
+					<s:SolidColorStroke color="#FFFFFF" weight="2" />
+				</s:stroke>
+			</s:Line>
+			<s:Label id="team2LabelDisplay" width="100%"/>
+		</s:VGroup>
+		
+		<components:ZGroup id="team2Area" width="100%" height="50%" />
 	</s:VGroup>
+
+	<s:Group id="contentGroup">
+		<s:layout>
+			<s:VerticalLayout />
+		</s:layout>
+	</s:Group>
 </s:Skin>

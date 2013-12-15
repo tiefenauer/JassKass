@@ -9,6 +9,7 @@ package info.tiefenauer.jasskass.app.controller.startup
 	import info.tiefenauer.jasskass.jass.controller.AddStoeck;
 	import info.tiefenauer.jasskass.jass.controller.AddWys;
 	import info.tiefenauer.jasskass.jass.controller.CreateJass;
+	import info.tiefenauer.jasskass.jass.controller.FinishJass;
 	import info.tiefenauer.jasskass.jass.controller.HideScore;
 	import info.tiefenauer.jasskass.jass.controller.LoadJassesFromFile;
 	import info.tiefenauer.jasskass.jass.controller.NewJass;
@@ -44,8 +45,9 @@ package info.tiefenauer.jasskass.app.controller.startup
 			commandMap.map(JassEvent.NEW_JASS).toCommand(NewJass);
 			commandMap.map(JassEvent.CREATE_JASS).toCommand(CreateJass);
 			commandMap.map(JassEvent.START_JASS).toCommand(StartJass);
-			commandMap.map(JassEvent.SHOW_SCORE).toCommand(ShowScore);
-			commandMap.map(JassEvent.HIDE_SCORE).toCommand(HideScore);
+			commandMap.map(JassEvent.FINISH_JASS).toCommand(FinishJass);
+			commandMap.map(JassEvent.SHOW_PENALTY).toCommand(ShowScore);
+			commandMap.map(JassEvent.HIDE_PENALTY).toCommand(HideScore);
 			commandMap.map(JassEvent.SHOW_JASS_DETAIL).toCommand(ShowJassDetails);
 			
 			// JassProxy

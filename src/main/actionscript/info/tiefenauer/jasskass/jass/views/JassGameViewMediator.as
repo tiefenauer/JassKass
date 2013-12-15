@@ -11,6 +11,7 @@ package info.tiefenauer.jasskass.jass.views
 	import info.tiefenauer.jasskass.jass.event.PointsEvent;
 	import info.tiefenauer.jasskass.jass.event.WysEvent;
 	import info.tiefenauer.jasskass.jass.model.JassProxyEvent;
+	import info.tiefenauer.jasskass.jass.model.enum.JassPoints;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJassProxy;
 	import info.tiefenauer.jasskass.jass.views.base.JassGameViewBase;
 	import info.tiefenauer.jasskass.jass.views.phone.JassGameView;
@@ -30,7 +31,6 @@ package info.tiefenauer.jasskass.jass.views
 			addViewListener(MobileView.BACK, onBack);
 			addViewListener(JassGameViewBase.POINTS_ENTERED, onPointsEntered);
 			addViewListener(JassGameViewBase.WYS_ENTERED, onWysEntered);
-			addViewListener(JassGameViewBase.STOECK_ENTERED, onStoeckEntered);
 			addViewListener(JassGameViewBase.FLIP_BOARD_BUTTON_CLICKED, onShowPenalty);
 			
 			addContextListener(JassProxyEvent.CURRENT_GAME_CHANGED, onCurrentGameChanged);
@@ -42,37 +42,26 @@ package info.tiefenauer.jasskass.jass.views
 		// Event handlers
 		//-----------------------------
 		private function onBack(event:Event):void{
-			dispatch(new JassProxyEvent(JassProxyEvent.SAVE_JASSES));
+			// alert Popup zeigen
+			dispatch(new JassEvent(JassEvent.FINISH_JASS));
 		}
 		private function onPointsEntered(event:Event):void{
 			dispatch(new PointsEvent(PointsEvent.ADD_POINTS, view.team1Points, view.team2Points));
 		}
 		private function onWysEntered(event:Event):void{
-			switch (view.wysTarget){
-				case view.wysButtonTeam1:
-					dispatch(new WysEvent(WysEvent.WYS, jassProxy.currentJass.team1, view.wyses));
-					break;
-				case view.wysButtonTeam2:
-					dispatch(new WysEvent(WysEvent.WYS, jassProxy.currentJass.team2, view.wyses));
-					break;
-			}
-		}
-		private function onStoeckEntered(event:Event):void{
-			switch (view.wysTarget){
-				case view.stoeckButtonTeam1:
-					dispatch(new WysEvent(WysEvent.STOECK, jassProxy.currentJass.team1));
-					break;
-				case view.stoeckButtonTeam2:
-					dispatch(new WysEvent(WysEvent.STOECK, jassProxy.currentJass.team2));
-					break;
-			}
+			dispatch(new WysEvent(WysEvent.WYS, view.wysTarget, view.wyses));
 		}
 		private function onShowPenalty(event:Event):void{
-			dispatch(new JassEvent(JassEvent.SHOW_SCORE));
+			dispatch(new JassEvent(JassEvent.SHOW_PENALTY));
 		}
 		
 		private function onCurrentGameChanged(event:JassProxyEvent):void{
-			view.game = jassProxy.currentJass.currentGame;
+			if (jassProxy.currentJass.team1Points < JassPoints.SIEG){
+				// neues Game beginnen?
+			}
+			else {
+				view.game = jassProxy.currentJass.currentGame;
+			}
 		}
 	}
 }

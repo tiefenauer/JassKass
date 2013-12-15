@@ -4,6 +4,7 @@
  */
 package info.tiefenauer.jasskass.jass.model.vo
 {
+	import info.tiefenauer.jasskass.jass.model.interfaces.IJass;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJassGame;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IWys;
 	
@@ -14,11 +15,20 @@ package info.tiefenauer.jasskass.jass.model.vo
 	public class JassGame implements IJassGame
 	{
 		// private vars
+		private var _jass:IJass;
 		private var _factor:Number = 1;
 		private var _team1PointsPlayed:Number = 0;
 		private var _team2PointsPlayed:Number = 0;
 		private var _team1Wyses:Vector.<IWys> = new Vector.<IWys>();
 		private var _team2Wyses:Vector.<IWys> = new Vector.<IWys>();
+		
+		/**
+		 * 
+		 * @param jass
+		 */
+		public function JassGame(jass:IJass){
+			_jass = jass;
+		}
 		
 		/**
 		 * Get Total for Team 1 
@@ -117,6 +127,9 @@ package info.tiefenauer.jasskass.jass.model.vo
 		//-----------------------------
 		// Getter/Setter
 		//-----------------------------
+		public function get jass():IJass{
+			return _jass;
+		}
 		public function get factor():Number{
 			return _factor;
 		}

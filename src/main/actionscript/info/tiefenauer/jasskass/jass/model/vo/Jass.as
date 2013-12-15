@@ -4,6 +4,8 @@
  */
 package info.tiefenauer.jasskass.jass.model.vo
 {
+	import mx.utils.UIDUtil;
+	
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJass;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJassGame;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJassTeam;
@@ -17,6 +19,7 @@ package info.tiefenauer.jasskass.jass.model.vo
 	public class Jass implements IJass
 	{
 		// private vars
+		private var _id:String = UIDUtil.createUID();
 		private var _currentTeam:IJassTeam;
 		private var _date:Date;
 		private var _team1:IJassTeam = new JassTeam();
@@ -41,7 +44,7 @@ package info.tiefenauer.jasskass.jass.model.vo
 		 * Create new Game 
 		 */
 		public function newGame():void{
-			var game:IJassGame = new JassGame();
+			var game:IJassGame = new JassGame(this);
 			_currentGame = game;
 			_games.push(game);
 		}
@@ -60,7 +63,7 @@ package info.tiefenauer.jasskass.jass.model.vo
 		 * Get sum for team 1
 		 * @return 
 		 */
-		public function get pointsTeam1():Number{
+		public function get team1Points():Number{
 			var sum:Number = 0;
 			for each(var game:IJassGame in _games){
 				sum += game.team1PointsPlayed;
@@ -75,7 +78,7 @@ package info.tiefenauer.jasskass.jass.model.vo
 		 * Get sum for team 2
 		 * @return 
 		 */
-		public function get pointsTeam2():Number{
+		public function get team2Points():Number{
 			var sum:Number = 0;
 			for each(var game:IJassGame in _games){
 				sum += game.team2PointsPlayed;
@@ -134,7 +137,7 @@ package info.tiefenauer.jasskass.jass.model.vo
 						break;
 					case 'games':
 						for each(var gameObj:Object in obj[key]){
-							var game:JassGame = new JassGame();
+							var game:JassGame = new JassGame(this);
 							game.fromObject(gameObj);
 							_games.push(game);
 						}
@@ -146,6 +149,9 @@ package info.tiefenauer.jasskass.jass.model.vo
 		//----------------------------------
 		// Getter/Setter
 		//----------------------------------
+		public function get id():String{
+			return _id;
+		}
 		public function get date():Date{
 			return _date;
 		}
@@ -173,16 +179,16 @@ package info.tiefenauer.jasskass.jass.model.vo
 		public function set currentGame(value:IJassGame):void{
 			_currentGame = value;
 		}
-		public function get team1Score():Number{
+		public function get team1Penalty():Number{
 			return _team1Striche;
 		}
-		public function set team1Score(value:Number):void{
+		public function set team1Penalty(value:Number):void{
 			_team1Striche = value;
 		}
-		public function get team2Score():Number{
+		public function get team2Penalty():Number{
 			return _team2Striche;
 		}
-		public function set team2Score(value:Number):void{
+		public function set team2Penalty(value:Number):void{
 			_team2Striche = value;
 		}
 

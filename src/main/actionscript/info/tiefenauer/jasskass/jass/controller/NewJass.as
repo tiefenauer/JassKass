@@ -7,6 +7,7 @@ package info.tiefenauer.jasskass.jass.controller
 	import info.tiefenauer.jasskass.app.controller.SimpleCommand;
 	import info.tiefenauer.jasskass.jass.event.JassEvent;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJassProxy;
+	import info.tiefenauer.jasskass.jass.model.vo.Jass;
 	import info.tiefenauer.jasskass.jass.views.phone.TeamBuilderView;
 	
 	/**
@@ -21,8 +22,7 @@ package info.tiefenauer.jasskass.jass.controller
 		
 		override public function execute():void{
 			super.execute();
-			jassProxy.newJass();
-			app.activeNavigator.pushView(TeamBuilderView, jassProxy.currentJass);
+			app.activeNavigator.pushView(TeamBuilderView, new Jass());
 		}
 	}
 }

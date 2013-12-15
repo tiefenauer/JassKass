@@ -5,15 +5,17 @@
 package info.tiefenauer.jasskass.app.controller.startup
 {
 	import info.tiefenauer.jasskass.app.controller.SimpleCommand;
-	import info.tiefenauer.jasskass.balance.views.BalanceViewMediator;
-	import info.tiefenauer.jasskass.balance.views.interfaces.IBalanceView;
+	import info.tiefenauer.jasskass.kass.views.KassViewMediator;
+	import info.tiefenauer.jasskass.kass.views.interfaces.IKassView;
+	import info.tiefenauer.jasskass.jass.views.JassDetailViewMediator;
 	import info.tiefenauer.jasskass.jass.views.JassGameViewMediator;
 	import info.tiefenauer.jasskass.jass.views.JassListViewMediator;
-	import info.tiefenauer.jasskass.jass.views.JassScoreViewMediator;
+	import info.tiefenauer.jasskass.jass.views.JassPenaltyViewMediator;
 	import info.tiefenauer.jasskass.jass.views.TeamBuilderViewMediator;
+	import info.tiefenauer.jasskass.jass.views.interfaces.IJassDetailView;
 	import info.tiefenauer.jasskass.jass.views.interfaces.IJassGameView;
 	import info.tiefenauer.jasskass.jass.views.interfaces.IJassListView;
-	import info.tiefenauer.jasskass.jass.views.interfaces.IJassScoreView;
+	import info.tiefenauer.jasskass.jass.views.interfaces.IJassPenaltyView;
 	import info.tiefenauer.jasskass.jass.views.interfaces.ITeamBuilderView;
 	import info.tiefenauer.jasskass.profile.views.ProfileViewMediator;
 	import info.tiefenauer.jasskass.profile.views.interfaces.IProfileView;
@@ -36,10 +38,11 @@ package info.tiefenauer.jasskass.app.controller.startup
 			mediatorMap.map(ITeamBuilderView).toMediator(TeamBuilderViewMediator);
 			mediatorMap.map(IJassListView).toMediator(JassListViewMediator);
 			mediatorMap.map(IJassGameView).toMediator(JassGameViewMediator);
-			mediatorMap.map(IJassScoreView).toMediator(JassScoreViewMediator);
+			mediatorMap.map(IJassPenaltyView).toMediator(JassPenaltyViewMediator);
+			mediatorMap.map(IJassDetailView).toMediator(JassDetailViewMediator);
 			
 			// balance
-			mediatorMap.map(IBalanceView).toMediator(BalanceViewMediator);
+			mediatorMap.map(IKassView).toMediator(KassViewMediator);
 			
 			// profile
 			mediatorMap.map(IProfileView).toMediator(ProfileViewMediator);

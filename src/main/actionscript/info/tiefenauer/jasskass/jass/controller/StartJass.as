@@ -17,9 +17,10 @@ package info.tiefenauer.jasskass.jass.controller
 		
 		override public function execute():void{
 			super.execute();
+			jassProxy.currentJass = event.jass;
 			event.jass.newGame();
 			event.jass.newRound();
-			application.activeNavigator.pushView(JassGameView, event.jass);
+			application.activeNavigator.pushView(JassGameView, event.jass.currentGame);
 		}
 	}
 }

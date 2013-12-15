@@ -19,8 +19,9 @@ package info.tiefenauer.jasskass.jass.event
 		public static const NEW_JASS:String = NAME + 'NewJass';
 		public static const CREATE_JASS:String = NAME + 'CreateJass';
 		public static const START_JASS:String = NAME + 'StartJass';
-		public static const SHOW_SCORE:String = NAME + 'ShowScore';
-		public static const HIDE_SCORE:String = NAME + 'HideScore';
+		public static const FINISH_JASS:String = NAME + 'FinishJass';
+		public static const SHOW_PENALTY:String = NAME + 'ShowPenalty';
+		public static const HIDE_PENALTY:String = NAME + 'HidePenalty';
 		public static const SHOW_JASS_DETAIL:String = NAME + 'ShowJassDetail';
 		
 		public var jass:IJass;

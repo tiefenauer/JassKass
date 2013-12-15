@@ -16,6 +16,7 @@ package info.tiefenauer.jasskass.jass.controller
 		
 		override public function execute():void{
 			super.execute();
+			jassProxy.addJass(event.jass);
 			application.activeNavigator.popView();
 		}
 	}
