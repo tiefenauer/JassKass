@@ -3,7 +3,7 @@
 						 xmlns:s="library://ns.adobe.com/flex/spark" 
 						 xmlns:base="info.tiefenauer.jasskass.jass.views.base.*"
 						 implements="info.tiefenauer.jasskass.jass.views.interfaces.IJassDetailView"
-						 creationComplete="onCreationComplete(event)"
+						 creationComplete="onCreationComplete(event)" xmlns:components="info.tiefenauer.jasskass.jass.views.components.*"
 						 >
 	<fx:Script>
 		<![CDATA[
@@ -14,35 +14,73 @@
 			protected function onCreationComplete(event:FlexEvent):void{
 				title = translate('Jass vom') + ' ' + jass.date;
 			}
-			
 		]]>
 	</fx:Script>
 	
-	<s:Scroller width="100%" height="100%">
-		<s:VGroup width="100%" height="100%" paddingLeft="10" paddingRight="10" paddingTop="10" paddingBottom="10" >
-			<s:Label width="100%" text="{translate('Team 1:')}" />
-			<s:HGroup width="100%">
-				<s:Label width="50%" text="{translate('Punkte:')}" />
-				<s:Label width="50%" text="{jass.team1Points}" />
-			</s:HGroup>
-
-			<s:HGroup width="100%">
-				<s:Label width="50%" text="{translate('Striche:')}" />
-				<s:Label width="50%" text="{jass.team1Penalty}" />
-			</s:HGroup>
-			
-			<s:Label width="50%" text="{translate('Team 2:')}" />
-			<s:HGroup width="100%">
-				<s:Label width="50%" text="{translate('Punkte:')}" />
-				<s:Label width="50%" text="{jass.team2Points}" />
-			</s:HGroup>
+	<fx:Style>
+		@namespace s "library://ns.adobe.com/flex/spark";
+		@namespace base "info.tiefenauer.jasskass.jass.views.base.*";
+		@namespace components "info.tiefenauer.jasskass.jass.views.components.*";
+		.title 
+		{
+			fontSize: 50;
+			textAlign: center;
+			/*textDecoration: underline;*/
+		}
+	</fx:Style>
+	
+	<components:JassTafel width="100%" height="100%" displayZ="false">
+		<s:VGroup width="100%" height="50%" paddingLeft="10" paddingRight="10" paddingTop="10" paddingBottom="10" >
+			<s:Label width="100%" text="{translate('Team 1:')}"  styleName="title"/>
+			<s:Label width="100%" text="{jass.team1.player1.firstName + ' + ' + jass.team1.player2.firstName}" textAlign="center"/>
 			
 			<s:HGroup width="100%">
-				<s:Label width="50%" text="{translate('Striche:')}" />
-				<s:Label width="50%" text="{jass.team2Penalty}" />
+				<s:Label width="40%" text="{translate('PunkteTotal:')}" />
+				<s:Label width="60%" text="{jass.team1TotalPoints}" />
+			</s:HGroup>
+			
+			<s:HGroup width="100%">
+				<s:Label width="40%" text="{translate('Davon gespielt:')}" />
+				<s:Label width="60%" text="{jass.team1PointsPlayed}" />
+			</s:HGroup>
+			
+			<s:HGroup width="100%">
+				<s:Label width="40%" text="{translate('Davon gewiesen:')}" />
+				<s:Label width="60%" text="{jass.team1WysPoints}" />
+			</s:HGroup>
+			
+			<s:HGroup width="100%">
+				<s:Label width="40%" text="{translate('Striche:')}" />
+				<s:Label width="60%" text="{jass.team1Penalty}" />
 			</s:HGroup>
 			
 		</s:VGroup>
-	</s:Scroller>
+		<s:VGroup width="100%" height="50%" paddingLeft="10" paddingRight="10" paddingTop="10" paddingBottom="10" >
+			<s:Label width="100%" text="{translate('Team 2:')}" styleName="title"/>
+			<s:Label width="100%" text="{jass.team2.player1.firstName + ' + ' + jass.team2.player2.firstName}" textAlign="center"/>
+
+			<s:HGroup width="100%">
+				<s:Label width="40%" text="{translate('Punkte Total:')}" />
+				<s:Label width="60%" text="{jass.team2TotalPoints}" />
+			</s:HGroup>
+			
+			<s:HGroup width="100%">
+				<s:Label width="40%" text="{translate('Davon gespielt:')}" />
+				<s:Label width="60%" text="{jass.team2PointsPlayed}" />
+			</s:HGroup>
+		
+			<s:HGroup width="100%">
+				<s:Label width="40%" text="{translate('Davon gewiesen:')}" />
+				<s:Label width="60%" text="{jass.team2WysPoints}" />
+			</s:HGroup>
+			
+			<s:HGroup width="100%">
+				<s:Label width="40%" text="{translate('Striche:')}" />
+				<s:Label width="60%" text="{jass.team2Penalty}" />
+			</s:HGroup>
+		</s:VGroup>
+	</components:JassTafel>
+		
+
 	
 </base:JassDetailViewBase>

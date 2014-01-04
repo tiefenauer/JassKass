@@ -26,10 +26,12 @@ package info.tiefenauer.jasskass.jass.event
 		
 		public var team:IJassTeam;
 		public var wyses:Vector.<IWys>;
+		public var factor:Number;
 		
-		public function WysEvent(type:String, team:IJassTeam, wyses:Vector.<IWys>=null, bubbles:Boolean=false, cancelable:Boolean=false){
+		public function WysEvent(type:String, team:IJassTeam, wyses:Vector.<IWys>=null, factor:Number=1, bubbles:Boolean=false, cancelable:Boolean=false){
 			super(type, bubbles, cancelable);
 			this.team = team;
+			this.factor = factor;
 			if (wyses)
 				this.wyses = wyses;
 			else

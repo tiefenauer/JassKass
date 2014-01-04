@@ -4,6 +4,8 @@
  */
 package info.tiefenauer.jasskass.jass.model.vo
 {
+	import mx.events.PropertyChangeEvent;
+	
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJass;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJassGame;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IWys;

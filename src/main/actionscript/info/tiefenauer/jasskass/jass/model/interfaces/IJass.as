@@ -17,13 +17,17 @@ package info.tiefenauer.jasskass.jass.model.interfaces
 		
 		function get team1():IJassTeam;
 		function set team1(value:IJassTeam):void;
-		function get team1Points():Number;
+		function get team1TotalPoints():Number;
+		function get team1PointsPlayed():Number;
+		function get team1WysPoints():Number;
 		function get team1Penalty():Number;
 		function set team1Penalty(value:Number):void;
 
 		function get team2():IJassTeam;
 		function set team2(value:IJassTeam):void;
-		function get team2Points():Number;
+		function get team2TotalPoints():Number;
+		function get team2PointsPlayed():Number;
+		function get team2WysPoints():Number;
 		function get team2Penalty():Number;
 		function set team2Penalty(value:Number):void;
 		

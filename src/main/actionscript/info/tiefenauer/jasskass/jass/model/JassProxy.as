@@ -5,7 +5,7 @@
 package info.tiefenauer.jasskass.jass.model
 {
 	import info.tiefenauer.jasskass.app.model.Actor;
-	import info.tiefenauer.jasskass.jass.event.ScoreEvent;
+	import info.tiefenauer.jasskass.jass.event.PenaltyEvent;
 	import info.tiefenauer.jasskass.jass.model.enum.JassPoints;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJass;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJassProxy;
@@ -48,12 +48,12 @@ package info.tiefenauer.jasskass.jass.model
 				case _currentJass.team1:
 					_currentJass.currentGame.team1PointsPlayed += points;
 					if (points == JassPoints.MATCH)
-						dispatch(new ScoreEvent(ScoreEvent.MATCH, _currentJass.team1));
+						dispatch(new PenaltyEvent(PenaltyEvent.MATCH, _currentJass.team1));
 					break;
 				case _currentJass.team2:
 					_currentJass.currentGame.team2PointsPlayed += points;
 					if (points == JassPoints.MATCH)
-						dispatch(new ScoreEvent(ScoreEvent.MATCH, _currentJass.team2));
+						dispatch(new PenaltyEvent(PenaltyEvent.MATCH, _currentJass.team2));
 					break;
 			}
 			dispatch(new JassProxyEvent(JassProxyEvent.CURRENT_GAME_CHANGED));
@@ -84,7 +84,17 @@ package info.tiefenauer.jasskass.jass.model
 			checkStrichEvent();
 		}
 		
-		public function addStrichToCurrentJass(team:IJassTeam, count:Number):void{
+		public function setFactorForCurrentGame(factor:Number):void{
+			_currentJass.currentGame.factor = factor;
+			dispatch(new JassProxyEvent(JassProxyEvent.CURRENT_GAME_CHANGED));
+		}
+		
+		public function startNewGame():void{
+			_currentJass.newGame();
+			dispatch(new JassProxyEvent(JassProxyEvent.NEW_GAME));
+		}
+		
+		public function addPenaltyToCurrentJass(team:IJassTeam, count:Number):void{
 			switch(team){
 				case _currentJass.team1:
 					_currentJass.team1Penalty += count;
@@ -101,15 +111,19 @@ package info.tiefenauer.jasskass.jass.model
 		 * Check if a Strich is happening 
 		 */
 		private function checkStrichEvent():void{
-			if (_currentJass.currentGame.team1TotalPoints == JassPoints.BERGPREIS)
-				dispatch(new ScoreEvent(ScoreEvent.BERGPREIS, _currentJass.team1));
-			if (_currentJass.currentGame.team2TotalPoints == JassPoints.BERGPREIS)
-				dispatch(new ScoreEvent(ScoreEvent.BERGPREIS, _currentJass.team2));
-			if (_currentJass.currentGame.team1TotalPoints == JassPoints.SIEG)
-				dispatch(new ScoreEvent(ScoreEvent.SIEG, _currentJass.team1));
-			if (_currentJass.currentGame.team2TotalPoints == JassPoints.SIEG)
-				dispatch(new ScoreEvent(ScoreEvent.SIEG, _currentJass.team2));
-
+			switch(true){
+				case _currentJass.currentGame.team1TotalPoints >= JassPoints.BERGPREIS:
+					dispatch(new PenaltyEvent(PenaltyEvent.BERGPREIS, _currentJass.team1));
+					break;
+				case _currentJass.currentGame.team2TotalPoints >= JassPoints.BERGPREIS:
+					dispatch(new PenaltyEvent(PenaltyEvent.BERGPREIS, _currentJass.team2));
+					break;
+				case _currentJass.currentGame.team1TotalPoints >= JassPoints.SIEG:
+					dispatch(new PenaltyEvent(PenaltyEvent.SIEG, _currentJass.team1));
+					break;
+				case _currentJass.currentGame.team2TotalPoints >= JassPoints.SIEG:
+					dispatch(new PenaltyEvent(PenaltyEvent.SIEG, _currentJass.team2));
+			}
 		}
 		
 		//-----------------

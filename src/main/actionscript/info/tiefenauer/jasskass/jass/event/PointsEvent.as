@@ -17,6 +17,7 @@ package info.tiefenauer.jasskass.jass.event
 		//event types
 		public static const ADD_POINTS:String = NAME + 'AddPoints';
 		
+		public var factor:Number;
 		public var team1Points:Number;
 		public var team2Points:Number;
 		
@@ -29,10 +30,11 @@ package info.tiefenauer.jasskass.jass.event
 		 * @param cancelable
 		 * 
 		 */
-		public function PointsEvent(type:String, team1Points:Number=0, team2Points:Number=0, bubbles:Boolean=false, cancelable:Boolean=false){
+		public function PointsEvent(type:String, team1Points:Number=0, team2Points:Number=0, factor=1, bubbles:Boolean=false, cancelable:Boolean=false){
 			super(type, bubbles, cancelable);
 			this.team1Points = team1Points;
 			this.team2Points = team2Points;
+			this.factor = factor;
 		}
 	}
 }

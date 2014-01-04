@@ -14,6 +14,8 @@ package info.tiefenauer.jasskass.jass.model
 	{
 		public static const NAME:String = 'JassProxyEvent';
 		// event types
+		public static const NEW_GAME:String = NAME + 'NewGame';
+		
 		public static const CURRENT_GAME_CHANGED:String = NAME + 'CurrentGameChanged';
 		public static const CURRENT_STRICHE_CHANGED:String = NAME + 'CurrentStricheChanged';
 		

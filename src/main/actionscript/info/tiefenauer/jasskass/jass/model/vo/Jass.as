@@ -4,6 +4,8 @@
  */
 package info.tiefenauer.jasskass.jass.model.vo
 {
+	import flash.display3D.IndexBuffer3D;
+	
 	import mx.utils.UIDUtil;
 	
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJass;
@@ -35,6 +37,10 @@ package info.tiefenauer.jasskass.jass.model.vo
 		 */
 		public function Jass(){
 			_date = new Date();
+			_team1.player1 = new JassPlayer('Husi');
+			_team1.player2 = new JassPlayer('Christoph');
+			_team2.player1 = new JassPlayer('Stalder');
+			_team2.player2 = new JassPlayer('Tüfe');
 		}
 
 		//---------------------------------
@@ -63,30 +69,16 @@ package info.tiefenauer.jasskass.jass.model.vo
 		 * Get sum for team 1
 		 * @return 
 		 */
-		public function get team1Points():Number{
-			var sum:Number = 0;
-			for each(var game:IJassGame in _games){
-				sum += game.team1PointsPlayed;
-				for each (var wys:IWys in game.team1Wyses){
-					sum += wys.value;
-				}
-			}
-			return sum;
+		public function get team1TotalPoints():Number{
+			return team1PointsPlayed + team1WysPoints;
 		}
 		
 		/**
 		 * Get sum for team 2
 		 * @return 
 		 */
-		public function get team2Points():Number{
-			var sum:Number = 0;
-			for each(var game:IJassGame in _games){
-				sum += game.team2PointsPlayed;
-				for each (var wys:IWys in game.team2Wyses){
-					sum += wys.value * game.factor;
-				}
-			}
-			return sum;
+		public function get team2TotalPoints():Number{
+			return team2PointsPlayed + team2WysPoints;
 		}
 		
 		/**
@@ -144,6 +136,39 @@ package info.tiefenauer.jasskass.jass.model.vo
 						break;
 				}
 			}
+		}
+		
+		public function get team1PointsPlayed():Number{
+			var points:Number = 0;
+			_games.every(function(item:IJassGame, index:int, vector:Vector.<IJassGame>):void{
+				points += item.team1PointsPlayed;
+			});
+			return points;
+		}
+		public function get team2PointsPlayed():Number{
+			var points:Number = 0;
+			_games.every(function(item:IJassGame, index:int, vector:Vector.<IJassGame>):void{
+				points += item.team2PointsPlayed;
+			});
+			return points;
+		}
+		public function get team1WysPoints():Number{
+			var wysPoints:Number = 0;
+			for each(var game:IJassGame in _games){
+				game.team1Wyses.every(function(item:IWys, index:int, vector:Vector.<IWys>):void{
+					wysPoints += item.value;
+				});
+			}
+			return wysPoints;
+		}
+		public function get team2WysPoints():Number{
+			var wysPoints:Number = 0;
+			for each(var game:IJassGame in _games){
+				game.team2Wyses.every(function(item:IWys, index:int, vector:Vector.<IWys>):void{
+					wysPoints += item.value;
+				});
+			}
+			return wysPoints;
 		}
 		
 		//----------------------------------

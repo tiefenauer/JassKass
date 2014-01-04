@@ -23,8 +23,8 @@ package info.tiefenauer.jasskass.jass.model.vo
 		 * 
 		 */
 		public function JassTeam(player1:JassPlayer=null, player2:JassPlayer=null){
-			_player1 = player1?player1:new JassPlayer("Player 1");
-			_player2 = player2?player2:new JassPlayer("Player 2");
+			_player1 = player1;
+			_player2 = player2;
 		}
 		
 		/**

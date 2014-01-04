@@ -1,6 +1,14 @@
 /* CSS file */
 @namespace s "library://ns.adobe.com/flex/spark";
 @namespace components "info.tiefenauer.jasskass.jass.views.components.*";
+@namespace popups "info.tiefenauer.jasskass.jass.views.popups.*";
+@namespace phone "info.tiefenauer.jasskass.jass.views.phone.*";
+
+@font-face
+{
+	src: url('eraser-dust.ttf');
+	fontFamily: crayon;
+}
 
 /*****************************************************************
 * GLOBAL STYLES
@@ -16,7 +24,23 @@ global {
 components|JassTafel
 {
 	skinClass: ClassReference("info.tiefenauer.jasskass.skins.JassTafelSkin");
+}
+
+components|JassTafel s|Label.score
+{
+	fontSize: 50;
+}
+	
+phone|JassPenaltyView, phone|JassGameView, phone|JassDetailView
+{
 	color: #FFFFFF;
+	fontFamily: crayon;
+	fontSize: 24;
+	color: #FFFFFF;
+}
+components|JassTafelBackground
+{
+	skinClass: ClassReference("info.tiefenauer.jasskass.skins.JassTafelBackgroundSkin");
 }
 
 components|ZGroup
@@ -24,3 +48,7 @@ components|ZGroup
 	skinClass: ClassReference("info.tiefenauer.jasskass.skins.ZGroupSkin");
 }
 
+components|JassTeppich
+{
+	skinClass: ClassReference("info.tiefenauer.jasskass.skins.JassTeppichGermanSkin");
+}

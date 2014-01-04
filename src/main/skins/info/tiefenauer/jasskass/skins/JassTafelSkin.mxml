@@ -20,40 +20,30 @@
 	-->
 
 	<!-- background -->
-	<s:Rect id="background" width="100%" height="100%">
-		<s:fill>
-			<s:LinearGradient>
-				<s:GradientEntry color="0x316541" />
-				<s:GradientEntry color="0x204325" />
-			</s:LinearGradient>
-		</s:fill>
-	</s:Rect>
-	
-	<s:Path>
-		
-	</s:Path>
+	<components:JassTafelBackground width="100%" height="100%"/>
 	
 	<!-- Z with team labels-->
-	<s:VGroup width="100%" height="100%">
-		<components:ZGroup id="team1Area" width="100%" height="50%" />
+	<s:VGroup width="100%" height="100%" >
+		<components:ZGroup id="team1Area" width="100%" height="50%" visible="{hostComponent.displayZ}" />
 		
-		<s:VGroup width="100%" id="middleArea">
+		<s:VGroup width="100%" id="middleArea" >
 			
-			<s:Label id="team1LabelDisplay" width="100%" rotation="180" />
+			<s:Label id="team1LabelDisplay" width="90%" rotation="180" />
 			<s:Line width="100%" verticalCenter="0">
 				<s:stroke>
 					<s:SolidColorStroke color="#FFFFFF" weight="2" />
 				</s:stroke>
 			</s:Line>
-			<s:Label id="team2LabelDisplay" width="100%"/>
+			<s:Label id="team2LabelDisplay" width="90%" textAlign="right" />
 		</s:VGroup>
 		
-		<components:ZGroup id="team2Area" width="100%" height="50%" />
+		<components:ZGroup id="team2Area" width="100%" height="50%" visible="{hostComponent.displayZ}" />
 	</s:VGroup>
 
-	<s:Group id="contentGroup">
-		<s:layout>
-			<s:VerticalLayout />
-		</s:layout>
-	</s:Group>
+	<s:VGroup id="contentGroup"
+			  width="100%"
+			  height="100%"
+			  >
+		
+	</s:VGroup>
 </s:Skin>

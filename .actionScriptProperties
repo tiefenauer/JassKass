@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <actionScriptProperties analytics="false" mainApplicationPath="/JassKass/src/test/actionscript/flexUnitTests/models/vo/GetOAuth2AccessTokenTest.as" projectUUID="c406d6ee-8879-4a8b-9255-4750f2a56871" version="11">
-  <compiler additionalCompilerArguments="-locale en_US -keep-as3-metadata+=Inject,PostConstruct" autoRSLOrdering="true" copyDependentFiles="true" flexSDK="Apache Flex 4.11.0 FP 11.9 AIR 3.9 en_US" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" removeUnusedRSL="true" sourceFolderPath="src/main/actionscript" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="true" useDebugRSLSwfs="true" useFlashSDK="false" verifyDigests="true" warn="true">
+  <compiler additionalCompilerArguments="-locale en_US -keep-as3-metadata+=Inject,PostConstruct" autoRSLOrdering="true" copyDependentFiles="true" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" removeUnusedRSL="true" sourceFolderPath="src/main/actionscript" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="true" useDebugRSLSwfs="true" useFlashSDK="false" verifyDigests="true" warn="true">
     <compilerSourcePath>
       <compilerSourcePathEntry kind="1" linkType="1" path="src/main/actionscript"/>
       <compilerSourcePathEntry kind="1" linkType="1" path="src/test/actionscript"/>
@@ -37,11 +37,9 @@
       <libraryPathEntry kind="1" linkType="1" path="${FLEXUNIT_LIB_LOCATION}/version4libs/FlexProject_Extended"/>
       <libraryPathEntry kind="1" linkType="1" path="${FLEXUNIT_LOCALE_LOCATION}"/>
       <libraryPathEntry kind="1" linkType="1" path="libs"/>
+      <libraryPathEntry kind="3" linkType="1" path="/CLX.UIComponents/bin/CLX.UIComponents.swc" useDefaultLinkType="false"/>
     </libraryPath>
-    <sourceAttachmentPath>
-      <sourceAttachmentPathEntry kind="3" linkType="1" path="D:/workspace/flex/JassKass/libs/actionscript-oauth2.swc" sourcepath="D:/workspace/flex/actionscript-oauth2/src/main/actionscript" useDefaultLinkType="false"/>
-      <sourceAttachmentPathEntry kind="3" linkType="1" path="D:/workspace/flex/JassKass/libs/robotlegs-framework-v2.1.0.swc" sourcepath="D:/workspace/flex/robotlegs-framework-v2.1.0/src" useDefaultLinkType="false"/>
-    </sourceAttachmentPath>
+    <sourceAttachmentPath/>
   </compiler>
   <applications>
     <application path="JassKass.mxml">

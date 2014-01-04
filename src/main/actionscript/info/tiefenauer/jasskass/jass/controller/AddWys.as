@@ -20,7 +20,9 @@ package info.tiefenauer.jasskass.jass.controller
 		
 		override public function execute():void{
 			super.execute();
-			var wys:IWys;
+			for each(var wys:IWys in event.wyses){
+				wys.value = event.factor * wys.value;
+			}
 			jassProxy.addWysToCurrentGame(event.team, event.wyses)
 		}
 	}

@@ -9,14 +9,18 @@
 			import mx.managers.PopUpManager;
 			
 			import info.tiefenauer.jasskass.jass.model.interfaces.IJassPlayer;
+			import info.tiefenauer.jasskass.jass.model.vo.JassPlayer;
 			
 			// public variables
 			[Bindable] private var player:IJassPlayer;
 			
-			public function show(player:IJassPlayer):void{
+			public function show(player:IJassPlayer=null):void{
 				super.open((FlexGlobals.topLevelApplication as JassKass).activeNavigator.activeView, true);
 				PopUpManager.centerPopUp(this);
-				this.player = player;
+				if (player)
+					this.player = player;
+				else 
+					this.player = new JassPlayer();
 			}
 			
 			protected function onOkBtnClick(event:MouseEvent):void{

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base:KassViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				   xmlns:s="library://ns.adobe.com/flex/spark" 
+				   xmlns:base="info.tiefenauer.jasskass.kass.views.base.*"
+				   implements="info.tiefenauer.jasskass.kass.views.interfaces.IKassView"
+				   >
+	
+	<fx:Script>
+		<![CDATA[
+			import info.tiefenauer.jasskass.kass.model.interfaces.IBalance;
+			public function get balance():IBalance{
+				if (data is IBalance)
+					return data as IBalance;
+				return null;
+			}
+			public function set balance(value:IBalance):void{
+				data = value;
+			}
+		]]>
+	</fx:Script>
+	
+</base:KassViewBase>

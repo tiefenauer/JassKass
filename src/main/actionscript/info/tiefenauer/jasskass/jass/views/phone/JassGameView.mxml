@@ -8,7 +8,7 @@
 	
 	<fx:Script>
 		<![CDATA[
-			import spark.components.SkinnablePopUpContainer;
+			import spark.events.IndexChangeEvent;
 			import spark.events.PopUpEvent;
 			
 			import info.tiefenauer.jasskass.jass.model.interfaces.IJassGame;
@@ -19,6 +19,7 @@
 
 			[Bindable] public var team1TotalPoints:Number = 0;
 			[Bindable] public var team2TotalPoints:Number = 0;
+			[Bindable] public var factor:Number = 1;
 			
 			public var team1Points:Number = 0;
 			public var team2Points:Number = 0;
@@ -45,8 +46,9 @@
 			
 			override public function set game(value:IJassGame):void{
 				super.game = value;
-				team1TotalPoints = game.team1TotalPoints;
-				team2TotalPoints = game.team2TotalPoints;
+				team1TotalPoints = game.jass.team1TotalPoints;
+				team2TotalPoints = game.jass.team2TotalPoints;
+				factor = game.factor;
 			}
 			
 			protected function onTeam1AreaClicked(event:Event):void
@@ -73,10 +75,29 @@
 				});
 			}
 			
+			protected function onFactorSelectionChange(event:IndexChangeEvent):void{
+				factor = factorButtonBar.selectedItem.value;
+			}
+			
 		]]>
 	</fx:Script>
 	
 
+	<base:titleContent>
+		<s:ButtonBar id="factorButtonBar"
+					 requireSelection="true"
+					 change="onFactorSelectionChange(event)"
+					 width="100%"
+					 >
+			<s:dataProvider>
+				<s:ArrayCollection>
+					<fx:Object label="x1" value="1" />
+					<fx:Object label="x2" value="2" />
+					<fx:Object label="x3" value="3" />
+				</s:ArrayCollection>
+			</s:dataProvider>
+		</s:ButtonBar>
+	</base:titleContent>
 	<base:actionContent>
 		<s:Button id="flipJassBoard"
 				  label="Flip"
@@ -89,23 +110,26 @@
 						  middleAreaClicked="onMiddleAreaClicked(event)"
 						  width="100%" height="100%"
 						  >
+			
+			<s:Label id="team1PointsLabel" 
+					 text="{team1TotalPoints}"
+					 styleName="score"
+					 click="onTeam1AreaClicked(event)"
+					 verticalAlign="middle" 
+					 textAlign="center" 
+					 height="100%" width="100%" 
+					 />
+			
+			<s:Label id="team2PointsLabel" 
+					 text="{team2TotalPoints}"
+					 styleName="score"
+					 click="onTeam2AreaClicked(event)"
+					 verticalAlign="middle" 
+					 textAlign="center" 
+					 height="100%" width="100%" />
+			
 	</components:JassTafel>
 
-	<s:VGroup width="100%" height="100%" color="#FFFFFF" fontSize="40">
-		<s:Label id="team1PointsLabel" 
-				 text="{team1TotalPoints}"
-				 click="onTeam1AreaClicked(event)"
-				 verticalAlign="middle" 
-				 textAlign="center" 
-				 height="100%" width="100%" 
-				 />
-		
-		<s:Label id="team2PointsLabel" 
-				 text="{team2TotalPoints}"
-				 click="onTeam2AreaClicked(event)"
-				 verticalAlign="middle" 
-				 textAlign="center" 
-				 height="100%" width="100%" />
-	</s:VGroup>
+
 	
 </base:JassGameViewBase>

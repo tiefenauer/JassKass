@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SkinnablePopUpContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+						   xmlns:s="library://ns.adobe.com/flex/spark" 
+						   >
+
+	<s:layout>
+		<s:VerticalLayout />
+	</s:layout>
+	<fx:Script>
+		<![CDATA[
+			import mx.core.FlexGlobals;
+			import mx.managers.PopUpManager;
+			
+			import spark.events.IndexChangeEvent;
+			
+			public function show():void{
+				super.open((FlexGlobals.topLevelApplication as JassKass), true);
+				width = FlexGlobals.topLevelApplication.width - 30;
+				PopUpManager.centerPopUp(this);
+			}
+			
+			protected function onFactorListSelectionChange(event:IndexChangeEvent):void{
+				close(true, factorList.selectedItem.value);
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:List id="factorList"
+			verticalScrollPolicy="off"
+			change="onFactorListSelectionChange(event)"
+			width="100%"
+			>
+		<s:dataProvider>
+			<s:ArrayCollection>
+				<fx:Object id="x1" label="x1" value="1" />
+				<fx:Object id="x2" label="x2" value="2" />
+				<fx:Object id="x3" label="x3" value="3" />
+			</s:ArrayCollection>
+		</s:dataProvider>
+	</s:List>
+	
+</s:SkinnablePopUpContainer>

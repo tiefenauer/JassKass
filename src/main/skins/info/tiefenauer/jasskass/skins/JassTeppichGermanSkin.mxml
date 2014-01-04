@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark">
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("info.tiefenauer.jasskass.jass.views.components.JassTeppich")]
+	</fx:Metadata>
+	
+	<!-- states -->
+	<s:states>
+		<s:State name="disabled" />
+		<s:State name="normal" />
+	</s:states>
+	<!-- SkinParts
+	name=rosenIcon, type=spark.components.Image, required=true
+	name=schiltenIcon, type=spark.components.Image, required=true
+	name=eichelIcon, type=spark.components.Image, required=true
+	name=schellenIcon, type=spark.components.Image, required=true
+	-->
+	
+	<s:Rect radiusX="40" radiusY="40" width="100%" height="100%">
+		<s:fill>
+			<s:SolidColor color="#025C0F" />
+		</s:fill>
+		<s:stroke>
+			<s:SolidColorStroke color="#01400A" weight="5" />
+		</s:stroke>
+	</s:Rect>
+	
+	<s:Group id="contentGroup"
+			  width="100%"
+			  height="100%"
+			  />
+</s:Skin>

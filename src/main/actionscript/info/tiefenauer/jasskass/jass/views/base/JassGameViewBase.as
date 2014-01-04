@@ -19,6 +19,7 @@ package info.tiefenauer.jasskass.jass.views.base
 		public static const WYS_ENTERED:String = NAME + 'WysEntered';
 		public static const STOECK_ENTERED:String = NAME + 'StoeckEntered';
 		public static const FLIP_BOARD_BUTTON_CLICKED:String = NAME + 'FlipButtonClicked';
+		public static const FACTOR_BUTTON_CLICKED:String = NAME + 'FactorButtonClicked';
 		
 		//------------------------
 		// Getter/Setter

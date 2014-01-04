@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark">
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("info.tiefenauer.jasskass.jass.views.components.JassTafelBackground")]
+	</fx:Metadata>
+	
+	<!-- background -->
+	<s:Rect id="background" width="100%" height="100%">
+		<s:fill>
+			<s:LinearGradient>
+				<s:GradientEntry color="0x316541" />
+				<s:GradientEntry color="0x204325" />
+			</s:LinearGradient>
+		</s:fill>
+	</s:Rect>
+</s:Skin>
