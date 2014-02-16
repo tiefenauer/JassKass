@@ -6,16 +6,10 @@ package info.tiefenauer.jasskass.jass.views
 {
 	import flash.events.Event;
 	
-	import spark.events.PopUpEvent;
-	
 	import info.tiefenauer.jasskass.app.views.MobileView;
 	import info.tiefenauer.jasskass.jass.event.JassEvent;
-	import info.tiefenauer.jasskass.jass.model.interfaces.IJassPlayer;
-	import info.tiefenauer.jasskass.jass.model.vo.JassPlayer;
 	import info.tiefenauer.jasskass.jass.views.base.TeamBuilderViewBase;
 	import info.tiefenauer.jasskass.jass.views.interfaces.ITeamBuilderView;
-	import info.tiefenauer.jasskass.jass.views.phone.TeamBuilderView;
-	import info.tiefenauer.jasskass.jass.views.popups.NewPlayerPopup;
 	
 	import robotlegs.bender.bundles.mvcs.Mediator;
 	
@@ -29,11 +23,6 @@ package info.tiefenauer.jasskass.jass.views
 		
 		override public function initialize():void{
 			addViewListener(MobileView.BACK, dispatch);
-/*			addViewListener(TeamBuilderViewBase.PLAYER1_BUTTON_CLICKED, onPlayer1ButtonClicked);
-			addViewListener(TeamBuilderViewBase.PLAYER2_BUTTON_CLICKED, onPlayer2ButtonClicked);
-			addViewListener(TeamBuilderViewBase.PLAYER3_BUTTON_CLICKED, onPlayer3ButtonClicked);
-			addViewListener(TeamBuilderViewBase.PLAYER4_BUTTON_CLICKED, onPlayer4ButtonClicked);*/
-			addViewListener(TeamBuilderViewBase.DONE_BUTTON_CLICKED, onDoneButtonClicked);
 			addViewListener(TeamBuilderViewBase.CANCEL_BUTTON_CLICKED, onCancelButtonClicked);
 			addViewListener(TeamBuilderViewBase.START_BUTTON_CLICKED, onStartButtonClicked);
 		}
@@ -41,68 +30,17 @@ package info.tiefenauer.jasskass.jass.views
 		//---------------------------------------
 		// Event handlers
 		//---------------------------------------
-/*		private function onPlayer1ButtonClicked(event:Event):void{
-			if (!view.jass.team1.player1)
-				view.jass.team1.player1 = new JassPlayer();
-			showNewPlayerPopup(view.jass.team1.player1);
-		}
-		private function onPlayer2ButtonClicked(event:Event):void{
-			if (!view.jass.team1.player2)
-				view.jass.team1.player2 = new JassPlayer();
-			showNewPlayerPopup(view.jass.team1.player2);
-		}
-		private function onPlayer3ButtonClicked(event:Event):void{
-			if (!view.jass.team2.player1)
-				view.jass.team2.player1 = new JassPlayer();
-			showNewPlayerPopup(view.jass.team2.player1);
-		}
-		private function onPlayer4ButtonClicked(event:Event):void{
-			if (!view.jass.team2.player2)
-				view.jass.team2.player2 = new JassPlayer();
-			showNewPlayerPopup(view.jass.team2.player2);
-		}*/
-		private function onDoneButtonClicked(event:Event):void{
-			dispatch(new JassEvent(JassEvent.CREATE_JASS, view.jass));
-		}
 		private function onCancelButtonClicked(event:Event):void{
 			dispatch(new Event(MobileView.BACK));
 		}
 		private function onStartButtonClicked(event:Event):void{
-			if (view.jass.team1.player1 &&
-				view.jass.team1.player2 && 
-				view.jass.team2.player1 &&
-				view.jass.team2.player2)
-				dispatch(new JassEvent(JassEvent.START_JASS, view.jass));
-			else
-				showNotAllPlayerSetError();
+			view.jass.team1.player1.firstName = view.player1Name;
+			view.jass.team1.player2.firstName = view.player2Name;
+			view.jass.team2.player1.firstName = view.player3Name;
+			view.jass.team2.player2.firstName = view.player4Name;
+				
+			dispatch(new JassEvent(JassEvent.START_JASS, view.jass));
 		}
 		
-		//---------------------------------------
-		// Private functions
-		//---------------------------------------
-		/*private function showNewPlayerPopup(player:IJassPlayer):void{
-			var newPlayerPopup:NewPlayerPopup = new NewPlayerPopup();
-			newPlayerPopup.addEventListener(PopUpEvent.CLOSE, function(closeEvent:PopUpEvent):void{
-				var refreshView:TeamBuilderView = TeamBuilderView(view);
-				switch(closeEvent.data){
-					case view.jass.team1.player1:
-						refreshView.player1Btn.label = closeEvent.data.firstName;
-						break;
-					case view.jass.team1.player2:
-						refreshView.player2Btn.label = closeEvent.data.firstName;
-						break;
-					case view.jass.team2.player1:
-						refreshView.player3Btn.label = closeEvent.data.firstName;
-						break;
-					case view.jass.team2.player2:
-						refreshView.player4Btn.label = closeEvent.data.firstName;
-						break;
-				}
-			});
-			newPlayerPopup.show(player);
-		}*/
-		
-		private function showNotAllPlayerSetError():void{
-		}
 	}
 }

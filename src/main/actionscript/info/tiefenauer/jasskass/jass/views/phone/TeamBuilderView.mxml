@@ -2,29 +2,20 @@
 <base:TeamBuilderViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
 						 xmlns:s="library://ns.adobe.com/flex/spark" 
 						 xmlns:base="info.tiefenauer.jasskass.jass.views.base.*"
-						 implements="info.tiefenauer.jasskass.jass.views.interfaces.ITeamBuilderView" xmlns:components="info.tiefenauer.jasskass.jass.views.components.*" 
+						 implements="info.tiefenauer.jasskass.jass.views.interfaces.ITeamBuilderView" xmlns:components="info.tiefenauer.jasskass.jass.views.components.*" xmlns:callout="com.clx.uicomponents.list.callout.*" 
 						 >
 	
 	<fx:Script>
 		<![CDATA[
+			import spark.events.PopUpEvent;
+			
+			import info.tiefenauer.jasskass.jass.views.components.NewPlayerCallout;
+			
 			//---------------------
 			// Event handlers
 			//---------------------
 			protected function onDoneButtonClick(event:MouseEvent):void{
 				dispatchEvent(new Event(DONE_BUTTON_CLICKED));
-			}
-			
-			protected function onPlayer1ButtonClick(event:MouseEvent):void{
-				dispatchEvent(new Event(PLAYER1_BUTTON_CLICKED));
-			}
-			protected function onPlayer2ButtonClick(event:MouseEvent):void{
-				dispatchEvent(new Event(PLAYER2_BUTTON_CLICKED));
-			}
-			protected function onPlayer3ButtonClick(event:MouseEvent):void{
-				dispatchEvent(new Event(PLAYER3_BUTTON_CLICKED));
-			}
-			protected function onPlayer4ButtonClick(event:MouseEvent):void{
-				dispatchEvent(new Event(PLAYER4_BUTTON_CLICKED));
 			}
 			protected function onCancelButtonClick(event:MouseEvent):void{
 				dispatchEvent(new Event(CANCEL_BUTTON_CLICKED));
@@ -34,85 +25,31 @@
 			}
 			
 			protected function onPlayerIconClicked(event:MouseEvent):void{
-				var position:Point = event.target.contentToGlobal(new Point(schellenIcon.x, schellenIcon.y));
-				resizeEffect.widthFrom = 0;
-				resizeEffect.heightFrom = 0;
-				resizeEffect.widthTo = event.target.width;
-				resizeEffect.heightTo = event.target.height;
-				newPlayerGroupBackground.radiusX = Math.min(resizeEffect.widthTo, resizeEffect.heightTo) / 2;
-				newPlayerGroupBackground.radiusY = Math.min(resizeEffect.widthTo, resizeEffect.heightTo) / 2;
-				newPlayerInput.x = event.target.width;
-				
-				if (position.x > jassTeppich.width / 2){
-					moveLeft.target = newPlayerGroup;
-					expandParallel.addChild(moveLeft)
-				}
-					
-				newPlayerGroup.x = position.x - 20;
-				newPlayerGroup.y = position.y - event.target.height;
-				addElement(newPlayerGroup); 
-				expandSequence.end();
-				expandSequence.play();
+				var playerIcon:* = event.currentTarget;
+				var playerCallout:NewPlayerCallout = new NewPlayerCallout();
+				playerCallout.addEventListener(PopUpEvent.CLOSE, function(closeEvent:PopUpEvent):void{
+					trace('setting name for ' + playerIcon.id);
+					switch (playerIcon){
+						case player1icon:
+							player1.firstName = playerCallout.playerNameTI.text;
+							break;
+						case player2icon:
+							player2.firstName = playerCallout.playerNameTI.text;
+							break;
+						case player3icon:
+							player3.firstName = playerCallout.playerNameTI.text;
+							break;
+						case player4icon:
+							player4.firstName = playerCallout.playerNameTI.text;
+							break;
+					}
+				});
+				playerCallout.open(event.target as DisplayObjectContainer);
 			}
 			
 		]]>
 	</fx:Script>
-
-	<fx:Declarations>
-		<s:Move id="moveLeft"
-				xBy="{-jassTeppich.width - 50}"
-				duration="200"
-				/>
-		<s:Sequence id="expandSequence" 
-					target="{newPlayerGroup}"
-					>
-			<s:Resize id="resizeEffect" 
-					  target="{newPlayerGroup}" 
-					  duration="100"
-					  />
-			<s:Pause duration="100" />
-			
-			<s:Parallel id="expandParallel">
-				<s:Resize target="{newPlayerGroup}" 
-						  widthTo="{jassTeppich.width - 50}"
-						  duration="200"
-						  />
-			</s:Parallel>
-			<s:Fade target="{newPlayerInput}"
-					alphaFrom="0"
-					alphaTo="1"
-					/>
-		</s:Sequence>
-		
-		<s:Group id="newPlayerGroup"
-				 width="0"
-				 height="0"
-				>
-			<s:Rect id="newPlayerGroupBackground" 
-					width="100%"
-					height="100%"
-					radiusX="{schellenIcon.height / 2}"
-					radiusY="{schellenIcon.height / 2}"
-					>
-				<s:stroke>
-					<s:SolidColorStroke color="#BBBBBB" weight="4"/>
-				</s:stroke>
-				<s:fill>
-					<s:SolidColor color="#000000" alpha="0.5" />
-				</s:fill>
-			</s:Rect>
-			
-			<s:HGroup id="newPlayerInput"
-					  visible="false"
-					  paddingLeft="5" paddingRight="30" paddingTop="5" paddingBottom="5"
-					  verticalAlign="middle"
-					  width="100%"
-					  height="100%"
-					  >
-				<s:TextInput id="newPlayerTI" width="100%" verticalCenter="0"/>
-			</s:HGroup>
-		</s:Group>
-	</fx:Declarations>
+	
 	<s:Image id="background" 
 			 scaleMode="zoom"
 			 width="100%"
@@ -141,8 +78,13 @@
 				  verticalAlign="middle"
 				  >
 			
+			<s:HGroup width="100%">
+				<s:Label id="player1Lbl" text="{player1.firstName}" styleName="playerName" width="50%" textAlign="left"/>
+				<s:Label id="player2Lbl" text="{player2.firstName}" styleName="playerName" width="50%" textAlign="right" />
+			</s:HGroup>
+			
 			<components:JassTeppich id="jassTeppich" width="100%" height="{jassTeppich.width}" >
-				<s:Image id="schellenIcon"
+				<s:Image id="player1icon"
 						 click="onPlayerIconClicked(event)"
 						 top="20" left="20"
 						 >
@@ -157,7 +99,7 @@
 					</s:source>
 				</s:Image>
 				
-				<s:Image id="eichelIcon"
+				<s:Image id="player2icon"
 						 click="onPlayerIconClicked(event)"
 						 top="20" right="20"
 						 >
@@ -172,7 +114,7 @@
 					</s:source>
 				</s:Image>
 				
-				<s:Image id="schiltenIcon"
+				<s:Image id="player3icon"
 						 click="onPlayerIconClicked(event)"
 						 bottom="20" left="20"
 						 >
@@ -187,7 +129,7 @@
 					</s:source>
 				</s:Image>
 				
-				<s:Image id="rosenIcon"
+				<s:Image id="player4icon"
 						 click="onPlayerIconClicked(event)"
 						 bottom="20" right="20"
 						 >
@@ -203,6 +145,7 @@
 				</s:Image>
 				
 				<s:Button id="startButton"
+						  enabled="{player1.firstName &amp;&amp; player2.firstName &amp;&amp; player3.firstName &amp;&amp; player4.firstName}"
 						  label="Start"
 						  click="onStartButtonClick(event)"
 						  width="30%"
@@ -212,6 +155,10 @@
 						  />
 			</components:JassTeppich>
 			
+			<s:HGroup width="100%">
+				<s:Label id="player3Lbl" text="{player3.firstName}" styleName="playerName" width="50%" textAlign="left" />
+				<s:Label id="player4Lbl" text="{player4.firstName}" styleName="playerName" width="50%" textAlign="right" />
+			</s:HGroup>
 			
 		</s:VGroup>
 	</s:Scroller>

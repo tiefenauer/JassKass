@@ -46,8 +46,8 @@
 			
 			override public function set game(value:IJassGame):void{
 				super.game = value;
-				team1TotalPoints = game.jass.team1TotalPoints;
-				team2TotalPoints = game.jass.team2TotalPoints;
+				team1TotalPoints = game.team1TotalPoints;
+				team2TotalPoints = game.team2TotalPoints;
 				factor = game.factor;
 			}
 			

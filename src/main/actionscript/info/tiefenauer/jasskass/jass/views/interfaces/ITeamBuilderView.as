@@ -9,5 +9,10 @@ package info.tiefenauer.jasskass.jass.views.interfaces
 	public interface ITeamBuilderView
 	{
 		function get jass():IJass;
+		
+		function get player1Name():String;
+		function get player2Name():String;
+		function get player3Name():String;
+		function get player4Name():String;
 	}
 }

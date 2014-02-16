@@ -3,11 +3,47 @@
 				   xmlns:s="library://ns.adobe.com/flex/spark" 
 				   xmlns:base="info.tiefenauer.jasskass.kass.views.base.*"
 				   implements="info.tiefenauer.jasskass.kass.views.interfaces.IKassView"
+				   creationComplete="onCreationComplete(event)"
 				   >
 	
 	<fx:Script>
 		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.events.FlexEvent;
+			
+			import spark.events.IndexChangeEvent;
+			
+			import info.tiefenauer.jasskass.app.util.translate;
 			import info.tiefenauer.jasskass.kass.model.interfaces.IBalance;
+			
+			[Bindable] private var _entries:ArrayCollection = new ArrayCollection();
+			
+			private function get saldo():Number{
+				var _saldo:Number = 0;
+				for each(var item:Object in _entries){
+					_saldo += Number(item['totalgejasst']);
+				}
+				return _saldo;
+			}
+			private function set saldo(value:Number):void{}
+			
+			//-------------------------------
+			// Public functions
+			//-------------------------------
+			public function refresh():void{
+				saldoLabel.text = saldo + '.-';
+			}
+			
+			//-------------------------------
+			// Getter/Setter
+			//-------------------------------
+			public function get entries():ArrayCollection{
+				return _entries;
+			}
+			public function set entries(value:ArrayCollection):void{
+				_entries = value;
+				refresh();
+			}
 			public function get balance():IBalance{
 				if (data is IBalance)
 					return data as IBalance;
@@ -16,7 +52,63 @@
 			public function set balance(value:IBalance):void{
 				data = value;
 			}
+			
+			//-------------------------------
+			// Event handlers
+			//-------------------------------
+			protected function onButtonBarSelectionChanged(event:IndexChangeEvent):void{
+				dispatchEvent(new Event(SORT_ORDER_SELECTED));
+			}
+			
+			protected function onJassKassListSelectionChanged(event:IndexChangeEvent):void{
+				dispatchEvent(new Event(JASS_SELECTED));
+			}
+			
+			protected function onCreationComplete(event:FlexEvent):void{
+				sortButtonBar.dataProvider = new ArrayCollection([translate('nach Datum'), translate('nach Betrag')]);
+			}
+			
 		]]>
 	</fx:Script>
 	
+	<base:layout>
+		<s:VerticalLayout />
+	</base:layout>
+	
+	<s:HGroup width="100%">
+		<s:Label text="Saldo: " width="50%" />
+		<s:Label id="saldoLabel" width="50%" />
+	</s:HGroup>
+	
+	<s:ButtonBar id="sortButtonBar"
+				 change="onButtonBarSelectionChanged(event)"
+				 width="100%"
+				 />
+		
+	<s:List id="jassKassList"
+			dataProvider="{_entries}"
+			change="onJassKassListSelectionChanged(event)"
+			width="100%"
+			height="100%"
+			>
+		<s:itemRenderer>
+			<fx:Component>
+				<s:IconItemRenderer labelFunction="getLabel"
+									messageFunction="getMessage"
+									>
+					<fx:Script>
+						<![CDATA[
+							private function getLabel(item:Object):String{
+								return item['datum'] + ': ' + item['ort'];
+							}
+							private function getMessage(item:Object):String{
+								return 'Total: ' + item['totalgejasst'];
+							}
+						]]>
+					</fx:Script>
+				</s:IconItemRenderer>
+			</fx:Component>
+		</s:itemRenderer>
+	</s:List>
+		
 </base:KassViewBase>

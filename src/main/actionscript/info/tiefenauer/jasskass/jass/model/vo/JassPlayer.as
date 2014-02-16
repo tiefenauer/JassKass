@@ -10,6 +10,7 @@ package info.tiefenauer.jasskass.jass.model.vo
 	 * Base Class for Jass Players
 	 * @author Daniel Tiefenauer
 	 */
+	[Bindable]
 	public class JassPlayer implements IJassPlayer
 	{
 		private var _firstName:String;

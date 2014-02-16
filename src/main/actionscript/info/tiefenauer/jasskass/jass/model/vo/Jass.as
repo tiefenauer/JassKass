@@ -37,10 +37,10 @@ package info.tiefenauer.jasskass.jass.model.vo
 		 */
 		public function Jass(){
 			_date = new Date();
-			_team1.player1 = new JassPlayer('Husi');
-			_team1.player2 = new JassPlayer('Christoph');
-			_team2.player1 = new JassPlayer('Stalder');
-			_team2.player2 = new JassPlayer('Tüfe');
+			_team1.player1 = new JassPlayer();
+			_team1.player2 = new JassPlayer();
+			_team2.player1 = new JassPlayer();
+			_team2.player2 = new JassPlayer();
 		}
 
 		//---------------------------------

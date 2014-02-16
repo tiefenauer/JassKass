@@ -4,5 +4,10 @@ package info.tiefenauer.jasskass.kass.views.base
 	
 	public class KassViewBase extends MobileView
 	{
+		private static const NAME:String = 'KassViewBase';
+		// event types
+		public static const SORT_ORDER_SELECTED:String = NAME + 'SortCritChanged';
+		public static const JASS_SELECTED:String = NAME + 'JassSelected';
+		
 	}
 }
