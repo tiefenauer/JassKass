@@ -1,8 +1,12 @@
 package info.tiefenauer.jasskass.kass.views
 {
+	import flash.events.Event;
+	
 	import mx.collections.ArrayCollection;
 	
 	import info.tiefenauer.jasskass.kass.events.KassEvent;
+	import info.tiefenauer.jasskass.kass.model.interfaces.IKassEntry;
+	import info.tiefenauer.jasskass.kass.views.base.KassViewBase;
 	import info.tiefenauer.jasskass.kass.views.interfaces.IKassView;
 	
 	import robotlegs.bender.bundles.mvcs.Mediator;
@@ -15,8 +19,12 @@ package info.tiefenauer.jasskass.kass.views
 	{
 		[Inject] public var view:IKassView;
 		
+		private var _kassEntries:Vector.<IKassEntry>;
+		
 		override public function initialize():void{
 			super.initialize();
+			addViewListener(KassViewBase.FILTER_SELECTED, onFilterSelected);
+			
 			addContextListener(KassEvent.DOWNLOAD_KASS_DATA_END, onDownloadKassDataEnd);
 			
 			dispatch(new KassEvent(KassEvent.DOWNLOAD_KASS_DATA));
@@ -25,19 +33,54 @@ package info.tiefenauer.jasskass.kass.views
 		//--------------------------
 		// Private functions
 		//--------------------------
-		private function sort(value:Vector.<Object>):ArrayCollection{
+		private function sort(crit:Number):ArrayCollection{
+			var result:Vector.<IKassEntry> = new Vector.<IKassEntry>();
+			switch(crit){
+				case 0:
+					result = _kassEntries.sort(dateSort)
+					break;
+				case 1:
+					result = _kassEntries.sort(amountSort)
+					break;
+			}
 			var ac:ArrayCollection = new ArrayCollection();
-			var result:Vector.<Object> = value.sort(dateSort);
 			for each(var item:Object in result) ac.addItem(item);
 			return ac;
 		}
 		
-		private function dateSort(x:Object, y:Object):Number{
-			if (x['date'] < ['date'])
+		/**
+		 * Sort by Date 
+		 * @param x
+		 * @param y
+		 * @return 
+		 */
+		private function dateSort(x:IKassEntry, y:IKassEntry):Number{
+			if (x.date < y.date)
 				return -1;
-			if (x['date'] > ['date'])
+			if (x.date > y.date)
 				return +1;
 			return 0;
+		}
+		/**
+		 * Sort by Amount 
+		 * @param x
+		 * @param y
+		 * @return 
+		 * 
+		 */
+		private function amountSort(x:IKassEntry, y:IKassEntry):Number{
+			if (x.total < y.total)
+				return -1;
+			if (x.total > y.total)
+				return +1;
+			return 0;
+		}
+		
+		//--------------------------
+		// View Event handlers
+		//--------------------------
+		private function onFilterSelected(event:Event):void{
+			view.entries = sort(view.filterSelection.selectedIndex);
 		}
 		
 		//--------------------------
@@ -48,7 +91,8 @@ package info.tiefenauer.jasskass.kass.views
 		 * @param event
 		 */
 		private function onDownloadKassDataEnd(event:KassEvent):void{
-			view.entries = sort(event.entries);
+			_kassEntries = event.entries;
+			view.entries = sort(view.filterSelection.selectedIndex);
 		}
 			
 	}

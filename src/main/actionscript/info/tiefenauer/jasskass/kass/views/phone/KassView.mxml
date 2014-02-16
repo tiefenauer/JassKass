@@ -15,28 +15,33 @@
 			
 			import info.tiefenauer.jasskass.app.util.translate;
 			import info.tiefenauer.jasskass.kass.model.interfaces.IBalance;
+			import info.tiefenauer.jasskass.kass.model.interfaces.IKassEntry;
 			
 			[Bindable] private var _entries:ArrayCollection = new ArrayCollection();
 			
-			private function get saldo():Number{
+			[Bindable]
+			private function get saldo():String{
 				var _saldo:Number = 0;
-				for each(var item:Object in _entries){
-					_saldo += Number(item['totalgejasst']);
+				for each(var item:IKassEntry in _entries){
+					_saldo += item.total;
 				}
-				return _saldo;
+				return _saldo.toFixed(2);
 			}
-			private function set saldo(value:Number):void{}
+			private function set saldo(value:String):void{}
 			
 			//-------------------------------
 			// Public functions
 			//-------------------------------
 			public function refresh():void{
-				saldoLabel.text = saldo + '.-';
+				saldoLabel.text = saldo;
 			}
 			
 			//-------------------------------
 			// Getter/Setter
 			//-------------------------------
+			public function get filterSelection():ButtonBar{
+				return sortButtonBar;
+			}
 			public function get entries():ArrayCollection{
 				return _entries;
 			}
@@ -57,7 +62,7 @@
 			// Event handlers
 			//-------------------------------
 			protected function onButtonBarSelectionChanged(event:IndexChangeEvent):void{
-				dispatchEvent(new Event(SORT_ORDER_SELECTED));
+				dispatchEvent(new Event(FILTER_SELECTED));
 			}
 			
 			protected function onJassKassListSelectionChanged(event:IndexChangeEvent):void{
@@ -77,38 +82,21 @@
 	
 	<s:HGroup width="100%">
 		<s:Label text="Saldo: " width="50%" />
-		<s:Label id="saldoLabel" width="50%" />
+		<s:Label id="saldoLabel" text="{saldo}" width="50%" />
 	</s:HGroup>
 	
 	<s:ButtonBar id="sortButtonBar"
 				 change="onButtonBarSelectionChanged(event)"
+				 requireSelection="true"
 				 width="100%"
 				 />
 		
 	<s:List id="jassKassList"
 			dataProvider="{_entries}"
 			change="onJassKassListSelectionChanged(event)"
+			itemRenderer="info.tiefenauer.jasskass.kass.views.components.IKassEntryRenderer"
 			width="100%"
 			height="100%"
-			>
-		<s:itemRenderer>
-			<fx:Component>
-				<s:IconItemRenderer labelFunction="getLabel"
-									messageFunction="getMessage"
-									>
-					<fx:Script>
-						<![CDATA[
-							private function getLabel(item:Object):String{
-								return item['datum'] + ': ' + item['ort'];
-							}
-							private function getMessage(item:Object):String{
-								return 'Total: ' + item['totalgejasst'];
-							}
-						]]>
-					</fx:Script>
-				</s:IconItemRenderer>
-			</fx:Component>
-		</s:itemRenderer>
-	</s:List>
+			/>
 		
 </base:KassViewBase>

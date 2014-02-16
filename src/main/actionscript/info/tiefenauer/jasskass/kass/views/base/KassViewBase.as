@@ -6,7 +6,7 @@ package info.tiefenauer.jasskass.kass.views.base
 	{
 		private static const NAME:String = 'KassViewBase';
 		// event types
-		public static const SORT_ORDER_SELECTED:String = NAME + 'SortCritChanged';
+		public static const FILTER_SELECTED:String = NAME + 'SortCritChanged';
 		public static const JASS_SELECTED:String = NAME + 'JassSelected';
 		
 	}
