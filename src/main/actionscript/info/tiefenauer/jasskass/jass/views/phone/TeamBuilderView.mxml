@@ -56,12 +56,12 @@
 			 height="100%"
 			 >
 		<s:source>
-			<s:MultiDPIBitmapSource source120dpi="@Embed('dpi120/wood.png')"
-									source160dpi="@Embed('dpi160/wood.png')"
-									source240dpi="@Embed('dpi240/wood.png')"
-									source320dpi="@Embed('dpi320/wood.png')"
-									source480dpi="@Embed('dpi480/wood.png')"
-									source640dpi="@Embed('dpi640/wood.png')"
+			<s:MultiDPIBitmapSource source120dpi="@Embed('dpi120/bg_wood.png')"
+									source160dpi="@Embed('dpi160/bg_wood.png')"
+									source240dpi="@Embed('dpi240/bg_wood.png')"
+									source320dpi="@Embed('dpi320/bg_wood.png')"
+									source480dpi="@Embed('dpi480/bg_wood.png')"
+									source640dpi="@Embed('dpi640/bg_wood.png')"
 									/>
 		</s:source>
 	</s:Image>
@@ -89,12 +89,12 @@
 						 top="20" left="20"
 						 >
 					<s:source>
-						<s:MultiDPIBitmapSource source120dpi="@Embed('dpi120/icon_schelle.png')"
-												source160dpi="@Embed('dpi160/icon_schelle.png')"
-												source240dpi="@Embed('dpi240/icon_schelle.png')"
-												source320dpi="@Embed('dpi320/icon_schelle.png')"
-												source480dpi="@Embed('dpi480/icon_schelle.png')"
-												source640dpi="@Embed('dpi640/icon_schelle.png')"
+						<s:MultiDPIBitmapSource source120dpi="@Embed('dpi120/icons/ico_schelle.png')"
+												source160dpi="@Embed('dpi160/icons/ico_schelle.png')"
+												source240dpi="@Embed('dpi240/icons/ico_schelle.png')"
+												source320dpi="@Embed('dpi320/icons/ico_schelle.png')"
+												source480dpi="@Embed('dpi480/icons/ico_schelle.png')"
+												source640dpi="@Embed('dpi640/icons/ico_schelle.png')"
 												/>
 					</s:source>
 				</s:Image>
@@ -104,12 +104,12 @@
 						 top="20" right="20"
 						 >
 					<s:source>
-						<s:MultiDPIBitmapSource source120dpi="@Embed('dpi120/icon_eichel.png')"
-												source160dpi="@Embed('dpi160/icon_eichel.png')"
-												source240dpi="@Embed('dpi240/icon_eichel.png')"
-												source320dpi="@Embed('dpi320/icon_eichel.png')"
-												source480dpi="@Embed('dpi480/icon_eichel.png')"
-												source640dpi="@Embed('dpi640/icon_eichel.png')"
+						<s:MultiDPIBitmapSource source120dpi="@Embed('dpi120/icons/ico_eichel.png')"
+												source160dpi="@Embed('dpi160/icons/ico_eichel.png')"
+												source240dpi="@Embed('dpi240/icons/ico_eichel.png')"
+												source320dpi="@Embed('dpi320/icons/ico_eichel.png')"
+												source480dpi="@Embed('dpi480/icons/ico_eichel.png')"
+												source640dpi="@Embed('dpi640/icons/ico_eichel.png')"
 												/>
 					</s:source>
 				</s:Image>
@@ -119,12 +119,12 @@
 						 bottom="20" left="20"
 						 >
 					<s:source>
-						<s:MultiDPIBitmapSource source120dpi="@Embed('dpi120/icon_schilte.png')"
-												source160dpi="@Embed('dpi160/icon_schilte.png')"
-												source240dpi="@Embed('dpi240/icon_schilte.png')"
-												source320dpi="@Embed('dpi320/icon_schilte.png')"
-												source480dpi="@Embed('dpi480/icon_schilte.png')"
-												source640dpi="@Embed('dpi640/icon_schilte.png')"
+						<s:MultiDPIBitmapSource source120dpi="@Embed('dpi120/icons/ico_schilte.png')"
+												source160dpi="@Embed('dpi160/icons/ico_schilte.png')"
+												source240dpi="@Embed('dpi240/icons/ico_schilte.png')"
+												source320dpi="@Embed('dpi320/icons/ico_schilte.png')"
+												source480dpi="@Embed('dpi480/icons/ico_schilte.png')"
+												source640dpi="@Embed('dpi640/icons/ico_schilte.png')"
 												/>
 					</s:source>
 				</s:Image>
@@ -134,12 +134,12 @@
 						 bottom="20" right="20"
 						 >
 					<s:source>
-						<s:MultiDPIBitmapSource source120dpi="@Embed('dpi120/icon_rose.png')"
-												source160dpi="@Embed('dpi160/icon_rose.png')"
-												source240dpi="@Embed('dpi240/icon_rose.png')"
-												source320dpi="@Embed('dpi320/icon_rose.png')"
-												source480dpi="@Embed('dpi480/icon_rose.png')"
-												source640dpi="@Embed('dpi640/icon_rose.png')"
+						<s:MultiDPIBitmapSource source120dpi="@Embed('dpi120/icons/ico_rose.png')"
+												source160dpi="@Embed('dpi160/icons/ico_rose.png')"
+												source240dpi="@Embed('dpi240/icons/ico_rose.png')"
+												source320dpi="@Embed('dpi320/icons/ico_rose.png')"
+												source480dpi="@Embed('dpi480/icons/ico_rose.png')"
+												source640dpi="@Embed('dpi640/icons/ico_rose.png')"
 												/>
 					</s:source>
 				</s:Image>

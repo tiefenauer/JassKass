@@ -9,6 +9,9 @@ package info.tiefenauer.jasskass.jass.model.interfaces
 	[Bindable]
 	public interface IJassPlayer extends IJSON
 	{
+		function get id():String;
+		function set id(value:String):void;
+		
 		function get firstName():String;
 		function set firstName(value:String):void;
 		

@@ -5,8 +5,6 @@
 package info.tiefenauer.jasskass.app.controller.startup
 {
 	import info.tiefenauer.jasskass.app.controller.SimpleCommand;
-	import info.tiefenauer.jasskass.kass.views.KassViewMediator;
-	import info.tiefenauer.jasskass.kass.views.interfaces.IKassView;
 	import info.tiefenauer.jasskass.jass.views.JassDetailViewMediator;
 	import info.tiefenauer.jasskass.jass.views.JassGameViewMediator;
 	import info.tiefenauer.jasskass.jass.views.JassListViewMediator;
@@ -17,7 +15,11 @@ package info.tiefenauer.jasskass.app.controller.startup
 	import info.tiefenauer.jasskass.jass.views.interfaces.IJassListView;
 	import info.tiefenauer.jasskass.jass.views.interfaces.IJassPenaltyView;
 	import info.tiefenauer.jasskass.jass.views.interfaces.ITeamBuilderView;
+	import info.tiefenauer.jasskass.kass.views.KassViewMediator;
+	import info.tiefenauer.jasskass.kass.views.interfaces.IKassView;
+	import info.tiefenauer.jasskass.profile.views.GroupBuilderViewMediator;
 	import info.tiefenauer.jasskass.profile.views.ProfileViewMediator;
+	import info.tiefenauer.jasskass.profile.views.interfaces.IGroupBuilderView;
 	import info.tiefenauer.jasskass.profile.views.interfaces.IProfileView;
 	import info.tiefenauer.jasskass.statistics.views.StatisticsViewMediator;
 	import info.tiefenauer.jasskass.statistics.views.interfaces.IStatisticsView;
@@ -46,6 +48,7 @@ package info.tiefenauer.jasskass.app.controller.startup
 			
 			// profile
 			mediatorMap.map(IProfileView).toMediator(ProfileViewMediator);
+			mediatorMap.map(IGroupBuilderView).toMediator(GroupBuilderViewMediator);
 			
 			// statistics
 			mediatorMap.map(IStatisticsView).toMediator(StatisticsViewMediator);

@@ -26,6 +26,10 @@ package info.tiefenauer.jasskass.app.controller.startup
 	import info.tiefenauer.jasskass.jass.model.JassProxyEvent;
 	import info.tiefenauer.jasskass.kass.controller.DownloadKassData;
 	import info.tiefenauer.jasskass.kass.events.KassEvent;
+	import info.tiefenauer.jasskass.profile.controller.CreateJassGroup;
+	import info.tiefenauer.jasskass.profile.controller.CreateJassPlayer;
+	import info.tiefenauer.jasskass.profile.events.AzureGroupEvent;
+	import info.tiefenauer.jasskass.profile.events.AzurePlayerEvent;
 	
 	import robotlegs.bender.extensions.eventCommandMap.api.IEventCommandMap;
 	
@@ -40,6 +44,9 @@ package info.tiefenauer.jasskass.app.controller.startup
 		
 		override public function execute():void{
 			super.execute();
+			// general
+			commandMap.map(MobileView.BACK).toCommand(NavigateBackCommand);
+
 			
 			// Initialization
 			commandMap.map(InitializationEvent.LOAD_APP_CONFIG).toCommand(LoadAppConfiguration);
@@ -78,8 +85,9 @@ package info.tiefenauer.jasskass.app.controller.startup
 			// JassKass
 			commandMap.map(KassEvent.DOWNLOAD_KASS_DATA).toCommand(DownloadKassData);
 			
-			// general
-			commandMap.map(MobileView.BACK).toCommand(NavigateBackCommand);
+			// Azure-Events
+			commandMap.map(AzureGroupEvent.CREATE_GROUP).toCommand(CreateJassGroup);
+			commandMap.map(AzurePlayerEvent.CREATE_PLAYER).toCommand(CreateJassPlayer);
 		}
 	}
 }

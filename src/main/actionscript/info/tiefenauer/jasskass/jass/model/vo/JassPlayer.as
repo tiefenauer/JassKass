@@ -13,6 +13,7 @@ package info.tiefenauer.jasskass.jass.model.vo
 	[Bindable]
 	public class JassPlayer implements IJassPlayer
 	{
+		private var _id:String;
 		private var _firstName:String;
 		private var _lastName:String;
 		private var _eMail:String;
@@ -67,6 +68,12 @@ package info.tiefenauer.jasskass.jass.model.vo
 		//--------------------------
 		// Getter/Setter
 		//--------------------------
+		public function get id():String{
+			return _id;
+		}
+		public function set id(value:String):void{
+			_id = value;
+		}
 		public function get firstName():String{
 			return _firstName;
 		}
