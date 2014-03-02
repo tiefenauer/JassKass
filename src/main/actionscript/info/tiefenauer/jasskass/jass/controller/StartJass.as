@@ -17,10 +17,11 @@ package info.tiefenauer.jasskass.jass.controller
 		
 		override public function execute():void{
 			super.execute();
-			jassProxy.addJass(event.jass);
 			jassProxy.currentJass = event.jass;
 			event.jass.newGame();
 			event.jass.newRound();
+			application.tabbedNavigator.hideTabBar(true);
+			application.activeNavigator.hideActionBar(true);
 			application.activeNavigator.pushView(JassGameView, event.jass.currentGame);
 		}
 	}

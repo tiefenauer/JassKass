@@ -8,55 +8,58 @@ package info.tiefenauer.jasskass.jass.views
 	
 	import mx.collections.ArrayCollection;
 	
+	import info.tiefenauer.jasskass.app.views.SimpleMediator;
 	import info.tiefenauer.jasskass.jass.event.JassEvent;
+	import info.tiefenauer.jasskass.jass.model.JassProxyEvent;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJass;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJassProxy;
 	import info.tiefenauer.jasskass.jass.views.base.JassListViewBase;
 	import info.tiefenauer.jasskass.jass.views.interfaces.IJassListView;
-	
-	import robotlegs.bender.bundles.mvcs.Mediator;
+	import info.tiefenauer.jasskass.profile.events.JassGroupEvent;
+	import info.tiefenauer.jasskass.profile.model.interfaces.IJassGroupProxy;
 	
 	/**
 	 * Mediator for JassListView 
 	 * @author Daniel Tiefenauer
 	 * 
 	 */
-	public class JassListViewMediator extends Mediator
+	public class JassListViewMediator extends SimpleMediator
 	{
 		[Inject] public var view:IJassListView;
 		[Inject] public var jassProxy:IJassProxy;
-		
-		private var sortFunction:Function = sortJassByDateDesc;
-		
+		[Inject] public var jassGroupProxy:IJassGroupProxy;
+
 		override public function initialize():void{
 			addViewListener(JassListViewBase.NEW_JASS_BUTTON_CLICKED, onNewJassButtonClicked);
 			addViewListener(JassListViewBase.JASS_SELECTED, onJassSelected);
-			sortJassList();
+			addViewListener(JassListViewBase.FILTER_SELECTED, onFilterSelected);
+			addViewListener(JassListViewBase.REGISTER_GROUP_BUTTON_CLICKED, onRegisterGroupButtonClicked);
+			addViewListener(JassListViewBase.REFRESH_BUTTON_CLICKED, onRefreshButtonClicked);
+			
+			addContextListener(JassProxyEvent.JASSES_CHANGED, onJassesChanged);
+			
+			view.jassGroup = jassGroupProxy.currentJassGroup;
+			view.jasses.dataProvider = sort(view.filterSelection.selectedIndex);
 		}
 		
-		/**
-		 * Sort list and update view 
-		 */
-		private function sortJassList():void{
+		//--------------------------
+		// Private functions
+		//--------------------------
+		private function sort(crit:Number):ArrayCollection{
+			var result:Vector.<IJass> = new Vector.<IJass>();
+			switch(crit){
+				case 0:
+					result = jassProxy.jassList.sort(sortJassByDateAsc);
+					break;
+				case 1:
+					result = jassProxy.jassList.sort(sortJassByDateDesc);
+					break;
+			}
 			var ac:ArrayCollection = new ArrayCollection();
-			var sortedList:Vector.<IJass> = jassProxy.jassList.sort(sortFunction);
-			sortedList.forEach(function(jass:IJass, index:int, vector:Vector.<IJass>):void{ ac.addItem(jass) });
-			view.jasses.dataProvider = ac;
+			for each(var item:IJass in result) ac.addItem(item);
+			return ac;
 		}
 		
-		//---------------------------
-		// Event handlers
-		//---------------------------
-		private function onNewJassButtonClicked(event:Event):void{
-			dispatch(new JassEvent(JassEvent.NEW_JASS));
-		}
-		private function onJassSelected(event:Event):void{
-			dispatch(new JassEvent(JassEvent.SHOW_JASS_DETAIL, view.jasses.selectedItem));
-		}
-		
-		//---------------------------
-		// Sort functions
-		//---------------------------
 		private function sortJassByDateAsc(x:IJass, y:IJass):Number{
 			if (x.date.time < y.date.time)
 				return -1;
@@ -70,6 +73,35 @@ package info.tiefenauer.jasskass.jass.views
 			if (x.date.time < y.date.time)
 				return -1;
 			return 0;
+		}
+		
+		//---------------------------
+		// View Event handlers
+		//---------------------------
+		private function onNewJassButtonClicked(event:Event):void{
+			if (jassGroupProxy.currentJassGroup)
+				dispatch(new JassGroupEvent(JassGroupEvent.NEW_JASS_WITH_GROUP, jassGroupProxy.currentJassGroup));
+			else
+				dispatch(new JassEvent(JassEvent.NEW_ADHOC_JASS));
+		}
+		private function onJassSelected(event:Event):void{
+			dispatch(new JassEvent(JassEvent.SHOW_JASS_DETAIL, view.jasses.selectedItem));
+		}
+		private function onFilterSelected(event:Event):void{
+			view.jasses.dataProvider = sort(view.filterSelection.selectedIndex);
+		}
+		private function onRegisterGroupButtonClicked(event:Event):void{
+			app.tabbedNavigator.selectedIndex = 3;
+		}
+		private function onRefreshButtonClicked(event:Event):void{
+			dispatch(new JassProxyEvent(JassProxyEvent.SYNC_JASSES));
+		}
+		
+		//---------------------------
+		// Contex Event handlers
+		//---------------------------
+		private function onJassesChanged(event:JassProxyEvent):void{
+			view.jasses.dataProvider = sort(view.filterSelection.selectedIndex);
 		}
 	}
 }

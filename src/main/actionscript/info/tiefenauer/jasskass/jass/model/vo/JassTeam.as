@@ -27,38 +27,6 @@ package info.tiefenauer.jasskass.jass.model.vo
 			_player2 = player2;
 		}
 		
-		/**
-		 * 
-		 * @return 
-		 * 
-		 */
-		public function toObject():Object{
-			var obj:Object = new Object();
-			obj['player1'] = _player1.toObject();
-			obj['player2'] = _player2.toObject();
-			return obj;
-		}
-		
-		/**
-		 * 
-		 * @param obj
-		 * 
-		 */
-		public function fromObject(obj:Object):void{
-			for (var key:String in obj){
-				switch(key){
-					case 'player1':
-						_player1 = new JassPlayer();
-						_player1.fromObject(obj[key]);
-						break;
-					case 'player2':
-						_player2 = new JassPlayer();
-						_player2.fromObject(obj[key]);
-						break;
-				}
-			}
-		}
-		
 		//-----------------------------------
 		// Getter/Setter
 		//-----------------------------------

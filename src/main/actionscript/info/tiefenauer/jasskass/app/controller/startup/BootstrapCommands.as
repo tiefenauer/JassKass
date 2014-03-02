@@ -4,20 +4,25 @@ package info.tiefenauer.jasskass.app.controller.startup
 	import info.tiefenauer.jasskass.app.controller.SimpleCommand;
 	import info.tiefenauer.jasskass.app.event.InitializationEvent;
 	import info.tiefenauer.jasskass.app.views.MobileView;
+	import info.tiefenauer.jasskass.azure.event.AzureJassEvent;
+	import info.tiefenauer.jasskass.jass.controller.azure.AddAzureJass;
 	import info.tiefenauer.jasskass.jass.controller.AddPenalty;
 	import info.tiefenauer.jasskass.jass.controller.AddPoints;
 	import info.tiefenauer.jasskass.jass.controller.AddStoeck;
 	import info.tiefenauer.jasskass.jass.controller.AddWys;
-	import info.tiefenauer.jasskass.jass.controller.CreateJass;
 	import info.tiefenauer.jasskass.jass.controller.FinishJass;
 	import info.tiefenauer.jasskass.jass.controller.HideScore;
 	import info.tiefenauer.jasskass.jass.controller.LoadJassesFromFile;
+	import info.tiefenauer.jasskass.jass.controller.LoadJassesFromServer;
 	import info.tiefenauer.jasskass.jass.controller.NewJass;
 	import info.tiefenauer.jasskass.jass.controller.SaveJassesToFile;
+	import info.tiefenauer.jasskass.jass.controller.SaveJassesToServer;
 	import info.tiefenauer.jasskass.jass.controller.SetJassGameFactor;
 	import info.tiefenauer.jasskass.jass.controller.ShowJassDetails;
-	import info.tiefenauer.jasskass.jass.controller.ShowScore;
+	import info.tiefenauer.jasskass.jass.controller.ShowPenalty;
 	import info.tiefenauer.jasskass.jass.controller.StartJass;
+	import info.tiefenauer.jasskass.jass.controller.SyncJasses;
+	import info.tiefenauer.jasskass.jass.controller.UpdateJass;
 	import info.tiefenauer.jasskass.jass.event.JassEvent;
 	import info.tiefenauer.jasskass.jass.event.JassGameEvent;
 	import info.tiefenauer.jasskass.jass.event.PenaltyEvent;
@@ -26,10 +31,17 @@ package info.tiefenauer.jasskass.app.controller.startup
 	import info.tiefenauer.jasskass.jass.model.JassProxyEvent;
 	import info.tiefenauer.jasskass.kass.controller.DownloadKassData;
 	import info.tiefenauer.jasskass.kass.events.KassEvent;
-	import info.tiefenauer.jasskass.profile.controller.CreateJassGroup;
+	import info.tiefenauer.jasskass.profile.controller.ChangeCurrentJassGroup;
+	import info.tiefenauer.jasskass.profile.controller.azure.AddAzureJassGroup;
 	import info.tiefenauer.jasskass.profile.controller.CreateJassPlayer;
+	import info.tiefenauer.jasskass.profile.controller.LoadJassGroupsFromFile;
+	import info.tiefenauer.jasskass.profile.controller.RegisterGroup;
+	import info.tiefenauer.jasskass.profile.controller.SaveJassGroupsToFile;
 	import info.tiefenauer.jasskass.profile.events.AzureGroupEvent;
 	import info.tiefenauer.jasskass.profile.events.AzurePlayerEvent;
+	import info.tiefenauer.jasskass.profile.events.JassGroupEvent;
+	import info.tiefenauer.jasskass.profile.events.JassGroupProxyEvent;
+	import info.tiefenauer.jasskass.profile.events.RegisterGroupEvent;
 	
 	import robotlegs.bender.extensions.eventCommandMap.api.IEventCommandMap;
 	
@@ -53,20 +65,31 @@ package info.tiefenauer.jasskass.app.controller.startup
 			commandMap.map(InitializationEvent.GET_GOOGLE_API_TOKEN).toCommand(GetOAuth2AccessToken);
 			
 			// Jass
-			commandMap.map(JassEvent.NEW_JASS).toCommand(NewJass);
-			commandMap.map(JassEvent.CREATE_JASS).toCommand(CreateJass);
 			commandMap.map(JassEvent.START_JASS).toCommand(StartJass);
 			commandMap.map(JassEvent.FINISH_JASS).toCommand(FinishJass);
-			commandMap.map(JassEvent.SHOW_PENALTY).toCommand(ShowScore);
+			commandMap.map(JassEvent.SHOW_PENALTY).toCommand(ShowPenalty);
 			commandMap.map(JassEvent.HIDE_PENALTY).toCommand(HideScore);
 			commandMap.map(JassEvent.SHOW_JASS_DETAIL).toCommand(ShowJassDetails);
+			
+			// JassGroup
+			commandMap.map(JassGroupEvent.NEW_JASS_WITH_GROUP).toCommand(NewJass);
 			
 			// JassGame
 			commandMap.map(JassGameEvent.SET_FACTOR).toCommand(SetJassGameFactor);
 			
+			// JassGroup
+			commandMap.map(JassGroupEvent.CHANGE_CURRENT_GROUP).toCommand(ChangeCurrentJassGroup);
+			
 			// JassProxy
-			commandMap.map(JassProxyEvent.SAVE_JASSES).toCommand(SaveJassesToFile);
-			commandMap.map(JassProxyEvent.LOAD_JASSES).toCommand(LoadJassesFromFile);
+			commandMap.map(JassProxyEvent.SAVE_JASSES_TO_FILE).toCommand(SaveJassesToFile);
+			commandMap.map(JassProxyEvent.SAVE_JASSES_TO_SERVER).toCommand(SaveJassesToServer);
+			commandMap.map(JassProxyEvent.LOAD_JASSES_FROM_FILE).toCommand(LoadJassesFromFile);
+			commandMap.map(JassProxyEvent.LOAD_JASSES_FROM_SERVER).toCommand(LoadJassesFromServer);
+			commandMap.map(JassProxyEvent.SYNC_JASSES).toCommand(SyncJasses);
+			
+			// JassGroupProxy
+			commandMap.map(JassGroupProxyEvent.SAVE_JASS_GROUPS_TO_FILE).toCommand(SaveJassGroupsToFile);
+			commandMap.map(JassGroupProxyEvent.LOAD_JASS_GROUPS_FROM_FILE).toCommand(LoadJassGroupsFromFile);
 
 			// Points
 			commandMap.map(PointsEvent.ADD_POINTS).toCommand(AddPoints);
@@ -86,8 +109,11 @@ package info.tiefenauer.jasskass.app.controller.startup
 			commandMap.map(KassEvent.DOWNLOAD_KASS_DATA).toCommand(DownloadKassData);
 			
 			// Azure-Events
-			commandMap.map(AzureGroupEvent.CREATE_GROUP).toCommand(CreateJassGroup);
+			commandMap.map(AzureJassEvent.ADD_JASS).toCommand(AddAzureJass);
+			commandMap.map(AzureGroupEvent.ADD_GROUP).toCommand(AddAzureJassGroup);
 			commandMap.map(AzurePlayerEvent.CREATE_PLAYER).toCommand(CreateJassPlayer);
+			commandMap.map(RegisterGroupEvent.REGISTER_GROUP).toCommand(RegisterGroup);
+			commandMap.map(AzureJassEvent.UPDATE_JASS).toCommand(UpdateJass);
 		}
 	}
 }

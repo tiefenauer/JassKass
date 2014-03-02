@@ -13,8 +13,5 @@ package info.tiefenauer.jasskass.jass.model.interfaces
 		function get player2():IJassPlayer;
 		function set player2(value:IJassPlayer):void;
 		
-		// JSON functions
-		function toObject():Object;
-		function fromObject(obj:Object):void;
 	}
 }

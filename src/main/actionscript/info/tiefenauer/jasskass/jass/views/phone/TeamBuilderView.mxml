@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <base:TeamBuilderViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
-						 xmlns:s="library://ns.adobe.com/flex/spark" 
-						 xmlns:base="info.tiefenauer.jasskass.jass.views.base.*"
-						 implements="info.tiefenauer.jasskass.jass.views.interfaces.ITeamBuilderView" xmlns:components="info.tiefenauer.jasskass.jass.views.components.*" xmlns:callout="com.clx.uicomponents.list.callout.*" 
-						 >
+						  xmlns:s="library://ns.adobe.com/flex/spark" 
+						  xmlns:base="info.tiefenauer.jasskass.jass.views.base.*"
+						  implements="info.tiefenauer.jasskass.jass.views.interfaces.ITeamBuilderView" 
+						  xmlns:components="info.tiefenauer.jasskass.jass.views.components.*"
+						  creationComplete="onCreationComplete(event)"
+						  >
+	
 	
 	<fx:Script>
 		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.events.FlexEvent;
+			
 			import spark.events.PopUpEvent;
 			
-			import info.tiefenauer.jasskass.jass.views.components.NewPlayerCallout;
+			import info.tiefenauer.jasskass.jass.model.interfaces.IJassPlayer;
+			import info.tiefenauer.jasskass.jass.views.components.ChoosePlayerCallout;
+			[Bindable] private var playerChoiceList:ArrayCollection = new ArrayCollection();
 			
 			//---------------------
 			// Event handlers
 			//---------------------
-			protected function onDoneButtonClick(event:MouseEvent):void{
-				dispatchEvent(new Event(DONE_BUTTON_CLICKED));
-			}
 			protected function onCancelButtonClick(event:MouseEvent):void{
 				dispatchEvent(new Event(CANCEL_BUTTON_CLICKED));
 			}
@@ -26,25 +31,34 @@
 			
 			protected function onPlayerIconClicked(event:MouseEvent):void{
 				var playerIcon:* = event.currentTarget;
-				var playerCallout:NewPlayerCallout = new NewPlayerCallout();
+				var playerCallout:ChoosePlayerCallout = new ChoosePlayerCallout();
+				playerCallout.players = playerChoiceList;
+
 				playerCallout.addEventListener(PopUpEvent.CLOSE, function(closeEvent:PopUpEvent):void{
-					trace('setting name for ' + playerIcon.id);
+					var player:IJassPlayer = closeEvent.data;
 					switch (playerIcon){
 						case player1icon:
-							player1.firstName = playerCallout.playerNameTI.text;
+							_team1Player1 = player;
 							break;
 						case player2icon:
-							player2.firstName = playerCallout.playerNameTI.text;
+							_team2Player1 = player;
 							break;
 						case player3icon:
-							player3.firstName = playerCallout.playerNameTI.text;
+							_team2Player2 = player;
 							break;
 						case player4icon:
-							player4.firstName = playerCallout.playerNameTI.text;
+							_team1Player2 = player;
 							break;
 					}
+					playerChoiceList.removeItem(player);
 				});
 				playerCallout.open(event.target as DisplayObjectContainer);
+			}
+			
+			protected function onCreationComplete(event:FlexEvent):void{
+				for each(var player:IJassPlayer in group.players){
+					playerChoiceList.addItem(player);
+				};
 			}
 			
 		]]>
@@ -79,8 +93,8 @@
 				  >
 			
 			<s:HGroup width="100%">
-				<s:Label id="player1Lbl" text="{player1.firstName}" styleName="playerName" width="50%" textAlign="left"/>
-				<s:Label id="player2Lbl" text="{player2.firstName}" styleName="playerName" width="50%" textAlign="right" />
+				<s:Label id="player1Lbl" text="{_team1Player1.firstName}" styleName="playerName" width="50%" textAlign="left"/>
+				<s:Label id="player2Lbl" text="{_team2Player1.firstName}" styleName="playerName" width="50%" textAlign="right" />
 			</s:HGroup>
 			
 			<components:JassTeppich id="jassTeppich" width="100%" height="{jassTeppich.width}" >
@@ -145,7 +159,7 @@
 				</s:Image>
 				
 				<s:Button id="startButton"
-						  enabled="{player1.firstName &amp;&amp; player2.firstName &amp;&amp; player3.firstName &amp;&amp; player4.firstName}"
+						  enabled="{playerChoiceList.length == 0}"
 						  label="Start"
 						  click="onStartButtonClick(event)"
 						  width="30%"
@@ -156,11 +170,10 @@
 			</components:JassTeppich>
 			
 			<s:HGroup width="100%">
-				<s:Label id="player3Lbl" text="{player3.firstName}" styleName="playerName" width="50%" textAlign="left" />
-				<s:Label id="player4Lbl" text="{player4.firstName}" styleName="playerName" width="50%" textAlign="right" />
+				<s:Label id="player3Lbl" text="{_team2Player2.firstName}" styleName="playerName" width="50%" textAlign="left" />
+				<s:Label id="player4Lbl" text="{_team1Player2.firstName}" styleName="playerName" width="50%" textAlign="right" />
 			</s:HGroup>
 			
 		</s:VGroup>
 	</s:Scroller>
-	
 </base:TeamBuilderViewBase>

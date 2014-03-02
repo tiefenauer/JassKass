@@ -3,6 +3,20 @@
 		xmlns:s="library://ns.adobe.com/flex/spark"
 		xmlns:components="info.tiefenauer.jasskass.jass.views.components.*"
 		>
+	
+	<fx:Style>
+		@namespace s "library://ns.adobe.com/flex/spark";
+		@namespace components "info.tiefenauer.jasskass.jass.views.components.*";
+		.score
+		{
+			fontSize: 35;
+		}
+		
+		.playerName
+		{
+			fontSize: 18;
+		}
+	</fx:Style>
 	<!-- host component -->
 	<fx:Metadata>
 		[HostComponent("info.tiefenauer.jasskass.jass.views.components.JassTafel")]
@@ -20,24 +34,35 @@
 	-->
 
 	<!-- background -->
-	<components:JassTafelBackground width="100%" height="100%"/>
+	<s:Image scaleMode="zoom" width="100%" height="100%">
+		<s:source>
+			<s:MultiDPIBitmapSource source120dpi="@Embed('dpi120/bg_blackboard.jpg')"
+									source160dpi="@Embed('dpi160/bg_blackboard.jpg')"
+									source240dpi="@Embed('dpi240/bg_blackboard.jpg')"
+									source320dpi="@Embed('dpi320/bg_blackboard.jpg')"
+									source480dpi="@Embed('dpi480/bg_blackboard.jpg')"
+									source640dpi="@Embed('dpi640/bg_blackboard.jpg')"
+									/>
+		</s:source>
+	</s:Image>
+
 	
 	<!-- Z with team labels-->
 	<s:VGroup width="100%" height="100%" >
-		<components:ZGroup id="team1Area" width="100%" height="50%" visible="{hostComponent.displayZ}" />
+		<components:ZGroup id="team1Area" width="100%" height="50%" visible="{hostComponent.displayZ}" styleName="score" />
 		
 		<s:VGroup width="100%" id="middleArea" >
 			
-			<s:Label id="team1LabelDisplay" width="90%" rotation="180" />
+			<s:Label id="team1LabelDisplay" width="90%" rotation="180" styleName="playerName" />
 			<s:Line width="100%" verticalCenter="0">
 				<s:stroke>
 					<s:SolidColorStroke color="#FFFFFF" weight="2" />
 				</s:stroke>
 			</s:Line>
-			<s:Label id="team2LabelDisplay" width="90%" textAlign="right" />
+			<s:Label id="team2LabelDisplay" width="90%" textAlign="right" styleName="playerName"/>
 		</s:VGroup>
 		
-		<components:ZGroup id="team2Area" width="100%" height="50%" visible="{hostComponent.displayZ}" />
+		<components:ZGroup id="team2Area" width="100%" height="50%" visible="{hostComponent.displayZ}" styleName="score" />
 	</s:VGroup>
 
 	<s:VGroup id="contentGroup"

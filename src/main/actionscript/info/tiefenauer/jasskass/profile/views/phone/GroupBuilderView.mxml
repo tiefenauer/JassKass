@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base:GroupBuilderViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
+						xmlns:s="library://ns.adobe.com/flex/spark" 
+						xmlns:base="info.tiefenauer.jasskass.profile.views.base.*"
+						implements="info.tiefenauer.jasskass.profile.views.interfaces.IGroupBuilderView"
+						title="My Profile" xmlns:list="com.clx.uicomponents.list.*" 
+						>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			
+			import info.tiefenauer.jasskass.app.util.translate;
+			import info.tiefenauer.jasskass.jass.model.interfaces.IJassPlayer;
+			import info.tiefenauer.jasskass.jass.model.vo.JassPlayer;
+			
+			//-----------------------------
+			// Private/Protected functions
+			//-----------------------------
+			private function setSubmitButtonVisibility():void{
+				submitBtn.enabled = jassGroup.players.length == 4;
+			}
+			private function updatePlayerList():void{
+				var ac:ArrayCollection = new ArrayCollection();
+				for each(var player:IJassPlayer in jassGroup.players) ac.addItem(player);
+				playersList.dataProvider = ac;
+			}
+			private function resetInputForm():void{
+				nameTI.text = '';
+				emailTI.text = '';
+			}
+			
+			//-----------------------------
+			// Getter/Setter
+			//-----------------------------
+
+			//-----------------------------
+			// Event handlers
+			//-----------------------------
+			protected function onSubmitButtonClick(event:MouseEvent):void{
+				dispatchEvent(new Event(SUBMIT_BUTTON_CLICKED));
+			}
+			protected function onAddPlayerButtonClick(event:MouseEvent):void{
+				jassGroup.players.push(new JassPlayer(nameTI.text, null, emailTI.text));
+				setSubmitButtonVisibility();
+				updatePlayerList();
+				resetInputForm();
+			}
+			
+			protected function onPlayerDeleteIconClicked(event:Event):void{
+				var index:int = jassGroup.players.indexOf(playersList.selectedItem);
+				if (index > -1)
+					jassGroup.players.splice(index, 1);
+				updatePlayerList();
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<base:layout>
+		<s:VerticalLayout />
+	</base:layout>
+	
+	<s:VGroup width="100%" paddingLeft="20" paddingRight="20" paddingTop="20" paddingBottom="20">
+		<s:TextInput id="nameTI" prompt="{translate('Name')}" width="100%" />
+		<s:TextInput id="emailTI" prompt="{translate('E-Mail')}" width="100%" />
+		<s:Button id="addPlayerButton" label="{translate('Hinzufügen')}" click="onAddPlayerButtonClick(event)" width="100%"/>
+	</s:VGroup>
+
+	<list:MobileList id="playersList" width="100%" height="100%"
+					 itemRenderer="info.tiefenauer.jasskass.profile.views.components.renderer.JassPlayerItemRenderer"
+					 decoratorClicked="onPlayerDeleteIconClicked(event)"
+					 verticalScrollPolicy="auto"
+					 />
+
+	<s:VGroup width="100%" paddingLeft="20" paddingRight="20" paddingTop="20" paddingBottom="20">
+		<s:Button id="submitBtn"
+				  label="{translate('Fertig')}"
+				  enabled="false"
+				  click="onSubmitButtonClick(event)"
+				  width="100%"
+				  />
+	</s:VGroup>
+	
+</base:GroupBuilderViewBase>

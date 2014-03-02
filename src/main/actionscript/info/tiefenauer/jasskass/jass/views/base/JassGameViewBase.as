@@ -15,6 +15,7 @@ package info.tiefenauer.jasskass.jass.views.base
 	{
 		public static const NAME:String = 'JassGameViewBase';
 		// event names
+		public static const NEW_GAME_CLICKED:String = NAME + 'NewGameClicked';
 		public static const POINTS_ENTERED:String = NAME + 'PointsEntered';
 		public static const WYS_ENTERED:String = NAME + 'WysEntered';
 		public static const STOECK_ENTERED:String = NAME + 'StoeckEntered';

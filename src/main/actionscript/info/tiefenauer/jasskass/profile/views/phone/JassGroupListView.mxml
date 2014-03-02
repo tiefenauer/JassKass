@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base:JassGroupListViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
+							xmlns:s="library://ns.adobe.com/flex/spark" 
+							xmlns:base="info.tiefenauer.jasskass.profile.views.base.*"
+							implements="info.tiefenauer.jasskass.profile.views.interfaces.IJassGroupListView"
+							>
+	<fx:Script>
+		<![CDATA[
+			import spark.events.IndexChangeEvent;
+			
+			import info.tiefenauer.jasskass.app.util.translate;
+			
+			//---------------------------------
+			// Getter/Setter
+			//---------------------------------
+			override public function get contentList():List{
+				return jassGroupList;
+			}
+			//---------------------------------
+			// Event handlers
+			//---------------------------------
+			protected function onJassGroupListSelectionChanged(event:IndexChangeEvent):void{
+				dispatchEvent(new Event(GROUP_SELECTED));
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<base:layout>
+		<s:VerticalLayout paddingLeft="10" paddingRight="20" paddingTop="10" paddingBottom="10"/>
+	</base:layout>
+	
+	<s:Label text="{translate('Deine Gruppen')}" />
+	
+	<s:List id="jassGroupList"
+			dataProvider="{jassGroups}"
+			itemRenderer="info.tiefenauer.jasskass.profile.views.components.renderer.JassGroupItemRenderer"
+			change="onJassGroupListSelectionChanged(event)"
+			width="100%" height="100%"
+			/>
+</base:JassGroupListViewBase>

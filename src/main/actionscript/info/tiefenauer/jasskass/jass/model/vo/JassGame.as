@@ -4,8 +4,6 @@
  */
 package info.tiefenauer.jasskass.jass.model.vo
 {
-	import mx.events.PropertyChangeEvent;
-	
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJass;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJassGame;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IWys;
@@ -28,7 +26,7 @@ package info.tiefenauer.jasskass.jass.model.vo
 		 * 
 		 * @param jass
 		 */
-		public function JassGame(jass:IJass){
+		public function JassGame(jass:IJass=null){
 			_jass = jass;
 		}
 		
@@ -57,80 +55,14 @@ package info.tiefenauer.jasskass.jass.model.vo
 			return sum;
 		}
 
-		
-		/**
-		 * 
-		 * @return 
-		 * 
-		 */
-		public function toObject():Object{
-			var obj:Object = new Object();
-			obj['factor'] = _factor;
-			obj['team1pointsplayed'] = _team1PointsPlayed;
-			obj['team2pointsplayed'] = _team2PointsPlayed;
-			
-			var wys:IWys;
-			
-			var wysesTeam1:Array = new Array();
-			for each(wys in _team1Wyses){
-				wysesTeam1.push(wys.toObject());
-			}
-			obj['team1wyses'] = wysesTeam1;
-			
-			var wysesTeam2:Array = new Array();
-			for each(wys in _team2Wyses){
-				wysesTeam2.push(wys.toObject());
-			}
-			obj['team2wyses'] = wysesTeam2;
-			
-			return obj;
-		}
-		
-		/**
-		 * 
-		 * @param obj
-		 * 
-		 */
-		public function fromObject(obj:Object):void{
-			var wysObj:Object;
-			var wys:IWys;
-			
-			for(var key:String in obj){
-				switch(key){
-					case 'factor':
-						_factor = Number(obj[key]);
-						break;
-					case 'team1pointsplayed':
-						_team1PointsPlayed = Number(obj[key]);
-						break;
-					case 'team2pointsplayed':
-						_team2PointsPlayed = Number(obj[key]);
-						break;
-					case 'team1wyses':
-						_team1Wyses = new Vector.<IWys>();
-						for each(wysObj in obj[key]){
-							wys = new Wys();
-							wys.fromObject(wysObj);
-							_team1Wyses.push(wys);
-						}
-						break;
-					case 'team2wyses':
-						_team2Wyses = new Vector.<IWys>();
-						for each(wysObj in obj[key]){
-							wys = new Wys();
-							wys.fromObject(wysObj);
-							_team2Wyses.push(wys);
-						}
-						break;
-				}
-			}
-		}
-		
 		//-----------------------------
 		// Getter/Setter
 		//-----------------------------
 		public function get jass():IJass{
 			return _jass;
+		}
+		public function set jass(value:IJass):void{
+			_jass = value;
 		}
 		public function get factor():Number{
 			return _factor;

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base:RegisterGroupViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
+							xmlns:s="library://ns.adobe.com/flex/spark" 
+							xmlns:base="info.tiefenauer.jasskass.profile.views.base.*"
+							implements="info.tiefenauer.jasskass.profile.views.interfaces.IRegisterGroupView"
+							title="{translate('Beitreten')}"
+							>
+	<fx:Script>
+		<![CDATA[
+			import info.tiefenauer.jasskass.app.util.translate;
+			
+			protected function onSubmitButtonClicked(event:MouseEvent):void{
+				data = codeTI.text;
+				if (code && code.length > 0)
+					dispatchEvent(new Event(SUBMIT_BUTTON_CLICKED));
+			}
+			protected function onCancelButtonClicked(event:MouseEvent):void{
+				dispatchEvent(new Event(CANCEL_BUTTON_CLICKED));
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<base:layout>
+		<s:VerticalLayout paddingBottom="20" paddingLeft="20" paddingRight="20" paddingTop="20" gap="20"/>
+	</base:layout>
+	
+	<s:Label text="{translate('Gib den Code ein, den du von der Person erhalten hast, welche die Gruppe erstellt hat')}" width="100%" />
+	
+	<s:TextInput id="codeTI" prompt="{translate('Code')}" width="100%" />
+	
+	<s:Button label="{translate('Beitreten')}" width="100%" click="onSubmitButtonClicked(event)"/>
+	<s:Button label="{translate('Abbrechen')}" width="100%" click="onCancelButtonClicked(event)"/>
+	
+</base:RegisterGroupViewBase>

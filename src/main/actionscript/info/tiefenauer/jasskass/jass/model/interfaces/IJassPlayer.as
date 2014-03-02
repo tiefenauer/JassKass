@@ -4,10 +4,8 @@
  */
 package info.tiefenauer.jasskass.jass.model.interfaces
 {
-	import info.tiefenauer.jasskass.app.model.interfaces.IJSON;
-
 	[Bindable]
-	public interface IJassPlayer extends IJSON
+	public interface IJassPlayer
 	{
 		function get id():String;
 		function set id(value:String):void;

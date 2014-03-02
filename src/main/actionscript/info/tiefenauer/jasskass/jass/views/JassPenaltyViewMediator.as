@@ -9,7 +9,7 @@ package info.tiefenauer.jasskass.jass.views
 	import info.tiefenauer.jasskass.jass.event.JassEvent;
 	import info.tiefenauer.jasskass.jass.model.JassProxyEvent;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJassProxy;
-	import info.tiefenauer.jasskass.jass.views.base.JassScoreViewBase;
+	import info.tiefenauer.jasskass.jass.views.base.JassPenaltyViewBase;
 	import info.tiefenauer.jasskass.jass.views.interfaces.IJassPenaltyView;
 	
 	import robotlegs.bender.bundles.mvcs.Mediator;
@@ -24,7 +24,7 @@ package info.tiefenauer.jasskass.jass.views
 		[Inject] public var jassProxy:IJassProxy;
 		
 		override public function initialize():void{
-			addViewListener(JassScoreViewBase.FLIP, onFlip);
+			addViewListener(JassPenaltyViewBase.FLIP, onFlip);
 			addContextListener(JassProxyEvent.CURRENT_STRICHE_CHANGED, onStricheChanged);
 			
 			view.jass = jassProxy.currentJass;

@@ -6,9 +6,9 @@ package info.tiefenauer.jasskass.jass.controller
 	
 	import info.tiefenauer.jasskass.app.controller.SimpleCommand;
 	import info.tiefenauer.jasskass.jass.model.JassProxyEvent;
+	import info.tiefenauer.jasskass.jass.model.factory.JassFactory;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJass;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJassProxy;
-	import info.tiefenauer.jasskass.jass.model.vo.Jass;
 	
 	/**
 	 * Load Jasses from File 
@@ -30,8 +30,7 @@ package info.tiefenauer.jasskass.jass.controller
 				
 				var jassesObj:Object = JSON.parse(fileContent);
 				for each(var jassObj:Object in jassesObj){
-					var jass:IJass = new Jass();
-					jass.fromObject(jassObj);
+					var jass:IJass = JassFactory.fromObject(jassObj);
 					jassProxy.jassList.push(jass);
 				}
 			}

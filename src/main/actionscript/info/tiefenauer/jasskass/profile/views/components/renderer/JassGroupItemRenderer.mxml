@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<list:MobileIconItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+							 xmlns:s="library://ns.adobe.com/flex/spark" 
+							 xmlns:list="com.clx.uicomponents.list.*"
+							 labelField="key"
+							 messageFunction="getMessage"
+							 >
+	
+	<fx:Script>
+		<![CDATA[
+			import info.tiefenauer.jasskass.jass.model.interfaces.IJassPlayer;
+			import info.tiefenauer.jasskass.profile.model.interfaces.IJassGroup;
+			public function getMessage(item:IJassGroup):String{
+				var message:String = '';
+				for each(var player:IJassPlayer in item.players){
+					message += player.firstName;
+					if (item.players.indexOf(player)+1 < item.players.length)
+						message += ', ';
+				}
+				return message;
+			}
+		]]>
+	</fx:Script>
+	
+</list:MobileIconItemRenderer>

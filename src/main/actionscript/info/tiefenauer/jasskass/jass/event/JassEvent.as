@@ -16,8 +16,7 @@ package info.tiefenauer.jasskass.jass.event
 	{
 		public static const NAME:String = 'JassEvent';
 		// Event types
-		public static const NEW_JASS:String = NAME + 'NewJass';
-		public static const CREATE_JASS:String = NAME + 'CreateJass';
+		public static const NEW_ADHOC_JASS:String = NAME + 'NewAdHocJass';
 		public static const START_JASS:String = NAME + 'StartJass';
 		public static const FINISH_JASS:String = NAME + 'FinishJass';
 		public static const SHOW_PENALTY:String = NAME + 'ShowPenalty';

@@ -30,7 +30,7 @@ package info.tiefenauer.jasskass.jass.event
 		 * @param cancelable
 		 * 
 		 */
-		public function PointsEvent(type:String, team1Points:Number=0, team2Points:Number=0, factor=1, bubbles:Boolean=false, cancelable:Boolean=false){
+		public function PointsEvent(type:String, team1Points:Number=0, team2Points:Number=0, factor:Number=1, bubbles:Boolean=false, cancelable:Boolean=false){
 			super(type, bubbles, cancelable);
 			this.team1Points = team1Points;
 			this.team2Points = team2Points;

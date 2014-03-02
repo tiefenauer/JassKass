@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<list:MobileIconItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+							 xmlns:s="library://ns.adobe.com/flex/spark"  
+							 xmlns:list="com.clx.uicomponents.list.*"
+							 decoratorClicked="onDecoratorClicked(event)"
+							 labelField="firstName" 
+							 messageField="eMail" 
+							 >
+	
+	<fx:Script>
+		<![CDATA[
+			protected function onDecoratorClicked(event:Event):void{
+				
+			}
+		]]>
+	</fx:Script>
+	
+	
+	<list:decorator>
+		<s:MultiDPIBitmapSource source120dpi="@Embed('dpi120/icons/ico_delete.png')"
+								source160dpi="@Embed('dpi160/icons/ico_delete.png')"
+								source240dpi="@Embed('dpi240/icons/ico_delete.png')"
+								source320dpi="@Embed('dpi320/icons/ico_delete.png')"
+								source480dpi="@Embed('dpi480/icons/ico_delete.png')"
+								source640dpi="@Embed('dpi640/icons/ico_delete.png')"
+								/>
+	</list:decorator>
+</list:MobileIconItemRenderer>

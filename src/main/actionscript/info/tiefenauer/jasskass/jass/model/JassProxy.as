@@ -5,12 +5,15 @@
 package info.tiefenauer.jasskass.jass.model
 {
 	import info.tiefenauer.jasskass.app.model.Actor;
+	import info.tiefenauer.jasskass.app.util.toast;
+	import info.tiefenauer.jasskass.app.util.translate;
 	import info.tiefenauer.jasskass.jass.event.PenaltyEvent;
 	import info.tiefenauer.jasskass.jass.model.enum.JassPoints;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJass;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJassProxy;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJassTeam;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IWys;
+	import info.tiefenauer.jasskass.jass.views.interfaces.IJassListView;
 	
 	/**
 	 * Proxy to maintain jasses 
@@ -26,16 +29,26 @@ package info.tiefenauer.jasskass.jass.model
 		 * Add a jass 
 		 * @param jass
 		 */
-		public function addJass(value:IJass):void{
+		public function addJass(jass:IJass):void{
 			var filterByID:Function = function(item:IJass, index:int, vector:Vector.<IJass>):Boolean{
-				return item.id == value.id;
+				return item.id == jass.id;
 			};
-			if (_jassList.filter(filterByID).length == 0)
-				_jassList.push(value);
+			var result:Vector.<IJass> = _jassList.filter(filterByID);
+			if (result.length == 0)
+				_jassList.push(jass);
+			else
+				_jassList.splice(_jassList.indexOf(result[0]), 1, jass);
+			dispatch(new JassProxyEvent(JassProxyEvent.JASSES_CHANGED));
 		}
 		
 		public function removeJass(id:String):void{
-			
+			var filterByID:Function = function(item:IJass, index:int, vector:Vector.<IJass>):Boolean{
+				return item.id == id;
+			};
+			var result:Vector.<IJass> = _jassList.filter(filterByID);
+			if (result.length > 0)
+				_jassList.splice(_jassList.indexOf(result[0]), 1);
+			dispatch(new JassProxyEvent(JassProxyEvent.JASSES_CHANGED));
 		}
 		
 		/**
@@ -103,6 +116,7 @@ package info.tiefenauer.jasskass.jass.model
 					_currentJass.team2Penalty += count;
 					break;
 			}
+			toast(translate('Strich für') + ' ' + team.player1.firstName + ' und ' + team.player2.firstName);
 			dispatch(new JassProxyEvent(JassProxyEvent.CURRENT_STRICHE_CHANGED));
 		}
 

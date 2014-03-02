@@ -1,18 +1,16 @@
-/**
- * class_name
- * Copyright 2013 Daniel Tiefenauer
- */
 package info.tiefenauer.jasskass.jass.views.interfaces
 {
-	import info.tiefenauer.jasskass.jass.model.interfaces.IJass;
+	import info.tiefenauer.jasskass.jass.model.interfaces.IJassPlayer;
+	import info.tiefenauer.jasskass.profile.model.interfaces.IJassGroup;
 
 	public interface ITeamBuilderView
 	{
-		function get jass():IJass;
+		function get team1Player1():IJassPlayer;
+		function get team1Player2():IJassPlayer;
+		function get team2Player1():IJassPlayer;
+		function get team2Player2():IJassPlayer;
 		
-		function get player1Name():String;
-		function get player2Name():String;
-		function get player3Name():String;
-		function get player4Name():String;
+		function get group():IJassGroup;
+		function set group(value:IJassGroup):void;
 	}
 }

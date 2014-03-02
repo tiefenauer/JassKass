@@ -1,51 +1,46 @@
-/**
- * TeamBuilderViewBas
- * Copyright 2013 Daniel Tiefenauer
- */
 package info.tiefenauer.jasskass.jass.views.base
 {
 	import info.tiefenauer.jasskass.app.views.MobileView;
-	import info.tiefenauer.jasskass.jass.model.interfaces.IJass;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJassPlayer;
-	import info.tiefenauer.jasskass.jass.model.vo.JassPlayer;
+	import info.tiefenauer.jasskass.profile.model.interfaces.IJassGroup;
 	
 	/**
-	 * Base class for TeamBuilderViews 
-	 * @author Daniel Tiefenauer
+	 * Basisklasse für TeamBuilderViews 
+	 * @author Daniel
+	 * 
 	 */
 	public class TeamBuilderViewBase extends MobileView
 	{
 		public static const NAME:String = 'TeamBuilderViewBase';
 		// Event types
-		public static const DONE_BUTTON_CLICKED:String = NAME + 'DoneButtonClicked';
 		public static const CANCEL_BUTTON_CLICKED:String = NAME + 'CancelButtonClicked';
 		public static const START_BUTTON_CLICKED:String = NAME + 'StartButtonClicked';
+
+		[Bindable] protected var _team1Player1:IJassPlayer;
+		[Bindable] protected var _team1Player2:IJassPlayer;
+		[Bindable] protected var _team2Player1:IJassPlayer;
+		[Bindable] protected var _team2Player2:IJassPlayer;
 		
-		[Bindable] public var player1:IJassPlayer = new JassPlayer();
-		[Bindable] public var player2:IJassPlayer = new JassPlayer();
-		[Bindable] public var player3:IJassPlayer = new JassPlayer();
-		[Bindable] public var player4:IJassPlayer = new JassPlayer();
-		
-		public function get player1Name():String{
-			return player1.firstName;
+		public function get team1Player1():IJassPlayer{
+			return _team1Player1;
 		}
-		public function get player2Name():String{
-			return player2.firstName;
+		public function get team1Player2():IJassPlayer{
+			return _team1Player2;
 		}
-		public function get player3Name():String{
-			return player3.firstName;
+		public function get team2Player1():IJassPlayer{
+			return _team2Player1;
 		}
-		public function get player4Name():String{
-			return player4.firstName;
+		public function get team2Player2():IJassPlayer{
+			return _team2Player2;
 		}
 		
 		[Bindable]
-		public function get jass():IJass{
-			if (data is IJass)
-				return data as IJass;
+		public function get group():IJassGroup{
+			if (data is IJassGroup)
+				return data as IJassGroup;
 			return null;
 		}
-		public function set jass(value:IJass):void {
+		public function set group(value:IJassGroup):void {
 			data = value;
 		}
 	}

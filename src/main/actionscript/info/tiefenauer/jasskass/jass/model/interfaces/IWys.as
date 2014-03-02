@@ -4,9 +4,8 @@
  */
 package info.tiefenauer.jasskass.jass.model.interfaces
 {
-	import info.tiefenauer.jasskass.app.model.interfaces.IJSON;
-
-	public interface IWys extends IJSON
+	
+	public interface IWys
 	{
 		function get type():String;
 		function set type(value:String):void;

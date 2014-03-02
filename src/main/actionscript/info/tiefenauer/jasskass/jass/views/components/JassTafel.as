@@ -5,7 +5,11 @@
 package info.tiefenauer.jasskass.jass.views.components
 {
         import flash.events.Event;
+        import flash.events.GestureEvent;
         import flash.events.MouseEvent;
+        import flash.events.TransformGestureEvent;
+        import flash.ui.Multitouch;
+        import flash.ui.MultitouchInputMode;
         
         import mx.core.UIComponent;
         
@@ -21,6 +25,7 @@ package info.tiefenauer.jasskass.jass.views.components
         [Event(name="team1AreaClicked", type="flash.events.Event")]
         [Event(name="team2AreaClicked", type="flash.events.Event")]
         [Event(name="middleAreaClicked", type="flash.events.Event")]
+        [Event(name="swiped", type="flash.events.Event")]
         
         /**
          * JassTafel vorne 
@@ -47,13 +52,17 @@ package info.tiefenauer.jasskass.jass.views.components
             override protected function createChildren():void{
                     super.createChildren();
                     if (jass){
-                            team1LabelDisplay.text = translate('Team 1') + ' (' + jass.team1.player1.firstName + ' + ' + jass.team1.player2.firstName + ')';
-                            team2LabelDisplay.text = translate('Team 2') + ' (' + jass.team2.player1.firstName + ' + ' + jass.team2.player2.firstName + ')';
+                            team1LabelDisplay.text = jass.team1.player1.firstName + ' & ' + jass.team1.player2.firstName;
+                            team2LabelDisplay.text = jass.team2.player1.firstName + ' + ' + jass.team2.player2.firstName;
                     }
+					Multitouch.inputMode = MultitouchInputMode.GESTURE;
                     team1Area.addEventListener(MouseEvent.CLICK, onTeam1AreaClicked);
                     team2Area.addEventListener(MouseEvent.CLICK, onTeam2AreaClicked);
                     middleArea.addEventListener(MouseEvent.CLICK, onMiddleAreaClicked);
-                    
+					
+					team1Area.addEventListener(TransformGestureEvent.GESTURE_SWIPE, onSwipe);
+					team2Area.addEventListener(TransformGestureEvent.GESTURE_SWIPE, onSwipe);
+					middleArea.addEventListener(TransformGestureEvent.GESTURE_SWIPE, onSwipe);
             }
             
             //--------------------------------
@@ -67,6 +76,9 @@ package info.tiefenauer.jasskass.jass.views.components
             }
             protected function onMiddleAreaClicked(event:MouseEvent):void{
                     dispatchEvent(new Event(MIDDLE_AREA_CLICKED));
+            }
+            protected function onSwipe(event:TransformGestureEvent):void{
+                    dispatchEvent(new Event('swiped'));
             }
     }
 }

@@ -10,8 +10,9 @@
 							preloader="flexunit.flexui.FlexUnitSplashScreen">
 	<fx:Script>
 		<![CDATA[
-			import flexunit.flexui.FirstViewDataVO;
 			import com.adobe.protocols.oauth2.OAuth2Test;
+			
+			import flexunit.flexui.FirstViewDataVO;
 			
 			import org.floxy.ProxyRepositoryTest;
 			import org.floxy.event.ProxyClassEventTest;
@@ -30,7 +31,6 @@
 			import test.info.tiefenauer.jasskass.app.models.SettingProxyTest;
 			import test.info.tiefenauer.jasskass.app.models.TextFileServiceTest;
 			import test.info.tiefenauer.jasskass.app.models.vo.AppConfigurationTest;
-			import test.info.tiefenauer.jasskass.app.models.vo.ConfigFileTest;
 			import test.info.tiefenauer.jasskass.app.models.vo.SettingTest;
 			
 			public function currentRunTestSuite():Array
@@ -51,7 +51,6 @@
 				testsToRun.push(test.info.tiefenauer.jasskass.app.controllers.GetOAuth2AccessTokenTest);
 				testsToRun.push(test.info.tiefenauer.jasskass.app.models.SettingProxyTest);
 				testsToRun.push(test.info.tiefenauer.gdas3.SpreadsheetAuthorTest);
-				testsToRun.push(test.info.tiefenauer.jasskass.app.models.vo.ConfigFileTest);
 				testsToRun.push(test.info.tiefenauer.gdas3.SpreadsheetContentTest);
 				testsToRun.push(test.info.tiefenauer.jasskass.app.models.vo.SettingTest);
 				testsToRun.push(test.info.tiefenauer.jasskass.app.models.vo.AppConfigurationTest);

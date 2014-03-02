@@ -4,12 +4,12 @@
  */
 package info.tiefenauer.jasskass.jass.model.interfaces
 {
-	import info.tiefenauer.jasskass.app.model.interfaces.IJSON;
 
 	[Bindable]
-	public interface IJassGame extends IJSON
+	public interface IJassGame 
 	{
 		function get jass():IJass;
+		function set jass(value:IJass):void;
 		
 		function get factor():Number;
 		function set factor(value:Number):void;

@@ -46,11 +46,11 @@ package info.tiefenauer.jasskass.jass.views
 		}
 		
 		//-----------------------------
-		// Event handlers
+		// View Event handlers
 		//-----------------------------
 		private function onBack(event:Event):void{
 			// alert Popup zeigen
-			dispatch(new JassEvent(JassEvent.FINISH_JASS));
+			dispatch(new JassEvent(JassEvent.FINISH_JASS, jassProxy.currentJass));
 		}
 		private function onPointsEntered(event:Event):void{
 			dispatch(new PointsEvent(PointsEvent.ADD_POINTS, view.team1Points, view.team2Points, view.factor));
@@ -64,7 +64,10 @@ package info.tiefenauer.jasskass.jass.views
 		private function onFactorButtonClicked(event:Event):void{
 			showFactorPopup();
 		}
-		
+
+		//-----------------------------
+		// Context Event handlers
+		//-----------------------------
 		private function onNewGame(event:JassProxyEvent):void{
 			showFactorPopup();
 		}

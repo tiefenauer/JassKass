@@ -4,11 +4,12 @@
  */
 package info.tiefenauer.jasskass.app.controller.startup
 {
+	import flash.filesystem.File;
+	
 	import info.tiefenauer.jasskass.app.controller.SimpleCommand;
 	import info.tiefenauer.jasskass.app.model.interfaces.IConfigProxy;
 	import info.tiefenauer.jasskass.app.model.interfaces.ITextFileService;
 	import info.tiefenauer.jasskass.app.model.vo.AppConfiguration;
-	import info.tiefenauer.jasskass.app.model.vo.ConfigFile;
 	
 	/**
 	 * Load app configuration from file 
@@ -18,11 +19,10 @@ package info.tiefenauer.jasskass.app.controller.startup
 	{
 		[Inject] public var fileService:ITextFileService;
 		[Inject] public var configProxy:IConfigProxy;
-		[Inject] public var configFile:ConfigFile;
 		
 		override public function execute():void{
 			super.execute();
-			fileService.file = configFile;
+			fileService.file = File.applicationDirectory.resolvePath('config.xml');
 			var configs:XML = XML(fileService.read());
 			for each(var node:XML in configs.children()){
 				var appConfig:AppConfiguration = new AppConfiguration();

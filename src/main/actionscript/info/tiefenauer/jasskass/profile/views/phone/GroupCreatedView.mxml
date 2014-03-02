@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base:GroupCreatedViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
+						   xmlns:s="library://ns.adobe.com/flex/spark" 
+						   xmlns:base="info.tiefenauer.jasskass.profile.views.base.*"
+						   >
+	<fx:Script>
+		<![CDATA[
+			import info.tiefenauer.jasskass.app.util.translate;
+		]]>
+	</fx:Script>
+
+	<base:layout>
+		<s:VerticalLayout paddingLeft="20" paddingRight="20" paddingTop="20" paddingBottom="20"/>
+	</base:layout>
+	
+	<s:Label text="{translate('Gruppe erstellt')}" width="100%" textAlign="center"/>
+	
+	<s:Label text="{translate('Ihr Schlüssel lautet:')}" width="100%" textAlign="center"/>
+	
+	<s:Group width="100%">
+		<s:Rect width="100%" height="100%" radiusX="5" radiusY="5">
+			<s:fill>
+				<s:SolidColor color="#F2F050" />
+			</s:fill>
+			<s:stroke>
+				<s:SolidColorStroke color="#F5CF53" weight="1" />
+			</s:stroke>
+		</s:Rect>
+		
+		<s:Label text="{group.key}" width="100%" textAlign="center" />
+		
+	</s:Group>
+	
+	<s:Label width="100%" text="{translate('Geben Sie diesen Schlüssel an andere Gruppenteilnehmer weiter, um sie in die Gruppe aufzunehmen')}" />
+	
+</base:GroupCreatedViewBase>

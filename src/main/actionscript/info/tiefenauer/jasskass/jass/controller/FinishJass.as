@@ -5,6 +5,8 @@ package info.tiefenauer.jasskass.jass.controller
 	import spark.events.PopUpEvent;
 	
 	import info.tiefenauer.jasskass.app.controller.SimpleCommand;
+	import info.tiefenauer.jasskass.azure.event.AzureJassEvent;
+	import info.tiefenauer.jasskass.app.util.Network;
 	import info.tiefenauer.jasskass.app.util.translate;
 	import info.tiefenauer.jasskass.jass.event.JassEvent;
 	import info.tiefenauer.jasskass.jass.model.JassProxyEvent;
@@ -26,7 +28,12 @@ package info.tiefenauer.jasskass.jass.controller
 			alertPopup.show();
 			alertPopup.addEventListener(PopUpEvent.CLOSE, function(closeEvent:PopUpEvent):void{
 				if (closeEvent.data == AlertPopup.OK){
-					dispatch(new JassProxyEvent(JassProxyEvent.SAVE_JASSES));
+					jassProxy.currentJass = null;
+					jassProxy.addJass(event.jass);
+					dispatch(new JassProxyEvent(JassProxyEvent.SAVE_JASSES_TO_FILE));
+					if (Network.hasNetwork)
+						dispatch(new AzureJassEvent(AzureJassEvent.ADD_JASS, event.jass));
+					
 					app.activeNavigator.popView();
 				}
 			});

@@ -6,6 +6,7 @@ package info.tiefenauer.jasskass.jass.controller
 	
 	import info.tiefenauer.jasskass.app.controller.SimpleCommand;
 	import info.tiefenauer.jasskass.jass.model.JassProxyEvent;
+	import info.tiefenauer.jasskass.jass.model.factory.JassFactory;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJass;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJassProxy;
 	
@@ -22,7 +23,7 @@ package info.tiefenauer.jasskass.jass.controller
 			super.execute();
 			var jassArr:Array = new Array();
 			for each(var jass:IJass in jassProxy.jassList){
-				jassArr.push(jass.toObject());
+				jassArr.push(JassFactory.toObject(jass));
 			}
 			var file:File = File.applicationStorageDirectory.resolvePath('jasses.json');
 			if (file.exists)

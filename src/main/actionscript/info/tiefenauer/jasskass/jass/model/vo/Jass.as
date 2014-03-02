@@ -4,10 +4,7 @@
  */
 package info.tiefenauer.jasskass.jass.model.vo
 {
-	import flash.display3D.IndexBuffer3D;
-	
-	import mx.utils.UIDUtil;
-	
+	import info.tiefenauer.jasskass.azure.model.AzureObject;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJass;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJassGame;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJassTeam;
@@ -18,10 +15,10 @@ package info.tiefenauer.jasskass.jass.model.vo
 	 * @author Daniel Tiefenauer
 	 */
 	[Bindable]
-	public class Jass implements IJass
+	public class Jass extends AzureObject implements IJass
 	{
 		// private vars
-		private var _id:String = UIDUtil.createUID();
+		private var _id:String = null;
 		private var _currentTeam:IJassTeam;
 		private var _date:Date;
 		private var _team1:IJassTeam = new JassTeam();
@@ -81,63 +78,6 @@ package info.tiefenauer.jasskass.jass.model.vo
 			return team2PointsPlayed + team2WysPoints;
 		}
 		
-		/**
-		 * 
-		 * @return 
-		 * 
-		 */
-		public function toObject():Object{
-			var obj:Object = new Object();
-			obj['date'] = _date.time;
-			obj['team1'] = _team1.toObject();
-			obj['team2'] = _team2.toObject();
-			obj['team1striche'] = _team1Striche;
-			obj['team2striche'] = _team2Striche;
-			var games:Array = new Array();
-			for each(var game:IJassGame in _games){
-				games.push(game.toObject());
-			}
-			obj['games'] = games;
-			return obj;
-		}
-		
-		/**
-		 * 
-		 * @param obj
-		 * 
-		 */
-		public function fromObject(obj:Object):void{
-			for (var key:String in obj){
-				switch(key){
-					case 'date':
-						_date = new Date();
-						_date.time = Number(obj[key]);
-						break;
-					case 'team1':
-						_team1 = new JassTeam();
-						_team1.fromObject(obj[key]);
-						break;
-					case 'team2':
-						_team2 = new JassTeam();
-						_team2.fromObject(obj[key]);
-						break;
-					case 'team1striche':
-						_team1Striche = obj[key];
-						break;
-					case 'team2striche':
-						_team2Striche = obj[key];
-						break;
-					case 'games':
-						for each(var gameObj:Object in obj[key]){
-							var game:JassGame = new JassGame(this);
-							game.fromObject(gameObj);
-							_games.push(game);
-						}
-						break;
-				}
-			}
-		}
-		
 		public function get team1PointsPlayed():Number{
 			var points:Number = 0;
 			_games.every(function(item:IJassGame, index:int, vector:Vector.<IJassGame>):void{
@@ -177,8 +117,14 @@ package info.tiefenauer.jasskass.jass.model.vo
 		public function get id():String{
 			return _id;
 		}
+		public function set id(value:String):void{
+			_id = value;
+		}
 		public function get date():Date{
 			return _date;
+		}
+		public function set date(value:Date):void{
+			_date = value;
 		}
 		public function get team1():IJassTeam{
 			return _team1;

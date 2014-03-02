@@ -21,27 +21,12 @@ global {
 	modalTransparencyDuration: 100;
 }
 
-
-components|JassTafel
-{
-	skinClass: ClassReference("info.tiefenauer.jasskass.skins.JassTafelSkin");
-}
-
-components|JassTafel s|Label.score
-{
-	fontSize: 50;
-}
-	
 phone|JassPenaltyView, phone|JassGameView, phone|JassDetailView
 {
 	color: #FFFFFF;
 	fontFamily: crayon;
 	fontSize: 24;
 	color: #FFFFFF;
-}
-components|JassTafelBackground
-{
-	skinClass: ClassReference("info.tiefenauer.jasskass.skins.JassTafelBackgroundSkin");
 }
 
 components|ZGroup
@@ -54,7 +39,7 @@ components|JassTeppich
 	skinClass: ClassReference("info.tiefenauer.jasskass.skins.JassTeppichGermanSkin");
 }
 
-phone|TeamBuilderView s|Label.playerName
+phone|AdHocTeamBuilderView s|Label.playerName
 {
 	color: #474647;
 	fontSize: 30;

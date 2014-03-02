@@ -4,13 +4,10 @@
  */
 package test.info.tiefenauer.jasskass.app.controllers
 {
-	import flash.filesystem.File;
-	
 	import info.tiefenauer.jasskass.app.controller.startup.LoadAppConfiguration;
 	import info.tiefenauer.jasskass.app.model.ConfigProxy;
 	import info.tiefenauer.jasskass.app.model.TextFileService;
 	import info.tiefenauer.jasskass.app.model.interfaces.IConfiguration;
-	import info.tiefenauer.jasskass.app.model.vo.ConfigFile;
 	
 	import org.flexunit.asserts.assertEquals;
 	import org.flexunit.asserts.assertNotNull;
@@ -29,7 +26,6 @@ package test.info.tiefenauer.jasskass.app.controllers
 		public function setUp():void
 		{
 			command = new LoadAppConfiguration();
-			command.configFile = new ConfigFile(File.applicationDirectory.resolvePath('assets/sampleConfig.xml').nativePath);
 			command.fileService = new TextFileService();
 			command.configProxy = new ConfigProxy();
 		}

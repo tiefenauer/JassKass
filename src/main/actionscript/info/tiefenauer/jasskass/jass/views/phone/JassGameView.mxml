@@ -4,13 +4,32 @@
 				   xmlns:base="info.tiefenauer.jasskass.jass.views.base.*"
 				   xmlns:components="info.tiefenauer.jasskass.jass.views.components.*"
 				   implements="info.tiefenauer.jasskass.jass.views.interfaces.IJassGameView"
+				   actionBarVisible="false"
+				   creationComplete="onCreationComplete(event)"
 				   >
-	
+
+	<fx:Style>
+		@namespace s "library://ns.adobe.com/flex/spark";
+		@namespace base "info.tiefenauer.jasskass.jass.views.base.*";
+		@namespace components "info.tiefenauer.jasskass.jass.views.components.*";
+		.score
+		{
+			fontSize: 35;
+		}
+		
+		.playerName
+		{
+			fontSize: 18;
+		}
+	</fx:Style>
 	<fx:Script>
 		<![CDATA[
+			import mx.events.FlexEvent;
+			
 			import spark.events.IndexChangeEvent;
 			import spark.events.PopUpEvent;
 			
+			import info.tiefenauer.jasskass.app.util.translate;
 			import info.tiefenauer.jasskass.jass.model.interfaces.IJassGame;
 			import info.tiefenauer.jasskass.jass.model.interfaces.IJassTeam;
 			import info.tiefenauer.jasskass.jass.model.interfaces.IWys;
@@ -36,14 +55,21 @@
 					}
 				});
 			}
+			private function showPointsPopup():void{
+				var jassSliderPopup:JassSliderPopup = new JassSliderPopup();
+				jassSliderPopup.show();
+				jassSliderPopup.addEventListener(PopUpEvent.CLOSE, function(closeEvent:PopUpEvent):void{
+					if (closeEvent.data){
+						team1Points = closeEvent.data['team1'];
+						team2Points = closeEvent.data['team2'];
+						dispatchEvent(new Event(POINTS_ENTERED));
+					}
+				});
+			}
 
 			//------------------
 			// Event handler
 			//------------------
-			protected function onFlipJassBoardButtonClicked(event:MouseEvent):void{
-				dispatchEvent(new Event(FLIP_BOARD_BUTTON_CLICKED));
-			}
-			
 			override public function set game(value:IJassGame):void{
 				super.game = value;
 				team1TotalPoints = game.team1TotalPoints;
@@ -64,19 +90,23 @@
 			}
 			
 			protected function onMiddleAreaClicked(event:Event):void{
-				var jassSliderPopup:JassSliderPopup = new JassSliderPopup();
-				jassSliderPopup.show();
-				jassSliderPopup.addEventListener(PopUpEvent.CLOSE, function(closeEvent:PopUpEvent):void{
-					if (closeEvent.data){
-						team1Points = closeEvent.data['team1'];
-						team2Points = closeEvent.data['team2'];
-						dispatchEvent(new Event(POINTS_ENTERED));
-					}
-				});
+				showPointsPopup();
 			}
 			
 			protected function onFactorSelectionChange(event:IndexChangeEvent):void{
 				factor = factorButtonBar.selectedItem.value;
+			}
+			
+			protected function onCreationComplete(event:FlexEvent):void{
+				Multitouch.inputMode = MultitouchInputMode.GESTURE;
+			}
+			
+			protected function onSpongeImageClicked(event:MouseEvent):void{
+				dispatchEvent(new Event(NEW_GAME_CLICKED));
+			}
+			
+			protected function onFlipLabelClicked(event:MouseEvent):void{
+				dispatchEvent(new Event(FLIP_BOARD_BUTTON_CLICKED));
 			}
 			
 		]]>
@@ -98,19 +128,24 @@
 			</s:dataProvider>
 		</s:ButtonBar>
 	</base:titleContent>
-	<base:actionContent>
-		<s:Button id="flipJassBoard"
-				  label="Flip"
-				  click="onFlipJassBoardButtonClicked(event)"
-				  />
-	</base:actionContent>
 	
-	<components:JassTafel id="jassTafel"
-						  jass="{game.jass}" 
-						  middleAreaClicked="onMiddleAreaClicked(event)"
-						  width="100%" height="100%"
-						  >
-			
+	<!-- background -->
+	<s:Image scaleMode="zoom" width="100%" height="100%">
+		<s:source>
+			<s:MultiDPIBitmapSource source120dpi="@Embed('dpi120/bg_blackboard.jpg')"
+									source160dpi="@Embed('dpi160/bg_blackboard.jpg')"
+									source240dpi="@Embed('dpi240/bg_blackboard.jpg')"
+									source320dpi="@Embed('dpi320/bg_blackboard.jpg')"
+									source480dpi="@Embed('dpi480/bg_blackboard.jpg')"
+									source640dpi="@Embed('dpi640/bg_blackboard.jpg')"
+									/>
+		</s:source>
+	</s:Image>
+	
+	<!-- Z with team labels-->
+	<s:VGroup width="100%" height="100%" paddingTop="40">
+		<s:Group width="100%" height="100%">
+			<components:ZGroup id="team1Area" width="100%" height="100%" styleName="score" />
 			<s:Label id="team1PointsLabel" 
 					 text="{team1TotalPoints}"
 					 styleName="score"
@@ -119,7 +154,21 @@
 					 textAlign="center" 
 					 height="100%" width="100%" 
 					 />
+		</s:Group>
+		
+		<s:VGroup width="100%" id="middleArea" click="onMiddleAreaClicked(event)">
 			
+			<s:Label id="team1LabelDisplay" width="90%" rotation="180" styleName="playerName" text="{game.jass.team1.player1.firstName + ' + ' + game.jass.team1.player2.firstName}"/>
+			<s:Line width="100%" verticalCenter="0">
+				<s:stroke>
+					<s:SolidColorStroke color="#FFFFFF" weight="2" />
+				</s:stroke>
+			</s:Line>
+			<s:Label id="team2LabelDisplay" width="90%" textAlign="right" styleName="playerName" text="{game.jass.team2.player1.firstName + ' + ' + game.jass.team2.player2.firstName}"/>
+		</s:VGroup>
+		
+		<s:Group width="100%" height="100%">
+			<components:ZGroup id="team2Area" width="100%" height="100%" styleName="score" />
 			<s:Label id="team2PointsLabel" 
 					 text="{team2TotalPoints}"
 					 styleName="score"
@@ -127,9 +176,29 @@
 					 verticalAlign="middle" 
 					 textAlign="center" 
 					 height="100%" width="100%" />
-			
-	</components:JassTafel>
+		</s:Group>
 
-
+	</s:VGroup>
 	
+	<s:Image id="spongeImage"
+			 click="onSpongeImageClicked(event)"
+			 left="0" top="0"
+			 >
+		<s:source>
+			<s:MultiDPIBitmapSource source120dpi="@Embed('dpi120/sponge.png')"
+									source160dpi="@Embed('dpi160/sponge.png')"
+									source240dpi="@Embed('dpi240/sponge.png')"
+									source320dpi="@Embed('dpi320/sponge.png')"
+									source480dpi="@Embed('dpi480/sponge.png')"
+									source640dpi="@Embed('dpi640/sponge.png')"
+									/>
+		</s:source>
+	</s:Image>
+	
+	<s:Label id="flipLabel"
+			 text="{translate('Flip')}"
+			 click="onFlipLabelClicked(event)"
+			 right="0" top="0"
+			 />
+		
 </base:JassGameViewBase>

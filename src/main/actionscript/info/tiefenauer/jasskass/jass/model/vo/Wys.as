@@ -27,36 +27,6 @@ package info.tiefenauer.jasskass.jass.model.vo
 			this.type = type;
 		}
 		
-		/**
-		 * 
-		 * @return 
-		 * 
-		 */
-		public function toObject():Object{
-			var obj:Object = new Object();
-			obj['type'] = _type;
-			obj['value'] = _value;
-			return obj;
-		}
-		
-		/**
-		 * 
-		 * @param obj
-		 * 
-		 */
-		public function fromObject(obj:Object):void{
-			for(var key:String in obj){
-				switch(key){
-					case 'type':
-						_type = obj[key];
-						break;
-					case 'value':
-						_value = Number(obj[key]);
-						break;
-				}
-			}
-		}
-		
 		//--------------------------
 		// Getter/Setter
 		//--------------------------

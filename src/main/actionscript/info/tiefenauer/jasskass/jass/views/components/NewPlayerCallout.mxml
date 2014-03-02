@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Callout xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		   xmlns:s="library://ns.adobe.com/flex/spark"
+		   skinClass="com.clx.uicomponents.skins.MobileListCalloutSkin"
+		   mouseDownOutside="onMouseDownOutside(event)"
+		   >
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexMouseEvent;
+			
+			protected function onMouseDownOutside(event:FlexMouseEvent):void
+			{
+				this.close();
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:HGroup width="100%">
+		<s:TextInput id="playerNameTI" width="100%" height="100%" color="blue" fontSize="30" />
+		<!--				<s:Button id="okButton" width="10%" >
+		<s:icon>
+		<s:MultiDPIBitmapSource source120dpi="@Embed('dpi120/ico_ok.png')"
+		source160dpi="@Embed('dpi160/ico_ok.png')"
+		source240dpi="@Embed('dpi240/ico_ok.png')"
+		source320dpi="@Embed('dpi320/ico_ok.png')"
+		source480dpi="@Embed('dpi480/ico_ok.png')"
+		source640dpi="@Embed('dpi640/ico_ok.png')"
+		/>
+		</s:icon>
+		</s:Button>
+		<s:Button id="cancelButton" width="10%">
+		<s:icon>
+		<s:MultiDPIBitmapSource source120dpi="@Embed('dpi120/ico_cancel.png')"
+		source160dpi="@Embed('dpi160/ico_cancel.png')"
+		source240dpi="@Embed('dpi240/ico_cancel.png')"
+		source320dpi="@Embed('dpi320/ico_cancel.png')"
+		source480dpi="@Embed('dpi480/ico_cancel.png')"
+		source640dpi="@Embed('dpi640/ico_cancel.png')"
+		/>
+		</s:icon>
+		</s:Button>-->
+	</s:HGroup>
+	
+</s:Callout>
