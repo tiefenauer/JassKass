@@ -5,8 +5,6 @@
     <!-- load previously defined configuration properties file: Exchange this file if necessary -->
     <property file="build.properties" />
          
-    <ant antfile="build.show-properties.xml" />
- 
     <taskdef resource="flexTasks.tasks" classpath="${FLEX.tasks}" />
     <taskdef resource="flexTasks.tasks" classpath="${FLEX.root}\lib\flexTasks.jar" />
     <taskdef resource="flexUnitTasks.tasks" classpath="${basedir}\libs\flexUnitTasks-4.1.0.jar" />
@@ -29,8 +27,6 @@
         <echo level="info">BUILD GESTARTET AM ${time.start}</echo>
         <echo> </echo>
          
-        <ant antfile="build.init.xml" inheritall="true"/>
- 
     </target>
  
     <!-- Compile sources -->
