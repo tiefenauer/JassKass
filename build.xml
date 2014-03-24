@@ -62,7 +62,7 @@
 		<echo>============</echo>
 		
 	 
-		<mxmlc file="${PROJECT.src}\${PROJECT.app.main}" output="${OUTPUT.build}\${PROJECT.app.name}.swf">
+		<mxmlc file="${PROJECT.src.main}\${PROJECT.app.main}" output="${OUTPUT.build}\${PROJECT.app.name}.swf">
 			<load-config filename="${FLEX.root}/frameworks/airmobile-config.xml" />
 			<source-path path-element="${PROJECT.src.main}" />
 			<source-path path-element="${PROJECT.src.assets}" />
