@@ -90,6 +90,27 @@
     <target name="package-apk" if="${env.package_android}">
         <echo>Packaging for Android...</echo>
         <echo>========================</echo>
+    	
+    	<exec executable="${AIR.adt}" dir="${OUTPUT.root}" failonerror="true">
+    		<arg value="-package" />
+    		<arg value="-target" />
+    		<arg value="apk-captive-runtime" />
+    		<arg value="-storetype" />
+    		<arg value="${OUTPUT.storetype.android}" />
+    		<arg value="-keystore" />
+    		<arg value="${OUTPUT.keystore.android}" />
+    		<arg value="-storepass" />
+    		<arg value="${OUTPUT.storepass.android}" />
+    		<arg value="${OUTPUT.name.android}" />
+    		<arg value="${OUTPUT.build}/${PROJECT.app.name}-app.xml" />
+    		<arg value="-extdir"/>
+    		<arg value="${PROJECT.libs.ane}" />
+    		<arg value="-C" />
+    		<arg value="${OUTPUT.build}" />
+    		<arg value="${PROJECT.app.name}.swf" />
+    		<arg value="assets"/>
+     
+    	</exec>
     </target>
      
     <!-- Package IPA -->

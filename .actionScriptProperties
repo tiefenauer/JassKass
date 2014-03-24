@@ -37,7 +37,7 @@
       <libraryPathEntry kind="1" linkType="1" path="${FLEXUNIT_LIB_LOCATION}/version4libs/FlexProject_Extended"/>
       <libraryPathEntry kind="1" linkType="1" path="${FLEXUNIT_LOCALE_LOCATION}"/>
       <libraryPathEntry kind="1" linkType="1" path="libs"/>
-      <libraryPathEntry kind="3" linkType="1" path="/CLX.UIComponents/bin/CLX.UIComponents.swc" useDefaultLinkType="false"/>
+      <libraryPathEntry kind="3" linkType="1" path="/FlexUIComponents/bin/FlexUIComponents.swc" useDefaultLinkType="false"/>
       <libraryPathEntry kind="5" linkType="2" path="libs/ane/NativeDialogs.ane"/>
     </libraryPath>
     <sourceAttachmentPath/>
