@@ -32,11 +32,28 @@
          
     </target>
  
-    <!-- Compile sources -->
-    <target name="compile">
-        <echo>Compiling...</echo>
-        <echo>============</echo>       
-    </target>
+	<!-- Compile sources -->
+	<target name="compile">
+		<echo>Compiling...</echo>
+		<echo>============</echo>
+		
+	 
+		<mxmlc file="${PROJECT.src}\${PROJECT.app.main}" output="${OUTPUT.build}\${PROJECT.app.name}.swf">
+			<load-config filename="${FLEX.root}/frameworks/airmobile-config.xml" />
+			<source-path path-element="${PROJECT.src}" />
+			<source-path path-element="${basedir}/assets" />
+	 
+			<library-path dir="${PROJECT.libs}" append="true">
+				<include name="**/*.swc" />
+			</library-path>
+			<library-path dir="${OUTPUT.build.ane}" append="true">
+				<include name="**/*.swc" />
+			</library-path>
+			
+			<compiler.verbose-stacktraces>true</compiler.verbose-stacktraces>
+		</mxmlc>
+		
+	</target>
  
     <!-- Unit Tests -->
     <target name="test" if="${env.run_unittests}">
