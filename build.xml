@@ -65,7 +65,7 @@
 		<mxmlc file="${PROJECT.src}\${PROJECT.app.main}" output="${OUTPUT.build}\${PROJECT.app.name}.swf">
 			<load-config filename="${FLEX.root}/frameworks/airmobile-config.xml" />
 			<source-path path-element="${PROJECT.src}" />
-			<source-path path-element="${basedir}/assets" />
+			<source-path path-element="${PROJECT.assets}" />
 	 
 			<library-path dir="${PROJECT.libs}" append="true">
 				<include name="**/*.swc" />
