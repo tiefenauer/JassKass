@@ -87,7 +87,7 @@
     </target>
  
     <!-- Package APK -->
-    <target name="package-apk" if="${env.package_android}">
+    <target name="package-apk" if="${env.package_apk}">
         <echo>Packaging for Android...</echo>
         <echo>========================</echo>
     	
@@ -114,7 +114,7 @@
     </target>
      
     <!-- Package IPA -->
-    <target name="package-ipa" if="${env.package_ios}">
+    <target name="package-ipa" if="${env.package_ipa}">
         <echo>Packaging for iOS...</echo>
         <echo>====================</echo>           
     </target>
