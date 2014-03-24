@@ -10,7 +10,7 @@
 	<echoproperties srcfile="build.properties"></echoproperties>
 	-->
          
-    <taskdef resource="flexTasks.tasks" classpath="${FLEX.root}/lib/flexTasks.jar" />
+    <taskdef resource="flexTasks.tasks" classpath="${FLEX.root}/ant/lib/flexTasks.jar" />
 
     <taskdef resource="net/sf/antcontrib/antcontrib.properties">
       <classpath>
