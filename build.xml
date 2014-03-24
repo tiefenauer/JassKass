@@ -29,6 +29,12 @@
  
         <echo level="info">BUILD STARTED AT ${time.start}</echo>
         <echo> </echo>
+    	
+    	<!-- clean output directory -->
+    	<echo level="info">Initialisiere Deploy-Verzeichnis...</echo>
+    	<delete dir="${OUTPUT.root}" />
+    	<mkdir dir="${OUTPUT.root}" />
+    	<echo>... done!</echo>
          
     </target>
  
