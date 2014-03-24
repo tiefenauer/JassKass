@@ -66,6 +66,7 @@
 			<load-config filename="${FLEX.root}/frameworks/airmobile-config.xml" />
 			<source-path path-element="${PROJECT.src}" />
 			<source-path path-element="${PROJECT.assets}" />
+			<source-path path-element="${basedir}/main/skins" />
 	 
 			<library-path dir="${PROJECT.libs}" append="true">
 				<include name="**/*.swc" />
