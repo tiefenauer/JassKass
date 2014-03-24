@@ -47,8 +47,8 @@
     	<!-- Copy additional assets to the working directory -->
 		<echo>Coppying assets to build directory...</echo>
 		<copy todir="${OUTPUT.build}">
-			<fileset dir="${PROJECT.assets}" />
-			<fileset dir="${PROJECT.src}">
+			<fileset dir="${PROJECT.src.assets}" />
+			<fileset dir="${PROJECT.src.main}">
 				<include name="${PROJECT.app.desc}"/>
 			</fileset>
 		</copy>
@@ -64,9 +64,9 @@
 	 
 		<mxmlc file="${PROJECT.src}\${PROJECT.app.main}" output="${OUTPUT.build}\${PROJECT.app.name}.swf">
 			<load-config filename="${FLEX.root}/frameworks/airmobile-config.xml" />
-			<source-path path-element="${PROJECT.src}" />
-			<source-path path-element="${PROJECT.assets}" />
-			<source-path path-element="${basedir}/main/skins" />
+			<source-path path-element="${PROJECT.src.main}" />
+			<source-path path-element="${PROJECT.src.assets}" />
+			<source-path path-element="${PROJECT.src.skins}" />
 	 
 			<library-path dir="${PROJECT.libs}" append="true">
 				<include name="**/*.swc" />
