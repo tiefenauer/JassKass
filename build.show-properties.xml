@@ -1,0 +1,110 @@
+<project name="CLX.Satellite build script - show properties" >
+	<property environment="env"/>
+
+	<!-- load previously defined configuration properties file: Exchange this file if necessary -->
+	<property file="build.properties" />
+	
+	<echo message="package_ios:      ${env.package_ios}" />
+	<echo message="package_android:  ${env.package_android}" />
+	<echo message="create_asdoc:     ${env.create_asdoc}" />
+	<echo message="run_unittests:    ${env.run_unittests}" />
+	<echo> </echo>
+	
+	<echo message="BUILD_NUMBER:     ${env.BUILD_NUMBER}" />
+	<echo message="BUILD_ID:         ${env.BUILD_ID}" />
+	<echo message="BUILD_URL         ${env.BUILD_URL}" />		
+	<echo message="NODE_NAME         ${env.NODE_NAME}" />
+	<echo message="JOB_NAME          ${env.JOB_NAME}" />
+	<echo message="BUILD_TAG         ${env.BUILD_TAG}" />		
+	<echo message="JENKINS_URL       ${env.JENKINS_URL}" />
+	<echo message="EXECUTOR_NUMBER:  ${env.EXECUTOR_NUMBER}" />
+	<echo message="JAVA_HOME:        ${env.JAVA_HOME}" />		
+	<echo message="WORKSPACE:        ${env.WORKSPACE}" />
+	<echo message="SVN_REVISION:     ${env.SVN_REVISION}" />
+	<echo message="GIT_COMMIT:       ${env.GIT_COMMIT}" />
+	<echo message="GIT_BRANCH:       ${env.GIT_BRANCH}" />
+	<echo> </echo>
+		
+	<echo>=================================</echo>
+	<echo message="Build script für ${META.name}" />
+	<echo>=================================</echo>
+	<echo message="Autor:            ${META.author.name}" />
+	<echo message="E-Mail:           ${META.author.email}" />
+	<echo message="Copyright:        ${META.copyright}" />
+	<echo> </echo>
+	<echo>Dieses Script erstellt Packages einer App für Android (*.apk) und iOS (*.ipa).</echo>
+	<echo> </echo>
+	<echo>Das Script führt folgende Schritte durch</echo>
+	<echo>------------------------------------------------------------------------------</echo>
+	<echo> Titel            Target       Beschreibung</echo>
+	<echo>------------------------------------------------------------------------------</echo>
+	<echo> Initialisierung  init         Zielverzeichnisse bereinigen, App-Deskriptor vorbereiten</echo>
+	<echo> Kompilieren      compile      Kompilieren der Sourcen</echo>
+	<echo> Test             test         Unit-Tests (FlexUnit 4)</echo>
+	<echo> Package APK      package-apk  Android-App erstellen</echo>
+	<echo> Package IPA      package-ipa  iOS-App erstellen</echo>
+	<echo> Dokumentation    asdoc        ASDOC der Sourcen erstellen</echo>
+	<echo>------------------------------------------------------------------------------</echo>
+	<echo> </echo>	
+	<echo>Folgende Umgebungsvariablen müssen gesetzt sein:</echo>
+	<echo> - flex_version: Flex-Version, welche zum builden des Projekts verwendet werden soll</echo>
+	<echo> - air_version: AIR-Version, welche zum builden des Projekts verwendet werden soll</echo>
+	<echo> - sdk_dir: Verzeichnis, welches die Flex/air_versionen enthält</echo>
+	<echo> - cert_dir: Verzeichnis, welches die Zertfikate/Provisioning Profiles enthält</echo>
+	<echo> - output_dir: Verzeichnis, in welchem die Artefakte (Packages, Doku, Logs, ...) gespeichert werden</echo>
+	<echo> </echo>
+	<echo>Alle Projektspezifischen Parameter müssen im build.properties-File gesetzt sein.</echo>
+	<echo>Für verschiedene Apps können verschiedene build.properties-Files erstellt werden.</echo>
+	<echo> </echo>
+	<echo>----------------------------------------------------</echo>
+	<echo>Property Name             Property value      </echo>
+	<echo>----------------------------------------------------</echo>
+	<echo>-- Umgebungsvariablen</echo>
+	<echo message="flex_version              ${env.flex_version}" />
+	<echo message="air_version               ${env.air_version}" />
+	<echo message="sdk_dir                   ${env.sdk_dir}" />
+	<echo message="cert_dir                  ${env.cert_dir}" />
+	<echo message="output_dir                ${env.output_dir}" />
+	<echo> </echo>
+	<echo>-- Flex</echo>
+	<echo message="FLEX.root                 ${FLEX.root}" />
+	<echo message="FLEX.home                 ${FLEX.home}" />
+	<echo message="FLEX.tasks                ${FLEX.tasks}" />
+	<echo message="FLEX.plugins              ${FLEX.plugins.root}" />
+	<echo message="FLEX.flexunit             ${FLEX.flexunit}" />
+	<echo> </echo>
+	<echo>-- AIR</echo>
+	<echo message="AIR.mxmlc                 ${AIR.mxmlc}" />
+	<echo message="AIR.adt                   ${AIR.adt}" />
+	<echo message="AIR.adl                   ${AIR.adl}" />
+	<echo message="AIR.asdoc                 ${AIR.asdoc}" />
+	<echo> </echo>
+	<echo>-- Projekt</echo>
+	<echo message="PROJECT.root              ${PROJECT.root}" />
+	<echo message="PROJECT.src               ${PROJECT.src}" />
+	<echo message="PROJECT.libs              ${PROJECT.libs}" />
+	<echo message="PROJECT.libs.ane          ${PROJECT.libs.ane}" />
+	<echo message="PROJECT.assets            ${PROJECT.assets}" />
+	<echo message="PROJECT.locale            ${PROJECT.locale}" />
+	<echo message="PROJECT.app.name          ${PROJECT.app.name}" />
+	<echo message="PROJECT.app.main          ${PROJECT.app.main}" />
+	<echo message="PROJECT.app.desc          ${PROJECT.app.desc}" />
+	<echo> </echo>
+	<echo>-- Output</echo>
+	<echo message="OUTPUT.root               ${OUTPUT.root}" />
+	<echo message="OUTPUT.build              ${OUTPUT.build}" />
+	<echo message="OUTPUT.build.ane          ${OUTPUT.build.ane}" />
+	<echo message="OUTPUT.doc                ${OUTPUT.doc}" />
+	<echo message="OUTPUT.name.android       ${OUTPUT.name.android}" />
+	<echo message="OUTPUT.name.ios           ${OUTPUT.name.ios}" />
+	<echo message="OUTPUT.storetype.android  ${OUTPUT.storetype.android}" />
+	<echo message="OUTPUT.storetype.ios      ${OUTPUT.storetype.ios}" />
+	<echo message="OUTPUT.keystore.android   ${OUTPUT.keystore.android}" />
+	<echo message="OUTPUT.keystore.ios       ${OUTPUT.keystore.ios}" />
+	<echo> </echo>
+	<echo>-- ASDOC</echo>
+	<echo message="DOC.title                 ${DOC.title}" />
+	<echo message="DOC.footer                ${DOC.footer}" />
+	<echo> </echo>
+	
+</project>

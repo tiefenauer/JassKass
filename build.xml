@@ -4,8 +4,13 @@
  
     <!-- load previously defined configuration properties file: Exchange this file if necessary -->
     <property file="build.properties" />
+	<ant antfile="build.show-properties.xml" />
+
+	<!--
+	<echoproperties srcfile="build.properties"></echoproperties>
+	-->
          
-    <taskdef resource="flexTasks.tasks" classpath="${FLEX.root}\lib\flexTasks.jar" />
+    <taskdef resource="flexTasks.tasks" classpath="${FLEX.root}/lib/flexTasks.jar" />
 
     <taskdef resource="net/sf/antcontrib/antcontrib.properties">
       <classpath>
