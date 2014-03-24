@@ -31,7 +31,7 @@
         <echo> </echo>
     	
     	<!-- clean output directory -->
-    	<echo level="info">Initialisiere Deploy-Verzeichnis...</echo>
+    	<echo level="info">Initializiing target directory...</echo>
     	<delete dir="${OUTPUT.root}" />
     	<mkdir dir="${OUTPUT.root}" />
     	<echo>... done!</echo>
@@ -45,17 +45,14 @@
 		</copy>
     	
     	<!-- Copy additional assets to the working directory -->
-    	<target name="copyResources">
-    		<echo>Coppying assets to build directory...</echo>
-    		<copy todir="${OUTPUT.build}">
-    			<fileset dir="${PROJECT.assets}" />
-    			<fileset dir="${PROJECT.src}">
-    				<include name="${PROJECT.app.desc}"/>
-    			</fileset>
-    		</copy>
-    		<echo>... done!</echo>
-    		
-    	</target>    	
+		<echo>Coppying assets to build directory...</echo>
+		<copy todir="${OUTPUT.build}">
+			<fileset dir="${PROJECT.assets}" />
+			<fileset dir="${PROJECT.src}">
+				<include name="${PROJECT.app.desc}"/>
+			</fileset>
+		</copy>
+		<echo>... done!</echo>
          
     </target>
  
