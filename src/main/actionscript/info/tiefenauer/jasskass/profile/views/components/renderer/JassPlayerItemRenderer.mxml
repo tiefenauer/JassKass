@@ -17,12 +17,12 @@
 	
 	
 	<list:decorator>
-		<s:MultiDPIBitmapSource source120dpi="@Embed('dpi120/icons/ico_delete.png')"
-								source160dpi="@Embed('dpi160/icons/ico_delete.png')"
-								source240dpi="@Embed('dpi240/icons/ico_delete.png')"
-								source320dpi="@Embed('dpi320/icons/ico_delete.png')"
-								source480dpi="@Embed('dpi480/icons/ico_delete.png')"
-								source640dpi="@Embed('dpi640/icons/ico_delete.png')"
+		<s:MultiDPIBitmapSource source120dpi="@Embed('/assets/dpi120/icons/ico_delete.png')"
+								source160dpi="@Embed('/assets/dpi160/icons/ico_delete.png')"
+								source240dpi="@Embed('/assets/dpi240/icons/ico_delete.png')"
+								source320dpi="@Embed('/assets/dpi320/icons/ico_delete.png')"
+								source480dpi="@Embed('/assets/dpi480/icons/ico_delete.png')"
+								source640dpi="@Embed('/assets/dpi640/icons/ico_delete.png')"
 								/>
 	</list:decorator>
 </list:MobileIconItemRenderer>
