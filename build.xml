@@ -43,6 +43,19 @@
 			</fileset>
 			<globmapper from="*.ane" to="*.swc" />
 		</copy>
+    	
+    	<!-- Copy additional assets to the working directory -->
+    	<target name="copyResources">
+    		<echo>Coppying assets to build directory...</echo>
+    		<copy todir="${OUTPUT.build}">
+    			<fileset dir="${PROJECT.assets}" />
+    			<fileset dir="${PROJECT.src}">
+    				<include name="${PROJECT.app.desc}"/>
+    			</fileset>
+    		</copy>
+    		<echo>... done!</echo>
+    		
+    	</target>    	
          
     </target>
  
