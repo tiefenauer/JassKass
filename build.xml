@@ -1,14 +1,12 @@
-<project name="CLX.Satellite build script" default="start">
+<project name="My build script" default="start">
     <target name="start" depends="init, asdoc, test, compile, package-apk, package-ipa, finish"/>
     <property environment="env"/>
  
     <!-- load previously defined configuration properties file: Exchange this file if necessary -->
     <property file="build.properties" />
          
-    <taskdef resource="flexTasks.tasks" classpath="${FLEX.tasks}" />
     <taskdef resource="flexTasks.tasks" classpath="${FLEX.root}\lib\flexTasks.jar" />
-    <taskdef resource="flexUnitTasks.tasks" classpath="${basedir}\libs\flexUnitTasks-4.1.0.jar" />
-     
+
     <taskdef resource="net/sf/antcontrib/antcontrib.properties">
       <classpath>
         <pathelement location="D:\app\apache-ant-1.9.3\lib\ant-contrib-1.0b3.jar"/>
@@ -24,7 +22,7 @@
             <format property="time.start" pattern="yyyy-MM-dd hh:mm:ss aa" />
         </tstamp>
  
-        <echo level="info">BUILD GESTARTET AM ${time.start}</echo>
+        <echo level="info">BUILD STARTED AT ${time.start}</echo>
         <echo> </echo>
          
     </target>
@@ -65,7 +63,7 @@
         <tstamp>
             <format property="time.end" pattern="yyyy-MM-dd hh:mm:ss aa" />
         </tstamp>
-        <echo level="info">BUILD BEENDET AT ${time.start}</echo>
+        <echo level="info">BUILD FINISHED AT ${time.start}</echo>
     </target>
  
 </project>
