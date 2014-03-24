@@ -35,6 +35,14 @@
     	<delete dir="${OUTPUT.root}" />
     	<mkdir dir="${OUTPUT.root}" />
     	<echo>... done!</echo>
+    	
+		<!-- Rename Native Extensions (*.ane ==> *.swc) -->
+		<copy todir="${OUTPUT.build.ane}">
+			<fileset dir="${PROJECT.libs.ane}">
+				<include name="**/*.ane" />
+			</fileset>
+			<globmapper from="*.ane" to="*.swc" />
+		</copy>
          
     </target>
  
