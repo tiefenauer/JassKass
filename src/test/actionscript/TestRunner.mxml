@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   creationComplete="application1_creationCompleteHandler(event)"
+			   >
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			import org.flexunit.listeners.AirCIListener;
+			import org.flexunit.runner.FlexUnitCore;
+			
+			//UNIT_TESTS_IMPORT_START
+	                import test.info.tiefenauer.SampleTest;
+	                import test.info.tiefenauer.gdas3.SpreadsheetAuthorTest;
+	                import test.info.tiefenauer.gdas3.SpreadsheetCategoryTest;
+	                import test.info.tiefenauer.gdas3.SpreadsheetContentTest;
+	                import test.info.tiefenauer.gdas3.SpreadsheetLinkTest;
+	                import test.info.tiefenauer.gdas3.SpreadsheetServiceTest;
+	                import test.info.tiefenauer.gdas3.SpreadsheetTest;
+	                import test.info.tiefenauer.jasskass.app.controllers.GetOAuth2AccessTokenTest;
+	                import test.info.tiefenauer.jasskass.app.controllers.LoadAppConfigurationTest;
+	                import test.info.tiefenauer.jasskass.app.controllers.SaveOAuth2AccessTokenTest;
+	                import test.info.tiefenauer.jasskass.app.models.ConfigProxyTest;
+	                import test.info.tiefenauer.jasskass.app.models.FileServiceTest;
+	                import test.info.tiefenauer.jasskass.app.models.SettingProxyTest;
+	                import test.info.tiefenauer.jasskass.app.models.TextFileServiceTest;
+	                import test.info.tiefenauer.jasskass.app.models.vo.AppConfigurationTest;
+	                import test.info.tiefenauer.jasskass.app.models.vo.SettingTest;
+	                import test.info.tiefenauer.jasskass.counter.model.vo.JassPlayerTest;//UNIT_TESTS_IMPORT_END
+			
+			private var core:FlexUnitCore;
+			protected function application1_creationCompleteHandler(event:FlexEvent):void
+			{
+				core = new FlexUnitCore();
+				core.addUncaughtErrorListener( systemManager.loaderInfo );
+				core.addListener(new AirCIListener());
+				
+				core.run( currentRunTestSuite() );
+			}
+			
+			public function currentRunTestSuite():Array
+			{
+				var testsToRun:Array = new Array();
+				//UNIT_TESTS_ARRAY_START
+	                testsToRun.push(test.info.tiefenauer.SampleTest);
+	                testsToRun.push(test.info.tiefenauer.gdas3.SpreadsheetAuthorTest);
+	                testsToRun.push(test.info.tiefenauer.gdas3.SpreadsheetCategoryTest);
+	                testsToRun.push(test.info.tiefenauer.gdas3.SpreadsheetContentTest);
+	                testsToRun.push(test.info.tiefenauer.gdas3.SpreadsheetLinkTest);
+	                testsToRun.push(test.info.tiefenauer.gdas3.SpreadsheetServiceTest);
+	                testsToRun.push(test.info.tiefenauer.gdas3.SpreadsheetTest);
+	                testsToRun.push(test.info.tiefenauer.jasskass.app.controllers.GetOAuth2AccessTokenTest);
+	                testsToRun.push(test.info.tiefenauer.jasskass.app.controllers.LoadAppConfigurationTest);
+	                testsToRun.push(test.info.tiefenauer.jasskass.app.controllers.SaveOAuth2AccessTokenTest);
+	                testsToRun.push(test.info.tiefenauer.jasskass.app.models.ConfigProxyTest);
+	                testsToRun.push(test.info.tiefenauer.jasskass.app.models.FileServiceTest);
+	                testsToRun.push(test.info.tiefenauer.jasskass.app.models.SettingProxyTest);
+	                testsToRun.push(test.info.tiefenauer.jasskass.app.models.TextFileServiceTest);
+	                testsToRun.push(test.info.tiefenauer.jasskass.app.models.vo.AppConfigurationTest);
+	                testsToRun.push(test.info.tiefenauer.jasskass.app.models.vo.SettingTest);
+	                testsToRun.push(test.info.tiefenauer.jasskass.counter.model.vo.JassPlayerTest);//UNIT_TESTS_ARRAY_END
+				return testsToRun;
+			}
+			
+		]]>
+	</fx:Script>
+	
+</s:Application>

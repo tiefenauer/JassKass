@@ -6,20 +6,154 @@
     <property file="build.properties" />
 	<ant antfile="build.show-properties.xml" />
 
-	<!--
 	<echoproperties srcfile="build.properties"></echoproperties>
-	-->
          
+	<!-- Task definition für Flex -->
     <taskdef resource="flexTasks.tasks" classpath="${FLEX.root}/ant/lib/flexTasks.jar" />
 
-    <taskdef resource="net/sf/antcontrib/antcontrib.properties">
-      <classpath>
-        <pathelement location="D:\app\apache-ant-1.9.3\lib\ant-contrib-1.0b3.jar"/>
-      </classpath>
-    </taskdef>
+	<!-- Task definition für ant-contrib -->
+	<taskdef resource="net/sf/antcontrib/antlib.xml">
+	  <classpath>
+	    <pathelement location="C:\app\apache-ant-1.9.3\lib\ant-contrib-1.0b3.jar"/>
+	  </classpath>
+	</taskdef>
+	
+	<!-- Task definition für FlexUnit -->
+	<taskdef resource="flexUnitTasks.tasks">
+	    <classpath>
+	        <fileset dir="${FLEX.flexunit}">
+	            <include name="flexUnitTasks*.jar" />
+	        </fileset>
+	    </classpath>
+	</taskdef>
  
     <property name="FLEX_HOME" value="${FLEX.root}"></property>
  
+	<!-- TestRunner-Applikation mit Testklassen aktualisieren -->
+	<macrodef name="update-runner">
+	  <!-- Attribut: einzuschliessende Testklassen -->
+	  <attribute name="testClassesSources" />
+	  <!-- Attribut: zu aktualisierender Runner -->
+	  <attribute name="runner" />
+	  <sequential>
+	    <!-- Hilfsfiles für Autoimport/Auto-push() löschen -->
+	    <delete file="testsToRun.txt" />
+	    <delete file="testsToImport.txt" />
+	     
+	    <!-- Hilfsfiles für Import-Statements und array.push()-Operationen erstellen -->
+	    <for param="file">
+	        <path>
+	            <fileset refid="@{testClassesSources}"/>
+	        </path>
+	        <sequential>
+	            <local name="source"/>
+	            <property name="source" value="@{file}"></property>
+	            <!-- Pfadnamen in Klassennamen konvertieren, indem die Slashes mit Punkten ersetzt werden und die Dateiendung weggelassen wird -->
+	            <propertyregex property="baseDirEscaped" input="${PROJECT.test.main}\" regexp="\\" replace="/" global="true" override="true"/>
+	            <propertyregex property="sourceEscaped" input="${source}" regexp="\\" replace="/" global="true" override="true"/>
+	            <propertyregex property="withoutBaseDir" input="${sourceEscaped}" regexp="${baseDirEscaped}" replace="" global="true" override="true"/>
+	            <propertyregex property="withoutFileExtension" input="${withoutBaseDir}" regexp="\.as" replace="" global="true" override="true"/>
+	            <propertyregex property="replacedFile" input="${withoutFileExtension}" regexp="/" replace="." global="true" override="true"/>
+	             
+	            <!-- Import-Statements und array.push()-Operationen in Hilfsfiles schreiben -->
+	            <echo file="testsToRun.txt" append="true">
+	                testsToRun.push(${replacedFile});</echo>
+	            <echo file="testsToImport.txt" append="true">
+	                import ${replacedFile};</echo>
+	        </sequential>
+	    </for>
+	    <!-- Test zwischen den Markierungen in der TestRunner-Applikation ersetzten -->
+	    <loadfile property="testsToRunInsert" srcfile="testsToRun.txt"></loadfile>
+	    <loadfile property="testsToImportInsert" srcfile="testsToImport.txt"></loadfile>
+	    <replaceregexp file="@{runner}"
+	                   match="//UNIT_TESTS_IMPORT_START(?s)(.*)//UNIT_TESTS_IMPORT_END"
+	                   replace="//UNIT_TESTS_IMPORT_START${testsToImportInsert}//UNIT_TESTS_IMPORT_END"
+	                    />
+	    <replaceregexp file="@{runner}"
+	                   match="//UNIT_TESTS_ARRAY_START(?s)(.*)//UNIT_TESTS_ARRAY_END"
+	                   replace="//UNIT_TESTS_ARRAY_START${testsToRunInsert}//UNIT_TESTS_ARRAY_END"
+	                    />
+	    <delete file="testsToRun.txt" />
+	    <delete file="testsToImport.txt" />         
+	  </sequential>
+	</macrodef>
+	
+	<!-- TestRunner-Applikation kompilieren -->
+	<macrodef name="compile-runner">
+	    <!-- Attribut: zu kompilierendes MXML-File -->
+	    <attribute name="runner" />
+	    <!-- Attribut: Dateiname des Output-SWF -->
+	    <attribute name="swf" />
+		<!-- weitere includes -->
+		<attribute name="include" />
+
+	    <sequential>
+	        <mxmlc file="@{runner}" output="@{swf}" static-link-runtime-shared-libraries="true" >
+	            <load-config filename="${FLEX.root}/frameworks/airmobile-config.xml" />
+	              
+	            <source-path path-element="${PROJECT.src.main}" />
+	            <source-path path-element="${PROJECT.src.assets}" />
+	            <source-path path-element="${PROJECT.test.main}" />
+	            <source-path path-element="${PROJECT.test.assets}" />
+	            <!-- weitere in Testklassen benötigte Abhängigkeiten hier ergänzen -->
+	             
+	            <!-- von Testklassen benötigte Libraries hier ergänzen -->
+	            <library-path dir="${PROJECT.libs}" append="true">
+	                <include name="**/*.swc" />
+	            </library-path>
+	            <!-- ebenfalls in SWC konvertierte ANEs ergänzen, falls diese von den Testklassen referenziert werden -->
+	            <library-path dir="${PROJECT.libs.ane}" append="true">
+	                <include name="**/*.swc" />
+	            </library-path>           
+	             
+	            <!-- FlexUnit-Libraries einschliessen-->
+	            <library-path dir="${FLEX.flexunit}" append="true">
+	                <include name="@{include}" />
+	                <include name="*cilistener*.swc" />
+	                <include name="fluint*.swc" />
+	                <include name="*flexcoverlistener*.swc" />
+	                <include name="FlexUnit1Lib.swc" />
+	                <include name="hamcrest-as3*.swc" />
+	                <include name="mock-as3.swc" />
+	                <include name="mockolate*.swc" />
+	            </library-path>
+	             
+	            <!-- übrige Compiler-Optionen -->
+	            <compiler.verbose-stacktraces>true</compiler.verbose-stacktraces>
+	            <compiler.headless-server>true</compiler.headless-server>
+	        </mxmlc>
+	    </sequential>
+	</macrodef>
+	
+	<!-- TestRunner-Applikation ausführen -->
+	<macrodef name="execute-tests">
+	    <!-- Attribut: Kompilierte TestRunner-Applikation -->
+	    <attribute name="swf" />
+	    <!-- Attribut: Verzeichnis für Reports -->
+	    <attribute name="reportdir" />
+	    <sequential>
+	        <!-- FlexUnit-Tests ausführen (es wird automatisch ein App-Deskriptor erstellt) -->
+	        <flexunit swf="@{swf}" timeout="180000" player="air" toDir="@{reportdir}" haltonfailure="false" verbose="true" />
+	    </sequential>
+	</macrodef>
+	
+	<!-- XML-Reports in HTML umwandeln -->
+	<macrodef name="generate-html-report">
+	    <!-- Attribut: Source-Verzeichnis mit den XML-Reports -->
+	    <attribute name="dir" />
+	    <!-- Attribut: Zielverzeichnis für HTML-Reports -->
+	    <attribute name="todir" />
+	    <sequential>
+	        <!-- Ant-Task zum Umwandeln der Reports ausführen -->
+	        <junitreport todir="@{dir}">
+	            <fileset dir="@{dir}">
+	                <include name="TEST-*.xml" />
+	            </fileset>
+	            <report format="frames" todir="@{todir}" />
+	        </junitreport>
+	    </sequential>
+	</macrodef>
+	
     <!-- delete and create the target directories again -->
     <target name="init">
          
@@ -84,6 +218,21 @@
     <target name="test" if="${env.run_unittests}">
         <echo>Testing...</echo>
         <echo>==========</echo>
+    	
+    	<!-- Unit-Testklassen sammeln (Verzeichnis und/oder Pattern anpassen, falls die Konvention nicht eingehalten wird) -->
+    	<fileset dir="${basedir}/src/test/actionscript" id="unit-test-classes">
+    	     <include name="**/*Test.*"/>
+    	     <include name="**/*TestSuite.*"/>
+    	</fileset>
+    	  
+    	<!-- TestRunner-Application aktualisieren -->
+    	<update-runner testClassesSources="unit-test-classes" runner="${basedir}/src/test/actionscript/TestRunner.mxml"/>
+    	<!-- TestRunner-Application kompilieren -->
+    	<compile-runner runner="${PROJECT.test.main}/TestRunner.mxml" swf="${OUTPUT.flexUnit.bin}/TestRunner.swf" include="flexunit*flex*.swc" />
+    	<!-- TestRunner-application ausführen -->
+    	<execute-tests swf="${OUTPUT.flexUnit.bin}/TestRunner.swf" reportdir="${OUTPUT.flexUnit.results}" />
+    	<!-- HTML-Reports erstellen -->
+    	<generate-html-report dir="${OUTPUT.flexUnit.results}" todir="${OUTPUT.flexUnit.results}/html" />
     </target>
  
     <!-- Package APK -->
@@ -123,7 +272,34 @@
     <target name="asdoc" if="${env.create_asdoc}" >
         <echo>Generating ASDOC...</echo>
         <echo>===================</echo>
- 
+    	
+    	<asdoc output="${OUTPUT.doc}" lenient="true" failonerror="true" warnings="false" 
+    			strict="false" locale="en_us" fork="true" 
+    			window-title="${DOC.title}" main-title="My App" footer="${DOC.footer}"
+    		>
+    		<!-- load default libraries used in mobile projects -->
+    		<load-config filename="${FLEX.root}/frameworks/airmobile-config.xml" />
+    		<!-- specify the path to the root package of the classes you want to create documentation for -->
+    		<doc-sources path-element="${PROJECT.src.main}/info/tiefenauer" />
+    		<!-- ... add more paths here if needed -->
+    		
+    		<!-- specify the path to the classes for the asdoc compiler to resolve dependencies referenced in your documented classes -->
+    		<compiler.source-path path-element="${PROJECT.src.main}" />
+    		<compiler.source-path path-element="${PROJECT.src.assets}" />
+    		<!--... add more paths here if needed -->
+    		
+    		<!-- add paths to directories containing libraries used by your project -->
+    		<external-library-path dir="${PROJECT.libs}" >
+    			<include name="*.swc" />
+    		</external-library-path>
+    		<!-- ... add more paths here if needed -->
+    	 
+    		<!-- this library is needed by some applications and not included by default by airmobile-config.xml -->
+    		<external-library-path dir="${FLEX.root}/frameworks/libs/air">
+    			<include name="airglobal.swc"/>
+    		</external-library-path>
+    		
+    	</asdoc>
     </target>
  
     <!-- Show report -->

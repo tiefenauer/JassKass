@@ -19,7 +19,7 @@ package test.info.tiefenauer.gdas3
 		private var spreadsheet:Spreadsheet;
 		private var spreadsheetXML:XML;
 		
-		[Embed(source='assets/spreadsheet.xml', mimeType='application/octet-stream')]
+		[Embed(source='/assets/spreadsheet.xml', mimeType='application/octet-stream')]
 		private static const XMLSpreadsheetFile:Class;
 		
 		/*============================================================================*/
