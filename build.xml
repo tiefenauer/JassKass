@@ -14,7 +14,7 @@
 	<!-- Task definition für ant-contrib -->
 	<taskdef resource="net/sf/antcontrib/antlib.xml">
 	  <classpath>
-	    <pathelement location="C:\app\apache-ant-1.9.3\lib\ant-contrib-1.0b3.jar"/>
+	    <pathelement location="${}\apache-ant-1.9.3\lib\ant-contrib-1.0b3.jar"/>
 	  </classpath>
 	</taskdef>
 	
@@ -25,6 +25,33 @@
 	            <include name="flexUnitTasks*.jar" />
 	        </fileset>
 	    </classpath>
+	</taskdef>
+	
+	<!-- FlexPMD Ant-Taskdef -->
+	<taskdef name="flexPmd" classname="com.adobe.ac.pmd.ant.FlexPmdAntTask" classpath="${TOOLS.flexPMD}/flex-pmd-ant-task-[FlexPMD-Version].jar">
+	    <classpath>
+	        <fileset dir="${TOOLS.flexPMD}">
+	            <include name="*.jar" />
+	        </fileset>
+	    </classpath>
+	</taskdef>
+	
+	<!-- FlexCPD Ant-Taskdef -->
+	<taskdef name="flexCPD" classname="com.adobe.ac.cpd.ant.FlexCpdAntTask" classpath="${TOOLS.flexPMD}/flex-pmd-cpd-ant-task-[FlexPMD-Version].jar" >
+	    <classpath>
+	        <fileset dir="${TOOLS.flexPMD}">
+	            <include name="*.jar" />
+	        </fileset>
+	    </classpath>      
+	</taskdef>
+	
+	<!-- FlexMetrics Ant-Taskdef -->
+	<taskdef name="FlexMetrics" classname="com.adobe.ac.pmd.metrics.ant.FlexMetricsAntTask" classpath="${TOOLS.flexPMD}/flex-pmd-metrics-ant-task-[FlexPMD-Version].jar" >
+	    <classpath>
+	        <fileset dir="${TOOLS.flexPMD}">
+	            <include name="*.jar" />
+	        </fileset>
+	    </classpath>      
 	</taskdef>
  
     <property name="FLEX_HOME" value="${FLEX.root}"></property>
