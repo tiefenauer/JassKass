@@ -195,6 +195,14 @@
     	<echo level="info">Initializiing target directory...</echo>
     	<delete dir="${OUTPUT.root}" />
     	<mkdir dir="${OUTPUT.root}" />
+    	<mkdir dir="${OUTPUT.build}" />
+    	<mkdir dir="${OUTPUT.build.ane}" />
+
+    	<!-- create Documentation directories -->
+    	<mkdir dir="${OUTPUT.doc}" />
+    	
+    	<!-- create PMD directories -->
+    	<mkdir dir="${OUTPUT.flexpmd}" />
     	
     	<!-- create FlexUnit directories -->
     	<mkdir dir="${OUTPUT.flexUnit.bin}" />
