@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<testsuite name="test.info.tiefenauer.jasskass.app.controllers.SaveOAuth2AccessTokenTest" tests="1" failures="0" errors="0" skipped="0" time="0.019" hostname="AL-W138" timestamp="2014-04-11T06:39:17">
+  <testcase classname="test.info.tiefenauer.jasskass.app.controllers::SaveOAuth2AccessTokenTest" name="testCommand" time="0.019"/>
+</testsuite>

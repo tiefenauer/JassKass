@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<testsuite name="test.info.tiefenauer.jasskass.counter.model.vo.JassPlayerTest" tests="1" failures="0" errors="1" skipped="0" time="0.000" hostname="AL-W138" timestamp="2014-04-11T06:39:17">
+  <testcase classname="test.info.tiefenauer.jasskass.counter.model.vo::JassPlayerTest" name="initializationError" time="0.000">
+    <error message="No runnable methods" type="test.info.tiefenauer.jasskass.counter.model.vo::JassPlayerTest.initializationError"><![CDATA[Error: No runnable methods
+	at org.flexunit.runners::BlockFlexUnit4ClassRunner/validateInstanceMethods()[D:\workspaces\flex\projects\flexunit3\FlexUnit4\src\org\flexunit\runners\BlockFlexUnit4ClassRunner.as:246]
+	at org.flexunit.runners::BlockFlexUnit4ClassRunner/collectInitializationErrors()[D:\workspaces\flex\projects\flexunit3\FlexUnit4\src\org\flexunit\runners\BlockFlexUnit4ClassRunner.as:232]
+	at org.flexunit.runners::ParentRunner/validate()[D:\workspaces\flex\projects\flexunit3\FlexUnit4\src\org\flexunit\runners\ParentRunner.as:326]
+	at org.flexunit.runners::ParentRunner()[D:\workspaces\flex\projects\flexunit3\FlexUnit4\src\org\flexunit\runners\ParentRunner.as:133]
+	at org.flexunit.runners::BlockFlexUnit4ClassRunner()[D:\workspaces\flex\projects\flexunit3\FlexUnit4\src\org\flexunit\runners\BlockFlexUnit4ClassRunner.as:117]
+	at org.flexunit.internals.builders::FlexUnit4Builder/runnerForClass()[D:\workspaces\flex\projects\flexunit3\FlexUnit4\src\org\flexunit\internals\builders\FlexUnit4Builder.as:68]
+	at org.flexunit.runners.model::RunnerBuilderBase/safeRunnerForClass()[D:\workspaces\flex\projects\flexunit3\FlexUnit4\src\org\flexunit\runners\model\RunnerBuilderBase.as:73]
+	at org.flexunit.internals.builders::AllDefaultPossibilitiesBuilder/runnerForClass()[D:\workspaces\flex\projects\flexunit3\FlexUnit4\src\org\flexunit\internals\builders\AllDefaultPossibilitiesBuilder.as:119]
+	at org.flexunit.runners.model::RunnerBuilderBase/safeRunnerForClass()[D:\workspaces\flex\projects\flexunit3\FlexUnit4\src\org\flexunit\runners\model\RunnerBuilderBase.as:73]
+	at org.flexunit.runners.model::RunnerBuilderBase/localRunners()[D:\workspaces\flex\projects\flexunit3\FlexUnit4\src\org\flexunit\runners\model\RunnerBuilderBase.as:129]
+	at org.flexunit.runners.model::RunnerBuilderBase/runners()[D:\workspaces\flex\projects\flexunit3\FlexUnit4\src\org\flexunit\runners\model\RunnerBuilderBase.as:97]
+	at org.flexunit.runners::Suite()[D:\workspaces\flex\projects\flexunit3\FlexUnit4\src\org\flexunit\runners\Suite.as:270]
+	at org.flexunit.runner::Request$/classes()[D:\workspaces\flex\projects\flexunit3\FlexUnit4\src\org\flexunit\runner\Request.as:202]
+	at Function/http://adobe.com/AS3/2006/builtin::apply()
+	at org.flexunit.runner::FlexUnitCore/runClasses()[D:\workspaces\flex\projects\flexunit3\FlexUnit4\src\org\flexunit\runner\FlexUnitCore.as:269]
+	at Function/http://adobe.com/AS3/2006/builtin::apply()
+	at org.flexunit.runner::FlexUnitCore/run()[D:\workspaces\flex\projects\flexunit3\FlexUnit4\src\org\flexunit\runner\FlexUnitCore.as:245]
+	at TestRunner/application1_creationCompleteHandler()[D:\workspaces\flex\projects\JassKass\src\test\actionscript\TestRunner.mxml:39]
+	at TestRunner/___TestRunner_Application1_creationComplete()[D:\workspaces\flex\projects\JassKass\src\test\actionscript\TestRunner.mxml:4]
+	at flash.events::EventDispatcher/dispatchEventFunction()
+	at flash.events::EventDispatcher/dispatchEvent()
+	at mx.core::UIComponent/dispatchEvent()[/Users/justinmclean/Documents/ApacheFlex4.12.0/frameworks/projects/framework/src/mx/core/UIComponent.as:13682]
+	at mx.core::UIComponent/set initialized()[/Users/justinmclean/Documents/ApacheFlex4.12.0/frameworks/projects/framework/src/mx/core/UIComponent.as:1839]
+	at mx.managers::LayoutManager/doPhasedInstantiation()[/Users/justinmclean/Documents/ApacheFlex4.12.0/frameworks/projects/framework/src/mx/managers/LayoutManager.as:850]
+	at mx.managers::LayoutManager/doPhasedInstantiationCallback()[/Users/justinmclean/Documents/ApacheFlex4.12.0/frameworks/projects/framework/src/mx/managers/LayoutManager.as:1188]]]></error>
+  </testcase>
+</testsuite>

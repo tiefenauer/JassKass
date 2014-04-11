@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<testsuite name="test.info.tiefenauer.gdas3.SpreadsheetLinkTest" tests="4" failures="0" errors="0" skipped="0" time="0.018" hostname="AL-W138" timestamp="2014-04-11T06:39:14">
+  <testcase classname="test.info.tiefenauer.gdas3::SpreadsheetLinkTest" name="testFromXML" time="0.001"/>
+  <testcase classname="test.info.tiefenauer.gdas3::SpreadsheetLinkTest" name="testDefaults" time="0.000"/>
+  <testcase classname="test.info.tiefenauer.gdas3::SpreadsheetLinkTest" name="testAttributes" time="0.000"/>
+  <testcase classname="test.info.tiefenauer.gdas3::SpreadsheetLinkTest" name="testToXML" time="0.017"/>
+</testsuite>
