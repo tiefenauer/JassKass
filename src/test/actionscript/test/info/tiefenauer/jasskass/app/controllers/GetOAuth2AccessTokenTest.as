@@ -31,7 +31,7 @@ package test.info.tiefenauer.jasskass.app.controllers
 		/*============================================================================*/
 		/* Private Properties                                                         */
 		/*============================================================================*/
-		[Embed(source="/assets/GoogleAPIClient.json", mimeType="application/octet-stream")]
+		[Embed(source="/GoogleAPIClient.json", mimeType="application/octet-stream")]
 		private static const GoogleApiClientConfig:Class;
 		private var command:GetOAuth2AccessToken;
 		

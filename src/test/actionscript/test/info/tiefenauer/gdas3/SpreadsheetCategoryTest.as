@@ -19,7 +19,7 @@ package test.info.tiefenauer.gdas3
 		private var category:SpreadsheetCategory;
 		private var categoryXML:XML;
 		
-		[Embed(source='/assets/spreadsheetCategory.xml', mimeType='application/octet-stream')]
+		[Embed(source='/spreadsheetCategory.xml', mimeType='application/octet-stream')]
 		private static const CategoryXMLFile:Class;
 		
 		/*============================================================================*/

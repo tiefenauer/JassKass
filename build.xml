@@ -14,7 +14,7 @@
 	<!-- Task definition für ant-contrib -->
 	<taskdef resource="net/sf/antcontrib/antlib.xml">
 	  <classpath>
-	    <pathelement location="${}\apache-ant-1.9.3\lib\ant-contrib-1.0b3.jar"/>
+	    <pathelement location="${TOOLS.ant}\lib\ant-contrib-1.0b3.jar"/>
 	  </classpath>
 	</taskdef>
 	
@@ -195,6 +195,11 @@
     	<echo level="info">Initializiing target directory...</echo>
     	<delete dir="${OUTPUT.root}" />
     	<mkdir dir="${OUTPUT.root}" />
+    	
+    	<!-- create FlexUnit directories -->
+    	<mkdir dir="${OUTPUT.flexUnit.bin}" />
+    	<mkdir dir="${OUTPUT.flexUnit.result}" />
+    	<mkdir dir="${OUTPUT.flexUnit.report}" />
     	<echo>... done!</echo>
     	
 		<!-- Rename Native Extensions (*.ane ==> *.swc) -->
@@ -257,9 +262,9 @@
     	<!-- TestRunner-Application kompilieren -->
     	<compile-runner runner="${PROJECT.test.main}/TestRunner.mxml" swf="${OUTPUT.flexUnit.bin}/TestRunner.swf" include="flexunit*flex*.swc" />
     	<!-- TestRunner-application ausführen -->
-    	<execute-tests swf="${OUTPUT.flexUnit.bin}/TestRunner.swf" reportdir="${OUTPUT.flexUnit.results}" />
+    	<execute-tests swf="${OUTPUT.flexUnit.bin}/TestRunner.swf" reportdir="${OUTPUT.flexUnit.result}" />
     	<!-- HTML-Reports erstellen -->
-    	<generate-html-report dir="${OUTPUT.flexUnit.results}" todir="${OUTPUT.flexUnit.results}/html" />
+    	<generate-html-report dir="${OUTPUT.flexUnit.result}" todir="${OUTPUT.flexUnit.report}" />
     </target>
  
     <!-- Package APK -->

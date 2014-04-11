@@ -20,7 +20,7 @@ package test.info.tiefenauer.gdas3
 		private var author:SpreadsheetAuthor;
 		private var authorXML:XML;
 		
-		[Embed(source='/assets/spreadsheetAuthor.xml', mimeType='application/octet-stream')]
+		[Embed(source='/spreadsheetAuthor.xml', mimeType='application/octet-stream')]
 		private static const AuthorXMLFile:Class;
 		
 		/*============================================================================*/

@@ -18,7 +18,7 @@ package test.info.tiefenauer.jasskass.app.models
 		/*============================================================================*/
 		/* Private Properties                                                         */
 		/*============================================================================*/
-		[Embed(source="/assets/sampleTextFile.txt",mimeType="application/octet-stream")]
+		[Embed(source="/sampleTextFile.txt",mimeType="application/octet-stream")]
 		private static const SampleFile:Class;
 		
 		private var service:TextFileService; 

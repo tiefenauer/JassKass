@@ -101,6 +101,11 @@
 	<echo message="OUTPUT.build              ${OUTPUT.build}" />
 	<echo message="OUTPUT.build.ane          ${OUTPUT.build.ane}" />
 	<echo message="OUTPUT.doc                ${OUTPUT.doc}" />
+	<echo message="OUTPUT.flexUnit.bin 		 ${OUTPUT.flexUnit.bin}" />
+	<echo message="OUTPUT.flexUnit.result    ${OUTPUT.flexUnit.result}" />
+	<echo message="OUTPUT.flexpmd 			 ${OUTPUT.flexpmd}" />
+	<echo message="OUTPUT.doc                ${OUTPUT.doc}" />
+	<echo message="OUTPUT.doc                ${OUTPUT.doc}" />
 	<echo message="OUTPUT.name.android       ${OUTPUT.name.android}" />
 	<echo message="OUTPUT.name.ios           ${OUTPUT.name.ios}" />
 	<echo message="OUTPUT.storetype.android  ${OUTPUT.storetype.android}" />
