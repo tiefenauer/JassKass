@@ -1,5 +1,5 @@
 <project name="My build script" default="start">
-    <target name="start" depends="init, asdoc, test, compile, package-apk, package-ipa, finish"/>
+    <target name="start" depends="init, asdoc, test, code_analysis, compile, package-apk, package-ipa, finish"/>
     <property environment="env"/>
  
     <!-- load previously defined configuration properties file: Exchange this file if necessary -->
@@ -327,6 +327,30 @@
     		</external-library-path>
     		
     	</asdoc>
+    </target>
+	
+	<!-- Static code analysis -->
+    <target name="code_analysis" if="${env.code_analysis}" >
+        <echo>Performing Static code analysis...</echo>
+        <echo>==================================</echo>
+    	
+		<!-- PMD -->
+		<flexPmd    description="" 
+					outputdirectory="${OUTPUT.flexpmd}" 
+					sourcedirectory="${PROJECT.src.main}" 
+					/>
+
+		<!-- Copy/Paste Detector -->
+		<flexCPD minimumtokencount="50" outputfile="${OUTPUT.flexpmd}/cpd.xml">
+			<fileset dir="${PROJECT.src.main}">
+				   <include name="**/*.as" />
+				   <include name="**/*.mxml" />
+			</fileset>
+		</flexCPD>	
+
+		<!-- Metrics -->
+		<FlexMetrics sourcedirectory="${PROJECT.src.main}"
+			outputfile="${OUTPUT.flexpmd}/metrics.xml"/>		
     </target>
  
     <!-- Show report -->
