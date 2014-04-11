@@ -21,7 +21,7 @@
 	<!-- Task definition für FlexUnit -->
 	<taskdef resource="flexUnitTasks.tasks">
 	    <classpath>
-	        <fileset dir="${FLEX.flexunit}">
+	        <fileset dir="${TOOLS.flexUnit}">
 	            <include name="flexUnitTasks*.jar" />
 	        </fileset>
 	    </classpath>
@@ -134,7 +134,7 @@
 	            </library-path>           
 	             
 	            <!-- FlexUnit-Libraries einschliessen-->
-	            <library-path dir="${FLEX.flexunit}" append="true">
+	            <library-path dir="${TOOLS.flexUnit}" append="true">
 	                <include name="@{include}" />
 	                <include name="*cilistener*.swc" />
 	                <include name="fluint*.swc" />
