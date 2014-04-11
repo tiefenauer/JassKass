@@ -28,7 +28,7 @@
 	</taskdef>
 	
 	<!-- FlexPMD Ant-Taskdef -->
-	<taskdef name="flexPmd" classname="com.adobe.ac.pmd.ant.FlexPmdAntTask" classpath="${TOOLS.flexPMD}/flex-pmd-ant-task-[FlexPMD-Version].jar">
+	<taskdef name="flexPmd" classname="com.adobe.ac.pmd.ant.FlexPmdAntTask" classpath="${TOOLS.flexPMD}/flex-pmd-ant-task-${TOOLS.flexPMD.version}.jar">
 	    <classpath>
 	        <fileset dir="${TOOLS.flexPMD}">
 	            <include name="*.jar" />
@@ -37,7 +37,7 @@
 	</taskdef>
 	
 	<!-- FlexCPD Ant-Taskdef -->
-	<taskdef name="flexCPD" classname="com.adobe.ac.cpd.ant.FlexCpdAntTask" classpath="${TOOLS.flexPMD}/flex-pmd-cpd-ant-task-[FlexPMD-Version].jar" >
+	<taskdef name="flexCPD" classname="com.adobe.ac.cpd.ant.FlexCpdAntTask" classpath="${TOOLS.flexPMD}/flex-pmd-cpd-ant-task-${TOOLS.flexPMD.version}.jar" >
 	    <classpath>
 	        <fileset dir="${TOOLS.flexPMD}">
 	            <include name="*.jar" />
@@ -46,7 +46,7 @@
 	</taskdef>
 	
 	<!-- FlexMetrics Ant-Taskdef -->
-	<taskdef name="FlexMetrics" classname="com.adobe.ac.pmd.metrics.ant.FlexMetricsAntTask" classpath="${TOOLS.flexPMD}/flex-pmd-metrics-ant-task-[FlexPMD-Version].jar" >
+	<taskdef name="FlexMetrics" classname="com.adobe.ac.pmd.metrics.ant.FlexMetricsAntTask" classpath="${TOOLS.flexPMD}/flex-pmd-metrics-ant-task-${TOOLS.flexPMD.version}.jar" >
 	    <classpath>
 	        <fileset dir="${TOOLS.flexPMD}">
 	            <include name="*.jar" />
@@ -363,7 +363,22 @@
 
 		<!-- Metrics -->
 		<FlexMetrics sourcedirectory="${PROJECT.src.main}"
-			outputfile="${OUTPUT.flexpmd}/metrics.xml"/>		
+			outputfile="${OUTPUT.flexpmd}/metrics.xml"/>
+    	
+    	<!-- CLOC Report -->
+    	<exec command="${TOOLS.cloc}">
+    		<arg value="--by-file"/>
+    		<arg value="--xml"/>
+    		<arg value="-out=${OUTPUT.flexpmd}/cloc.xml"/>
+    		<arg value="${PROJECT.src.main}"/>
+    	</exec>
+    	
+    	<!-- transform CLOC-Report to SLOCCount -->
+    	<java jar="${TOOLS.saxon}" fork="true">
+    		<arg value="-xsl:${TOOLS.cloc2sloccount}"/>
+    		<arg value="-o:${OUTPUT.flexpmd}/sloccount.sc"/>
+    		<arg value="${OUTPUT.flexpmd}/cloc.xml"/>
+    	</java>
     </target>
  
     <!-- Show report -->
