@@ -65,13 +65,17 @@
 	<echo message="sdk_dir                   ${env.sdk_dir}" />
 	<echo message="cert_dir                  ${env.cert_dir}" />
 	<echo message="output_dir                ${env.output_dir}" />
+	<echo message="tools_dir                 ${env.tools_dir}" />	
 	<echo> </echo>
 	<echo>-- Flex</echo>
 	<echo message="FLEX.root                 ${FLEX.root}" />
 	<echo message="FLEX.home                 ${FLEX.home}" />
 	<echo message="FLEX.tasks                ${FLEX.tasks}" />
-	<echo message="FLEX.plugins              ${FLEX.plugins.root}" />
-	<echo message="FLEX.flexunit             ${FLEX.flexunit}" />
+	<echo> </echo>
+	<echo>-- Flex</echo>
+	<echo message="TOOLS.ant                 ${TOOLS.ant}" />
+	<echo message="TOOLS.flexunit            ${TOOLS.flexunit}" />
+	<echo message="TOOLS.flexPMD             ${TOOLS.flexPMD}" />	
 	<echo> </echo>
 	<echo>-- AIR</echo>
 	<echo message="AIR.mxmlc                 ${AIR.mxmlc}" />
@@ -81,10 +85,12 @@
 	<echo> </echo>
 	<echo>-- Projekt</echo>
 	<echo message="PROJECT.root              ${PROJECT.root}" />
-	<echo message="PROJECT.src               ${PROJECT.src}" />
+	<echo message="PROJECT.src.main          ${PROJECT.src.main}" />
+	<echo message="PROJECT.src.assets        ${PROJECT.src.assets}" />	
 	<echo message="PROJECT.libs              ${PROJECT.libs}" />
 	<echo message="PROJECT.libs.ane          ${PROJECT.libs.ane}" />
-	<echo message="PROJECT.assets            ${PROJECT.assets}" />
+	<echo message="PROJECT.test.main         ${PROJECT.test.main}" />
+	<echo message="PROJECT.test.assets       ${PROJECT.test.assets}" />	
 	<echo message="PROJECT.locale            ${PROJECT.locale}" />
 	<echo message="PROJECT.app.name          ${PROJECT.app.name}" />
 	<echo message="PROJECT.app.main          ${PROJECT.app.main}" />
