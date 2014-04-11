@@ -340,7 +340,7 @@
         <echo>==================================</echo>
     	
 		<!-- PMD -->
-		<flexPmd    description="" 
+		<flexPmd    description="FlexPMD SCA" 
 					outputdirectory="${OUTPUT.flexpmd}" 
 					sourcedirectory="${PROJECT.src.main}" 
 					/>
