@@ -1,5 +1,5 @@
 <project name="My build script" default="start">
-    <target name="start" depends="init, asdoc, test, code_analysis, compile, package-apk, package-ipa, finish"/>
+    <target name="start" depends="init, asdoc, test, code_analysis, test-coverage, compile, package-apk, package-ipa, finish"/>
     <property environment="env"/>
  
     <!-- load previously defined configuration properties file: Exchange this file if necessary -->
@@ -208,6 +208,11 @@
     	<mkdir dir="${OUTPUT.flexUnit.bin}" />
     	<mkdir dir="${OUTPUT.flexUnit.result}" />
     	<mkdir dir="${OUTPUT.flexUnit.report}" />
+    	
+    	<!-- create FlexCover directories -->
+    	<mkdir dir="${OUTPUT.flexcover}" />
+    	<mkdir dir="${OUTPUT.flexcover.bin}" />
+    	<mkdir dir="${OUTPUT.flexcover.results}" />
     	<echo>... done!</echo>
     	
 		<!-- Rename Native Extensions (*.ane ==> *.swc) -->
@@ -380,6 +385,13 @@
     		<arg value="${OUTPUT.flexpmd}/cloc.xml"/>
     	</java>
     </target>
+	
+	<!-- Code Coverage -->
+	<target name="test-coverage" if="${env.code_coverage}" >
+		<echo>Test Coverage...</echo>
+		<echo>==========</echo>
+		<ant antfile="build.coverage.xml" inheritall="false"></ant>
+	</target>
  
     <!-- Show report -->
     <target name="finish">

@@ -1,0 +1,115 @@
+<project name="CLX.Satellite code coverage" default="start" >
+	<target name="start" depends="test-coverage"/>
+	
+	<property environment="env"/>
+	<property file="build.properties" />
+	
+	<property name="FLEX_HOME" value="${FLEX.root}"></property>
+	
+	<!-- Für Code Coverage müssen modifizierte tasks verwendet werden -->
+    <path id="buildtools.classpath">
+        <fileset dir="${TEST.flexcover}" includes="flexTasks.jar" />
+    </path>
+	
+	<!-- Taskdef für modifiziertes MXMLC -->
+    <taskdef name="mxmlc" classname="flex.ant.MxmlcTask" classpathref="buildtools.classpath" />
+
+	<!-- Taskdef für modifiziertes FlexUnit -->
+    <taskdef resource="flexUnitTasks.tasks">
+       <classpath>
+          <fileset dir="${TEST.flexcover}">
+             <include name="flexUnitTasks*.jar" />
+          </fileset>
+       </classpath>
+    </taskdef>
+	
+	<!-- TaskDef für ant-contrib -->
+	<taskdef resource="net/sf/antcontrib/antlib.xml">
+	  <classpath>
+	    <pathelement location="D:\app\apache-ant-1.9.3\lib\ant-contrib-1.0b3.jar"/>
+	  </classpath>
+	</taskdef>
+	
+	<!-- = = = = = = = = = = = = = = = = =
+          macrodef: TestRunner Kompilieren          
+         = = = = = = = = = = = = = = = = = -->	
+   <macrodef name="compile-runner">
+      <attribute name="runner" />
+      <attribute name="swf" />
+      <attribute name="include" />
+      <attribute name="useflex" />
+      <sequential>
+      	<echo message="Compiling @{runner}" />
+        <mxmlc file="@{runner}" output="@{swf}" 
+        		strict="true" debug="true" incremental="true"
+				maxmemory="1024m" optimize="true" fork="true" 
+				static-link-runtime-shared-libraries="true">
+ 			<load-config filename="${FLEX_HOME}/frameworks/airmobile-config.xml" />
+            <default-frame-rate>24</default-frame-rate>
+	     	
+			<source-path path-element="${PROJECT.src.main}" />
+			<source-path path-element="${PROJECT.src.assets}" />
+			<source-path path-element="${PROJECT.src.skins}" />
+			<source-path path-element="${PROJECT.test.main}" />
+			<source-path path-element="${PROJECT.test.assets}" />
+			
+			<library-path dir="${PROJECT.libs}" append="true">
+				<include name="**/*.swc" />
+			</library-path>
+			<library-path dir="${OUTPUT.build.ane}" append="true">
+				<include name="**/*.swc" />
+			</library-path>	  
+	        <library-path dir="${TEST.mockolate}" append="true">
+        	    <include name="**.swc" />
+	        </library-path>
+	        <library-path dir="${TEST.hamcrest}" append="true">
+        	    <include name="**.swc" />
+	        </library-path>
+	        <library-path dir="${TOOLS.flexunit}" append="true">
+        	    <include name="@{include}" />
+	        </library-path>
+            <include-libraries dir="${TEST.flexcover}">
+                <include name="*.swc" />
+            </include-libraries>
+            <show-unused-type-selector-warnings>false</show-unused-type-selector-warnings>
+            
+	        <compiler.verbose-stacktraces>true</compiler.verbose-stacktraces>
+	        <compiler.headless-server>true</compiler.headless-server>
+        </mxmlc>      	
+      	
+      </sequential>
+   </macrodef>
+
+	<!-- = = = = = = = = = = = = = = = = =
+          macrodef: Unit-Tests ausführen          
+         = = = = = = = = = = = = = = = = = -->
+   <macrodef name="execute-tests">
+      <attribute name="swf" />
+      <attribute name="reportdir" />
+      <sequential>
+         <flexunit swf="@{swf}" timeout="180000" player="air" toDir="@{reportdir}" haltonfailure="false" 
+         verbose="true" workingDir="target/coverage" localTrusted="true" port="1024">
+     		<coverageSource>${basedir}/src/</coverageSource>
+			<coverageExclude>com.coltware</coverageExclude>
+		</flexunit>         
+      </sequential>
+   </macrodef>
+
+
+	<!-- Code-Coverage -->
+	<target name="test-coverage" >
+		<echo>Test Coverage...</echo>
+		<echo>==========</echo>
+		
+        <fileset dir="${PROJECT.test.main}" id="coverage-classes">
+             <include name="**/*Test.*"/>
+             <include name="**/*TestSuite.*"/>
+        </fileset>
+
+		<update-runner testClassesSources="coverage-classes" runner="${PROJECT.test.main}/TestRunner.mxml"/>
+		<compile-runner runner="${PROJECT.test.main}/TestRunner.mxml" swf="${OUTPUT.flexcover.bin}/TestRunner.swf" include="*aircilistener*.swc" useflex="true" />		
+		<execute-tests swf="${OUTPUT.flexcover.bin}/TestRunner.swf" reportdir="${OUTPUT.flexcover.results}" />          
+        
+	</target>
+
+</project>
