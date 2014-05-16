@@ -2,8 +2,14 @@ package info.tiefenauer.jasskass.kass.events
 {
 	import flash.events.Event;
 	
-	import info.tiefenauer.jasskass.kass.model.interfaces.IKassEntry;
+	import info.tiefenauer.jasskass.kass.model.interfaces.IKass;
+	import info.tiefenauer.jasskass.profile.model.interfaces.IJassGroup;
 	
+	/**
+	 * 
+	 * @author dtie
+	 * 
+	 */
 	public class KassEvent extends Event
 	{
 		private static const NAME:String = 'KassEvent';
@@ -12,7 +18,8 @@ package info.tiefenauer.jasskass.kass.events
 		public static const DOWNLOAD_KASS_DATA_START:String = NAME + 'DownloadKassDataStart';
 		public static const DOWNLOAD_KASS_DATA_END:String = NAME + 'DownloadKassDataEnd';
 		
-		public var entries:Vector.<IKassEntry>;
+		public var group:IJassGroup;
+		public var kass:IKass;
 		
 		/**
 		 * COnstructor 
@@ -22,9 +29,8 @@ package info.tiefenauer.jasskass.kass.events
 		 * @param cancelable
 		 * 
 		 */
-		public function KassEvent(type:String, entries:Vector.<IKassEntry>=null, bubbles:Boolean=false, cancelable:Boolean=false){
+		public function KassEvent(type:String,bubbles:Boolean=false, cancelable:Boolean=false){
 			super(type, bubbles, cancelable);
-			this.entries = entries;
 		}
 	}
 }

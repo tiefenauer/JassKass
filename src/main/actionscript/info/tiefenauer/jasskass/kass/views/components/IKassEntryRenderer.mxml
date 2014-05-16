@@ -17,10 +17,10 @@
 			import info.tiefenauer.jasskass.kass.model.interfaces.IKassEntry;
 			
 			private function getLabel(item:IKassEntry):String{
-				return df.format(item.date) + ': ' + item.location;
+				return "some Label";
 			}
 			private function getMessage(item:IKassEntry):String{
-				return translate('Total') + ': ' + item.total.toFixed(2);
+				return "some Message";
 			}
 			
 			public function get entry():IKassEntry{

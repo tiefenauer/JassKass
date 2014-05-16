@@ -69,9 +69,9 @@ package info.tiefenauer.jasskass.kass.views
 		 * 
 		 */
 		private function amountSort(x:IKassEntry, y:IKassEntry):Number{
-			if (x.total < y.total)
+			if (x.totalAmount < y.totalAmount)
 				return -1;
-			if (x.total > y.total)
+			if (x.totalAmount > y.totalAmount)
 				return +1;
 			return 0;
 		}
@@ -91,8 +91,6 @@ package info.tiefenauer.jasskass.kass.views
 		 * @param event
 		 */
 		private function onDownloadKassDataEnd(event:KassEvent):void{
-			_kassEntries = event.entries;
-			view.entries = sort(view.filterSelection.selectedIndex);
 		}
 			
 	}

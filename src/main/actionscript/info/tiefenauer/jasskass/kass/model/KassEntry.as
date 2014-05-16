@@ -1,72 +1,56 @@
+/**
+ * KassEntry.as
+ *
+ * Project: JassKass
+ * Date: May 16, 2014
+ * 
+ * @package		info.tiefenauer.jasskass.kass.model
+ * @copyright	Copyright (c) 2013 Crealogix E-Business AG
+ * @link		http://www.crealogix.com
+ * @author		dtie
+ * @version		1.0.0
+ *
+ */
+
 package info.tiefenauer.jasskass.kass.model
 {
-	import info.tiefenauer.jasskass.app.util.translate;
-	import info.tiefenauer.jasskass.jass.model.interfaces.IJass;
+	import info.tiefenauer.jasskass.kass.model.interfaces.IKassAmount;
 	import info.tiefenauer.jasskass.kass.model.interfaces.IKassEntry;
 	
-	/**
-	 * 
-	 * @author Daniel
-	 */
 	public class KassEntry implements IKassEntry
 	{
+		private var _id:String;
 		private var _date:Date;
-		private var _location:String = translate('unbekannt');
-		private var _total:Number = 0;
-		private var _isPaid:Boolean = false;
-		private var _comment:String = '';
-		private var _before:Number = 0;
-		private var _after:Number = 0;
-		private var _jasses:Vector.<IJass> = new Vector.<IJass>();
-
-		//-----------------------------
+		private var _amounts:Vector.<IKassAmount> = new Vector.<IKassAmount>();
+		
+		public function addAmount(value:IKassAmount):void{
+			
+		}
+		
+		public function get totalAmount():Number{
+			var total:Number = 0;
+			_amounts.forEach(function(item:IKassAmount, index:int, vector:Vector.<IKassAmount>):void{
+				total += item.value;
+			});
+			return total;
+		}
+		//----------------------------------
 		// Getter/Setter
-		//-----------------------------
+		//----------------------------------
+		public function get id():String{
+			return _id;
+		}
+		public function set id(value:String):void{
+			_id = value;
+		}
 		public function get date():Date{
 			return _date;
 		}
 		public function set date(value:Date):void{
 			_date = value;
 		}
-		public function get location():String{
-			return _location;
+		public function get amounts():Vector.<IKassAmount>{
+			return _amounts;
 		}
-		public function set location(value:String):void{
-			_location = value;
-		}
-		public function get total():Number{
-			return _total;
-		}
-		public function set total(value:Number):void{
-			_total = value;
-		}
-		public function get isPaid():Boolean{
-			return _isPaid;
-		}
-		public function set isPaid(value:Boolean):void{
-			_isPaid = value;
-		}
-		public function get comment():String{
-			return _comment;
-		}
-		public function set comment(value:String):void{
-			_comment = value;
-		}
-		public function get before():Number{
-			return _before;
-		}
-		public function set before(value:Number):void{
-			_before = value;
-		}
-		public function get after():Number{
-			return _after;
-		}
-		public function set after(value:Number):void{
-			_after = value;
-		}
-		public function get jasses():Vector.<IJass>{
-			return _jasses;
-		}
-		
 	}
 }

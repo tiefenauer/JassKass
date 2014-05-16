@@ -23,7 +23,7 @@
 			private function get saldo():String{
 				var _saldo:Number = 0;
 				for each(var item:IKassEntry in _entries){
-					_saldo += item.total;
+					_saldo += item.totalAmount;
 				}
 				return _saldo.toFixed(2);
 			}
