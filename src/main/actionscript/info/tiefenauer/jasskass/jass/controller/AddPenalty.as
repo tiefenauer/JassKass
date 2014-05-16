@@ -40,20 +40,20 @@ package info.tiefenauer.jasskass.jass.controller
 		}
 		
 		private function bergpreis():void{
-			jassProxy.addPenaltyToCurrentJass(event.team, 1);
+			jassProxy.currentJass.addPenalty(event.team, 1);
 		}
 		
 		private function match():void{
-			jassProxy.addPenaltyToCurrentJass(event.team, 1);
+			jassProxy.currentJass.addPenalty(event.team, 1);
 		}
 		private function kontermatch():void{
-			jassProxy.addPenaltyToCurrentJass(event.team, 1);
+			jassProxy.currentJass.addPenalty(event.team, 1);
 		}
 		private function sieg():void{
-			jassProxy.addPenaltyToCurrentJass(event.team, 2);
+			jassProxy.currentJass.addPenalty(event.team, 2);
 		}
 		private function vierBauern():void{
-			jassProxy.addPenaltyToCurrentJass(event.team, 2);
+			jassProxy.currentJass.addPenalty(event.team, 2);
 		}
 	}
 }

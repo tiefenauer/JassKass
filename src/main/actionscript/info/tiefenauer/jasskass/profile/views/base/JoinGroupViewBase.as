@@ -2,7 +2,7 @@ package info.tiefenauer.jasskass.profile.views.base
 {
 	import info.tiefenauer.jasskass.app.views.MobileView;
 	
-	public class RegisterGroupViewBase extends MobileView
+	public class JoinGroupViewBase extends MobileView
 	{
 		private static const NAME:String = 'RegisterGroupViewBase';
 		// event types

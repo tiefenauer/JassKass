@@ -20,6 +20,7 @@ package info.tiefenauer.jasskass.jass.event
 		public static const START_JASS:String = NAME + 'StartJass';
 		public static const FINISH_JASS:String = NAME + 'FinishJass';
 		public static const SHOW_PENALTY:String = NAME + 'ShowPenalty';
+		public static const CHECK_PENALTY:String = NAME + 'CheckPenalty';
 		public static const HIDE_PENALTY:String = NAME + 'HidePenalty';
 		public static const SHOW_JASS_DETAIL:String = NAME + 'ShowJassDetail';
 		

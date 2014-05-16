@@ -19,9 +19,8 @@ package info.tiefenauer.jasskass.jass.views.base
 		public static const NEW_JASS_BUTTON_CLICKED:String = NAME + 'NewJassButtonClicked';
 		public static const JASS_SELECTED:String = NAME + 'JassSelected';
 		public static const FILTER_SELECTED:String = NAME + 'SortCritChanged';
-		public static const REGISTER_GROUP_BUTTON_CLICKED:String = NAME + 'RegisterGroupButtonSelected';
+		public static const JOIN_GROUP_BUTTON_CLICKED:String = NAME + 'JoinGroupButtonSelected';
 		public static const REFRESH_BUTTON_CLICKED:String = NAME + 'RefreshButtonSelected';
-		
 		
 		//-----------------------------
 		// Getter/Setter

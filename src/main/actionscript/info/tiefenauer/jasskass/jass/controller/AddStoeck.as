@@ -15,7 +15,7 @@ package info.tiefenauer.jasskass.jass.controller
 		
 		override public function execute():void{
 			super.execute();
-			jassProxy.addWysToCurrentGame(event.team, event.wyses);
+			jassProxy.currentJass.currentGame.addWyses(event.team, event.wyses);
 		}
 	}
 }

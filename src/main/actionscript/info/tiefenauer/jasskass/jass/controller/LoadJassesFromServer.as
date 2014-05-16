@@ -32,10 +32,12 @@ package info.tiefenauer.jasskass.jass.controller
 			release();
 			for each(var jass:IJass in jasses){
 				jass.isSynced = true;
+				jass.group = jassGroupProxy.currentJassGroup;
 				jassProxy.addJass(jass);
 			}
 
 			// heruntergeladene liste hinzufügen und alle lokalen jasse, welche nicht in der heruntergeladenen liste sind, löschen
+			/*
 			for each(var localJass:IJass in jassProxy.jassList){
 				var inBothLists:Vector.<IJass> = jasses.filter(function(item:IJass, index:int, vector:Vector.<IJass>):Boolean{
 					return localJass.isSynced && item.id == localJass.id;
@@ -43,6 +45,7 @@ package info.tiefenauer.jasskass.jass.controller
 				if (inBothLists.length == 0)
 					jassProxy.removeJass(localJass.id);
 			}
+			*/
 			dispatch(new JassProxyEvent(JassProxyEvent.SAVE_JASSES_TO_FILE));
 		}
 	}

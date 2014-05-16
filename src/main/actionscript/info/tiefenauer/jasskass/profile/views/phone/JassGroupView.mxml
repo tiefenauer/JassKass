@@ -42,15 +42,14 @@
 			protected function onNewTeamButtonClick(event:MouseEvent):void{
 				dispatchEvent(new Event(NEW_GROUP_BUTTON_CLICKED));
 			}
-			
 			protected function onChangeTeamButtonClick(event:MouseEvent):void{
 				dispatchEvent(new Event(CHANGE_GROUP_BUTTON_CLICKED));
 			}
 			protected function onLeaveTeamButtonClick(event:MouseEvent):void{
 				dispatchEvent(new Event(LEAVE_GROUP_BUTTON_CLICKED));
 			}
-			protected function onRegisterGroupButtonClicked(event:MouseEvent):void{
-				dispatchEvent(new Event(REGISTER_GROUP_BUTTON_CLICKED));
+			protected function onJoinGroupButtonClicked(event:MouseEvent):void{
+				dispatchEvent(new Event(JOIN_GROUP_BUTTON_CLICKED));
 			}
 			
 		]]>
@@ -81,20 +80,26 @@
 				width="100%" height="100%"
 				/>
 		
-		<s:Button id="changeTeamButton" 
-				  label="{translate('Team wechseln')}"
+		<s:Button label="{translate('Gruppe wechseln')}"
 				  click="onChangeTeamButtonClick(event)"
+				  width="100%"
 				  />
 		
-		<s:Button id="leaveTeamButton" 
-				  label="{translate('Team verlassen')}"
+		<s:Button label="{translate('Gruppe verlassen')}"
 				  click="onLeaveTeamButtonClick(event)"
+				  width="100%"
 				  />
+		
+		<s:Button label="{translate('Gruppe beitreten')}" 
+				  click="onJoinGroupButtonClicked(event)" 
+				  width="100%" 
+				  />
+		
 	</s:VGroup>
 	
 	<s:VGroup width="100%" height="100%" includeIn="noCurrent" paddingLeft="10" paddingRight="20" paddingTop="10" paddingBottom="10">
-		<s:Label width="100%" text="{translate('keiner JassGruppe beigetreten')}" />
-		<s:Button label="{translate('Gruppe beitreten')}" width="100%" click="onRegisterGroupButtonClicked(event)" />
+		<s:Label width="100%" text="{translate('keiner Gruppe beigetreten')}" />
+		<s:Button label="{translate('Gruppe beitreten')}" width="100%" click="onJoinGroupButtonClicked(event)" />
 		<s:Button label="{translate('Neue Gruppe erstellen')}" width="100%" click="onNewTeamButtonClick(event)" />
 	</s:VGroup>	
 	

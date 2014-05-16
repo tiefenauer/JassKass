@@ -2,12 +2,12 @@ package info.tiefenauer.jasskass.profile.events
 {
 	import flash.events.Event;
 	
-	public class RegisterGroupEvent extends Event
+	public class JoinGroupEvent extends Event
 	{
 		private static const NAME:String = 'RegisterGroupEvent';
 		// event types
-		public static const REGISTER_GROUP:String = NAME + 'RegisterGroup';
-		public static const GROUP_REGISTERED:String = NAME + 'GroupRegistered';
+		public static const JOIN_GROUP:String = NAME + 'JoinGroup';
+		public static const GROUP_JOINED:String = NAME + 'GroupJoined';
 		
 		public var code:String;
 		
@@ -19,7 +19,7 @@ package info.tiefenauer.jasskass.profile.events
 		 * @param cancelable
 		 * 
 		 */
-		public function RegisterGroupEvent(type:String, code:String=null,bubbles:Boolean=false, cancelable:Boolean=false){
+		public function JoinGroupEvent(type:String, code:String=null,bubbles:Boolean=false, cancelable:Boolean=false){
 			super(type, bubbles, cancelable);
 			this.code = code;
 		}

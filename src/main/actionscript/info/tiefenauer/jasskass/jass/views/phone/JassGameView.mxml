@@ -26,45 +26,84 @@
 		<![CDATA[
 			import mx.events.FlexEvent;
 			
-			import spark.events.IndexChangeEvent;
 			import spark.events.PopUpEvent;
 			
 			import info.tiefenauer.jasskass.app.util.translate;
 			import info.tiefenauer.jasskass.jass.model.interfaces.IJassGame;
 			import info.tiefenauer.jasskass.jass.model.interfaces.IJassTeam;
 			import info.tiefenauer.jasskass.jass.model.interfaces.IWys;
+			import info.tiefenauer.jasskass.jass.views.popups.GameFactorPopup;
 			import info.tiefenauer.jasskass.jass.views.popups.JassSliderPopup;
 			import info.tiefenauer.jasskass.jass.views.popups.WysPopup;
-
+			
 			[Bindable] public var team1TotalPoints:Number = 0;
 			[Bindable] public var team2TotalPoints:Number = 0;
-			[Bindable] public var factor:Number = 1;
 			
-			public var team1Points:Number = 0;
-			public var team2Points:Number = 0;
-			public var wysTarget:IJassTeam;
-			public var wyses:Vector.<IWys>;
 			
+			[Bindable] private var _factor:Number = 1;
+			[Bindable] private var _team1Points:Number = 0;
+			[Bindable] private var _team2Points:Number = 0;
+			[Bindable] private var _wysTarget:IJassTeam;
+			[Bindable] private var _wyses:Vector.<IWys>;
+			
+			//------------------
+			// Private functions
+			//------------------
 			private function showWysPopup():void{
 				var wysPopup:WysPopup = new WysPopup();
 				wysPopup.show();
-				wysPopup.addEventListener(PopUpEvent.CLOSE, function(closeEvent:PopUpEvent):void{
-					if (closeEvent.data){
-						wyses = closeEvent.data;
-						dispatchEvent(new Event(WYS_ENTERED));
+				wysPopup.addEventListener(PopUpEvent.CLOSE, function(wysEvent:PopUpEvent):void{
+					if (wysEvent.data){
+						_wyses = wysEvent.data;
+						var factorPopup:GameFactorPopup = new GameFactorPopup();
+						factorPopup.show();
+						factorPopup.addEventListener(PopUpEvent.CLOSE, function(factorEvent:PopUpEvent):void{
+							_factor = factorEvent.data?factorEvent.data:1;
+							dispatchEvent(new Event(WYS_ENTERED));
+						});
 					}
 				});
 			}
 			private function showPointsPopup():void{
 				var jassSliderPopup:JassSliderPopup = new JassSliderPopup();
 				jassSliderPopup.show();
-				jassSliderPopup.addEventListener(PopUpEvent.CLOSE, function(closeEvent:PopUpEvent):void{
-					if (closeEvent.data){
-						team1Points = closeEvent.data['team1'];
-						team2Points = closeEvent.data['team2'];
-						dispatchEvent(new Event(POINTS_ENTERED));
+				jassSliderPopup.addEventListener(PopUpEvent.CLOSE, function(pointsEvent:PopUpEvent):void{
+					if (pointsEvent.data){
+						var factorPopup:GameFactorPopup = new GameFactorPopup();
+						factorPopup.show();
+						factorPopup.addEventListener(PopUpEvent.CLOSE, function(factorEvent:PopUpEvent):void{
+							_factor = factorEvent.data?factorEvent.data:1;
+							_team1Points = pointsEvent.data['team1'];
+							_team2Points = pointsEvent.data['team2'];
+							dispatchEvent(new Event(POINTS_ENTERED));
+						});
 					}
 				});
+			}
+			
+			//------------------
+			// Public functions
+			//------------------
+			public function get factor():Number{
+				return _factor;
+			}
+			public function get team1points():Number{
+				return _team1Points;
+			}
+			public function set team1points(value:Number):void{
+				_team1Points = value;
+			}
+			public function get team2points():Number{
+				return _team2Points;
+			}
+			public function set team2points(value:Number):void{
+				_team2Points = value;
+			}
+			public function get wysTarget():IJassTeam{
+				return _wysTarget;
+			}
+			public function get wyses():Vector.<IWys>{
+				return _wyses;
 			}
 
 			//------------------
@@ -74,27 +113,14 @@
 				super.game = value;
 				team1TotalPoints = game.team1TotalPoints;
 				team2TotalPoints = game.team2TotalPoints;
-				factor = game.factor;
 			}
-			
-			protected function onTeam1AreaClicked(event:Event):void
-			{
-				wysTarget = game.jass.team1;
+			protected function onTeam1AreaClicked(event:Event):void{
+				_wysTarget = game.jass.team1;
 				showWysPopup();
 			}
-			
-			protected function onTeam2AreaClicked(event:Event):void
-			{
-				wysTarget = game.jass.team2;
+			protected function onTeam2AreaClicked(event:Event):void{
+				_wysTarget = game.jass.team2;
 				showWysPopup();
-			}
-			
-			protected function onMiddleAreaClicked(event:Event):void{
-				showPointsPopup();
-			}
-			
-			protected function onFactorSelectionChange(event:IndexChangeEvent):void{
-				factor = factorButtonBar.selectedItem.value;
 			}
 			
 			protected function onCreationComplete(event:FlexEvent):void{
@@ -102,33 +128,19 @@
 			}
 			
 			protected function onSpongeImageClicked(event:MouseEvent):void{
-				dispatchEvent(new Event(NEW_GAME_CLICKED));
+				dispatchEvent(new Event(SPONGE_CLICKED));
 			}
-			
 			protected function onFlipLabelClicked(event:MouseEvent):void{
 				dispatchEvent(new Event(FLIP_BOARD_BUTTON_CLICKED));
+			}
+			protected function onPenImageClick(event:MouseEvent):void{
+				showPointsPopup();
 			}
 			
 		]]>
 	</fx:Script>
 	
 
-	<base:titleContent>
-		<s:ButtonBar id="factorButtonBar"
-					 requireSelection="true"
-					 change="onFactorSelectionChange(event)"
-					 width="100%"
-					 >
-			<s:dataProvider>
-				<s:ArrayCollection>
-					<fx:Object label="x1" value="1" />
-					<fx:Object label="x2" value="2" />
-					<fx:Object label="x3" value="3" />
-				</s:ArrayCollection>
-			</s:dataProvider>
-		</s:ButtonBar>
-	</base:titleContent>
-	
 	<!-- background -->
 	<s:Image scaleMode="zoom" width="100%" height="100%">
 		<s:source>
@@ -156,15 +168,17 @@
 					 />
 		</s:Group>
 		
-		<s:VGroup width="100%" id="middleArea" click="onMiddleAreaClicked(event)">
+		<s:VGroup width="100%" >
 			
-			<s:Label id="team1LabelDisplay" width="90%" rotation="180" styleName="playerName" text="{game.jass.team1.player1.firstName + ' + ' + game.jass.team1.player2.firstName}"/>
+			<s:Label id="team1LabelDisplay" width="90%" rotation="180" styleName="playerName" 
+					 text="{game.jass.team1.player1.firstName + ' + ' + game.jass.team1.player2.firstName}"/>
 			<s:Line width="100%" verticalCenter="0">
 				<s:stroke>
 					<s:SolidColorStroke color="#FFFFFF" weight="2" />
 				</s:stroke>
 			</s:Line>
-			<s:Label id="team2LabelDisplay" width="90%" textAlign="right" styleName="playerName" text="{game.jass.team2.player1.firstName + ' + ' + game.jass.team2.player2.firstName}"/>
+			<s:Label id="team2LabelDisplay" width="90%" textAlign="right" styleName="playerName" 
+					 text="{game.jass.team2.player1.firstName + ' + ' + game.jass.team2.player2.firstName}"/>
 		</s:VGroup>
 		
 		<s:Group width="100%" height="100%">
@@ -182,7 +196,8 @@
 	
 	<s:Image id="spongeImage"
 			 click="onSpongeImageClicked(event)"
-			 left="0" top="0"
+			 left="-20" top="-20"
+			 rotation="35"			 
 			 >
 		<s:source>
 			<s:MultiDPIBitmapSource source120dpi="@Embed('/assets/dpi120/sponge.png')"
@@ -191,6 +206,24 @@
 									source320dpi="@Embed('/assets/dpi320/sponge.png')"
 									source480dpi="@Embed('/assets/dpi480/sponge.png')"
 									source640dpi="@Embed('/assets/dpi640/sponge.png')"
+									/>			
+
+		</s:source>
+	</s:Image>
+	
+	<s:Image id="penImage"
+			 click="onPenImageClick(event)"
+			 verticalCenter="0"
+			 left="-20"
+			 rotation="20"
+			 >
+		<s:source>
+			<s:MultiDPIBitmapSource source120dpi="@Embed('/assets/dpi120/jass_stift.png')"
+									source160dpi="@Embed('/assets/dpi160/jass_stift.png')"
+									source240dpi="@Embed('/assets/dpi240/jass_stift.png')"
+									source320dpi="@Embed('/assets/dpi320/jass_stift.png')"
+									source480dpi="@Embed('/assets/dpi480/jass_stift.png')"
+									source640dpi="@Embed('/assets/dpi640/jass_stift.png')"
 									/>
 		</s:source>
 	</s:Image>

@@ -6,8 +6,6 @@ package info.tiefenauer.jasskass.jass.event
 {
 	import flash.events.Event;
 	
-	import mx.effects.easing.Back;
-	
 	/**
 	 * Event class for JassGame 
 	 * @author Daniel Tiefenauer
@@ -16,7 +14,7 @@ package info.tiefenauer.jasskass.jass.event
 	{
 		private static const NAME:String = 'JassGameEvent';
 		// event types
-		public static const SET_FACTOR:String = NAME + 'SetFactor';
+		public static const NEW_GAME:String = NAME + 'NewGame';
 		
 		public var factor:Number;
 		

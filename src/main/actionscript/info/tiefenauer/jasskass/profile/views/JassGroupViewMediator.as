@@ -8,7 +8,7 @@ package info.tiefenauer.jasskass.profile.views
 	import info.tiefenauer.jasskass.profile.views.interfaces.IJassGroupView;
 	import info.tiefenauer.jasskass.profile.views.phone.GroupBuilderView;
 	import info.tiefenauer.jasskass.profile.views.phone.JassGroupListView;
-	import info.tiefenauer.jasskass.profile.views.phone.RegisterGroupView;
+	import info.tiefenauer.jasskass.profile.views.phone.JoinGroupView;
 	
 	import robotlegs.bender.bundles.mvcs.Mediator;
 	
@@ -25,7 +25,7 @@ package info.tiefenauer.jasskass.profile.views
 		override public function initialize():void{
 			addViewListener(JassGroupViewBase.NEW_GROUP_BUTTON_CLICKED, onNewTeamButtonClicked);
 			addViewListener(JassGroupViewBase.CHANGE_GROUP_BUTTON_CLICKED, onChangeTeamButtonClicked);
-			addViewListener(JassGroupViewBase.REGISTER_GROUP_BUTTON_CLICKED, onRegisterTeamButtonClicked);
+			addViewListener(JassGroupViewBase.JOIN_GROUP_BUTTON_CLICKED, onRegisterTeamButtonClicked);
 			addViewListener(JassGroupViewBase.LEAVE_GROUP_BUTTON_CLICKED, onLeaveTeamButtonClicked);
 			
 			view.jassGroup = jassGroupProxy.currentJassGroup;
@@ -41,7 +41,7 @@ package info.tiefenauer.jasskass.profile.views
 			app.activeNavigator.pushView(JassGroupListView);
 		}
 		private function onRegisterTeamButtonClicked(event:Event):void{
-			app.activeNavigator.pushView(RegisterGroupView);
+			app.activeNavigator.pushView(JoinGroupView);
 		}
 		private function onLeaveTeamButtonClicked(event:Event):void{
 		}

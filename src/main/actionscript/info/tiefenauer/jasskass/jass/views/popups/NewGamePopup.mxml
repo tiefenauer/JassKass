@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SkinnablePopUpContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+						   xmlns:s="library://ns.adobe.com/flex/spark" 
+						   >
+	
+	<s:layout>
+		<s:VerticalLayout />
+	</s:layout>
+	<fx:Script>
+		<![CDATA[
+			import mx.core.FlexGlobals;
+			import mx.managers.PopUpManager;
+			
+			import info.tiefenauer.jasskass.app.util.translate;
+			
+			private static const NAME:String = 'NewGamePopup';
+			public static const NEW_GAME:String = NAME + 'NewGame';
+			public static const FINISH:String = NAME + 'Finish';
+			
+			public function show():void{
+				super.open((FlexGlobals.topLevelApplication as JassKass), true);
+				width = FlexGlobals.topLevelApplication.width - 30;
+				PopUpManager.centerPopUp(this);
+			}
+			
+			protected function onNewGameButtonClicked(event:MouseEvent):void{
+				close(true, NEW_GAME);
+			}
+			protected function onFinishButtonClicked(event:MouseEvent):void{
+				close(true, FINISH);
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:Label text="{translate('Neues Spiel oder beenden?')}" />
+	
+	<s:Button label="{translate('Neues Spiel')}" click="onNewGameButtonClicked(event)" width="100%" />
+	<s:Button label="{translate('Beenden')}" click="onFinishButtonClicked(event)" width="100%" />
+	
+</s:SkinnablePopUpContainer>

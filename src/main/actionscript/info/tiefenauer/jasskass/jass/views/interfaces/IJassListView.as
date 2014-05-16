@@ -19,5 +19,6 @@ package info.tiefenauer.jasskass.jass.views.interfaces
 		function get filterSelection():ButtonBar;
 		function set jassGroup(value:IJassGroup):void;
 		function get jasses():List;
+		function get groupKey():String;
 	}
 }

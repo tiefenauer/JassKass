@@ -4,7 +4,7 @@ package info.tiefenauer.jasskass.profile.controller
 	import info.tiefenauer.jasskass.azure.service.GetGroupService;
 	import info.tiefenauer.jasskass.jass.model.JassProxyEvent;
 	import info.tiefenauer.jasskass.profile.events.JassGroupProxyEvent;
-	import info.tiefenauer.jasskass.profile.events.RegisterGroupEvent;
+	import info.tiefenauer.jasskass.profile.events.JoinGroupEvent;
 	import info.tiefenauer.jasskass.profile.model.interfaces.IJassGroup;
 	import info.tiefenauer.jasskass.profile.model.interfaces.IJassGroupProxy;
 	
@@ -12,9 +12,9 @@ package info.tiefenauer.jasskass.profile.controller
 	 * 
 	 * @author Daniel
 	 */
-	public class RegisterGroup extends SimpleCommand
+	public class JoinGroup extends SimpleCommand
 	{
-		[Inject] public var event:RegisterGroupEvent;
+		[Inject] public var event:JoinGroupEvent;
 		[Inject] public var service:GetGroupService;
 		[Inject] public var jassGroupProxy:IJassGroupProxy;
 		
@@ -32,7 +32,7 @@ package info.tiefenauer.jasskass.profile.controller
 			jassGroupProxy.currentJassGroup = group;
 			dispatch(new JassGroupProxyEvent(JassGroupProxyEvent.SAVE_JASS_GROUPS_TO_FILE));
 			dispatch(new JassProxyEvent(JassProxyEvent.LOAD_JASSES_FROM_SERVER));
-			dispatch(new RegisterGroupEvent(RegisterGroupEvent.GROUP_REGISTERED, event.code));
+			dispatch(new JoinGroupEvent(JoinGroupEvent.GROUP_JOINED, event.code));
 		}
 			
 	}

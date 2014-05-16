@@ -6,6 +6,7 @@ package info.tiefenauer.jasskass.jass.model.vo
 {
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJass;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJassGame;
+	import info.tiefenauer.jasskass.jass.model.interfaces.IJassTeam;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IWys;
 	
 	/**
@@ -28,6 +29,39 @@ package info.tiefenauer.jasskass.jass.model.vo
 		 */
 		public function JassGame(jass:IJass=null){
 			_jass = jass;
+		}
+		
+		/**
+		 * 
+		 * @param team
+		 * @param points
+		 */
+		public function addPoints(team:IJassTeam, points:Number):void{
+			switch(team){
+				case _jass.team1:
+					_team1PointsPlayed += points;
+					break;
+				case _jass.team2:
+					_team2PointsPlayed += points;
+					break;
+			}
+		}
+		
+		/**
+		 * 
+		 * @param team
+		 * @param wyses
+		 */
+		public function addWyses(team:IJassTeam, wyses:Vector.<IWys>):void{
+			var wys:IWys;
+			switch(team){
+				case _jass.team1:
+					for each(wys in wyses) _team1Wyses.push(wys);
+					break;
+				case _jass.team2:
+					for each(wys in wyses) _team2Wyses.push(wys);
+					break;
+			}
 		}
 		
 		/**

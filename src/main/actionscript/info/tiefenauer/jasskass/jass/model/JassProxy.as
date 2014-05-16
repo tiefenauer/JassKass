@@ -7,13 +7,9 @@ package info.tiefenauer.jasskass.jass.model
 	import info.tiefenauer.jasskass.app.model.Actor;
 	import info.tiefenauer.jasskass.app.util.toast;
 	import info.tiefenauer.jasskass.app.util.translate;
-	import info.tiefenauer.jasskass.jass.event.PenaltyEvent;
-	import info.tiefenauer.jasskass.jass.model.enum.JassPoints;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJass;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJassProxy;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJassTeam;
-	import info.tiefenauer.jasskass.jass.model.interfaces.IWys;
-	import info.tiefenauer.jasskass.jass.views.interfaces.IJassListView;
 	
 	/**
 	 * Proxy to maintain jasses 
@@ -51,57 +47,6 @@ package info.tiefenauer.jasskass.jass.model
 			dispatch(new JassProxyEvent(JassProxyEvent.JASSES_CHANGED));
 		}
 		
-		/**
-		 * Add Points for a team to current game 
-		 * @param team
-		 * @param points
-		 */
-		public function addPointsToCurrentGame(team:IJassTeam, points:Number):void{
-			switch(team){
-				case _currentJass.team1:
-					_currentJass.currentGame.team1PointsPlayed += points;
-					if (points == JassPoints.MATCH)
-						dispatch(new PenaltyEvent(PenaltyEvent.MATCH, _currentJass.team1));
-					break;
-				case _currentJass.team2:
-					_currentJass.currentGame.team2PointsPlayed += points;
-					if (points == JassPoints.MATCH)
-						dispatch(new PenaltyEvent(PenaltyEvent.MATCH, _currentJass.team2));
-					break;
-			}
-			dispatch(new JassProxyEvent(JassProxyEvent.CURRENT_GAME_CHANGED));
-			checkStrichEvent();
-		}
-		
-		/**
-		 * ADd Wyses to current game
-		 * @param team
-		 * @param wyses
-		 * 
-		 */
-		public function addWysToCurrentGame(team:IJassTeam, wyses:Vector.<IWys>):void{
-			var wys:IWys;
-			switch(team){
-				case _currentJass.team1:
-					for each(wys in wyses){
-						_currentJass.currentGame.team1Wyses.push(wys);
-					}
-					break;
-				case _currentJass.team2:
-					for each(wys in wyses){
-						_currentJass.currentGame.team2Wyses.push(wys);
-					}
-					break;
-			}
-			dispatch(new JassProxyEvent(JassProxyEvent.CURRENT_GAME_CHANGED));
-			checkStrichEvent();
-		}
-		
-		public function setFactorForCurrentGame(factor:Number):void{
-			_currentJass.currentGame.factor = factor;
-			dispatch(new JassProxyEvent(JassProxyEvent.CURRENT_GAME_CHANGED));
-		}
-		
 		public function startNewGame():void{
 			_currentJass.newGame();
 			dispatch(new JassProxyEvent(JassProxyEvent.NEW_GAME));
@@ -120,25 +65,6 @@ package info.tiefenauer.jasskass.jass.model
 			dispatch(new JassProxyEvent(JassProxyEvent.CURRENT_STRICHE_CHANGED));
 		}
 
-		
-		/**
-		 * Check if a Strich is happening 
-		 */
-		private function checkStrichEvent():void{
-			switch(true){
-				case _currentJass.currentGame.team1TotalPoints >= JassPoints.BERGPREIS:
-					dispatch(new PenaltyEvent(PenaltyEvent.BERGPREIS, _currentJass.team1));
-					break;
-				case _currentJass.currentGame.team2TotalPoints >= JassPoints.BERGPREIS:
-					dispatch(new PenaltyEvent(PenaltyEvent.BERGPREIS, _currentJass.team2));
-					break;
-				case _currentJass.currentGame.team1TotalPoints >= JassPoints.SIEG:
-					dispatch(new PenaltyEvent(PenaltyEvent.SIEG, _currentJass.team1));
-					break;
-				case _currentJass.currentGame.team2TotalPoints >= JassPoints.SIEG:
-					dispatch(new PenaltyEvent(PenaltyEvent.SIEG, _currentJass.team2));
-			}
-		}
 		
 		//-----------------
 		// Getter/Setter

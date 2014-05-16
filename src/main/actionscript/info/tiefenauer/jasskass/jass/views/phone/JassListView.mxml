@@ -41,6 +41,9 @@
 			public function get filterSelection():ButtonBar{
 				return sortButtonBar;
 			}
+			public function get groupKey():String{
+				return codeTI.text;
+			}
 			//------------------
 			// Event handlers
 			//------------------
@@ -51,12 +54,14 @@
 			protected function onButtonBarSelectionChanged(event:IndexChangeEvent):void{
 				dispatchEvent(new Event(FILTER_SELECTED));
 			}
-			protected function onNavigateToGroupClicked(event:MouseEvent):void{
-				dispatchEvent(new Event(REGISTER_GROUP_BUTTON_CLICKED));
+			protected function onJoinGroupButtonClicked(event:MouseEvent):void{
+				dispatchEvent(new Event(JOIN_GROUP_BUTTON_CLICKED));
 			}
-			
 			protected function onRefreshButtonClick(event:MouseEvent):void{
 				dispatchEvent(new Event(REFRESH_BUTTON_CLICKED));
+			}
+			protected function onCodeEntered(event:TextEvent):void{
+				joinGroupButton.enabled = codeTI.text.length > 0;
 			}
 			
 		]]>
@@ -104,8 +109,8 @@
 	
 	<s:VGroup paddingLeft="20" paddingRight="20" paddingTop="20" paddingBottom="20" width="100%" height="100%" includeIn="noJassGroup">
 		<s:Label text="{translate('Du musst einer Jassgruppe beitreten, um die Jasse anzeigen zu können')}" textAlign="center" width="100%"/>
-		<s:TextInput id="codeTI" prompt="{translate('Code')}" width="100%" />
-		<s:Button label="{translate('Gruppe beitreten')}" width="100%" click="onNavigateToGroupClicked(event)"/>
+		<s:TextInput id="codeTI" textInput="onCodeEntered(event)" prompt="{translate('Code')}" width="100%" />
+		<s:Button id="joinGroupButton" label="{translate('Gruppe beitreten')}" width="100%" click="onJoinGroupButtonClicked(event)"/>
 	</s:VGroup>
 
 	

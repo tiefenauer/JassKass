@@ -12,7 +12,7 @@ package info.tiefenauer.jasskass.profile.views.base
 		private static const NAME:String = 'ProfileViewBase';
 		// event types
 		public static const NEW_GROUP_BUTTON_CLICKED:String = NAME + 'NewTeamButtonClicked';
-		public static const REGISTER_GROUP_BUTTON_CLICKED:String = NAME + 'RegisterTeamButtonClicked';
+		public static const JOIN_GROUP_BUTTON_CLICKED:String = NAME + 'JoinTeamButtonClicked';
 		public static const CHANGE_GROUP_BUTTON_CLICKED:String = NAME + 'ChangeTeamButtonClicked';
 		public static const LEAVE_GROUP_BUTTON_CLICKED:String = NAME + 'LeaveTeamButtonClicked';
 	

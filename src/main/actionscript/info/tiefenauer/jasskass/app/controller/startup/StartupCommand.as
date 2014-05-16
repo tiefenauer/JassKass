@@ -18,13 +18,11 @@ package info.tiefenauer.jasskass.app.controller.startup
 		override public function execute():void{
 			super.execute();
 			dispatch(new InitializationEvent(InitializationEvent.LOAD_APP_CONFIG));
-			dispatch(new InitializationEvent(InitializationEvent.GET_GOOGLE_API_TOKEN));
 			
 			dispatch(new JassProxyEvent(JassProxyEvent.LOAD_JASSES_FROM_FILE));
 			dispatch(new JassGroupProxyEvent(JassGroupProxyEvent.LOAD_JASS_GROUPS_FROM_FILE));
 			
 			dispatch(new JassProxyEvent(JassProxyEvent.SYNC_JASSES));
-			dispatch(new JassProxyEvent(JassProxyEvent.LOAD_JASSES_FROM_SERVER));
 		}
 	}
 }

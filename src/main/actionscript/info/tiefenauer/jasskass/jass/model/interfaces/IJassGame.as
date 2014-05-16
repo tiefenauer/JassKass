@@ -4,12 +4,16 @@
  */
 package info.tiefenauer.jasskass.jass.model.interfaces
 {
+	
 
 	[Bindable]
 	public interface IJassGame 
 	{
 		function get jass():IJass;
 		function set jass(value:IJass):void;
+		
+		function addPoints(team:IJassTeam, points:Number):void;
+		function addWyses(team:IJassTeam, wyses:Vector.<IWys>):void;
 		
 		function get factor():Number;
 		function set factor(value:Number):void;

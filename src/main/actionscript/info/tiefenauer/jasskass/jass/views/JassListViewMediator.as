@@ -16,6 +16,7 @@ package info.tiefenauer.jasskass.jass.views
 	import info.tiefenauer.jasskass.jass.views.base.JassListViewBase;
 	import info.tiefenauer.jasskass.jass.views.interfaces.IJassListView;
 	import info.tiefenauer.jasskass.profile.events.JassGroupEvent;
+	import info.tiefenauer.jasskass.profile.events.JoinGroupEvent;
 	import info.tiefenauer.jasskass.profile.model.interfaces.IJassGroupProxy;
 	
 	/**
@@ -33,10 +34,11 @@ package info.tiefenauer.jasskass.jass.views
 			addViewListener(JassListViewBase.NEW_JASS_BUTTON_CLICKED, onNewJassButtonClicked);
 			addViewListener(JassListViewBase.JASS_SELECTED, onJassSelected);
 			addViewListener(JassListViewBase.FILTER_SELECTED, onFilterSelected);
-			addViewListener(JassListViewBase.REGISTER_GROUP_BUTTON_CLICKED, onRegisterGroupButtonClicked);
+			addViewListener(JassListViewBase.JOIN_GROUP_BUTTON_CLICKED, onJoinGroupClicked);
 			addViewListener(JassListViewBase.REFRESH_BUTTON_CLICKED, onRefreshButtonClicked);
 			
 			addContextListener(JassProxyEvent.JASSES_CHANGED, onJassesChanged);
+			addContextListener(JoinGroupEvent.GROUP_JOINED, onGroupJoined);
 			
 			view.jassGroup = jassGroupProxy.currentJassGroup;
 			view.jasses.dataProvider = sort(view.filterSelection.selectedIndex);
@@ -46,13 +48,15 @@ package info.tiefenauer.jasskass.jass.views
 		// Private functions
 		//--------------------------
 		private function sort(crit:Number):ArrayCollection{
-			var result:Vector.<IJass> = new Vector.<IJass>();
+			var result:Vector.<IJass> = jassProxy.jassList.filter(function(item:IJass, index:int, vector:Vector.<IJass>):Boolean{
+				return item.group.name == jassGroupProxy.currentJassGroup.name;
+			});
 			switch(crit){
 				case 0:
-					result = jassProxy.jassList.sort(sortJassByDateAsc);
+					result = result.sort(sortJassByDateAsc);
 					break;
 				case 1:
-					result = jassProxy.jassList.sort(sortJassByDateDesc);
+					result = result.sort(sortJassByDateDesc);
 					break;
 			}
 			var ac:ArrayCollection = new ArrayCollection();
@@ -90,8 +94,8 @@ package info.tiefenauer.jasskass.jass.views
 		private function onFilterSelected(event:Event):void{
 			view.jasses.dataProvider = sort(view.filterSelection.selectedIndex);
 		}
-		private function onRegisterGroupButtonClicked(event:Event):void{
-			app.tabbedNavigator.selectedIndex = 3;
+		private function onJoinGroupClicked(event:Event):void{
+			dispatch(new JoinGroupEvent(JoinGroupEvent.JOIN_GROUP, view.groupKey));
 		}
 		private function onRefreshButtonClicked(event:Event):void{
 			dispatch(new JassProxyEvent(JassProxyEvent.SYNC_JASSES));
@@ -102,6 +106,9 @@ package info.tiefenauer.jasskass.jass.views
 		//---------------------------
 		private function onJassesChanged(event:JassProxyEvent):void{
 			view.jasses.dataProvider = sort(view.filterSelection.selectedIndex);
+		}
+		private function onGroupJoined(event:JoinGroupEvent):void{
+			view.jassGroup = jassGroupProxy.currentJassGroup;
 		}
 	}
 }

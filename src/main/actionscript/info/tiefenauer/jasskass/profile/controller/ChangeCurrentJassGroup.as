@@ -1,6 +1,7 @@
 package info.tiefenauer.jasskass.profile.controller
 {
 	import info.tiefenauer.jasskass.app.controller.SimpleCommand;
+	import info.tiefenauer.jasskass.jass.model.JassProxyEvent;
 	import info.tiefenauer.jasskass.profile.events.JassGroupEvent;
 	import info.tiefenauer.jasskass.profile.events.JassGroupProxyEvent;
 	import info.tiefenauer.jasskass.profile.model.interfaces.IJassGroupProxy;
@@ -14,6 +15,7 @@ package info.tiefenauer.jasskass.profile.controller
 			super.execute();
 			jassGroupProxy.currentJassGroup = event.group;
 			dispatch(new JassGroupProxyEvent(JassGroupProxyEvent.SAVE_JASS_GROUPS_TO_FILE));
+			dispatch(new JassProxyEvent(JassProxyEvent.SYNC_JASSES));
 		}
 	}
 }

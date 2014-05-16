@@ -9,6 +9,7 @@ package info.tiefenauer.jasskass.jass.model.vo
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJassGame;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJassTeam;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IWys;
+	import info.tiefenauer.jasskass.profile.model.interfaces.IJassGroup;
 	
 	/**
 	 * 
@@ -19,13 +20,14 @@ package info.tiefenauer.jasskass.jass.model.vo
 	{
 		// private vars
 		private var _id:String = null;
+		private var _group:IJassGroup = null;
 		private var _currentTeam:IJassTeam;
 		private var _date:Date;
 		private var _team1:IJassTeam = new JassTeam();
 		private var _team2:IJassTeam = new JassTeam();
 		private var _games:Vector.<IJassGame> = new Vector.<IJassGame>();
-		private var _team1Striche:Number = 0;
-		private var _team2Striche:Number = 0;
+		private var _team1Penalty:Number = 0;
+		private var _team2Penalty:Number = 0;
 		
 		private var _currentGame:IJassGame;
 		
@@ -61,6 +63,23 @@ package info.tiefenauer.jasskass.jass.model.vo
 			else
 				_currentTeam = _team1;
 		}
+		
+		/**
+		 * Add Penalty for Team 
+		 * @param team 
+		 * @param count
+		 */
+		public function addPenalty(team:IJassTeam, count:Number):void{
+			switch(team){
+				case _team1:
+					_team1Penalty += count;
+					break;
+				case _team2:
+					_team2Penalty += count;
+					break;
+			}
+		}
+			
 		
 		/**
 		 * Get sum for team 1
@@ -120,6 +139,12 @@ package info.tiefenauer.jasskass.jass.model.vo
 		public function set id(value:String):void{
 			_id = value;
 		}
+		public function get group():IJassGroup{
+			return _group;
+		}
+		public function set group(value:IJassGroup):void{
+			_group = value;
+		}
 		public function get date():Date{
 			return _date;
 		}
@@ -151,16 +176,16 @@ package info.tiefenauer.jasskass.jass.model.vo
 			_currentGame = value;
 		}
 		public function get team1Penalty():Number{
-			return _team1Striche;
+			return _team1Penalty;
 		}
 		public function set team1Penalty(value:Number):void{
-			_team1Striche = value;
+			_team1Penalty = value;
 		}
 		public function get team2Penalty():Number{
-			return _team2Striche;
+			return _team2Penalty;
 		}
 		public function set team2Penalty(value:Number):void{
-			_team2Striche = value;
+			_team2Penalty = value;
 		}
 
 	}

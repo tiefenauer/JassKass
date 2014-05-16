@@ -5,6 +5,7 @@
 package info.tiefenauer.jasskass.jass.controller
 {
 	import info.tiefenauer.jasskass.app.controller.SimpleCommand;
+	import info.tiefenauer.jasskass.jass.event.JassEvent;
 	import info.tiefenauer.jasskass.jass.event.WysEvent;
 	import info.tiefenauer.jasskass.jass.model.enum.WysType;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJassProxy;
@@ -25,16 +26,18 @@ package info.tiefenauer.jasskass.jass.controller
 				checkPenalty(wys);
 				wys.value = event.factor * wys.value;
 			}
-			jassProxy.addWysToCurrentGame(event.team, event.wyses)
+			jassProxy.currentJass.currentGame.addWyses(event.team, event.wyses);
+			
+			dispatch(new JassEvent(JassEvent.CHECK_PENALTY, jassProxy.currentJass));
 		}
 		
 		private function checkPenalty(wys:IWys):void{
 			switch(wys.type){
 				case WysType.VIER_BAUERN:
 					if (event.team == jassProxy.currentJass.team1)
-						jassProxy.addPenaltyToCurrentJass(jassProxy.currentJass.team2, 1);
-					else
-						jassProxy.addPenaltyToCurrentJass(jassProxy.currentJass.team1, 1);
+						jassProxy.currentJass.addPenalty(jassProxy.currentJass.team2, 1);
+					else if(event.team == jassProxy.currentJass.team2)
+						jassProxy.currentJass.addPenalty(jassProxy.currentJass.team1, 1);
 					break;
 			}
 		}

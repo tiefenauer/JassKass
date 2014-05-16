@@ -5,6 +5,7 @@
 package info.tiefenauer.jasskass.jass.model.interfaces
 {
 	import info.tiefenauer.jasskass.azure.model.IAzureObject;
+	import info.tiefenauer.jasskass.profile.model.interfaces.IJassGroup;
 	
 
 	[Bindable]
@@ -12,11 +13,17 @@ package info.tiefenauer.jasskass.jass.model.interfaces
 	{
 		function get games():Vector.<IJassGame>;
 		
+		function addPenalty(team:IJassTeam, count:Number):void;
+		
 		function newGame():void;
 		function newRound():void;
 		
 		function get id():String;
 		function set id(value:String):void;
+		
+		function get group():IJassGroup;
+		function set group(value:IJassGroup):void;
+		
 		function get date():Date;
 		function set date(value:Date):void;
 		

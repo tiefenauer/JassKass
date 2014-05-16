@@ -4,6 +4,7 @@ package info.tiefenauer.jasskass.jass.model.factory
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJass;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJassGame;
 	import info.tiefenauer.jasskass.jass.model.vo.Jass;
+	import info.tiefenauer.jasskass.profile.model.factory.JassGroupFactory;
 
 	public class JassFactory
 	{
@@ -14,6 +15,9 @@ package info.tiefenauer.jasskass.jass.model.factory
 				switch(key){
 					case 'id':
 						jass.id = obj[key];
+						break;
+					case 'group':
+						jass.group = JassGroupFactory.fromObject(obj[key]);
 						break;
 					case 'isSynced':
 						jass.isSynced = str2bool(obj[key]);
@@ -54,6 +58,7 @@ package info.tiefenauer.jasskass.jass.model.factory
 		public static function toObject(jass:IJass):Object{
 			var obj:Object = new Object();
 			obj['id'] = jass.id;
+			obj['group'] = JassGroupFactory.toObject(jass.group);
 			obj['isSynced'] = jass.isSynced;
 			obj['date'] = jass.date.time;
 			obj['team1'] = JassTeamFactory.toObject(jass.team1);

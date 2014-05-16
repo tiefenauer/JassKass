@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<base:RegisterGroupViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
+<base:JoinGroupViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
 							xmlns:s="library://ns.adobe.com/flex/spark" 
 							xmlns:base="info.tiefenauer.jasskass.profile.views.base.*"
-							implements="info.tiefenauer.jasskass.profile.views.interfaces.IRegisterGroupView"
+							implements="info.tiefenauer.jasskass.profile.views.interfaces.IJoinGroupView"
 							title="{translate('Beitreten')}"
 							>
 	<fx:Script>
@@ -32,4 +32,4 @@
 	<s:Button label="{translate('Beitreten')}" width="100%" click="onSubmitButtonClicked(event)"/>
 	<s:Button label="{translate('Abbrechen')}" width="100%" click="onCancelButtonClicked(event)"/>
 	
-</base:RegisterGroupViewBase>
+</base:JoinGroupViewBase>
