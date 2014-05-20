@@ -34,7 +34,7 @@ package info.tiefenauer.jasskass.app.model
 			if (!_file)
 				throw new Error("No file specified!");
 			if (!_file.exists)
-				throw new Error("No file specified!");
+				throw new Error("File does not exist!");
 			if (_file.isDirectory)
 				throw new Error("Can't read from directory!");
 			

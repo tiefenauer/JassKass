@@ -14,16 +14,13 @@
 package test.info.tiefenauer.jasskass.kass.controller
 {
 	import flash.events.EventDispatcher;
-	import flash.utils.setTimeout;
 	
 	import info.tiefenauer.jasskass.azure.service.KassService;
 	import info.tiefenauer.jasskass.kass.controller.DownloadKassData;
 	import info.tiefenauer.jasskass.kass.events.KassEvent;
 	import info.tiefenauer.jasskass.kass.model.Kass;
-	import info.tiefenauer.jasskass.kass.model.interfaces.IKass;
 	import info.tiefenauer.jasskass.profile.model.JassGroup;
 	
-	import mockolate.mock;
 	import mockolate.stub;
 	import mockolate.runner.MockolateRule;
 	

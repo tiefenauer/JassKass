@@ -39,6 +39,8 @@ package info.tiefenauer.jasskass.kass.model
 			});
 			if (result.length == 0)
 				_entries.push(value);
+			else
+				_entries.splice(_entries.indexOf(result[0]), 1, value);
 		}
 		
 		//------------------------

@@ -57,7 +57,7 @@ package test.info.tiefenauer.jasskass.kass.model.factory
 		public function testFromAzureObject():void{
 			var kassAmount:IKassAmount = KassAmountFactory.fromAzureObject({
 				id: 'someId',
-				player: 'somePlayer',
+				playerid: 'somePlayer',
 				value: 10
 			});
 			
@@ -70,7 +70,7 @@ package test.info.tiefenauer.jasskass.kass.model.factory
 		public function shouldBeZero():void{
 			var kassAmount:IKassAmount = KassAmountFactory.fromAzureObject({
 				id: 'someId',
-				player: 'somePlayer',
+				playerid: 'somePlayer',
 				value: 'someInvalidValue'
 			});
 			
@@ -90,8 +90,8 @@ package test.info.tiefenauer.jasskass.kass.model.factory
 			var obj:Object = KassAmountFactory.toAzureObject(amount);
 			assertNotNull(obj.id);
 			assertEquals(amount.id, obj.id);
-			assertNotNull(obj.player);
-			assertEquals(amount.player.id, obj.player);
+			assertNotNull(obj.playerid);
+			assertEquals(amount.player.id, obj.playerid);
 			assertNotNull(obj.value);
 			assertEquals(amount.value, obj.value);
 		}

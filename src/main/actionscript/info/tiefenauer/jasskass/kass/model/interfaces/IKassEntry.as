@@ -12,6 +12,9 @@ package info.tiefenauer.jasskass.kass.model.interfaces
 		function get id():String;
 		function set id(value:String):void;
 		
+		function get isSynced():Boolean;
+		function set isSynced(value:Boolean):void;
+		
 		function get date():Date;
 		function set date(value:Date):void;
 		

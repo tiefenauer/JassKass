@@ -62,10 +62,10 @@ package test.info.tiefenauer.jasskass.kass.model.factory
 				id: 'someId',
 				date: now.time,
 				amounts: [
-					{ id: 'someId1', player: 'player1', value: 10},  
-					{ id: 'someId2', player: 'player2', value: 20},  
-					{ id: 'someId3', player: 'player3', value: 30},  
-					{ id: 'someId4', player: 'player4', value: 40}  
+					{ id: 'someId1', playerid: 'player1', value: 10},  
+					{ id: 'someId2', playerid: 'player2', value: 20},  
+					{ id: 'someId3', playerid: 'player3', value: 30},  
+					{ id: 'someId4', playerid: 'player4', value: 40}  
 				]
 			});
 			assertEquals('someId', kassEntry.id)

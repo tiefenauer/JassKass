@@ -45,7 +45,7 @@ package info.tiefenauer.jasskass.kass.model.factory
 		 */
 		public static function toAzureObject(entry:IKassEntry):Object {
 			var obj:Object = new Object();
-			if (entry.id)
+			if (entry.id && entry.id.length > 0)
 				obj.id = entry.id;
 			if (entry.date)
 				obj.date = entry.date.time;

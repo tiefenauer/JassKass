@@ -5,19 +5,26 @@ package info.tiefenauer.jasskass.jass.controller
 	import spark.events.PopUpEvent;
 	
 	import info.tiefenauer.jasskass.app.controller.SimpleCommand;
-	import info.tiefenauer.jasskass.azure.event.AzureJassEvent;
 	import info.tiefenauer.jasskass.app.util.Network;
 	import info.tiefenauer.jasskass.app.util.translate;
+	import info.tiefenauer.jasskass.azure.event.AzureJassEvent;
 	import info.tiefenauer.jasskass.jass.event.JassEvent;
 	import info.tiefenauer.jasskass.jass.model.JassProxyEvent;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJassProxy;
 	
+	/**
+	 * 
+	 * @author dtie
+	 */
 	public class FinishJass extends SimpleCommand
 	{
 		[Inject] public var event:JassEvent;
 		[Inject] public var jassProxy:IJassProxy;
 		[Inject] public var app:JassKass;
 		
+		/**
+		 * 
+		 */
 		override public function execute():void{
 			super.execute();
 			var alertPopup:AlertPopup = new AlertPopup(AlertPopup.WARNING);
@@ -35,9 +42,9 @@ package info.tiefenauer.jasskass.jass.controller
 						dispatch(new AzureJassEvent(AzureJassEvent.ADD_JASS, event.jass));
 					
 					app.activeNavigator.popView();
+					dispatch(new JassEvent(JassEvent.JASS_FINISHED, event.jass));
 				}
 			});
-				
 		}
 	}
 }

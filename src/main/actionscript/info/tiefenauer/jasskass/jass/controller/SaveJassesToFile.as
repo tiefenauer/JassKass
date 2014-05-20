@@ -19,6 +19,10 @@ package info.tiefenauer.jasskass.jass.controller
 		[Inject] public var event:JassProxyEvent;
 		[Inject] public var jassProxy:IJassProxy;
 		
+		/**
+		 * 
+		 * 
+		 */
 		override public function execute():void{
 			super.execute();
 			var jassArr:Array = new Array();

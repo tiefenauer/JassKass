@@ -18,7 +18,7 @@ package test.info.tiefenauer.jasskass.app.models
 		/*============================================================================*/
 		/* Private Properties                                                         */
 		/*============================================================================*/
-		[Embed(source="/sampleTextFile.txt",mimeType="application/octet-stream")]
+		[Embed(source="/sampleTextFile.rtf",mimeType="application/octet-stream")]
 		private static const SampleFile:Class;
 		
 		private var service:TextFileService; 
@@ -32,7 +32,7 @@ package test.info.tiefenauer.jasskass.app.models
 		public function setUp():void
 		{
 			service = new TextFileService();
-			testFile = File.applicationDirectory.resolvePath('assets/sampleTextFile.txt');
+			testFile = File.applicationDirectory.resolvePath('sampleTextFile.rtf');
 			var bytes:ByteArray = new SampleFile() as ByteArray;
 			testContent = bytes.readUTFBytes(bytes.length);
 		}
@@ -66,7 +66,7 @@ package test.info.tiefenauer.jasskass.app.models
 		}
 		[Test]
 		public function testWrite():void{
-			service.file = File.createTempFile();
+			service.file = File.applicationStorageDirectory.resolvePath('sampleTextFile.txt');
 			service.write(testContent);
 			
 			var fs:FileStream = new FileStream();

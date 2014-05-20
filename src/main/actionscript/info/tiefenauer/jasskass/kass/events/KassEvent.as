@@ -18,6 +18,14 @@ package info.tiefenauer.jasskass.kass.events
 		public static const DOWNLOAD_KASS_DATA_START:String = NAME + 'DownloadKassDataStart';
 		public static const DOWNLOAD_KASS_DATA_END:String = NAME + 'DownloadKassDataEnd';
 		
+		public static const SYNC_KASS_DATA:String = NAME + 'SyncKassData';
+		public static const SYNC_KASS_DATA_START:String = NAME + 'SyncKassDataStart';
+		public static const SYNC_KASS_DATA_END:String = NAME + 'SyncKassDataEnd';
+		
+		public static const SAVE_KASS_DATA:String = NAME + 'SaveKassData';
+		public static const SAVE_KASS_DATA_START:String = NAME + 'SaveKassDataStart';
+		public static const SAVE_KASS_DATA_END:String = NAME + 'SaveKassDataEnd';
+		
 		public var group:IJassGroup;
 		public var kass:IKass;
 		

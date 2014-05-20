@@ -66,7 +66,7 @@ package test.info.tiefenauer.jasskass.kass.model.factory
 			var now:Date = new Date();
 			var kass:IKass = KassFactory.fromAzureObject({
 				id: 'someId',
-				group: 'someGroupId',
+				groupid: 'someGroupId',
 				entries: [
 					{
 						id: 'entry1', 
@@ -115,7 +115,7 @@ package test.info.tiefenauer.jasskass.kass.model.factory
 			
 			var obj:Object = KassFactory.toAzureObject(kass);
 			assertEquals(kass.id, obj.id);
-			assertEquals(kass.group.id, obj.group);
+			assertEquals(kass.group.id, obj.groupid);
 			assertTrue(obj.entries is Array);
 			assertEquals(kass.entries.length, (obj.entries as Array).length);
 		}

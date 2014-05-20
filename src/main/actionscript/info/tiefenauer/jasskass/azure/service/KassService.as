@@ -41,6 +41,7 @@ package info.tiefenauer.jasskass.azure.service
 		 * 
 		 */
 		public function getKass(group:IJassGroup):void{
+			_endpoint = 'getkass';
 			if (group.id && group.id.length > 0){
 				byId(group.id);
 			}
@@ -50,6 +51,21 @@ package info.tiefenauer.jasskass.azure.service
 			else{
 				throw(new Error('Key und/oder ID müssen angegeben werden!'));
 			}
+		}
+		
+		/**
+		 * 
+		 * @param group
+		 * @param entries
+		 */
+		public function addEntries(kass:IKass, entries:Array):void{
+			_body = JSON.stringify({
+				kass: {
+					groupid: kass.group.id,
+					entries: entries
+				}
+			});
+			POST();
 		}
 		
 		private function byId(id:String):void{

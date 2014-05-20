@@ -36,9 +36,11 @@ package info.tiefenauer.jasskass.kass.model.factory
 			var kass:IKass = new Kass();
 			for(var key:String in obj) switch(key){
 				case 'id':
-					kass.id = obj[key];
+					var id:String = obj[key];
+					if (id && id.length > 0)
+						kass.id = id;
 					break;
-				case 'group':
+				case 'groupid':
 					kass.group = new JassGroup();
 					kass.group.id = obj[key];
 					break;
@@ -61,10 +63,10 @@ package info.tiefenauer.jasskass.kass.model.factory
 		 */
 		public static function toAzureObject(kass:IKass):Object{
 			var obj:Object = new Object();
-			if (kass.id)
+			if (kass.id && kass.id.length > 0)
 				obj.id = kass.id;
 			if (kass.group)
-				obj.group = kass.group.id;
+				obj.groupid = kass.group.id;
 			var entries:Array = [];
 			for each(var entry:IKassEntry in kass.entries){
 				entries.push(KassEntryFactory.toAzureObject(entry));

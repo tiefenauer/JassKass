@@ -31,6 +31,8 @@ package info.tiefenauer.jasskass.app.controller.startup
 	import info.tiefenauer.jasskass.jass.event.WysEvent;
 	import info.tiefenauer.jasskass.jass.model.JassProxyEvent;
 	import info.tiefenauer.jasskass.kass.controller.DownloadKassData;
+	import info.tiefenauer.jasskass.kass.controller.SaveKassDataToFile;
+	import info.tiefenauer.jasskass.kass.controller.SyncKassData;
 	import info.tiefenauer.jasskass.kass.events.KassEvent;
 	import info.tiefenauer.jasskass.profile.controller.ChangeCurrentJassGroup;
 	import info.tiefenauer.jasskass.profile.controller.CreateJassPlayer;
@@ -110,6 +112,8 @@ package info.tiefenauer.jasskass.app.controller.startup
 			
 			// JassKass
 			commandMap.map(KassEvent.DOWNLOAD_KASS_DATA).toCommand(DownloadKassData);
+			commandMap.map(KassEvent.SYNC_KASS_DATA).toCommand(SyncKassData);
+			commandMap.map(KassEvent.SAVE_KASS_DATA).toCommand(SaveKassDataToFile);
 			
 			// Azure-Events
 			commandMap.map(AzureJassEvent.ADD_JASS).toCommand(AddAzureJass);

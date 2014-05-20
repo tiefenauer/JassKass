@@ -36,7 +36,7 @@ package info.tiefenauer.jasskass.kass.model.factory
 				case 'id':
 					kassAmount.id = obj[key];
 					break;
-				case 'player':
+				case 'playerid':
 					kassAmount.player = new JassPlayer();
 					kassAmount.player.id = obj[key];
 					break;
@@ -60,7 +60,7 @@ package info.tiefenauer.jasskass.kass.model.factory
 			if (amount.id)
 				obj.id = amount.id;
 			if (amount.player)
-				obj.player = amount.player.id;
+				obj.playerid = amount.player.id;
 			if (amount.value)
 				obj.value = amount.value;
 			return obj;
