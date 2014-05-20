@@ -9,6 +9,11 @@ package info.tiefenauer.jasskass.azure.service
 	
 	import org.osflash.signals.Signal;
 
+	/**
+	 * 
+	 * @author dtie
+	 * 
+	 */
 	public class AddJassService extends AzureService
 	{
 		/**

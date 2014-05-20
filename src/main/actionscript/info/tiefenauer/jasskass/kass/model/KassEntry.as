@@ -14,6 +14,7 @@
 
 package info.tiefenauer.jasskass.kass.model
 {
+	import info.tiefenauer.jasskass.kass.model.interfaces.IKass;
 	import info.tiefenauer.jasskass.kass.model.interfaces.IKassAmount;
 	import info.tiefenauer.jasskass.kass.model.interfaces.IKassEntry;
 	
@@ -26,6 +27,7 @@ package info.tiefenauer.jasskass.kass.model
 		private var _id:String;
 		private var _isSynced:Boolean = false;
 		private var _date:Date;
+		private var _kass:IKass
 		private var _amounts:Vector.<IKassAmount> = new Vector.<IKassAmount>();
 		
 		/**
@@ -73,6 +75,12 @@ package info.tiefenauer.jasskass.kass.model
 		}
 		public function set date(value:Date):void{
 			_date = value;
+		}
+		public function get kass():IKass{
+			return _kass;
+		}
+		public function set kass(value:IKass):void{
+			_kass = value;
 		}
 		public function get amounts():Vector.<IKassAmount>{
 			return _amounts;

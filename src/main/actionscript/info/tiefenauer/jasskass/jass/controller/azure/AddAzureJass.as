@@ -38,6 +38,7 @@ package info.tiefenauer.jasskass.jass.controller.azure
 		
 		private function onJassAdded(jass:IJass):void{
 			release();
+			jass.group = jassGroupProxy.currentJassGroup;
 			jass.isSynced = true;
 			jassProxy.addJass(jass);
 			dispatch(new JassProxyEvent(JassProxyEvent.SAVE_JASSES_TO_FILE));

@@ -30,6 +30,7 @@ package info.tiefenauer.jasskass.app.controller.startup
 	import info.tiefenauer.jasskass.jass.event.PointsEvent;
 	import info.tiefenauer.jasskass.jass.event.WysEvent;
 	import info.tiefenauer.jasskass.jass.model.JassProxyEvent;
+	import info.tiefenauer.jasskass.kass.controller.CreateKassEntry;
 	import info.tiefenauer.jasskass.kass.controller.DownloadKassData;
 	import info.tiefenauer.jasskass.kass.controller.SaveKassDataToFile;
 	import info.tiefenauer.jasskass.kass.controller.SyncKassData;
@@ -74,6 +75,7 @@ package info.tiefenauer.jasskass.app.controller.startup
 			commandMap.map(JassEvent.CHECK_PENALTY).toCommand(CheckPenalty);
 			commandMap.map(JassEvent.HIDE_PENALTY).toCommand(HideScore);
 			commandMap.map(JassEvent.SHOW_JASS_DETAIL).toCommand(ShowJassDetails);
+			commandMap.map(JassEvent.CREATE_KASS_ENTRY).toCommand(CreateKassEntry);
 			
 			// JassGroup
 			commandMap.map(JassGroupEvent.NEW_JASS_WITH_GROUP).toCommand(NewJass);

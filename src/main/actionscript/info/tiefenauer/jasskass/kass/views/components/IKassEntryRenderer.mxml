@@ -13,14 +13,13 @@
 		<![CDATA[
 			import spark.formatters.DateTimeFormatter;
 			
-			import info.tiefenauer.jasskass.app.util.translate;
 			import info.tiefenauer.jasskass.kass.model.interfaces.IKassEntry;
 			
 			private function getLabel(item:IKassEntry):String{
-				return "some Label";
+				return item.kass.group.name;
 			}
 			private function getMessage(item:IKassEntry):String{
-				return "some Message";
+				return df.format(item.date);
 			}
 			
 			public function get entry():IKassEntry{

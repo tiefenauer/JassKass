@@ -41,8 +41,9 @@ package info.tiefenauer.jasskass.jass.controller
 					if (Network.hasNetwork)
 						dispatch(new AzureJassEvent(AzureJassEvent.ADD_JASS, event.jass));
 					
-					app.activeNavigator.popView();
+					app.activeNavigator.popToFirstView();;
 					dispatch(new JassEvent(JassEvent.JASS_FINISHED, event.jass));
+					dispatch(new JassEvent(JassEvent.CREATE_KASS_ENTRY, event.jass));
 				}
 			});
 		}

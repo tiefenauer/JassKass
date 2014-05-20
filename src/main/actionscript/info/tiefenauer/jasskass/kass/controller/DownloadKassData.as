@@ -28,8 +28,9 @@ package info.tiefenauer.jasskass.kass.controller
 		 * 
 		 * @param kass
 		 */
-		private function onKassDownloaded(kass:IKass):void{
+		private function onKassDownloaded(responseObj:Object):void{
 			release();
+			var kass:IKass = responseObj.kass?responseObj.kass:null;
 			var downloadedEvent:KassEvent = new KassEvent(KassEvent.DOWNLOAD_KASS_DATA_END);
 			downloadedEvent.group = event.group;
 			downloadedEvent.kass = kass;

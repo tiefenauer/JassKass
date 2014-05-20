@@ -30,7 +30,7 @@ package info.tiefenauer.jasskass.kass.controller
 		[Inject] public var kassProxy:IKassProxy;
 		[Inject] public var service:KassService;
 		
-		private var unSynced:Array = [];
+		private var unSynced:Vector.<IKassEntry> = new Vector.<IKassEntry>();
 		
 		/**
 		 * 

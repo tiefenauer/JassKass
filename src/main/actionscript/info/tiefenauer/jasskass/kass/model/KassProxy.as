@@ -45,7 +45,13 @@ package info.tiefenauer.jasskass.kass.model
 			}
 			
 		}
-		public function addEntry(entry:IKassEntry, kass:IKass=null){
+		/**
+		 * 
+		 * @param entry
+		 * @param kass
+		 * 
+		 */
+		public function addEntry(entry:IKassEntry, kass:IKass=null):void{
 			if (!kass)
 				kass = currentKass;
 			if (kass)
@@ -67,7 +73,7 @@ package info.tiefenauer.jasskass.kass.model
 		 * @return 
 		 */
 		public function get currentKass():IKass{
-			var result:Vector.<IKass> = _kasses.filter(function(item:IKass, index:int, vector:Vector.<IKass):Boolean{
+			var result:Vector.<IKass> = _kasses.filter(function(item:IKass, index:int, vector:Vector.<IKass>):Boolean{
 				return item.group.id == jassGroupProxy.currentJassGroup.id; 
 			});
 			if (result.length > 0)

@@ -8,6 +8,7 @@ package info.tiefenauer.jasskass.kass.views
 	import info.tiefenauer.jasskass.kass.model.interfaces.IKassEntry;
 	import info.tiefenauer.jasskass.kass.views.base.KassViewBase;
 	import info.tiefenauer.jasskass.kass.views.interfaces.IKassView;
+	import info.tiefenauer.jasskass.profile.model.interfaces.IJassGroupProxy;
 	
 	import robotlegs.bender.bundles.mvcs.Mediator;
 	
@@ -18,6 +19,7 @@ package info.tiefenauer.jasskass.kass.views
 	public class KassViewMediator extends Mediator
 	{
 		[Inject] public var view:IKassView;
+		[Inject] public var jassGroupProxy:IJassGroupProxy;
 		
 		private var _kassEntries:Vector.<IKassEntry>;
 		
@@ -27,7 +29,9 @@ package info.tiefenauer.jasskass.kass.views
 			
 			addContextListener(KassEvent.DOWNLOAD_KASS_DATA_END, onDownloadKassDataEnd);
 			
-			dispatch(new KassEvent(KassEvent.DOWNLOAD_KASS_DATA));
+			var downloadEvent:KassEvent = new KassEvent(KassEvent.DOWNLOAD_KASS_DATA);
+			downloadEvent.group = jassGroupProxy.currentJassGroup;
+			dispatch(downloadEvent);
 		}
 		
 		//--------------------------
@@ -91,6 +95,8 @@ package info.tiefenauer.jasskass.kass.views
 		 * @param event
 		 */
 		private function onDownloadKassDataEnd(event:KassEvent):void{
+			_kassEntries = event.kass.entries;
+			view.entries = sort(view.filterSelection.selectedIndex);
 		}
 			
 	}

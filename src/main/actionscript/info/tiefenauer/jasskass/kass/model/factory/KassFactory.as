@@ -48,6 +48,7 @@ package info.tiefenauer.jasskass.kass.model.factory
 					var entries:Array = obj[key];
 					for each(var entryObj:Object in entries){
 						var entry:IKassEntry = KassEntryFactory.fromAzureObject(entryObj);
+						entry.kass = kass;
 						kass.addEntry(entry);
 					}
 					break;

@@ -37,9 +37,10 @@ package info.tiefenauer.jasskass.kass.controller
 		 * 
 		 */
 		override public function execute():void{
-			// create entries for Team 1
 			var kassEntry:IKassEntry = new KassEntry();
 			var amount:IKassAmount
+			
+			// create entries for Team 1
 			amount = new KassAmount();
 			amount.player = event.jass.team1.player1;
 			amount.value = event.jass.team1Penalty;
@@ -48,9 +49,8 @@ package info.tiefenauer.jasskass.kass.controller
 			amount.player = event.jass.team1.player2;
 			amount.value = event.jass.team1Penalty;
 			kassEntry.addAmount(amount);
+			
 			// create entries for Team 2
-			var kassEntry:IKassEntry = new KassEntry();
-			var amount:IKassAmount
 			amount = new KassAmount();
 			amount.player = event.jass.team2.player1;
 			amount.value = event.jass.team2Penalty;

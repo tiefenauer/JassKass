@@ -18,6 +18,9 @@ package info.tiefenauer.jasskass.kass.model.interfaces
 		function get date():Date;
 		function set date(value:Date):void;
 		
+		function get kass():IKass;
+		function set kass(value:IKass):void;
+		
 		function get amounts():Vector.<IKassAmount>;
 		
 		function get totalAmount():Number;
