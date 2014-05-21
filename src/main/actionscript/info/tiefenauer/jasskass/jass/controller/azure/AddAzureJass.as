@@ -7,7 +7,7 @@ package info.tiefenauer.jasskass.jass.controller.azure
 	import info.tiefenauer.jasskass.app.controller.SimpleCommand;
 	import info.tiefenauer.jasskass.app.util.Network;
 	import info.tiefenauer.jasskass.azure.event.AzureJassEvent;
-	import info.tiefenauer.jasskass.azure.service.AddJassService;
+	import info.tiefenauer.jasskass.azure.service.JassService;
 	import info.tiefenauer.jasskass.jass.event.JassEvent;
 	import info.tiefenauer.jasskass.jass.model.JassProxyEvent;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJass;
@@ -25,7 +25,7 @@ package info.tiefenauer.jasskass.jass.controller.azure
 		[Inject] public var jassProxy:IJassProxy;
 		[Inject] public var jassGroupProxy:IJassGroupProxy;
 		[Inject] public var app:JassKass;
-		[Inject] public var service:AddJassService;
+		[Inject] public var service:JassService;
 		
 		override public function execute():void{
 			super.execute();

@@ -10,38 +10,55 @@ package info.tiefenauer.jasskass.azure.service
 	
 	import org.osflash.signals.Signal;
 
-	public class GetJassesService extends AzureService
+	/**
+	 * 
+	 * @author dtie
+	 */
+	public class JassService extends AzureService
 	{
 		/**
 		 * Constructor 
 		 */
-		public function GetJassesService(){
+		public function JassService(){
 			super('getjasses/');
 			onSuccess = new Signal(Vector.<IJass>);
-			_completeHandler = onJassesDownloaded;
 		}
 		
+		/**
+		 * 
+		 * @param group
+		 */
 		public function getJasses(group:IJassGroup):void{
+			_endpoint = 'getJasses';
+			_completeHandler = onJassesDownloaded;
+
 			if (group.id && group.id.length > 0){
-				byId(group.id);
+				_endpoint += '/byId?groupId=' + group.id;
+				GET();
 			}
 			else if (group.key && group.key.length > 0){
-				byKey(group.key);
+				_endpoint += '/byKey?groupKey=' + group.key;
+				GET();
 			}
 			else{
 				throw(new Error('Key und/oder ID müssen angegeben werden!'));
 			}
 		}
 		
-		private function byId(id:String):void{
-			_endpoint += 'byId?';
-			_endpoint += 'groupId=' + id;			
-			GET();
-		}
-		private function byKey(key:String):void{
-			_endpoint += 'byKey?';
-			_endpoint += 'groupKey=' + key;
-			GET();
+		/**
+		 * 
+		 * @param jass
+		 * @param group
+		 * 
+		 */
+		public function addJass(jass:IJass, group:IJassGroup):void{
+			_endpoint = 'addjass';
+			_completeHandler = onJassAdded;
+			_body = {
+				jass: JassFactory.toAzureObject(jass),
+					group: JassGroupFactory.toObject(group)
+			};
+			POST();
 		}
 		
 		/**
@@ -93,6 +110,21 @@ package info.tiefenauer.jasskass.azure.service
 					jasses.push(jass);
 				}
 				onSuccess.dispatch(jasses);
+			}
+			catch(error:Error){
+				onError.dispatch(error);
+			}
+		}
+		
+		/**
+		 * 
+		 * @param event
+		 */
+		private function onJassAdded(event:Event):void{
+			try{
+				var responseObj:Object = JSON.parse(urlLoader.data);
+				var jass:IJass = JassFactory.fromAzureObject(responseObj);
+				onSuccess.dispatch(jass);
 			}
 			catch(error:Error){
 				onError.dispatch(error);

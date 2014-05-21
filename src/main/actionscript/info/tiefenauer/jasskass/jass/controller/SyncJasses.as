@@ -2,7 +2,7 @@ package info.tiefenauer.jasskass.jass.controller
 {
 	import info.tiefenauer.jasskass.app.controller.SimpleCommand;
 	import info.tiefenauer.jasskass.azure.event.AzureJassEvent;
-	import info.tiefenauer.jasskass.azure.service.GetJassesService;
+	import info.tiefenauer.jasskass.azure.service.JassService;
 	import info.tiefenauer.jasskass.jass.model.JassProxyEvent;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJass;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJassProxy;
@@ -15,7 +15,7 @@ package info.tiefenauer.jasskass.jass.controller
 	public class SyncJasses extends SimpleCommand
 	{
 		[Inject] public var event:JassProxyEvent;
-		[Inject] public var getJassesService:GetJassesService;
+		[Inject] public var getJassesService:JassService;
 		[Inject] public var jassProxy:IJassProxy;
 		[Inject] public var jassGroupProxy:IJassGroupProxy;
 

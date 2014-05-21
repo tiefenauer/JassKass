@@ -1,7 +1,7 @@
 package info.tiefenauer.jasskass.profile.controller
 {
 	import info.tiefenauer.jasskass.app.controller.SimpleCommand;
-	import info.tiefenauer.jasskass.azure.service.GetGroupService;
+	import info.tiefenauer.jasskass.azure.service.GroupService;
 	import info.tiefenauer.jasskass.jass.model.JassProxyEvent;
 	import info.tiefenauer.jasskass.profile.events.JassGroupProxyEvent;
 	import info.tiefenauer.jasskass.profile.events.JoinGroupEvent;
@@ -15,7 +15,7 @@ package info.tiefenauer.jasskass.profile.controller
 	public class JoinGroup extends SimpleCommand
 	{
 		[Inject] public var event:JoinGroupEvent;
-		[Inject] public var service:GetGroupService;
+		[Inject] public var service:GroupService;
 		[Inject] public var jassGroupProxy:IJassGroupProxy;
 		
 		override public function execute():void{
@@ -23,7 +23,7 @@ package info.tiefenauer.jasskass.profile.controller
 			
 			detain();
 			service.onSuccess.addOnce(onGroupReceived);
-			service.registerGroup(event.code);
+			service.joinGroup(event.code);
 		}
 		
 		private function onGroupReceived(group:IJassGroup):void{

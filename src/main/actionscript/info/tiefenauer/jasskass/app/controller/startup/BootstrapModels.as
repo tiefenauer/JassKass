@@ -13,12 +13,9 @@ package info.tiefenauer.jasskass.app.controller.startup
 	import info.tiefenauer.jasskass.app.model.TextFileService;
 	import info.tiefenauer.jasskass.app.model.interfaces.IConfigProxy;
 	import info.tiefenauer.jasskass.app.model.interfaces.ITextFileService;
-	import info.tiefenauer.jasskass.azure.service.AddGroupService;
-	import info.tiefenauer.jasskass.azure.service.AddJassService;
-	import info.tiefenauer.jasskass.azure.service.GetGroupService;
-	import info.tiefenauer.jasskass.azure.service.GetJassesService;
+	import info.tiefenauer.jasskass.azure.service.GroupService;
+	import info.tiefenauer.jasskass.azure.service.JassService;
 	import info.tiefenauer.jasskass.azure.service.KassService;
-	import info.tiefenauer.jasskass.azure.service.UpdateJassService;
 	import info.tiefenauer.jasskass.jass.model.JassProxy;
 	import info.tiefenauer.jasskass.jass.model.JassTeamProxy;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJassProxy;
@@ -54,11 +51,8 @@ package info.tiefenauer.jasskass.app.controller.startup
 			
 			// Services
 			injector.map(ITextFileService).toType(TextFileService);
-			injector.map(AddJassService).toType(AddJassService);
-			injector.map(AddGroupService).toType(AddGroupService);
-			injector.map(GetJassesService).toType(GetJassesService);
-			injector.map(GetGroupService).toType(GetGroupService);
-			injector.map(UpdateJassService).toType(UpdateJassService);
+			injector.map(JassService).toType(JassService);
+			injector.map(GroupService).toType(GroupService);
 			injector.map(KassService).toType(KassService);
 			
 			// authorization

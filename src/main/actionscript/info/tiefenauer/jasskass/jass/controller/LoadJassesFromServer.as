@@ -1,7 +1,7 @@
 package info.tiefenauer.jasskass.jass.controller
 {
 	import info.tiefenauer.jasskass.app.controller.SimpleCommand;
-	import info.tiefenauer.jasskass.azure.service.GetJassesService;
+	import info.tiefenauer.jasskass.azure.service.JassService;
 	import info.tiefenauer.jasskass.jass.model.JassProxyEvent;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJass;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJassProxy;
@@ -14,7 +14,7 @@ package info.tiefenauer.jasskass.jass.controller
 	public class LoadJassesFromServer extends SimpleCommand
 	{
 		[Inject] public var event:JassProxyEvent;
-		[Inject] public var service:GetJassesService;
+		[Inject] public var service:JassService;
 		[Inject] public var jassProxy:IJassProxy;
 		[Inject] public var jassGroupProxy:IJassGroupProxy;
 		

@@ -13,14 +13,14 @@
  */
 package test.info.tiefenauer.jasskass.azure
 {
-	import info.tiefenauer.jasskass.azure.service.GetJassesService;
+	import info.tiefenauer.jasskass.azure.service.JassService;
 
 	public class GetJassesServiceTest
 	{		
 		/*============================================================================*/
 		/* Private Properties                                                         */
 		/*============================================================================*/
-		private var service:GetJassesService;
+		private var service:JassService;
 		
 		/*============================================================================*/
 		/* Test Setup and Teardown                                                    */
@@ -28,7 +28,7 @@ package test.info.tiefenauer.jasskass.azure
 		[Before]
 		public function setUp():void
 		{
-			service = new GetJassesService();
+			service = new JassService();
 		}
 		
 		[After]

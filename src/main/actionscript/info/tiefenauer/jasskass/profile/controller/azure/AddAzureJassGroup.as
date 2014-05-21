@@ -3,7 +3,7 @@ package info.tiefenauer.jasskass.profile.controller.azure
 	import flash.net.URLLoader;
 	
 	import info.tiefenauer.jasskass.app.controller.SimpleCommand;
-	import info.tiefenauer.jasskass.azure.service.AddGroupService;
+	import info.tiefenauer.jasskass.azure.service.GroupService;
 	import info.tiefenauer.jasskass.profile.events.AzureGroupEvent;
 	import info.tiefenauer.jasskass.profile.events.JassGroupProxyEvent;
 	import info.tiefenauer.jasskass.profile.model.JassGroup;
@@ -19,10 +19,14 @@ package info.tiefenauer.jasskass.profile.controller.azure
 		[Inject] public var event:AzureGroupEvent;
 		[Inject] public var jassGroupProxy:IJassGroupProxy;
 		[Inject] public var app:JassKass;
-		[Inject] public var service:AddGroupService;
+		[Inject] public var service:GroupService;
 		
 		private var loader:URLLoader = new URLLoader();
 		
+		/**
+		 * 
+		 * 
+		 */
 		override public function execute():void{
 			super.execute();
 			
@@ -32,6 +36,11 @@ package info.tiefenauer.jasskass.profile.controller.azure
 		}
 		
 		
+		/**
+		 * 
+		 * @param group
+		 * 
+		 */
 		private function onGroupAdded(group:JassGroup):void{
 			release()
 			group.isSynced = true;
