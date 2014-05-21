@@ -13,6 +13,7 @@
 			import mx.events.FlexEvent;
 			
 			import spark.events.IndexChangeEvent;
+			import spark.events.TextOperationEvent;
 			
 			import info.tiefenauer.jasskass.app.util.translate;
 			import info.tiefenauer.jasskass.profile.model.interfaces.IJassGroup;
@@ -35,7 +36,7 @@
 					setCurrentState('default');
 				}
 				else {
-					setCurrentState('noJassGroup');
+					setCurrentState('join');
 				}
 			}
 			public function get filterSelection():ButtonBar{
@@ -55,13 +56,14 @@
 				dispatchEvent(new Event(FILTER_SELECTED));
 			}
 			protected function onJoinGroupButtonClicked(event:MouseEvent):void{
+				setCurrentState('joining');
 				dispatchEvent(new Event(JOIN_GROUP_BUTTON_CLICKED));
 			}
 			protected function onRefreshButtonClick(event:MouseEvent):void{
 				dispatchEvent(new Event(REFRESH_BUTTON_CLICKED));
 			}
-			protected function onCodeEntered(event:TextEvent):void{
-				joinGroupButton.enabled = codeTI.text.length > 0;
+			protected function onCodeChanged(event:TextOperationEvent):void{
+				joinGroupButton.enabled = codeTI.text.length > 5;				
 			}
 			
 		]]>
@@ -69,11 +71,14 @@
 	
 	<base:states>
 		<s:State name="default" />
-		<s:State name="noJassGroup" />
+		<s:State name="join" stateGroups="noJassGroup"/>
+		<s:State name="joining" stateGroups="noJassGroup"/>
+		<s:State name="joined" stateGroups="noJassGroup"/>
 	</base:states>
 	
 	<base:navigationContent>
 		<s:Button id="refreshButton"
+				  includeIn="default"
 				  label="Refresh"
 				  click="onRefreshButtonClick(event)"
 				  />
@@ -88,15 +93,18 @@
 				  />
 	</base:actionContent>
 	
-	<s:VGroup width="100%" height="100%" includeIn="default">
+	<!-- Jass-List (when current group exists) -->
+	<s:VGroup width="100%" height="100%" gap="0" includeIn="default">
 		<s:ButtonBar id="sortButtonBar"
+					 skinClass="info.tiefenauer.jasskass.skins.buttonBar.ButtonBarFixedWidthSkin"
 					 change="onButtonBarSelectionChanged(event)"
 					 requireSelection="true"
 					 selectedIndex="0"
 					 width="100%"
+					 height="60"
 					 />
 		
-		<!-- list to display jasses -->
+		<!--- list to display jasses -->
 		<s:List id="jassList"
 				dataProvider="{jassListDataProvider}"
 				itemRenderer="info.tiefenauer.jasskass.jass.views.components.JassItemRenderer"
@@ -107,11 +115,55 @@
 		</s:List>
 	</s:VGroup>
 	
-	<s:VGroup paddingLeft="20" paddingRight="20" paddingTop="20" paddingBottom="20" width="100%" height="100%" includeIn="noJassGroup">
-		<s:Label text="{translate('Du musst einer Jassgruppe beitreten, um die Jasse anzeigen zu können')}" textAlign="center" width="100%"/>
-		<s:TextInput id="codeTI" textInput="onCodeEntered(event)" prompt="{translate('Code')}" width="100%" />
-		<s:Button id="joinGroupButton" label="{translate('Gruppe beitreten')}" width="100%" click="onJoinGroupButtonClicked(event)"/>
-	</s:VGroup>
+	
+	<s:Group width="100%" height="100%" includeIn="noJassGroup">
+		<s:Image width="100%" height="100%" scaleMode="zoom">
+			<s:source>
+				<s:MultiDPIBitmapSource source120dpi="@Embed('/assets/dpi120/bg_wood.png')"
+										source160dpi="@Embed('/assets/dpi160/bg_wood.png')"
+										source240dpi="@Embed('/assets/dpi240/bg_wood.png')"
+										source320dpi="@Embed('/assets/dpi320/bg_wood.png')"
+										source480dpi="@Embed('/assets/dpi480/bg_wood.png')"
+										source640dpi="@Embed('/assets/dpi640/bg_wood.png')"
+										/>
+			</s:source>
+		</s:Image>
+		
+		<s:VGroup paddingLeft="20" paddingRight="20" paddingTop="20" paddingBottom="20" width="100%" height="100%" verticalCenter="0" verticalAlign="middle" >
+			<s:Label text="{translate('Du musst einer Jassgruppe beitreten, um die Jasse anzeigen zu können')}" textAlign="center" width="100%"/>
+			<!--- TextInput to enter group code -->
+			<s:TextInput id="codeTI"
+						 change="onCodeChanged(event)"
+						 prompt="{translate('Code')}" 
+						 width="100%" 
+						 textAlign="center" 
+						 skinClass="info.tiefenauer.jasskass.skins.CodeTextInputSkin"
+						 />
+			
+			<!--- Button to send join request -->
+			<s:Button id="joinGroupButton" 
+					  label="{translate('Gruppe beitreten')}" 
+					  click="onJoinGroupButtonClicked(event)"
+					  enabled="false"
+					  enabled.joining="false"
+					  width="100%" 
+					  />
+			
+			<!-- Spinner symbol -->
+			<s:Group width="100%" height="100" horizontalCenter="0">
+				<s:Rect radiusX="3" radiusY="3">
+					<s:fill>
+						<s:SolidColor color="#FFFFFF" />
+					</s:fill>
+					<s:stroke>
+						<s:SolidColorStroke color="#59270C" weight="1"/>
+					</s:stroke>
+				</s:Rect>
+				<s:BusyIndicator symbolColor="#663602" rotationInterval="20" includeIn="joining" horizontalCenter="0"/>
+				<s:Label id="messageLabel" includeIn="joined" width="100%" />
+			</s:Group>
+		</s:VGroup>
+	</s:Group>
 
 	
 </base:JassListViewBase>

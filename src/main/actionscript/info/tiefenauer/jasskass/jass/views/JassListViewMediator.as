@@ -30,6 +30,10 @@ package info.tiefenauer.jasskass.jass.views
 		[Inject] public var jassProxy:IJassProxy;
 		[Inject] public var jassGroupProxy:IJassGroupProxy;
 
+		/**
+		 * 
+		 * 
+		 */
 		override public function initialize():void{
 			addViewListener(JassListViewBase.NEW_JASS_BUTTON_CLICKED, onNewJassButtonClicked);
 			addViewListener(JassListViewBase.JASS_SELECTED, onJassSelected);
@@ -47,6 +51,12 @@ package info.tiefenauer.jasskass.jass.views
 		//--------------------------
 		// Private functions
 		//--------------------------
+		/**
+		 * 
+		 * @param crit
+		 * @return 
+		 * 
+		 */
 		private function sort(crit:Number):ArrayCollection{
 			var result:Vector.<IJass> = jassProxy.jassList.filter(function(item:IJass, index:int, vector:Vector.<IJass>):Boolean{
 				return item.group.name == jassGroupProxy.currentJassGroup.name;
@@ -64,6 +74,13 @@ package info.tiefenauer.jasskass.jass.views
 			return ac;
 		}
 		
+		/**
+		 * 
+		 * @param x
+		 * @param y
+		 * @return 
+		 * 
+		 */
 		private function sortJassByDateAsc(x:IJass, y:IJass):Number{
 			if (x.date.time < y.date.time)
 				return -1;
@@ -71,6 +88,13 @@ package info.tiefenauer.jasskass.jass.views
 				return -1;
 			return 0;
 		}
+		/**
+		 * 
+		 * @param x
+		 * @param y
+		 * @return 
+		 * 
+		 */
 		private function sortJassByDateDesc(x:IJass, y:IJass):Number{
 			if (x.date.time > y.date.time)
 				return -1;

@@ -1,31 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:IconItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+<!---
+<p>Default ItemRenderer for Jasses in a list</p>
+@author Daniel Tiefenauer
+-->
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
 					xmlns:s="library://ns.adobe.com/flex/spark"
-					labelFunction="getLabel"
-					messageFunction="getMessage"
-					iconWidth="64" 
-					iconHeight="64"
+					height="60"
+					creationComplete="onCreationComplete(event)"
 					>
 
 	<fx:Script>
 		<![CDATA[
-			import mx.formatters.DateFormatter;
+			import mx.events.FlexEvent;
 			
+			import info.tiefenauer.jasskass.app.util.translate;
 			import info.tiefenauer.jasskass.jass.model.interfaces.IJass;
 
-			// private variables
-			private var df:DateFormatter = new DateFormatter('DD.MM.YYYY');
-			private var FLAGSTATE:int = 2;
-
-			private function getLabel(jass:IJass):String{
-				return 'Jass vom ' + df.format(jass.date);
+			[Bindable] private var date:String;
+			[Bindable] private var month:String;
+			[Bindable] private var team1Label:String;
+			[Bindable] private var team2Label:String;
+			
+			[Bindable]
+			public function get jass():IJass{
+				if (data is IJass)
+					return data as IJass;
+				return null;
 			}
-			private function getMessage(jass:IJass):String{
-				return jass.team1.player1.firstName + '&' + jass.team1.player2.firstName + ', ' + jass.team2.player1.firstName + '&' + jass.team2.player2.firstName;
+			public function set jass(value:IJass):void{
+				data = value;
 			}
 			
+			protected function onCreationComplete(event:FlexEvent):void{
+				date = '' + jass.date.date;
+				month = 'Jan';
+				team1Label = jass.team1.player1.firstName + ' ' + translate('und') + ' ' + jass.team1.player2.firstName;
+				team2Label = jass.team2.player1.firstName + ' ' + translate('und') + ' ' + jass.team2.player2.firstName;
+			}
 			
 		]]>
 	</fx:Script>
 	
-</s:IconItemRenderer>
+	<!-- Main Group -->
+	<s:HGroup width="100%" height="100%">
+		<s:Group width="60" height="60">
+			<s:Rect width="100%" height="100%">
+				<s:fill>
+					<s:SolidColor color="#DBA100" />
+				</s:fill>
+			</s:Rect>
+			<s:VGroup width="100%" height="100%" paddingLeft="5" paddingRight="5" paddingTop="5" paddingBottom="5">
+				<s:Label fontSize="30" text="{date}" width="100%" textAlign="center" color="#FFFFFF"/>
+				<s:Label fontSize="15" text="{month}" width="100%" textAlign="center" color="#FFFFFF"/>
+			</s:VGroup>
+		</s:Group>		
+		
+		<s:VGroup width="100%" height="100%" paddingTop="5" paddingBottom="5">
+			<s:Label text="{team1Label}" width="100%" height="50%" textAlign="center" verticalAlign="middle"/>
+			<s:Label text="{team2Label}" width="100%" height="50%" textAlign="center" verticalAlign="middle"/>
+		</s:VGroup>
+		
+		<s:Group width="60" height="60">
+			<s:Rect width="100%" height="100%">
+				<s:fill>
+					<s:SolidColor color="#EAEAEA"/>
+				</s:fill>
+			</s:Rect>
+			<s:Label text="{jass.team1Penalty + jass.team2Penalty + ' ' + translate('CHF')}" width="100%" height="100%" textAlign="center" verticalAlign="middle"/>
+		</s:Group>
+	</s:HGroup>
+	
+	<s:Line width="100%">
+		<s:stroke>
+			<s:SolidColorStroke color="#CCCCCC" />
+		</s:stroke>
+	</s:Line>
+	
+</s:ItemRenderer>

@@ -12,12 +12,6 @@
 			
 			//UNIT_TESTS_IMPORT_START
 	                import test.info.tiefenauer.SampleTest;
-	                import test.info.tiefenauer.gdas3.SpreadsheetAuthorTest;
-	                import test.info.tiefenauer.gdas3.SpreadsheetCategoryTest;
-	                import test.info.tiefenauer.gdas3.SpreadsheetContentTest;
-	                import test.info.tiefenauer.gdas3.SpreadsheetLinkTest;
-	                import test.info.tiefenauer.gdas3.SpreadsheetServiceTest;
-	                import test.info.tiefenauer.gdas3.SpreadsheetTest;
 	                import test.info.tiefenauer.jasskass.app.controllers.GetOAuth2AccessTokenTest;
 	                import test.info.tiefenauer.jasskass.app.controllers.LoadAppConfigurationTest;
 	                import test.info.tiefenauer.jasskass.app.controllers.SaveOAuth2AccessTokenTest;
@@ -27,7 +21,15 @@
 	                import test.info.tiefenauer.jasskass.app.models.TextFileServiceTest;
 	                import test.info.tiefenauer.jasskass.app.models.vo.AppConfigurationTest;
 	                import test.info.tiefenauer.jasskass.app.models.vo.SettingTest;
-	                import test.info.tiefenauer.jasskass.counter.model.vo.JassPlayerTest;//UNIT_TESTS_IMPORT_END
+	                import test.info.tiefenauer.jasskass.azure.AzureServiceTest;
+	                import test.info.tiefenauer.jasskass.azure.GetJassesServiceTest;
+	                import test.info.tiefenauer.jasskass.azure.KassServiceTest;
+	                import test.info.tiefenauer.jasskass.counter.model.vo.JassPlayerTest;
+	                import test.info.tiefenauer.jasskass.jass.controller.StartJassTest;
+	                import test.info.tiefenauer.jasskass.kass.controller.DownloadKassDataTest;
+	                import test.info.tiefenauer.jasskass.kass.model.factory.KassAmountFactoryTest;
+	                import test.info.tiefenauer.jasskass.kass.model.factory.KassEntryFactoryTest;
+	                import test.info.tiefenauer.jasskass.kass.model.factory.KassFactoryTest;//UNIT_TESTS_IMPORT_END
 			
 			private var core:FlexUnitCore;
 			protected function application1_creationCompleteHandler(event:FlexEvent):void
@@ -44,12 +46,6 @@
 				var testsToRun:Array = new Array();
 				//UNIT_TESTS_ARRAY_START
 	                testsToRun.push(test.info.tiefenauer.SampleTest);
-	                testsToRun.push(test.info.tiefenauer.gdas3.SpreadsheetAuthorTest);
-	                testsToRun.push(test.info.tiefenauer.gdas3.SpreadsheetCategoryTest);
-	                testsToRun.push(test.info.tiefenauer.gdas3.SpreadsheetContentTest);
-	                testsToRun.push(test.info.tiefenauer.gdas3.SpreadsheetLinkTest);
-	                testsToRun.push(test.info.tiefenauer.gdas3.SpreadsheetServiceTest);
-	                testsToRun.push(test.info.tiefenauer.gdas3.SpreadsheetTest);
 	                testsToRun.push(test.info.tiefenauer.jasskass.app.controllers.GetOAuth2AccessTokenTest);
 	                testsToRun.push(test.info.tiefenauer.jasskass.app.controllers.LoadAppConfigurationTest);
 	                testsToRun.push(test.info.tiefenauer.jasskass.app.controllers.SaveOAuth2AccessTokenTest);
@@ -59,7 +55,15 @@
 	                testsToRun.push(test.info.tiefenauer.jasskass.app.models.TextFileServiceTest);
 	                testsToRun.push(test.info.tiefenauer.jasskass.app.models.vo.AppConfigurationTest);
 	                testsToRun.push(test.info.tiefenauer.jasskass.app.models.vo.SettingTest);
-	                testsToRun.push(test.info.tiefenauer.jasskass.counter.model.vo.JassPlayerTest);//UNIT_TESTS_ARRAY_END
+	                testsToRun.push(test.info.tiefenauer.jasskass.azure.AzureServiceTest);
+	                testsToRun.push(test.info.tiefenauer.jasskass.azure.GetJassesServiceTest);
+	                testsToRun.push(test.info.tiefenauer.jasskass.azure.KassServiceTest);
+	                testsToRun.push(test.info.tiefenauer.jasskass.counter.model.vo.JassPlayerTest);
+	                testsToRun.push(test.info.tiefenauer.jasskass.jass.controller.StartJassTest);
+	                testsToRun.push(test.info.tiefenauer.jasskass.kass.controller.DownloadKassDataTest);
+	                testsToRun.push(test.info.tiefenauer.jasskass.kass.model.factory.KassAmountFactoryTest);
+	                testsToRun.push(test.info.tiefenauer.jasskass.kass.model.factory.KassEntryFactoryTest);
+	                testsToRun.push(test.info.tiefenauer.jasskass.kass.model.factory.KassFactoryTest);//UNIT_TESTS_ARRAY_END
 				return testsToRun;
 			}
 			
