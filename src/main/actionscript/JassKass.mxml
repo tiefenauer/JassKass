@@ -32,10 +32,10 @@
 					 height="100%"
 					 >
 <!--		<s:icon>
-			<s:MultiDPIBitmapSource source160dpi="@Embed('assets/icons/ico_cards_64.png')"
-									source240dpi="@Embed('assets/icons/ico_cards_96.png')"
-									source320dpi="@Embed('assets/icons/ico_cards_128.png')"
-									source480dpi="@Embed('assets/icons/ico_cards_256.png')"
+			<s:MultiDPIBitmapSource source160dpi="@Embed('/assets/icons/ico_cards_64.png')"
+									source240dpi="@Embed('/assets/icons/ico_cards_96.png')"
+									source320dpi="@Embed('/assets/icons/ico_cards_128.png')"
+									source480dpi="@Embed('/assets/icons/ico_cards_256.png')"
 									/>
 		</s:icon>-->
 	</s:ViewNavigator>
@@ -47,10 +47,10 @@
 					 height="100%"
 					 >
 <!--		<s:icon>
-			<s:MultiDPIBitmapSource source160dpi="@Embed('assets/icons/ico_cash_64.png')"
-									source240dpi="@Embed('assets/icons/ico_cash_96.png')"
-									source320dpi="@Embed('assets/icons/ico_cash_128.png')"
-									source480dpi="@Embed('assets/icons/ico_cash_256.png')"
+			<s:MultiDPIBitmapSource source160dpi="@Embed('/assets/icons/ico_cash_64.png')"
+									source240dpi="@Embed('/assets/icons/ico_cash_96.png')"
+									source320dpi="@Embed('/assets/icons/ico_cash_128.png')"
+									source480dpi="@Embed('/assets/icons/ico_cash_256.png')"
 									/>
 		</s:icon>-->
 	</s:ViewNavigator>
@@ -62,10 +62,10 @@
 					 height="100%"
 					 >
 <!--		<s:icon>
-			<s:MultiDPIBitmapSource source160dpi="@Embed('assets/icons/ico_statistic_64.png')"
-									source240dpi="@Embed('assets/icons/ico_statistic_96.png')"
-									source320dpi="@Embed('assets/icons/ico_statistic_128.png')"
-									source480dpi="@Embed('assets/icons/ico_statistic_256.png')"
+			<s:MultiDPIBitmapSource source160dpi="@Embed('/assets/icons/ico_statistic_64.png')"
+									source240dpi="@Embed('/assets/icons/ico_statistic_96.png')"
+									source320dpi="@Embed('/assets/icons/ico_statistic_128.png')"
+									source480dpi="@Embed('/assets/icons/ico_statistic_256.png')"
 									/>
 		</s:icon>-->
 	</s:ViewNavigator>
@@ -77,10 +77,10 @@
 					 height="100%"
 					 >
 <!--		<s:icon>
-			<s:MultiDPIBitmapSource source160dpi="@Embed('assets/icons/ico_profile_64.png')"
-									source240dpi="@Embed('assets/icons/ico_profile_96.png')"
-									source320dpi="@Embed('assets/icons/ico_profile_128.png')"
-									source480dpi="@Embed('assets/icons/ico_profile_256.png')"
+			<s:MultiDPIBitmapSource source160dpi="@Embed('/assets/icons/ico_profile_64.png')"
+									source240dpi="@Embed('/assets/icons/ico_profile_96.png')"
+									source320dpi="@Embed('/assets/icons/ico_profile_128.png')"
+									source480dpi="@Embed('/assets/icons/ico_profile_256.png')"
 									/>
 		</s:icon>-->
 		

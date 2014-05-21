@@ -120,6 +120,7 @@
 	              
 	            <source-path path-element="${PROJECT.src.main}" />
 	            <source-path path-element="${PROJECT.src.assets}" />
+	            <source-path path-element="${PROJECT.src.skins}" />
 	            <source-path path-element="${PROJECT.test.main}" />
 	            <source-path path-element="${PROJECT.test.assets}" />
 	            <!-- weitere in Testklassen benötigte Abhängigkeiten hier ergänzen -->
@@ -129,21 +130,21 @@
 	                <include name="**/*.swc" />
 	            </library-path>
 	            <!-- ebenfalls in SWC konvertierte ANEs ergänzen, falls diese von den Testklassen referenziert werden -->
-	            <library-path dir="${PROJECT.libs.ane}" append="true">
+	            <library-path dir="${OUTPUT.build.ane}" append="true">
 	                <include name="**/*.swc" />
 	            </library-path>           
 	             
 	            <!-- FlexUnit-Libraries einschliessen-->
-	            <library-path dir="${TOOLS.flexunit}" append="true">
-	                <include name="@{include}" />
-	                <include name="*cilistener*.swc" />
-	                <include name="fluint*.swc" />
-	                <include name="*flexcoverlistener*.swc" />
-	                <include name="FlexUnit1Lib.swc" />
-	                <include name="hamcrest-as3*.swc" />
-	                <include name="mock-as3.swc" />
-	                <include name="mockolate*.swc" />
-	            </library-path>
+		        <library-path dir="${TEST.flexUnit}" append="true">
+		            <include name="@{include}" />
+	        	    <include name="**.swc" />
+		        </library-path>
+		        <library-path dir="${TEST.mockolate}" append="true">
+	        	    <include name="**.swc" />
+		        </library-path>
+		        <library-path dir="${TEST.hamcrest}" append="true">
+	        	    <include name="**.swc" />
+		        </library-path>
 	             
 	            <!-- übrige Compiler-Optionen -->
 	            <compiler.verbose-stacktraces>true</compiler.verbose-stacktraces>

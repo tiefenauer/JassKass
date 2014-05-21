@@ -41,7 +41,7 @@ package info.tiefenauer.jasskass.app.views
 		}
 		
 		private function onCreationComplete(event:FlexEvent):void {
-			var tbv:Boolean = TabbedViewNavigatorApplication(FlexGlobals.topLevelApplication).tabbedNavigator.tabBar.visible;
+			var tbv:Boolean = true;//TabbedViewNavigatorApplication(FlexGlobals.topLevelApplication).tabbedNavigator.tabBar.visible;
 			tabBarVisible = tbv;
 		}
 		
