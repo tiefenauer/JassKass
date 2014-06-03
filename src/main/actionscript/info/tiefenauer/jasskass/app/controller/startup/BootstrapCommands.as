@@ -74,7 +74,6 @@ package info.tiefenauer.jasskass.app.controller.startup
 			
 			// Initialization
 			commandMap.map(InitializationEvent.LOAD_APP_CONFIG).toCommand(LoadAppConfiguration);
-			commandMap.map(InitializationEvent.GET_GOOGLE_API_TOKEN).toCommand(GetOAuth2AccessToken);
 			
 			// Jass
 			commandMap.map(JassEvent.START_JASS).toCommand(StartJass);

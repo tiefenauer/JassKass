@@ -10,26 +10,23 @@
 			import org.flexunit.listeners.AirCIListener;
 			import org.flexunit.runner.FlexUnitCore;
 			
-			//UNIT_TESTS_IMPORT_START
-	                import test.info.tiefenauer.SampleTest;
-	                import test.info.tiefenauer.jasskass.app.controllers.GetOAuth2AccessTokenTest;
-	                import test.info.tiefenauer.jasskass.app.controllers.LoadAppConfigurationTest;
-	                import test.info.tiefenauer.jasskass.app.controllers.SaveOAuth2AccessTokenTest;
-	                import test.info.tiefenauer.jasskass.app.models.ConfigProxyTest;
-	                import test.info.tiefenauer.jasskass.app.models.FileServiceTest;
-	                import test.info.tiefenauer.jasskass.app.models.SettingProxyTest;
-	                import test.info.tiefenauer.jasskass.app.models.TextFileServiceTest;
-	                import test.info.tiefenauer.jasskass.app.models.vo.AppConfigurationTest;
-	                import test.info.tiefenauer.jasskass.app.models.vo.SettingTest;
-	                import test.info.tiefenauer.jasskass.azure.AzureServiceTest;
-	                import test.info.tiefenauer.jasskass.azure.GetJassesServiceTest;
-	                import test.info.tiefenauer.jasskass.azure.KassServiceTest;
-	                import test.info.tiefenauer.jasskass.counter.model.vo.JassPlayerTest;
-	                import test.info.tiefenauer.jasskass.jass.controller.StartJassTest;
-	                import test.info.tiefenauer.jasskass.kass.controller.DownloadKassDataTest;
-	                import test.info.tiefenauer.jasskass.kass.model.factory.KassAmountFactoryTest;
-	                import test.info.tiefenauer.jasskass.kass.model.factory.KassEntryFactoryTest;
-	                import test.info.tiefenauer.jasskass.kass.model.factory.KassFactoryTest;//UNIT_TESTS_IMPORT_END
+			import test.info.tiefenauer.SampleTest;
+			import test.info.tiefenauer.jasskass.app.controllers.LoadAppConfigurationTest;
+			import test.info.tiefenauer.jasskass.app.models.ConfigProxyTest;
+			import test.info.tiefenauer.jasskass.app.models.FileServiceTest;
+			import test.info.tiefenauer.jasskass.app.models.SettingProxyTest;
+			import test.info.tiefenauer.jasskass.app.models.TextFileServiceTest;
+			import test.info.tiefenauer.jasskass.app.models.vo.AppConfigurationTest;
+			import test.info.tiefenauer.jasskass.app.models.vo.SettingTest;
+			import test.info.tiefenauer.jasskass.azure.AzureServiceTest;
+			import test.info.tiefenauer.jasskass.azure.GetJassesServiceTest;
+			import test.info.tiefenauer.jasskass.azure.KassServiceTest;
+			import test.info.tiefenauer.jasskass.counter.model.vo.JassPlayerTest;
+			import test.info.tiefenauer.jasskass.jass.controller.StartJassTest;
+			import test.info.tiefenauer.jasskass.kass.controller.DownloadKassDataTest;
+			import test.info.tiefenauer.jasskass.kass.model.factory.KassAmountFactoryTest;
+			import test.info.tiefenauer.jasskass.kass.model.factory.KassEntryFactoryTest;
+			import test.info.tiefenauer.jasskass.kass.model.factory.KassFactoryTest;//UNIT_TESTS_IMPORT_END
 			
 			private var core:FlexUnitCore;
 			protected function application1_creationCompleteHandler(event:FlexEvent):void
@@ -46,9 +43,7 @@
 				var testsToRun:Array = new Array();
 				//UNIT_TESTS_ARRAY_START
 	                testsToRun.push(test.info.tiefenauer.SampleTest);
-	                testsToRun.push(test.info.tiefenauer.jasskass.app.controllers.GetOAuth2AccessTokenTest);
 	                testsToRun.push(test.info.tiefenauer.jasskass.app.controllers.LoadAppConfigurationTest);
-	                testsToRun.push(test.info.tiefenauer.jasskass.app.controllers.SaveOAuth2AccessTokenTest);
 	                testsToRun.push(test.info.tiefenauer.jasskass.app.models.ConfigProxyTest);
 	                testsToRun.push(test.info.tiefenauer.jasskass.app.models.FileServiceTest);
 	                testsToRun.push(test.info.tiefenauer.jasskass.app.models.SettingProxyTest);
