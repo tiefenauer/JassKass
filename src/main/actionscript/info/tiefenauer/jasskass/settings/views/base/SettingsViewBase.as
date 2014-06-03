@@ -14,19 +14,25 @@
 
 package info.tiefenauer.jasskass.settings.views.base
 {
-	import mx.collections.ArrayCollection;
-	
 	import info.tiefenauer.jasskass.app.views.MobileView;
+	import info.tiefenauer.jasskass.settings.model.interfaces.ISetting;
 	
 	/**
-	 * 
+	 * Base class for Setting Views
 	 * @author dtie
 	 */
 	public class SettingsViewBase extends MobileView
 	{
+		private static const NAME:String = 'SettingsViewBase';
+		// event types
+		public static const SAVE_SETTINGS_CLICKED:String = NAME + 'SaveSettingsClicked';
+		/**
+		 * 
+		 * 
+		 */
 		public function SettingsViewBase(){
 			super();
-			data = new ArrayCollection();
+			data = new Vector.<ISetting>();
 		}
 		
 
@@ -34,12 +40,12 @@ package info.tiefenauer.jasskass.settings.views.base
 		// Getter/Setter
 		//--------------------------------
 		[Bindable]
-		public function get settings():ArrayCollection{
-			if (data is ArrayCollection)
-				return data as ArrayCollection;
+		public function get settings():Vector.<ISetting>{
+			if (data is Vector.<ISetting>)
+				return data as Vector.<ISetting>;
 			return null;
 		}
-		public function set settings(value:ArrayCollection):void{
+		public function set settings(value:Vector.<ISetting>):void{
 			data = value;
 		}
 	}

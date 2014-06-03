@@ -6,9 +6,9 @@ package test.info.tiefenauer.jasskass.app.controllers
 {
 	import info.tiefenauer.jasskass.app.controller.startup.SaveOAuth2AccessToken;
 	import info.tiefenauer.jasskass.app.event.GoogleAuthEvent;
-	import info.tiefenauer.jasskass.app.model.SettingProxy;
 	import info.tiefenauer.jasskass.app.model.enum.SettingKey;
-	import info.tiefenauer.jasskass.app.model.interfaces.ISetting;
+	import info.tiefenauer.jasskass.settings.model.SettingProxy;
+	import info.tiefenauer.jasskass.settings.model.interfaces.ISetting;
 	
 	import org.flexunit.asserts.assertEquals;
 	import org.flexunit.asserts.assertNotNull;

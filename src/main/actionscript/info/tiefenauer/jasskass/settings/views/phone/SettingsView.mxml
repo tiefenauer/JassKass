@@ -10,8 +10,14 @@
 		<![CDATA[
 			import info.tiefenauer.jasskass.app.util.translate;
 			
+			private var settingsChanged:Boolean = false;
+			
 			protected function onSettingChanged(event:Event):void{
-				trace('setting changed');
+				setCurrentState('settingsChanged');
+			}
+			
+			protected function onSaveButtonClick(event:MouseEvent):void{
+				dispatchEvent(new Event(SAVE_SETTINGS_CLICKED));
 			}
 			
 		]]>
@@ -27,6 +33,18 @@
 								source640dpi="@Embed('/assets/dpi640/ico_info.png')"
 								/>
 	</fx:Declarations>
+	
+	<base:states>
+		<s:State name="default" />
+		<s:State name="settingsChanged" />
+	</base:states>
+	
+	<base:actionContent>
+		<s:Button label="{translate('Speichern')}"
+				  click="onSaveButtonClick(event)"
+				  includeIn="settingsChanged"
+				  />
+	</base:actionContent>
 	
 	<s:Scroller width="100%" height="100%">
 		<s:VGroup paddingLeft="10" paddingRight="10" paddingTop="20" paddingBottom="20">

@@ -7,8 +7,8 @@ package info.tiefenauer.jasskass.app.controller.startup
 	import info.tiefenauer.jasskass.app.controller.SimpleCommand;
 	import info.tiefenauer.jasskass.app.event.GoogleAuthEvent;
 	import info.tiefenauer.jasskass.app.model.enum.SettingKey;
-	import info.tiefenauer.jasskass.app.model.interfaces.ISettingProxy;
-	import info.tiefenauer.jasskass.app.model.vo.Setting;
+	import info.tiefenauer.jasskass.settings.model.Setting;
+	import info.tiefenauer.jasskass.settings.model.interfaces.ISettingsProxy;
 	
 	/**
 	 * Save Access Token
@@ -17,7 +17,7 @@ package info.tiefenauer.jasskass.app.controller.startup
 	public class SaveOAuth2AccessToken extends SimpleCommand
 	{
 		[Inject] public var event:GoogleAuthEvent;
-		[Inject] public var settingProxy:ISettingProxy;
+		[Inject] public var settingProxy:ISettingsProxy;
 		
 		override public function execute():void{
 			super.execute();

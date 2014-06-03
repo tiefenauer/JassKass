@@ -22,6 +22,7 @@ package info.tiefenauer.jasskass.settings.views.components
 	import spark.components.SkinnableContainer;
 	import spark.core.IDisplayText;
 	
+	import info.tiefenauer.jasskass.settings.model.interfaces.ISetting;
 	import info.tiefenauer.jasskass.skins.SettingDisplaySkin;
 	
 	[Event(name="settingChanged", type="flash.events.Event")]
@@ -36,6 +37,8 @@ package info.tiefenauer.jasskass.settings.views.components
 		[SkinPart(required="true")] public var labelDisplay:IDisplayText;
 		[SkinPart(required="false")] public var valueDisplay:IVisualElement;
 		[SkinPart(required="true")] public var iconDisplay:Image;
+		
+		public var setting:ISetting;
 		
 		private var _label:String;
 		

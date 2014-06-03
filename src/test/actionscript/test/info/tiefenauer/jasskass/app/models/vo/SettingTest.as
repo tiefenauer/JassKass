@@ -4,7 +4,7 @@
  */
 package test.info.tiefenauer.jasskass.app.models.vo
 {
-	import info.tiefenauer.jasskass.app.model.vo.Setting;
+	import info.tiefenauer.jasskass.settings.model.Setting;
 	
 	import org.flexunit.asserts.assertEquals;
 	import org.flexunit.asserts.assertNull;

@@ -46,8 +46,11 @@ package info.tiefenauer.jasskass.app.controller.startup
 	import info.tiefenauer.jasskass.profile.events.JassGroupEvent;
 	import info.tiefenauer.jasskass.profile.events.JassGroupProxyEvent;
 	import info.tiefenauer.jasskass.profile.events.JoinGroupEvent;
+	import info.tiefenauer.jasskass.settings.SaveSettingsSignal;
+	import info.tiefenauer.jasskass.settings.controller.SaveSettings;
 	
 	import robotlegs.bender.extensions.eventCommandMap.api.IEventCommandMap;
+	import robotlegs.bender.extensions.signalCommandMap.api.ISignalCommandMap;
 	
 	/**
 	 * Bootstrap events/commands 
@@ -57,12 +60,17 @@ package info.tiefenauer.jasskass.app.controller.startup
 	public class BootstrapCommands extends SimpleCommand
 	{
 		[Inject] public var commandMap:IEventCommandMap;
+		[Inject] public var signalCommandMap:ISignalCommandMap;
 		
+		/**
+		 * 
+		 */
 		override public function execute():void{
 			super.execute();
+			signalCommandMap.map(SaveSettingsSignal).toCommand(SaveSettings);
+			
 			// general
 			commandMap.map(MobileView.BACK).toCommand(NavigateBackCommand);
-
 			
 			// Initialization
 			commandMap.map(InitializationEvent.LOAD_APP_CONFIG).toCommand(LoadAppConfiguration);
@@ -107,6 +115,7 @@ package info.tiefenauer.jasskass.app.controller.startup
 			commandMap.map(PenaltyEvent.MATCH).toCommand(AddPenalty);
 			commandMap.map(PenaltyEvent.KONTERMATCH).toCommand(AddPenalty);
 			commandMap.map(PenaltyEvent.VIER_BAUERN).toCommand(AddPenalty);
+			
 			
 			// Wyses
 			commandMap.map(WysEvent.WYS).toCommand(AddWys);

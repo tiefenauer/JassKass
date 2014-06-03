@@ -1,6 +1,6 @@
 package info.tiefenauer.jasskass.settings.views.interfaces
 {
-	import mx.collections.ArrayCollection;
+	import info.tiefenauer.jasskass.settings.model.interfaces.ISetting;
 
 	/**
 	 * 
@@ -8,6 +8,6 @@ package info.tiefenauer.jasskass.settings.views.interfaces
 	 */
 	public interface ISettingsView
 	{
-		function get settings():ArrayCollection;
+		function get settings():Vector.<ISetting>;
 	}
 }

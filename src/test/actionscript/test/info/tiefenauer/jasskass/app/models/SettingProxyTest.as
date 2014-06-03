@@ -4,11 +4,9 @@
  */
 package test.info.tiefenauer.jasskass.app.models
 {
-	import info.tiefenauer.jasskass.app.model.SettingProxy;
-	import info.tiefenauer.jasskass.app.model.interfaces.IConfiguration;
-	import info.tiefenauer.jasskass.app.model.interfaces.ISetting;
-	import info.tiefenauer.jasskass.app.model.vo.AppConfiguration;
-	import info.tiefenauer.jasskass.app.model.vo.Setting;
+	import info.tiefenauer.jasskass.settings.model.Setting;
+	import info.tiefenauer.jasskass.settings.model.SettingProxy;
+	import info.tiefenauer.jasskass.settings.model.interfaces.ISetting;
 	
 	import org.flexunit.asserts.assertEquals;
 	import org.flexunit.asserts.assertNotNull;

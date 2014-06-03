@@ -2,9 +2,9 @@
  * Setting.as
  * Copyright 2013 Daniel Tiefenauer
  */
-package info.tiefenauer.jasskass.app.model.vo
+package info.tiefenauer.jasskass.settings.model
 {
-	import info.tiefenauer.jasskass.app.model.interfaces.ISetting;
+	import info.tiefenauer.jasskass.settings.model.interfaces.ISetting;
 	
 	/**
 	 * Base class for all Settings 

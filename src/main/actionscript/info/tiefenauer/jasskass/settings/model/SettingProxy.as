@@ -2,17 +2,17 @@
  * SettingProxy.as
  * Copyright 2013 Daniel Tiefenauer
  */
-package info.tiefenauer.jasskass.app.model
+package info.tiefenauer.jasskass.settings.model
 {
-	import info.tiefenauer.jasskass.app.model.interfaces.ISetting;
-	import info.tiefenauer.jasskass.app.model.interfaces.ISettingProxy;
+	import info.tiefenauer.jasskass.settings.model.interfaces.ISetting;
+	import info.tiefenauer.jasskass.settings.model.interfaces.ISettingsProxy;
 	
 	/**
 	 * Proxy to maintain changing settings 
 	 * @author Daniel Tiefenauer
 	 * 
 	 */
-	public class SettingProxy implements ISettingProxy
+	public class SettingProxy implements ISettingsProxy
 	{
 		private var _settings:Vector.<ISetting> = new Vector.<ISetting>();
 
@@ -44,7 +44,13 @@ package info.tiefenauer.jasskass.app.model
 				_settings.splice(_settings.indexOf(conf), 1, value);
 			else
 				_settings.push(value);
-
+		}
+		
+		//-----------------------
+		// Getter/Setter
+		//-----------------------
+		public function get settings():Vector.<ISetting>{
+			return _settings;
 		}
 	}
 }
