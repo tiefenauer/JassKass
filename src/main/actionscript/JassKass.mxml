@@ -12,10 +12,11 @@
 			
 			import robotlegs.bender.bundles.mvcs.MVCSBundle;
 			import robotlegs.bender.extensions.contextView.ContextView;
+			import robotlegs.bender.extensions.signalCommandMap.SignalCommandMapExtension;
 			import robotlegs.bender.framework.api.IContext;
 			import robotlegs.bender.framework.impl.Context;
 			private var _context:IContext = new Context()
-											.install(MVCSBundle)
+											.install(MVCSBundle, SignalCommandMapExtension)
 											.configure(JassKassConfig)
 											.configure(new ContextView(this as DisplayObjectContainer));
 			
