@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---
+	Einfache Subklasse von <code>spark.components.Label</code> zur Anzeige von einem Text. Der Text wird zusätzlich mit einem Schatten
+	versehen, damit ein <em>embossed</em>-Effekt entsteht.
+	@see spark.components.Label
+-->
+<s:Label xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 textAlign="center"
+		 verticalAlign="middle"
+		 maxDisplayedLines="10"
+		 lineBreak="toFit"
+		 color="#666666"
+		 >
+	<s:filters>
+		<s:DropShadowFilter color="#FFFFFF"
+							strength="2"
+							distance="1"
+							blurX="0"
+							blurY="0"
+							angle="90"
+							alpha="1"
+							/>
+	</s:filters>
+</s:Label>
