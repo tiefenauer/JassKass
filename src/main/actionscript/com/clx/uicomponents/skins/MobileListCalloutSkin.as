@@ -56,7 +56,6 @@ package com.clx.uicomponents.skins
 					break;
 				}
 			}
-			setStyle('color', 0xFFFFFF);
 		}
 		
 		override protected function createChildren():void {

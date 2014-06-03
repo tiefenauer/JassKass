@@ -10,13 +10,11 @@
 		<![CDATA[
 			import mx.events.FlexMouseEvent;
 			
-			import spark.components.CalloutPosition;
 			import spark.events.PopUpEvent;
+			[Bindable] private var toolTipText:String;
 			protected function onIconClick(event:MouseEvent):void{
-				if (!preventPopup && hostComponent.toolTipMessage && hostComponent.toolTipMessage.length > 0){
+				if (!preventPopup && hostComponent.toolTip && hostComponent.toolTip.length > 0){
 					toolTipCallout.open(iconDisplay,false);
-					toolTipCallout.verticalPosition = toolTipCallout.horizontalPosition = CalloutPosition.BEFORE;
-					toolTipLabel.text = hostComponent.toolTipMessage;
 				}
 			}
 			
@@ -34,14 +32,15 @@
 
 	<fx:Declarations>
 		<s:Callout id="toolTipCallout" width="70%"
+				   skinClass="com.clx.uicomponents.skins.MobileListCalloutSkin"
 				   contentBackgroundAppearance="none"
 				   color="#70673F"
 				   backgroundColor="#ECE0AB"
 				   verticalPosition="before" 
-				   horizontalPosition="before" 
+				   horizontalPosition="end" 
 				   mouseDownOutside="onMouseDownOutsideCallout(event)"
 				   >
-			<s:Label id="toolTipLabel" text="asdasd" width="100%" />
+			<s:Label id="toolTipLabel" text="{hostComponent.toolTip}" width="100%" lineBreak="toFit" />
 		</s:Callout> 
 	</fx:Declarations>
 	

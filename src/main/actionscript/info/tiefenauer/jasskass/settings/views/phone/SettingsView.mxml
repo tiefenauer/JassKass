@@ -34,7 +34,7 @@
 			<components:TitleLabel text="{translate('Generelles')}" width="100%"/>
 			
 			<components:SettingDisplay label="{translate('Auto-Bergpreis')}"
-									   toolTipMessage="{translate('Automatisches Anmelden des Bergpreis')}"
+									   toolTip="{translate('Automatisches Anmelden des Bergpreis')}"
 									   icon="{infoIcon}" 
 									   width="100%" 
 									   settingChanged="onSettingChanged(event)">
@@ -46,7 +46,7 @@
 			<components:TitleLabel text="{translate('Striche')}" width="100%"/>
 			
 			<components:SettingDisplay label="{translate('4 Bauern')}"
-									   toolTipMessage="{translate('Strich für 4 Bauern')}"
+									   toolTip="{translate('Strich für 4 Bauern')}"
 									   icon="{infoIcon}" 
 									   width="100%" 
 									   settingChanged="onSettingChanged(event)">
@@ -56,7 +56,7 @@
 			</components:SettingDisplay>
 			
 			<components:SettingDisplay label="{translate('Match')}"
-									   toolTipMessage="{translate('Anzahl Striche für einen Match')}"
+									   toolTip="{translate('Anzahl Striche für einen Match')}"
 									   icon="{infoIcon}" 
 									   width="100%" 
 									   settingChanged="onSettingChanged(event)">
@@ -66,7 +66,7 @@
 			</components:SettingDisplay>
 			
 			<components:SettingDisplay label="{translate('Kontermatch')}"
-									   toolTipMessage="{translate('Anzahl Striche für einen Kontermatch')}"
+									   toolTip="{translate('Anzahl Striche für einen Kontermatch')}"
 									   icon="{infoIcon}" 
 									   width="100%" 
 									   settingChanged="onSettingChanged(event)">
@@ -76,7 +76,7 @@
 			</components:SettingDisplay>
 			
 			<components:SettingDisplay label="{translate('Bergpreis')}"
-									   toolTipMessage="{translate('Anzahl Striche für den Bergpreis')}"
+									   toolTip="{translate('Anzahl Striche für den Bergpreis')}"
 									   icon="{infoIcon}" 
 									   width="100%" 
 									   settingChanged="onSettingChanged(event)">
@@ -86,7 +86,7 @@
 			</components:SettingDisplay>
 			
 			<components:SettingDisplay label="{translate('Sieg')}"
-									   toolTipMessage="{translate('Anzahl Striche für den Sieg')}"
+									   toolTip="{translate('Anzahl Striche für den Sieg')}"
 									   icon="{infoIcon}" 
 									   width="100%" settingChanged="onSettingChanged(event)">
 				<components:valueDisplay>
@@ -97,7 +97,7 @@
 			<components:TitleLabel text="{translate('Berechnung JassKass')}" width="100%"/>
 			
 			<components:SettingDisplay label="{translate('Strichwert')}"
-									   toolTipMessage="{translate('Betrag in Franken für einen Strich')}"
+									   toolTip="{translate('Betrag in Franken für einen Strich')}"
 									   icon="{infoIcon}" width="100%" 
 									   settingChanged="onSettingChanged(event)"
 									   >
@@ -107,7 +107,7 @@
 			</components:SettingDisplay>
 			
 			<components:SettingDisplay label="{translate('Differenzfaktor')}"
-									   toolTipMessage="{translate('Zusätzlicher Frankenbetrag für das Verliererteam')}"
+									   toolTip="{translate('Zusätzlicher Frankenbetrag für das Verliererteam')}"
 									   icon="{infoIcon}" 
 									   width="100%" 
 									   settingChanged="onSettingChanged(event)">

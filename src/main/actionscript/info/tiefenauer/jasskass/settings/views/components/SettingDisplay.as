@@ -38,7 +38,6 @@ package info.tiefenauer.jasskass.settings.views.components
 		[SkinPart(required="true")] public var iconDisplay:Image;
 		
 		private var _label:String;
-		private var _toolTipMessage:String;
 		
 		/**
 		 * 
@@ -79,13 +78,6 @@ package info.tiefenauer.jasskass.settings.views.components
 			_label = value;
 			if (labelDisplay && labelDisplay.text != value)
 				labelDisplay.text = value;
-		}
-		public function set toolTipMessage(value:String):void{
-			if (value != _toolTipMessage)
-				_toolTipMessage = value;
-		}
-		public function get toolTipMessage():String{
-			return _toolTipMessage;
 		}
 	}
 }
