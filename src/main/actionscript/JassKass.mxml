@@ -55,9 +55,9 @@
 		</s:icon>-->
 	</s:ViewNavigator>
 	
-	<s:ViewNavigator id="statisticsViewNavigator"
-					 firstView="info.tiefenauer.jasskass.statistics.views.phone.StatisticsView"
-					 label="Statistik"
+	<s:ViewNavigator id="settingsViewNavigator"
+					 firstView="info.tiefenauer.jasskass.settings.views.phone.SettingsView"
+					 label="Einstellungen"
 					 width="100%"
 					 height="100%"
 					 >

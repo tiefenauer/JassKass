@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base:SettingsViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:base="info.tiefenauer.jasskass.settings.views.base.*"
+					   implements="info.tiefenauer.jasskass.settings.views.interfaces.ISettingsView"
+					   backButtonEnabled="false"
+					   title="{translate('Einstellungen')}" xmlns:components="info.tiefenauer.jasskass.settings.views.components.*"
+					   >
+	<fx:Script>
+		<![CDATA[
+			import info.tiefenauer.jasskass.app.util.translate;
+			
+			protected function onSettingChanged(event:Event):void{
+				trace('setting changed');
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<s:MultiDPIBitmapSource id="infoIcon"
+								source120dpi="@Embed('/assets/dpi120/ico_info.png')"
+								source160dpi="@Embed('/assets/dpi160/ico_info.png')"
+								source240dpi="@Embed('/assets/dpi240/ico_info.png')"
+								source320dpi="@Embed('/assets/dpi320/ico_info.png')"
+								source480dpi="@Embed('/assets/dpi480/ico_info.png')"
+								source640dpi="@Embed('/assets/dpi640/ico_info.png')"
+								/>
+	</fx:Declarations>
+	
+	<s:Scroller width="100%" height="100%">
+		<s:VGroup paddingLeft="10" paddingRight="10" paddingTop="20" paddingBottom="20">
+
+			<components:TitleLabel text="{translate('Generelles')}" width="100%"/>
+			
+			<components:SettingDisplay label="{translate('Auto-Bergpreis')}"
+									   toolTipMessage="{translate('Automatisches Anmelden des Bergpreis')}"
+									   icon="{infoIcon}" 
+									   width="100%" 
+									   settingChanged="onSettingChanged(event)">
+				<components:valueDisplay>
+					<s:ToggleSwitch right="0"/>
+				</components:valueDisplay>
+			</components:SettingDisplay>
+			
+			<components:TitleLabel text="{translate('Striche')}" width="100%"/>
+			
+			<components:SettingDisplay label="{translate('4 Bauern')}"
+									   toolTipMessage="{translate('Strich für 4 Bauern')}"
+									   icon="{infoIcon}" 
+									   width="100%" 
+									   settingChanged="onSettingChanged(event)">
+				<components:valueDisplay>
+					<s:ToggleSwitch right="0"/>
+				</components:valueDisplay>
+			</components:SettingDisplay>
+			
+			<components:SettingDisplay label="{translate('Match')}"
+									   toolTipMessage="{translate('Anzahl Striche für einen Match')}"
+									   icon="{infoIcon}" 
+									   width="100%" 
+									   settingChanged="onSettingChanged(event)">
+				<components:valueDisplay>
+					<s:NumericStepper minimum="1" skinClass="info.tiefenauer.jasskass.skins.numericStepper.MobileNumStepSkin"/>
+				</components:valueDisplay>
+			</components:SettingDisplay>
+			
+			<components:SettingDisplay label="{translate('Kontermatch')}"
+									   toolTipMessage="{translate('Anzahl Striche für einen Kontermatch')}"
+									   icon="{infoIcon}" 
+									   width="100%" 
+									   settingChanged="onSettingChanged(event)">
+				<components:valueDisplay>
+					<s:NumericStepper minimum="1" skinClass="info.tiefenauer.jasskass.skins.numericStepper.MobileNumStepSkin"/>
+				</components:valueDisplay>
+			</components:SettingDisplay>
+			
+			<components:SettingDisplay label="{translate('Bergpreis')}"
+									   toolTipMessage="{translate('Anzahl Striche für den Bergpreis')}"
+									   icon="{infoIcon}" 
+									   width="100%" 
+									   settingChanged="onSettingChanged(event)">
+				<components:valueDisplay>
+					<s:NumericStepper minimum="1" skinClass="info.tiefenauer.jasskass.skins.numericStepper.MobileNumStepSkin"/>
+				</components:valueDisplay>
+			</components:SettingDisplay>
+			
+			<components:SettingDisplay label="{translate('Sieg')}"
+									   toolTipMessage="{translate('Anzahl Striche für den Sieg')}"
+									   icon="{infoIcon}" 
+									   width="100%" settingChanged="onSettingChanged(event)">
+				<components:valueDisplay>
+					<s:NumericStepper minimum="1" skinClass="info.tiefenauer.jasskass.skins.numericStepper.MobileNumStepSkin"/>
+				</components:valueDisplay>
+			</components:SettingDisplay>
+			
+			<components:TitleLabel text="{translate('Berechnung JassKass')}" width="100%"/>
+			
+			<components:SettingDisplay label="{translate('Strichwert')}"
+									   toolTipMessage="{translate('Betrag in Franken für einen Strich')}"
+									   icon="{infoIcon}" width="100%" 
+									   settingChanged="onSettingChanged(event)"
+									   >
+				<components:valueDisplay>
+					<s:NumericStepper minimum="1" skinClass="info.tiefenauer.jasskass.skins.numericStepper.MobileNumStepSkin"/>
+				</components:valueDisplay>
+			</components:SettingDisplay>
+			
+			<components:SettingDisplay label="{translate('Differenzfaktor')}"
+									   toolTipMessage="{translate('Zusätzlicher Frankenbetrag für das Verliererteam')}"
+									   icon="{infoIcon}" 
+									   width="100%" 
+									   settingChanged="onSettingChanged(event)">
+				<components:valueDisplay>
+					<s:NumericStepper minimum="1" skinClass="info.tiefenauer.jasskass.skins.numericStepper.MobileNumStepSkin"/>
+				</components:valueDisplay>
+			</components:SettingDisplay>
+			
+		</s:VGroup>
+	</s:Scroller>
+	
+	
+</base:SettingsViewBase>

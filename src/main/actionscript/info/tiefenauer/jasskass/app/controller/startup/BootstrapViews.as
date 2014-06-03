@@ -25,8 +25,8 @@ package info.tiefenauer.jasskass.app.controller.startup
 	import info.tiefenauer.jasskass.profile.views.interfaces.IJassGroupListView;
 	import info.tiefenauer.jasskass.profile.views.interfaces.IJassGroupView;
 	import info.tiefenauer.jasskass.profile.views.interfaces.IJoinGroupView;
-	import info.tiefenauer.jasskass.statistics.views.StatisticsViewMediator;
-	import info.tiefenauer.jasskass.statistics.views.interfaces.IStatisticsView;
+	import info.tiefenauer.jasskass.settings.views.SettingsViewMediator;
+	import info.tiefenauer.jasskass.settings.views.interfaces.ISettingsView;
 	
 	import robotlegs.bender.extensions.mediatorMap.api.IMediatorMap;
 	
@@ -57,7 +57,7 @@ package info.tiefenauer.jasskass.app.controller.startup
 			mediatorMap.map(IJoinGroupView).toMediator(JoinGroupViewMediator);
 			
 			// statistics
-			mediatorMap.map(IStatisticsView).toMediator(StatisticsViewMediator);
+			mediatorMap.map(ISettingsView).toMediator(SettingsViewMediator);
 		}
 	}
 }
