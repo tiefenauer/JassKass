@@ -9,5 +9,6 @@ package info.tiefenauer.jasskass.settings.views.interfaces
 	public interface ISettingsView
 	{
 		function get settings():Vector.<ISetting>;
+		function set settings(value:Vector.<ISetting>):void;
 	}
 }

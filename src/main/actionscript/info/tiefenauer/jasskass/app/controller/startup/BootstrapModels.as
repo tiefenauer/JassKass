@@ -24,6 +24,8 @@ package info.tiefenauer.jasskass.app.controller.startup
 	import info.tiefenauer.jasskass.kass.model.interfaces.IKassProxy;
 	import info.tiefenauer.jasskass.profile.model.JassGroupProxy;
 	import info.tiefenauer.jasskass.profile.model.interfaces.IJassGroupProxy;
+	import info.tiefenauer.jasskass.settings.model.SettingsProxy;
+	import info.tiefenauer.jasskass.settings.model.interfaces.ISettingsProxy;
 	
 	import org.as3commons.logging.setup.LogSetupLevel;
 	
@@ -48,6 +50,7 @@ package info.tiefenauer.jasskass.app.controller.startup
 			injector.map(IJassProxy).toSingleton(JassProxy);
 			injector.map(IJassGroupProxy).toSingleton(JassGroupProxy);
 			injector.map(IKassProxy).toSingleton(KassProxy);
+			injector.map(ISettingsProxy).toSingleton(SettingsProxy);
 			
 			// Services
 			injector.map(ITextFileService).toType(TextFileService);

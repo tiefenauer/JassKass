@@ -13,7 +13,7 @@ package info.tiefenauer.jasskass.settings.model
 	public class Setting implements ISetting
 	{
 		protected var _key:String;
-		protected var _value:String;
+		protected var _value:*;
 		
 		/**
 		 * Constructor 
@@ -21,7 +21,7 @@ package info.tiefenauer.jasskass.settings.model
 		 * @param value
 		 * 
 		 */
-		public function Setting(key:String=null, value:String=null){
+		public function Setting(key:String=null, value:*=null){
 			_key = key;
 			_value = value;
 		}
@@ -50,10 +50,10 @@ package info.tiefenauer.jasskass.settings.model
 		public function set key(value:String):void{
 			_key = value;
 		}
-		public function get value():String{
+		public function get value():*{
 			return _value;
 		}
-		public function set value(value:String):void{
+		public function set value(value:*):void{
 			_value = value;
 		}
 	}

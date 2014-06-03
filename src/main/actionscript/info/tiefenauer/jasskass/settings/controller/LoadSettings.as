@@ -1,5 +1,5 @@
 /**
- * SaveSettings.as
+ * LoadSettings.as
  *
  * Project: JassKass
  * Date: Jun 3, 2014
@@ -23,28 +23,25 @@ package info.tiefenauer.jasskass.settings.controller
 	import info.tiefenauer.jasskass.settings.model.interfaces.ISettingsProxy;
 	
 	/**
-	 * Save Settings 
+	 * Load Settings from File
 	 * @author dtie
 	 */
-	public class SaveSettings extends SimpleCommand
+	public class LoadSettings extends SimpleCommand
 	{
-		[Inject] public var settings:Vector.<ISetting>;
-		[Inject] public var settingsProxy:ISettingsProxy;
 		[Inject] public var fileService:ITextFileService;
+		[Inject] public var settingsProxy:ISettingsProxy;
 		
 		/**
 		 * 
 		 */
 		override public function execute():void{
 			super.execute();
-			var settingsArr:Array = [];
-			for each(var setting:ISetting in settings){
-				settingsProxy.addSetting(setting);
-				settingsArr.push(SettingsFactory.toObject(setting));
-			};
 			fileService.file = File.applicationStorageDirectory.resolvePath('settings.json');
-			fileService.write(JSON.stringify(settingsArr));
+			var settingsArr:Array = JSON.parse(fileService.read()) as Array;
+			for each(var settingsObj:Object in settingsArr){
+				var setting:ISetting = SettingsFactory.fromObject(settingsObj);
+				settingsProxy.addSetting(setting);
+			}
 		}
-			
 	}
 }

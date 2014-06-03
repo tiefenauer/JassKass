@@ -12,7 +12,7 @@ package info.tiefenauer.jasskass.settings.model
 	 * @author Daniel Tiefenauer
 	 * 
 	 */
-	public class SettingProxy implements ISettingsProxy
+	public class SettingsProxy implements ISettingsProxy
 	{
 		private var _settings:Vector.<ISetting> = new Vector.<ISetting>();
 

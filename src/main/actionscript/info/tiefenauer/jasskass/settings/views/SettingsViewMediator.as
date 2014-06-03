@@ -2,7 +2,8 @@ package info.tiefenauer.jasskass.settings.views
 {
 	import flash.events.Event;
 	
-	import info.tiefenauer.jasskass.settings.SaveSettingsSignal;
+	import info.tiefenauer.jasskass.settings.model.interfaces.ISettingsProxy;
+	import info.tiefenauer.jasskass.settings.signals.SaveSettingsSignal;
 	import info.tiefenauer.jasskass.settings.views.base.SettingsViewBase;
 	import info.tiefenauer.jasskass.settings.views.interfaces.ISettingsView;
 	
@@ -15,6 +16,7 @@ package info.tiefenauer.jasskass.settings.views
 	public class SettingsViewMediator extends Mediator
 	{
 		[Inject] public var view:ISettingsView;
+		[Inject] public var settingsProxy:ISettingsProxy;
 		[Inject] public var saveSettingsSignal:SaveSettingsSignal;
 		
 		/**
@@ -23,6 +25,8 @@ package info.tiefenauer.jasskass.settings.views
 		override public function initialize():void{
 			super.initialize();
 			addViewListener(SettingsViewBase.SAVE_SETTINGS_CLICKED, onSaveButtonClicked);
+			
+			view.settings = settingsProxy.settings;
 		}
 		
 		/**

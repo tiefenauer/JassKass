@@ -46,8 +46,10 @@ package info.tiefenauer.jasskass.app.controller.startup
 	import info.tiefenauer.jasskass.profile.events.JassGroupEvent;
 	import info.tiefenauer.jasskass.profile.events.JassGroupProxyEvent;
 	import info.tiefenauer.jasskass.profile.events.JoinGroupEvent;
-	import info.tiefenauer.jasskass.settings.SaveSettingsSignal;
+	import info.tiefenauer.jasskass.settings.controller.LoadSettings;
 	import info.tiefenauer.jasskass.settings.controller.SaveSettings;
+	import info.tiefenauer.jasskass.settings.signals.LoadSettingsSignal;
+	import info.tiefenauer.jasskass.settings.signals.SaveSettingsSignal;
 	
 	import robotlegs.bender.extensions.eventCommandMap.api.IEventCommandMap;
 	import robotlegs.bender.extensions.signalCommandMap.api.ISignalCommandMap;
@@ -68,6 +70,7 @@ package info.tiefenauer.jasskass.app.controller.startup
 		override public function execute():void{
 			super.execute();
 			signalCommandMap.map(SaveSettingsSignal).toCommand(SaveSettings);
+			signalCommandMap.map(LoadSettingsSignal).toCommand(LoadSettings);
 			
 			// general
 			commandMap.map(MobileView.BACK).toCommand(NavigateBackCommand);

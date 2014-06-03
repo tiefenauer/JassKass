@@ -3,12 +3,16 @@
 					   xmlns:s="library://ns.adobe.com/flex/spark" 
 					   xmlns:base="info.tiefenauer.jasskass.settings.views.base.*"
 					   implements="info.tiefenauer.jasskass.settings.views.interfaces.ISettingsView"
+					   xmlns:components="info.tiefenauer.jasskass.settings.views.components.*"
 					   backButtonEnabled="false"
-					   title="{translate('Einstellungen')}" xmlns:components="info.tiefenauer.jasskass.settings.views.components.*"
+					   title="{translate('Einstellungen')}" 
 					   >
 	<fx:Script>
 		<![CDATA[
 			import info.tiefenauer.jasskass.app.util.translate;
+			import info.tiefenauer.jasskass.settings.model.Setting;
+			import info.tiefenauer.jasskass.settings.model.enum.SettingKey;
+			import info.tiefenauer.jasskass.settings.model.interfaces.ISetting;
 			
 			private var settingsChanged:Boolean = false;
 			
@@ -17,7 +21,50 @@
 			}
 			
 			protected function onSaveButtonClick(event:MouseEvent):void{
+				settings = new Vector.<ISetting>();
+				settings.push(new Setting(SettingKey.AUTO_BERGPREIS, autoBergpreisSetting.selected));
+				settings.push(new Setting(SettingKey.VIER_BAUERN, vierBauernSetting.selected));
+				settings.push(new Setting(SettingKey.MATCH, matchSetting.value));
+				settings.push(new Setting(SettingKey.KONTERMATCH, konterMatchSetting.value));
+				settings.push(new Setting(SettingKey.BERGPREIS, bergpreisSetting.value));
+				settings.push(new Setting(SettingKey.SIEG, siegSetting.value));
+				settings.push(new Setting(SettingKey.STICHWERT, stichwertSetting.value));
+				settings.push(new Setting(SettingKey.DIFF_FAKTOR, diffFaktorSetting.value));
 				dispatchEvent(new Event(SAVE_SETTINGS_CLICKED));
+				setCurrentState('default');
+			}
+			
+			/**
+			 * 
+			 */
+			override public function set settings(value:Vector.<ISetting>):void{
+				super.settings = value;
+				for each(var setting:ISetting in value) switch (setting.key) {
+					case SettingKey.AUTO_BERGPREIS:
+						autoBergpreisSetting.selected = setting.value == true;
+						break;
+					case SettingKey.VIER_BAUERN:
+						vierBauernSetting.selected = setting.value == true;
+						break;
+					case SettingKey.MATCH:
+						matchSetting.value = setting.value;
+						break;
+					case SettingKey.KONTERMATCH:
+						konterMatchSetting.value = setting.value;
+						break;
+					case SettingKey.BERGPREIS:
+						bergpreisSetting.value = setting.value;
+						break;
+					case SettingKey.SIEG:
+						siegSetting.value = setting.value;
+						break;
+					case SettingKey.STICHWERT:
+						stichwertSetting.value = setting.value;
+						break;
+					case SettingKey.DIFF_FAKTOR:
+						diffFaktorSetting.value = setting.value;
+						break;
+				};
 			}
 			
 		]]>
@@ -57,7 +104,7 @@
 									   width="100%" 
 									   settingChanged="onSettingChanged(event)">
 				<components:valueDisplay>
-					<s:ToggleSwitch right="0"/>
+					<s:ToggleSwitch right="0" id="autoBergpreisSetting"/>
 				</components:valueDisplay>
 			</components:SettingDisplay>
 			
@@ -69,7 +116,7 @@
 									   width="100%" 
 									   settingChanged="onSettingChanged(event)">
 				<components:valueDisplay>
-					<s:ToggleSwitch right="0"/>
+					<s:ToggleSwitch right="0" id="vierBauernSetting"/>
 				</components:valueDisplay>
 			</components:SettingDisplay>
 			
@@ -79,7 +126,7 @@
 									   width="100%" 
 									   settingChanged="onSettingChanged(event)">
 				<components:valueDisplay>
-					<s:NumericStepper minimum="1" skinClass="info.tiefenauer.jasskass.skins.numericStepper.MobileNumStepSkin"/>
+					<s:NumericStepper id="matchSetting" minimum="1" skinClass="info.tiefenauer.jasskass.skins.numericStepper.MobileNumStepSkin"/>
 				</components:valueDisplay>
 			</components:SettingDisplay>
 			
@@ -89,7 +136,7 @@
 									   width="100%" 
 									   settingChanged="onSettingChanged(event)">
 				<components:valueDisplay>
-					<s:NumericStepper minimum="1" skinClass="info.tiefenauer.jasskass.skins.numericStepper.MobileNumStepSkin"/>
+					<s:NumericStepper id="konterMatchSetting" minimum="1" skinClass="info.tiefenauer.jasskass.skins.numericStepper.MobileNumStepSkin"/>
 				</components:valueDisplay>
 			</components:SettingDisplay>
 			
@@ -99,7 +146,7 @@
 									   width="100%" 
 									   settingChanged="onSettingChanged(event)">
 				<components:valueDisplay>
-					<s:NumericStepper minimum="1" skinClass="info.tiefenauer.jasskass.skins.numericStepper.MobileNumStepSkin"/>
+					<s:NumericStepper id="bergpreisSetting" minimum="1" skinClass="info.tiefenauer.jasskass.skins.numericStepper.MobileNumStepSkin"/>
 				</components:valueDisplay>
 			</components:SettingDisplay>
 			
@@ -108,7 +155,7 @@
 									   icon="{infoIcon}" 
 									   width="100%" settingChanged="onSettingChanged(event)">
 				<components:valueDisplay>
-					<s:NumericStepper minimum="1" skinClass="info.tiefenauer.jasskass.skins.numericStepper.MobileNumStepSkin"/>
+					<s:NumericStepper id="siegSetting" minimum="1" skinClass="info.tiefenauer.jasskass.skins.numericStepper.MobileNumStepSkin"/>
 				</components:valueDisplay>
 			</components:SettingDisplay>
 			
@@ -120,7 +167,7 @@
 									   settingChanged="onSettingChanged(event)"
 									   >
 				<components:valueDisplay>
-					<s:NumericStepper minimum="1" skinClass="info.tiefenauer.jasskass.skins.numericStepper.MobileNumStepSkin"/>
+					<s:NumericStepper id="stichwertSetting" minimum="1" skinClass="info.tiefenauer.jasskass.skins.numericStepper.MobileNumStepSkin"/>
 				</components:valueDisplay>
 			</components:SettingDisplay>
 			
@@ -130,7 +177,7 @@
 									   width="100%" 
 									   settingChanged="onSettingChanged(event)">
 				<components:valueDisplay>
-					<s:NumericStepper minimum="1" skinClass="info.tiefenauer.jasskass.skins.numericStepper.MobileNumStepSkin"/>
+					<s:NumericStepper id="diffFaktorSetting" minimum="1" skinClass="info.tiefenauer.jasskass.skins.numericStepper.MobileNumStepSkin"/>
 				</components:valueDisplay>
 			</components:SettingDisplay>
 			

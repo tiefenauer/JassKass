@@ -9,7 +9,7 @@ package info.tiefenauer.jasskass.settings.model.interfaces
 		function get key():String;
 		function set key(value:String):void;
 		
-		function get value():String;
-		function set value(value:String):void;
+		function get value():*;
+		function set value(value:*):void;
 	}
 }

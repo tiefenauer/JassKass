@@ -5,7 +5,7 @@
 package test.info.tiefenauer.jasskass.app.models
 {
 	import info.tiefenauer.jasskass.settings.model.Setting;
-	import info.tiefenauer.jasskass.settings.model.SettingProxy;
+	import info.tiefenauer.jasskass.settings.model.SettingsProxy;
 	import info.tiefenauer.jasskass.settings.model.interfaces.ISetting;
 	
 	import org.flexunit.asserts.assertEquals;
@@ -16,7 +16,7 @@ package test.info.tiefenauer.jasskass.app.models
 		/*============================================================================*/
 		/* Private Properties                                                         */
 		/*============================================================================*/
-		private var proxy:SettingProxy;
+		private var proxy:SettingsProxy;
 		
 		/*============================================================================*/
 		/* Test Setup and Teardown                                                    */
@@ -24,7 +24,7 @@ package test.info.tiefenauer.jasskass.app.models
 		[Before]
 		public function setUp():void
 		{
-			proxy = new SettingProxy();
+			proxy = new SettingsProxy();
 		}
 		
 		[After]
