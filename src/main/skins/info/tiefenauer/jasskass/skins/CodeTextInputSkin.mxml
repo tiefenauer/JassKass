@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		xmlns:s="library://ns.adobe.com/flex/spark"
-		minHeight="40"
 		>
 	<!-- host component -->
 	<fx:Metadata>
 		[HostComponent("spark.components.TextInput")]
 	</fx:Metadata>
-	
+
+	<fx:Style>
+		@namespace s "library://ns.adobe.com/flex/spark";
+		@font-face
+		{
+			src: url('/assets/fonts/eraser-dust.ttf');
+			fontFamily: crayon;
+			embed-as-cff: true;
+		}
+	</fx:Style>
 	<!-- states -->
 	<s:states>
 		<s:State name="disabledWithPrompt" />
@@ -22,27 +30,29 @@
 	-->
 	
 	<!-- background -->
-	<s:Rect width="100%" height="100%" radiusX="3" radiusY="3">
-		<s:fill>
-			<s:SolidColor color="#994011" />
-		</s:fill>
-		<s:stroke>
-			<s:SolidColorStroke color="#59270C" weight="1" />
-		</s:stroke>
-	</s:Rect>
+	<s:Image scaleMode="zoom" width="100%" height="100%">
+		<s:source>
+			<s:MultiDPIBitmapSource source120dpi="@Embed('/assets/dpi120/bg_blackboard.jpg')"
+									source160dpi="@Embed('/assets/dpi160/bg_blackboard.jpg')"
+									source240dpi="@Embed('/assets/dpi240/bg_blackboard.jpg')"
+									source320dpi="@Embed('/assets/dpi320/bg_blackboard.jpg')"
+									source480dpi="@Embed('/assets/dpi480/bg_blackboard.jpg')"
+									source640dpi="@Embed('/assets/dpi640/bg_blackboard.jpg')"
+									/>
+		</s:source>
+	</s:Image>
 	
-	<s:Label id="promptDisplay" 
+	<s:Label id="promptDisplay"
 			 includeIn="normalWithPrompt,disabledWithPrompt" 
-			 color="#BAB8B6" 
+			 color="#FFFFFF"
+			 alpha="0.5"
 			 width="100%" height="100%" 
 			 verticalAlign="middle"
 			 />
 
 	<s:RichEditableText id="textDisplay" 
 						typographicCase="uppercase"
-						fontSize="20" 
-						color="#DEBC97" 
-						fontWeight="bold" 
+						color="#FFFFFF" 
 						width="100%" 
 						height="100%" 
 						verticalAlign="middle"

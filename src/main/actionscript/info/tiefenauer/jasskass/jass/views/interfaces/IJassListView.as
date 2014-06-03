@@ -20,5 +20,6 @@ package info.tiefenauer.jasskass.jass.views.interfaces
 		function set jassGroup(value:IJassGroup):void;
 		function get jasses():List;
 		function get groupKey():String;
+		function setCurrentState(stateName:String, playTransition:Boolean=true):void;
 	}
 }

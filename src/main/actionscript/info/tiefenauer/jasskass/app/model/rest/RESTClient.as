@@ -57,19 +57,22 @@ package info.tiefenauer.jasskass.app.model.rest
 				// Bad request
 				case 400:
 					onError.dispatch(new RESTClientError(RESTClientError.BAD_REQUEST_400));
+					onSuccess.removeAll();
 					break;
 				// Unauthorized
 				case 401:
 					onError.dispatch(new RESTClientError(RESTClientError.UNAUTHORIZED_401));
+					onSuccess.removeAll();
 					break;
 				// Not Found
 				case 404:
 					onError.dispatch(new RESTClientError(RESTClientError.NOT_FOUND_404));
-					//onLearningObjectDownloadOK.removeAll();
+					onSuccess.removeAll();
 					break;
 				// Internal Server Error
 				case 500:
 					onError.dispatch(new RESTClientError(RESTClientError.INTERNAL_SERVER_ERROR_500));
+					onSuccess.removeAll();
 					break;
 			}
 		}		

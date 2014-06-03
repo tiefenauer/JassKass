@@ -8,6 +8,7 @@ package info.tiefenauer.jasskass.profile.events
 		// event types
 		public static const JOIN_GROUP:String = NAME + 'JoinGroup';
 		public static const GROUP_JOINED:String = NAME + 'GroupJoined';
+		public static const GROUP_NOT_FOUND:String = NAME + 'GroupNotFound';
 		
 		public var code:String;
 		

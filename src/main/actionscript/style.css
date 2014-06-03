@@ -4,11 +4,13 @@
 @namespace popups "info.tiefenauer.jasskass.jass.views.popups.*";
 @namespace phone "info.tiefenauer.jasskass.jass.views.phone.*";
 @namespace local "*";
+@namespace skins "info.tiefenauer.jasskass.skins.*";
 
 @font-face
 {
 	src: url('/assets/fonts/eraser-dust.ttf');
 	fontFamily: crayon;
+	embed-as-cff: false;
 }
 
 /*****************************************************************

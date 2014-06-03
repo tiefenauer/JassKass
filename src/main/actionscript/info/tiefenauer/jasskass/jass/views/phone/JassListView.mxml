@@ -74,6 +74,7 @@
 		<s:State name="join" stateGroups="noJassGroup"/>
 		<s:State name="joining" stateGroups="noJassGroup"/>
 		<s:State name="joined" stateGroups="noJassGroup"/>
+		<s:State name="notJoined" stateGroups="noJassGroup"/>
 	</base:states>
 	
 	<base:navigationContent>
@@ -133,11 +134,14 @@
 			<s:Label text="{translate('Du musst einer Jassgruppe beitreten, um die Jasse anzeigen zu können')}" textAlign="center" width="100%"/>
 			<!--- TextInput to enter group code -->
 			<s:TextInput id="codeTI"
+						 skinClass="info.tiefenauer.jasskass.skins.CodeTextInputSkin"
+						 fontFamily="crayon"
+						 fontSize="40"
 						 change="onCodeChanged(event)"
 						 prompt="{translate('Code')}" 
-						 width="100%" 
+						 width="100%"
+						 height="80"
 						 textAlign="center" 
-						 skinClass="info.tiefenauer.jasskass.skins.CodeTextInputSkin"
 						 />
 			
 			<!--- Button to send join request -->
@@ -150,8 +154,8 @@
 					  />
 			
 			<!-- Spinner symbol -->
-			<s:Group width="100%" height="100" horizontalCenter="0">
-				<s:Rect radiusX="3" radiusY="3">
+			<s:Group width="100%" height="50" horizontalCenter="0">
+				<s:Rect radiusX="3" radiusY="3" width="100%" height="100%" includeIn="joining,notJoined" alpha="0.5">
 					<s:fill>
 						<s:SolidColor color="#FFFFFF" />
 					</s:fill>
@@ -159,8 +163,14 @@
 						<s:SolidColorStroke color="#59270C" weight="1"/>
 					</s:stroke>
 				</s:Rect>
-				<s:BusyIndicator symbolColor="#663602" rotationInterval="20" includeIn="joining" horizontalCenter="0"/>
-				<s:Label id="messageLabel" includeIn="joined" width="100%" />
+				<s:BusyIndicator symbolColor="#663602" rotationInterval="20" includeIn="joining" horizontalCenter="0" verticalCenter="0"/>
+				<s:Label text="{translate('Ungültiger Code')}" 
+						 includeIn="notJoined" 
+						 color="#FF0000" 
+						 width="100%" 
+						 textAlign="center"
+						 verticalCenter="0"
+						 />
 			</s:Group>
 		</s:VGroup>
 	</s:Group>

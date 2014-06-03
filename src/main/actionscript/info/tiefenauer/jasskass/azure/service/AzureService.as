@@ -63,5 +63,6 @@ package info.tiefenauer.jasskass.azure.service
 			].concat(_headers);
 			return request;
 		}
+		
 	}
 }

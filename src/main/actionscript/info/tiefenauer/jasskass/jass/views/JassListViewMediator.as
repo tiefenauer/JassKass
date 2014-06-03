@@ -43,6 +43,7 @@ package info.tiefenauer.jasskass.jass.views
 			
 			addContextListener(JassProxyEvent.JASSES_CHANGED, onJassesChanged);
 			addContextListener(JoinGroupEvent.GROUP_JOINED, onGroupJoined);
+			addContextListener(JoinGroupEvent.GROUP_NOT_FOUND, onGroupNotFound);
 			
 			view.jassGroup = jassGroupProxy.currentJassGroup;
 			view.jasses.dataProvider = sort(view.filterSelection.selectedIndex);
@@ -133,6 +134,9 @@ package info.tiefenauer.jasskass.jass.views
 		}
 		private function onGroupJoined(event:JoinGroupEvent):void{
 			view.jassGroup = jassGroupProxy.currentJassGroup;
+		}
+		private function onGroupNotFound(event:JoinGroupEvent):void{
+			view.setCurrentState('notJoined');
 		}
 	}
 }

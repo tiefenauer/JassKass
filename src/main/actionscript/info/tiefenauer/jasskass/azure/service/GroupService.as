@@ -28,7 +28,7 @@ package info.tiefenauer.jasskass.azure.service
 		 * @param code
 		 */
 		public function joinGroup(code:String):void{
-			_endpoint += 'getgroup?code=' + code;
+			_endpoint = 'getgroup?code=' + code;
 			_completeHandler = onGroupJoined;
 			GET();
 		}
