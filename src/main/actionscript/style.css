@@ -5,6 +5,7 @@
 @namespace phone "info.tiefenauer.jasskass.jass.views.phone.*";
 @namespace local "*";
 @namespace skins "info.tiefenauer.jasskass.skins.*";
+@namespace popup "com.clx.uicomponents.popup.*";
 
 @font-face
 {
@@ -46,4 +47,8 @@ phone|AdHocTeamBuilderView s|Label.playerName
 	color: #474647;
 	fontSize: 30;
 	fontWeight: bold;
+}
+
+popup|AlertPopup {
+	skinClass: ClassReference("com.clx.uicomponents.skins.DefaultAlertPopupSkin");
 }

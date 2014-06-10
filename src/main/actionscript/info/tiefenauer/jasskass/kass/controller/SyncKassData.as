@@ -38,7 +38,7 @@ package info.tiefenauer.jasskass.kass.controller
 		override public function execute():void{
 			super.execute();
 			kassProxy.currentKass.entries.filter(function(item:IKassEntry, index:int, vector:Vector.<IKassEntry>):Boolean{
-				return item.isSynced
+				return item.isSynced;
 			}).forEach(function(entry:IKassEntry):void{
 				unSynced.push(entry);
 			});
@@ -56,7 +56,7 @@ package info.tiefenauer.jasskass.kass.controller
 			release();
 			unSynced.forEach(function(entry:IKassEntry):void{
 				entry.isSynced = true;
-				kassProxy.addEntry(entry);
+				kassProxy.currentKass.addEntry(entry);
 			});
 		}
 		

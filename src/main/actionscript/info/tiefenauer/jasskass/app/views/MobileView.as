@@ -3,11 +3,7 @@ package info.tiefenauer.jasskass.app.views
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
-	import mx.core.FlexGlobals;
-	import mx.events.FlexEvent;
-	
 	import spark.components.Button;
-	import spark.components.TabbedViewNavigatorApplication;
 	import spark.components.View;
 	
 	import info.tiefenauer.jasskass.app.util.translate;
@@ -36,14 +32,9 @@ package info.tiefenauer.jasskass.app.views
 			_backBtn.label = translate('Zurück');
 			_backBtn.visible = true;
 			
-			addEventListener(FlexEvent.CREATION_COMPLETE, onCreationComplete);
 			navigationContent = new Array(_backBtn);
 		}
 		
-		private function onCreationComplete(event:FlexEvent):void {
-			var tbv:Boolean = true;//TabbedViewNavigatorApplication(FlexGlobals.topLevelApplication).tabbedNavigator.tabBar.visible;
-			tabBarVisible = tbv;
-		}
 		
 		private function onBackBtnClick(event:MouseEvent):void{
 			dispatchEvent(new Event(BACK));

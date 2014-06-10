@@ -2,13 +2,15 @@
 <base:KassViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
 				   xmlns:s="library://ns.adobe.com/flex/spark" 
 				   xmlns:base="info.tiefenauer.jasskass.kass.views.base.*"
-				   implements="info.tiefenauer.jasskass.kass.views.interfaces.IKassView"
+				   backButtonEnabled="false"
 				   creationComplete="onCreationComplete(event)"
+				   title="{translate('Kasse')}"
 				   >
 	
 	<fx:Script>
 		<![CDATA[
 			import mx.collections.ArrayCollection;
+			import mx.collections.IList;
 			import mx.events.FlexEvent;
 			
 			import spark.events.IndexChangeEvent;
@@ -16,8 +18,6 @@
 			import info.tiefenauer.jasskass.app.util.translate;
 			import info.tiefenauer.jasskass.kass.model.interfaces.IBalance;
 			import info.tiefenauer.jasskass.kass.model.interfaces.IKassEntry;
-			
-			[Bindable] private var _entries:ArrayCollection = new ArrayCollection();
 			
 			[Bindable]
 			private function get saldo():String{
@@ -42,11 +42,8 @@
 			public function get filterSelection():ButtonBar{
 				return sortButtonBar;
 			}
-			public function get entries():ArrayCollection{
-				return _entries;
-			}
-			public function set entries(value:ArrayCollection):void{
-				_entries = value;
+			override public function set entries(value:ArrayCollection):void{
+				super.entries = value;
 				refresh();
 			}
 			public function get balance():IBalance{
@@ -62,41 +59,63 @@
 			// Event handlers
 			//-------------------------------
 			protected function onButtonBarSelectionChanged(event:IndexChangeEvent):void{
-				dispatchEvent(new Event(FILTER_SELECTED));
+				onFilterSelectionChanged.dispatch(filterSelection.selectedIndex);
 			}
-			
 			protected function onJassKassListSelectionChanged(event:IndexChangeEvent):void{
-				dispatchEvent(new Event(JASS_SELECTED));
+				onKassEntrySelected.dispatch(kassEntryList.selectedItem);
 			}
 			
 			protected function onCreationComplete(event:FlexEvent):void{
 				sortButtonBar.dataProvider = new ArrayCollection([translate('nach Datum'), translate('nach Betrag')]);
 			}
 			
+			protected function onReloadClick(event:MouseEvent):void{
+				dispatchEvent(new Event(RELOAD_CLICKED));
+			}
+			
 		]]>
 	</fx:Script>
+	
+	<base:actionContent>
+		<s:Button label="{translate('Reload')}"
+				  click="onReloadClick(event)"
+				  />
+	</base:actionContent>
+	
+	<base:states>
+		<s:State name="default" />
+		<s:State name="loading" />
+	</base:states>
 	
 	<base:layout>
 		<s:VerticalLayout />
 	</base:layout>
 	
-	<s:HGroup width="100%">
-		<s:Label text="Saldo: " width="50%" />
-		<s:Label id="saldoLabel" text="{saldo}" width="50%" />
+	<s:HGroup width="100%" height="50" paddingLeft="20" paddingRight="20" paddingTop="20" paddingBottom="20">
+		<s:Label id="saldoLabel" text="{'CHF ' + saldo}" textAlign="center" width="100%" />
 	</s:HGroup>
 	
 	<s:ButtonBar id="sortButtonBar"
+				 skinClass="info.tiefenauer.jasskass.skins.buttonBar.ButtonBarFixedWidthSkin"
 				 change="onButtonBarSelectionChanged(event)"
 				 requireSelection="true"
 				 width="100%"
+				 height="50"
 				 />
 		
-	<s:List id="jassKassList"
+	<s:List id="kassEntryList"
+			includeIn="default"
 			dataProvider="{_entries}"
 			change="onJassKassListSelectionChanged(event)"
 			itemRenderer="info.tiefenauer.jasskass.kass.views.components.IKassEntryRenderer"
 			width="100%"
 			height="100%"
 			/>
+	
+	<s:VGroup includeIn="loading" verticalAlign="middle" horizontalAlign="center" width="100%" height="100%">
+		<s:BusyIndicator rotationInterval="10" />
+		<s:Label text="{translate('Bitte warten')}" />
+		<s:Label text="{translate('Daten werden geladen')}" />
+	</s:VGroup>
 		
 </base:KassViewBase>

@@ -41,6 +41,7 @@
       <libraryPathEntry kind="3" linkType="1" path="${DOCUMENTS}/FlexCITutorial/flexUnit4.1/flexunit-cilistener-4.1.0-x-y.y.y.y.swc" useDefaultLinkType="false"/>
       <libraryPathEntry kind="3" linkType="1" path="${DOCUMENTS}/FlexCITutorial/flexUnit4.1/flexunit-aircilistener-4.1.0-x-y.y.y.y.swc" useDefaultLinkType="false"/>
       <libraryPathEntry kind="5" linkType="2" path="libs/ane/NativeDialogs.ane"/>
+      <libraryPathEntry kind="5" linkType="2" path="libs/ane/SystemProperties.ane"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>

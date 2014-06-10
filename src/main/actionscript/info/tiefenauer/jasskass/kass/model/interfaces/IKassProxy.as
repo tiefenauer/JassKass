@@ -38,20 +38,7 @@ package info.tiefenauer.jasskass.kass.model.interfaces
 		 * @param kass
 		 * @return 
 		 */
-		function addEntries(entries:Vector.<IKassEntry>, kass:IKass=null):void;
-		
-		/**
-		 * Add Entry to Kass 
-		 * @param entry
-		 * @param kass
-		 */
-		function addEntry(entry:IKassEntry, kass:IKass=null):void;
-		
-		/**
-		 * Get Entries for current Kass 
-		 * @return 
-		 */
-		function get entries():Vector.<IKassEntry>;
+		function addKass(kass:IKass):void;
 		
 	}
 }

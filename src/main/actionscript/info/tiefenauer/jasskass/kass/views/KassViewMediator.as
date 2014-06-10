@@ -4,10 +4,11 @@ package info.tiefenauer.jasskass.kass.views
 	
 	import mx.collections.ArrayCollection;
 	
+	import info.tiefenauer.jasskass.kass.events.KassEntryEvent;
 	import info.tiefenauer.jasskass.kass.events.KassEvent;
 	import info.tiefenauer.jasskass.kass.model.interfaces.IKassEntry;
+	import info.tiefenauer.jasskass.kass.model.interfaces.IKassProxy;
 	import info.tiefenauer.jasskass.kass.views.base.KassViewBase;
-	import info.tiefenauer.jasskass.kass.views.interfaces.IKassView;
 	import info.tiefenauer.jasskass.profile.model.interfaces.IJassGroupProxy;
 	
 	import robotlegs.bender.bundles.mvcs.Mediator;
@@ -18,17 +19,37 @@ package info.tiefenauer.jasskass.kass.views
 	 */
 	public class KassViewMediator extends Mediator
 	{
-		[Inject] public var view:IKassView;
+		[Inject] public var view:KassViewBase;
 		[Inject] public var jassGroupProxy:IJassGroupProxy;
+		[Inject] public var kassProxy:IKassProxy;
 		
 		private var _kassEntries:Vector.<IKassEntry>;
 		
+		/**
+		 * 
+		 */
 		override public function initialize():void{
 			super.initialize();
-			addViewListener(KassViewBase.FILTER_SELECTED, onFilterSelected);
+			addViewListener(KassViewBase.RELOAD_CLICKED, onReloadClicked);
+			view.onKassEntrySelected.add(onKassEntrySelected);
+			view.onFilterSelectionChanged.add(onFilterSelected);
 			
 			addContextListener(KassEvent.DOWNLOAD_KASS_DATA_END, onDownloadKassDataEnd);
 			
+			if (kassProxy.currentKass){
+				_kassEntries = kassProxy.currentKass.entries;
+				view.entries = sort(0);
+			}
+			else{
+				downloadKassData();
+			}
+		}
+		
+		/**
+		 * 
+		 */
+		private function downloadKassData():void{
+			view.setCurrentState('loading');
 			var downloadEvent:KassEvent = new KassEvent(KassEvent.DOWNLOAD_KASS_DATA);
 			downloadEvent.group = jassGroupProxy.currentJassGroup;
 			dispatch(downloadEvent);
@@ -40,11 +61,11 @@ package info.tiefenauer.jasskass.kass.views
 		private function sort(crit:Number):ArrayCollection{
 			var result:Vector.<IKassEntry> = new Vector.<IKassEntry>();
 			switch(crit){
-				case 0:
-					result = _kassEntries.sort(dateSort)
-					break;
 				case 1:
 					result = _kassEntries.sort(amountSort)
+					break;
+				default:
+					result = _kassEntries.sort(dateSort)
 					break;
 			}
 			var ac:ArrayCollection = new ArrayCollection();
@@ -83,8 +104,14 @@ package info.tiefenauer.jasskass.kass.views
 		//--------------------------
 		// View Event handlers
 		//--------------------------
-		private function onFilterSelected(event:Event):void{
-			view.entries = sort(view.filterSelection.selectedIndex);
+		private function onKassEntrySelected(value:IKassEntry):void{
+			dispatch(new KassEntryEvent(KassEntryEvent.SHOW_KASS_ENTRY, value));
+		}
+		private function onFilterSelected(value:int):void{
+			view.entries = sort(value);
+		}
+		private function onReloadClicked(event:Event):void{
+			downloadKassData();
 		}
 		
 		//--------------------------
@@ -95,8 +122,9 @@ package info.tiefenauer.jasskass.kass.views
 		 * @param event
 		 */
 		private function onDownloadKassDataEnd(event:KassEvent):void{
+			view.setCurrentState('default');
 			_kassEntries = event.kass.entries;
-			view.entries = sort(view.filterSelection.selectedIndex);
+			view.entries = sort(0);
 		}
 			
 	}

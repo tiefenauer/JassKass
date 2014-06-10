@@ -5,7 +5,8 @@
 						  xmlns:components="info.tiefenauer.jasskass.jass.views.components.*"
 						  implements="info.tiefenauer.jasskass.jass.views.interfaces.IJassPenaltyView"
 						  actionBarVisible="false"
-						  backButtonEnabled="false" 
+						  tabBarVisible="false"
+						  backButtonEnabled="false"
 						  >
 	
 	<fx:Script>

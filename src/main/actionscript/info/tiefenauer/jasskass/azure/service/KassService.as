@@ -38,7 +38,7 @@ package info.tiefenauer.jasskass.azure.service
 		public function KassService(){
 			super('getkass');
 			_completeHandler = onKassDownloaded;
-			onSuccess = new Signal(Object);
+			onSuccess = new Signal(IKass);
 		}
 		
 		/**
@@ -98,8 +98,8 @@ package info.tiefenauer.jasskass.azure.service
 					var kass:IKass = KassFactory.fromAzureObject(responseObj.kass);
 					if (responseObj.group)
 						kass.group = JassGroupFactory.fromObject(responseObj.group);
+					onSuccess.dispatch(kass);
 				}
-				onSuccess.dispatch({kass: kass});
 			}
 			catch(error:Error) {
 				onError.dispatch(error);

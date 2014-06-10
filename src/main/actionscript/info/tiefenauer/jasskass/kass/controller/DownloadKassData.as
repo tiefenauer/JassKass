@@ -4,6 +4,7 @@ package info.tiefenauer.jasskass.kass.controller
 	import info.tiefenauer.jasskass.azure.service.KassService;
 	import info.tiefenauer.jasskass.kass.events.KassEvent;
 	import info.tiefenauer.jasskass.kass.model.interfaces.IKass;
+	import info.tiefenauer.jasskass.kass.model.interfaces.IKassProxy;
 	
 	/**
 	 * JassKass-Daten von Drive herunterladen 
@@ -13,6 +14,7 @@ package info.tiefenauer.jasskass.kass.controller
 	{
 		[Inject] public var event:KassEvent;
 		[Inject] public var service:KassService;
+		[Inject] public var kassProxy:IKassProxy;
 		
 		/**
 		 * 
@@ -28,11 +30,11 @@ package info.tiefenauer.jasskass.kass.controller
 		 * 
 		 * @param kass
 		 */
-		private function onKassDownloaded(responseObj:Object):void{
+		private function onKassDownloaded(kass:IKass):void{
 			release();
-			var kass:IKass = responseObj.kass?responseObj.kass:null;
+			kass.group = event.group;
+			kassProxy.addKass(kass);
 			var downloadedEvent:KassEvent = new KassEvent(KassEvent.DOWNLOAD_KASS_DATA_END);
-			downloadedEvent.group = event.group;
 			downloadedEvent.kass = kass;
 			dispatch(downloadedEvent);
 		}

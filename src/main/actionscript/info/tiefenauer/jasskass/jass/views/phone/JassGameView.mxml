@@ -5,6 +5,7 @@
 				   xmlns:components="info.tiefenauer.jasskass.jass.views.components.*"
 				   implements="info.tiefenauer.jasskass.jass.views.interfaces.IJassGameView"
 				   actionBarVisible="false"
+				   tabBarVisible="false"
 				   creationComplete="onCreationComplete(event)"
 				   >
 

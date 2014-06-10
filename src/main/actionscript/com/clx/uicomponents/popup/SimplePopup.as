@@ -82,6 +82,7 @@ package com.clx.uicomponents.popup
 				}
 			}
 			catch(error:Error){
+				trace(error);
 				// we are probably in FlexUnitApplication
 			}
 		}

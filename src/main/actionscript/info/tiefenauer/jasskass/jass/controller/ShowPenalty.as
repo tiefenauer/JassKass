@@ -25,6 +25,8 @@ package info.tiefenauer.jasskass.jass.controller
 		
 		override public function execute():void{
 			super.execute();
+			application.tabbedNavigator.hideTabBar(true);
+			application.activeNavigator.hideActionBar(true);
 			var transition:FlipViewTransition = new FlipViewTransition();
 			transition.direction = ViewTransitionDirection.LEFT;
 			application.activeNavigator.pushView(JassPenaltyView, jassProxy.currentJass, null, transition);

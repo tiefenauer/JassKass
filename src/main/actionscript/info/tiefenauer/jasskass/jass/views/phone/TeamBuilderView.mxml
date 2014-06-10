@@ -5,6 +5,7 @@
 						  implements="info.tiefenauer.jasskass.jass.views.interfaces.ITeamBuilderView" 
 						  xmlns:components="info.tiefenauer.jasskass.jass.views.components.*"
 						  creationComplete="onCreationComplete(event)"
+						  title="{translate('Neuer Jass')}"
 						  >
 	
 	
@@ -15,6 +16,7 @@
 			
 			import spark.events.PopUpEvent;
 			
+			import info.tiefenauer.jasskass.app.util.translate;
 			import info.tiefenauer.jasskass.jass.model.interfaces.IJassPlayer;
 			import info.tiefenauer.jasskass.jass.views.components.ChoosePlayerCallout;
 			[Bindable] private var playerChoiceList:ArrayCollection = new ArrayCollection();

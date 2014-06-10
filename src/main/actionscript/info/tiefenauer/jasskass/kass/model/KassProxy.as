@@ -16,7 +16,6 @@ package info.tiefenauer.jasskass.kass.model
 {
 	import info.tiefenauer.jasskass.app.model.Actor;
 	import info.tiefenauer.jasskass.kass.model.interfaces.IKass;
-	import info.tiefenauer.jasskass.kass.model.interfaces.IKassEntry;
 	import info.tiefenauer.jasskass.kass.model.interfaces.IKassProxy;
 	import info.tiefenauer.jasskass.profile.model.interfaces.IJassGroupProxy;
 	
@@ -35,43 +34,19 @@ package info.tiefenauer.jasskass.kass.model
 		 * @param kass
 		 * @return 
 		 */
-		public function addEntries(entries:Vector.<IKassEntry>, kass:IKass=null):void{
-			if (!kass)
-				kass = currentKass;
-			if (kass){
-				entries.forEach(function(entry:IKassEntry):void{
-					kass.addEntry(entry);
-				});
-			}
-			
-		}
-		/**
-		 * 
-		 * @param entry
-		 * @param kass
-		 * 
-		 */
-		public function addEntry(entry:IKassEntry, kass:IKass=null):void{
-			if (!kass)
-				kass = currentKass;
-			if (kass)
-				kass.addEntry(entry);
+		public function addKass(kass:IKass):void{
+			var result:Vector.<IKass> = _kasses.filter(function(item:IKass, index:int, vector:Vector.<IKass>):Boolean{
+				return item.id == kass.id;
+			});
+			if (result.length == 0)
+				_kasses.push(kass);
+			else
+				_kasses.splice(_kasses.indexOf(result[0]), 1, kass);
 		}
 		
-		/**
-		 * 
-		 * @return 
-		 */
-		public function get entries():Vector.<IKassEntry>{
-			if (currentKass)
-				return currentKass.entries;
-			return null;
-		}
-		
-		/**
-		 * 
-		 * @return 
-		 */
+		//----------------------------
+		// Getter/Setter
+		//----------------------------
 		public function get currentKass():IKass{
 			var result:Vector.<IKass> = _kasses.filter(function(item:IKass, index:int, vector:Vector.<IKass>):Boolean{
 				return item.group.id == jassGroupProxy.currentJassGroup.id; 
@@ -80,11 +55,7 @@ package info.tiefenauer.jasskass.kass.model
 				return result[0];
 			return null;
 		}
-		
-		/**
-		 * 
-		 * @return 
-		 */
+
 		public function get kasses():Vector.<IKass>{
 			return _kasses;
 		}
