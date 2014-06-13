@@ -15,29 +15,10 @@ package info.tiefenauer.jasskass.profile.model.factory
 	{
 		/**
 		 * 
-		 * @param group
-		 * @return 
-		 */
-		public static function toObject(group:IJassGroup):Object{
-			var playersArr:Array = new Array();
-			for each(var player:IJassPlayer in group.players){
-				playersArr.push(JassPlayerFactory.toObject(player));
-			}
-			return {
-				id: group.id || '',
-				isSynced: group.isSynced,
-				key: group.key || '',
-				name: group.name || '',
-				active: group.active,
-				players: playersArr
-			};
-		}
-		/**
-		 * 
 		 * @param obj
 		 * @return 
 		 */
-		public static function fromObject(obj:Object):IJassGroup{
+		public static function fromAzureObject(obj:Object):IJassGroup{
 			var group:JassGroup = new JassGroup();
 			
 			for(var key:String in obj) switch (key){
@@ -60,7 +41,7 @@ package info.tiefenauer.jasskass.profile.model.factory
 			
 			var playersArray:Array = obj['players'];
 			for each(var playerObj:Object in playersArray){
-				group.players.push(JassPlayerFactory.fromObject(playerObj));
+				group.players.push(JassPlayerFactory.fromAzureObject(playerObj));
 			}
 			return group;
 		}
@@ -75,7 +56,7 @@ package info.tiefenauer.jasskass.profile.model.factory
 			for each(var player:IJassPlayer in group.players) players.push(JassPlayerFactory.toAzureObject(player));
 			return {
 				id: group.id || '',
-				groupName: group.name || '',
+				name: group.name || '',
 				key: group.key || '',
 				active: group.active || false,
 				players: players || []

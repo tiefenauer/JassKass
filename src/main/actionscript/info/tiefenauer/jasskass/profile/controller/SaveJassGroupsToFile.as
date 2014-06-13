@@ -23,7 +23,7 @@ package info.tiefenauer.jasskass.profile.controller
 			super.execute();
 			var jassGroupArr:Array = new Array();
 			for each(var jassGroup:IJassGroup in jassGroupProxy.jassGroups){
-				jassGroupArr.push(JassGroupFactory.toObject(jassGroup));
+				jassGroupArr.push(JassGroupFactory.toAzureObject(jassGroup));
 			}
 			var file:File = File.applicationStorageDirectory.resolvePath('jassGroups.json');
 			if (file.exists)

@@ -13,7 +13,7 @@ package info.tiefenauer.jasskass.profile.model
 	{
 		private var _id:String = null;
 		private var _key:String = null;
-		private var _groupName:String = '';
+		private var _name:String = '';
 		private var _current:Boolean = false;
 		private var _players:Vector.<IJassPlayer> = new Vector.<IJassPlayer>();
 		
@@ -33,10 +33,10 @@ package info.tiefenauer.jasskass.profile.model
 			_key = value;
 		}
 		public function get name():String{
-			return _groupName;
+			return _name;
 		}
 		public function set name(value:String):void{
-			_groupName = value;
+			_name = value;
 		}
 		public function get active():Boolean{
 			return _current;

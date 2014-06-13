@@ -99,7 +99,7 @@ package info.tiefenauer.jasskass.azure.service
 				if (responseObj.kass){
 					var kass:IKass = KassFactory.fromAzureObject(responseObj.kass);
 					if (responseObj.group){
-						kass.group = JassGroupFactory.fromObject(responseObj.group);
+						kass.group = JassGroupFactory.fromAzureObject(responseObj.group);
 						kass.entries.forEach(function(entry:IKassEntry, entryIx:int, vector:Vector.<IKassEntry>):void{
 							entry.amounts.forEach(function(amount:IKassAmount, amountIx:int, vector:Vector.<IKassAmount>):void{
 								var players:Vector.<IJassPlayer> = kass.group.players.filter(function(player:IJassPlayer, index:int, vector:Vector.<IJassPlayer>):Boolean{

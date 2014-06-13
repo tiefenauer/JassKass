@@ -10,13 +10,11 @@
 	<fx:Script>
 		<![CDATA[
 			import mx.collections.ArrayCollection;
-			import mx.collections.IList;
 			import mx.events.FlexEvent;
 			
 			import spark.events.IndexChangeEvent;
 			
 			import info.tiefenauer.jasskass.app.util.translate;
-			import info.tiefenauer.jasskass.kass.model.interfaces.IBalance;
 			import info.tiefenauer.jasskass.kass.model.interfaces.IKassEntry;
 			
 			[Bindable]
@@ -34,6 +32,10 @@
 			//-------------------------------
 			public function refresh():void{
 				saldoLabel.text = saldo;
+				if (_entries.length == 0)
+					setCurrentState('empty');
+				else
+					setCurrentState('');
 			}
 			
 			//-------------------------------
@@ -45,14 +47,6 @@
 			override public function set entries(value:ArrayCollection):void{
 				super.entries = value;
 				refresh();
-			}
-			public function get balance():IBalance{
-				if (data is IBalance)
-					return data as IBalance;
-				return null;
-			}
-			public function set balance(value:IBalance):void{
-				data = value;
 			}
 			
 			//-------------------------------
@@ -85,6 +79,7 @@
 	<base:states>
 		<s:State name="default" />
 		<s:State name="loading" />
+		<s:State name="empty" />
 	</base:states>
 	
 	<base:layout>
@@ -111,6 +106,10 @@
 			width="100%"
 			height="100%"
 			/>
+	
+	<s:VGroup includeIn="empty" verticalAlign="middle" horizontalAlign="center" width="100%" height="100%">
+		<s:Label text="{translate('Die Kasse ist leer')}" />
+	</s:VGroup>
 	
 	<s:VGroup includeIn="loading" verticalAlign="middle" horizontalAlign="center" width="100%" height="100%">
 		<s:BusyIndicator rotationInterval="10" />

@@ -26,7 +26,7 @@ package info.tiefenauer.jasskass.profile.controller
 				
 				var jassGroupsObj:Object = JSON.parse(fileContent);
 				for each(var jassGroupObj:Object in jassGroupsObj){
-					var jassGroup:IJassGroup = JassGroupFactory.fromObject(jassGroupObj);
+					var jassGroup:IJassGroup = JassGroupFactory.fromAzureObject(jassGroupObj);
 					jassGroupProxy.addJassGroup(jassGroup);
 				}
 			}

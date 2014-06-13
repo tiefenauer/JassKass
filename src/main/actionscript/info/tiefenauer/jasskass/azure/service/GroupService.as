@@ -52,7 +52,7 @@ package info.tiefenauer.jasskass.azure.service
 		private function onGroupJoined(event:Event):void{
 			try{
 				var responseObj:Object = JSON.parse(urlLoader.data);
-				var group:IJassGroup = JassGroupFactory.fromObject(responseObj);
+				var group:IJassGroup = JassGroupFactory.fromAzureObject(responseObj);
 				onSuccess.dispatch(group);
 			}
 			catch(error:Error){
@@ -67,7 +67,7 @@ package info.tiefenauer.jasskass.azure.service
 		private function onGroupAdded(event:Event):void{
 			try{
 				var responseObj:Object = JSON.parse(urlLoader.data);
-				var group:IJassGroup = JassGroupFactory.fromObject(responseObj);
+				var group:IJassGroup = JassGroupFactory.fromAzureObject(responseObj);
 				onSuccess.dispatch(group);
 			}
 			catch(error:Error){

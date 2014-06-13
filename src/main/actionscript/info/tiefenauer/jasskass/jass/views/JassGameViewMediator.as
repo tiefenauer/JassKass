@@ -38,6 +38,8 @@ package info.tiefenauer.jasskass.jass.views
 			addContextListener(JassProxyEvent.CURRENT_GAME_CHANGED, onCurrentGameChanged);
 			addContextListener(PenaltyEvent.BERGPREIS, onBergpreis);
 			addContextListener(PenaltyEvent.SIEG, onSieg);
+			addContextListener(PenaltyEvent.MATCH, onMatch);
+			addContextListener(PenaltyEvent.KONTERMATCH, onKonterMatch);
 			view.game = jassProxy.currentJass.currentGame;
 		}
 		
@@ -73,7 +75,14 @@ package info.tiefenauer.jasskass.jass.views
 			toast(event.team.player1.firstName + ' ' + translate('und') + ' ' + event.team.player2.firstName + ' ' + translate('haben den Bergpreis geholt'));
 		}
 		private function onSieg(event:PenaltyEvent):void{
-			toast(event.team.player1.firstName + ' ' + translate('und') + ' ' + event.team.player2.firstName + ' ' + translate('haben den Sieg geholt'));			
+			toast(event.team.player1.firstName + ' ' + translate('und') + ' ' + event.team.player2.firstName + ' ' + translate('haben den Sieg geholt'));
+			dispatch(new JassEvent(JassEvent.FINISH_JASS, jassProxy.currentJass));
+		}
+		private function onMatch(event:PenaltyEvent):void{
+			toast('Match für ' + event.team.player1.firstName + ' ' + translate('und') + ' ' + event.team.player2.firstName);
+		}
+		private function onKonterMatch(event:PenaltyEvent):void{
+			toast('Kontermatch für ' + event.team.player1.firstName + ' ' + translate('und') + ' ' + event.team.player2.firstName);
 		}
 
 			

@@ -73,7 +73,10 @@
     <buildTarget buildTargetName="device" iosSettingsVersion="2" isCurrent="true" platformId="com.adobe.flexide.multiplatform.ios.platform" provisioningFile="" releasePackageType="">
       <airSettings airCertificatePath="" airTimestamp="true" anePathSet="true" version="1">
         <airExcludes/>
-        <anePaths/>
+        <anePaths>
+          <anePathEntry path="libs/ane/NativeDialogs.ane"/>
+          <anePathEntry path="libs/ane/SystemProperties.ane"/>
+        </anePaths>
         <newLaunchParams/>
         <modifiedLaunchParams/>
         <newPackagingParams/>
@@ -87,6 +90,7 @@
         <airExcludes/>
         <anePaths>
           <anePathEntry path="libs/ane/NativeDialogs.ane"/>
+          <anePathEntry path="libs/ane/SystemProperties.ane"/>
         </anePaths>
         <newLaunchParams/>
         <modifiedLaunchParams/>

@@ -30,6 +30,7 @@ package info.tiefenauer.jasskass.app.controller.startup
 	import info.tiefenauer.jasskass.jass.event.PointsEvent;
 	import info.tiefenauer.jasskass.jass.event.WysEvent;
 	import info.tiefenauer.jasskass.jass.model.JassProxyEvent;
+	import info.tiefenauer.jasskass.jass.signals.MatchSignal;
 	import info.tiefenauer.jasskass.kass.controller.CreateKassEntry;
 	import info.tiefenauer.jasskass.kass.controller.DownloadKassData;
 	import info.tiefenauer.jasskass.kass.controller.SaveKassDataToFile;

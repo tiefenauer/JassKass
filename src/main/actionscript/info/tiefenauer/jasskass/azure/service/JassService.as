@@ -56,7 +56,7 @@ package info.tiefenauer.jasskass.azure.service
 			_completeHandler = onJassAdded;
 			_body = {
 				jass: JassFactory.toAzureObject(jass),
-					group: JassGroupFactory.toObject(group)
+				group: JassGroupFactory.toAzureObject(group)
 			};
 			POST();
 		}
@@ -71,7 +71,7 @@ package info.tiefenauer.jasskass.azure.service
 				var jassesObj:Object = responseObj['jasses'];
 				var groupObj:Object = responseObj['group'];
 				
-				var group:IJassGroup = JassGroupFactory.fromObject(groupObj);
+				var group:IJassGroup = JassGroupFactory.fromAzureObject(groupObj);
 				
 				var jasses:Vector.<IJass> = new Vector.<IJass>();
 				for each(var jassObj:Object in jassesObj){

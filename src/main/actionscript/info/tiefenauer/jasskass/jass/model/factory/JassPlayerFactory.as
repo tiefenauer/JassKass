@@ -11,34 +11,20 @@ package info.tiefenauer.jasskass.jass.model.factory
 	{
 		/**
 		 * 
-		 * @param player
-		 * @return 
-		 * 
-		 */
-		public static function toObject(player:IJassPlayer):Object{
-			return {
-				first: player.firstName || '',
-				last: player.lastName || '',
-				email: player.eMail || ''
-			};
-		}
-		
-		/**
-		 * 
 		 * @param obj
 		 * @return 
 		 * 
 		 */
-		public static function fromObject(obj:Object):IJassPlayer{
+		public static function fromAzureObject(obj:Object):IJassPlayer{
 			var player:IJassPlayer = new JassPlayer();
 			for (var key:String in obj) switch (key){
 				case'id':
 					player.id = obj[key];
 					break;
-				case 'first':
+				case 'firstName':
 					player.firstName = obj[key];
 					break;
-				case 'last':
+				case 'lastName':
 					player.lastName = obj[key];
 					break;
 				case 'email':

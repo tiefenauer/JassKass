@@ -17,7 +17,7 @@ package info.tiefenauer.jasskass.jass.model.factory
 						jass.id = obj[key];
 						break;
 					case 'group':
-						jass.group = JassGroupFactory.fromObject(obj[key]);
+						jass.group = JassGroupFactory.fromAzureObject(obj[key]);
 						break;
 					case 'isSynced':
 						jass.isSynced = str2bool(obj[key]);
@@ -58,7 +58,7 @@ package info.tiefenauer.jasskass.jass.model.factory
 		public static function toObject(jass:IJass):Object{
 			var obj:Object = new Object();
 			obj['id'] = jass.id;
-			obj['group'] = JassGroupFactory.toObject(jass.group);
+			obj['group'] = JassGroupFactory.toAzureObject(jass.group);
 			obj['isSynced'] = jass.isSynced;
 			obj['date'] = jass.date.time;
 			obj['team1'] = JassTeamFactory.toObject(jass.team1);
