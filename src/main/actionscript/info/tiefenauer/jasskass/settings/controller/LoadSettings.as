@@ -31,12 +31,17 @@ package info.tiefenauer.jasskass.settings.controller
 		[Inject] public var fileService:ITextFileService;
 		[Inject] public var settingsProxy:ISettingsProxy;
 		
+		private var defaultSettingsFile:File = File.applicationDirectory.resolvePath('defaultSettings.json');
+		private var settingsFile:File = File.applicationStorageDirectory.resolvePath('settings.json');
+		
 		/**
 		 * 
 		 */
 		override public function execute():void{
 			super.execute();
-			fileService.file = File.applicationStorageDirectory.resolvePath('settings.json');
+			if (!settingsFile.exists)
+				defaultSettingsFile.copyTo(settingsFile);
+			fileService.file = settingsFile;
 			var settingsArr:Array = JSON.parse(fileService.read()) as Array;
 			for each(var settingsObj:Object in settingsArr){
 				var setting:ISetting = SettingsFactory.fromObject(settingsObj);

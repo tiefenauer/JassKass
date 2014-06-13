@@ -13,6 +13,11 @@ package info.tiefenauer.jasskass.profile.model.factory
 	 */
 	public class JassGroupFactory
 	{
+		/**
+		 * 
+		 * @param group
+		 * @return 
+		 */
 		public static function toObject(group:IJassGroup):Object{
 			var playersArr:Array = new Array();
 			for each(var player:IJassPlayer in group.players){
@@ -27,6 +32,11 @@ package info.tiefenauer.jasskass.profile.model.factory
 				players: playersArr
 			};
 		}
+		/**
+		 * 
+		 * @param obj
+		 * @return 
+		 */
 		public static function fromObject(obj:Object):IJassGroup{
 			var group:JassGroup = new JassGroup();
 			
@@ -53,6 +63,23 @@ package info.tiefenauer.jasskass.profile.model.factory
 				group.players.push(JassPlayerFactory.fromObject(playerObj));
 			}
 			return group;
+		}
+		
+		/**
+		 * 
+		 * @param group
+		 * 
+		 */
+		public static function toAzureObject(group:IJassGroup):Object{
+			var players:Array = [];
+			for each(var player:IJassPlayer in group.players) players.push(JassPlayerFactory.toAzureObject(player));
+			return {
+				id: group.id || '',
+				groupName: group.name || '',
+				key: group.key || '',
+				active: group.active || false,
+				players: players || []
+			};
 		}
 	}
 }

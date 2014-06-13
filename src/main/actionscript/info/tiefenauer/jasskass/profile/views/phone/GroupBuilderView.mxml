@@ -31,14 +31,11 @@
 			}
 			
 			//-----------------------------
-			// Getter/Setter
-			//-----------------------------
-
-			//-----------------------------
 			// Event handlers
 			//-----------------------------
 			protected function onSubmitButtonClick(event:MouseEvent):void{
-				dispatchEvent(new Event(SUBMIT_BUTTON_CLICKED));
+				jassGroup.name = groupNameTI.text;
+				onSubmitClicked.dispatch(jassGroup);
 			}
 			protected function onAddPlayerButtonClick(event:MouseEvent):void{
 				jassGroup.players.push(new JassPlayer(nameTI.text, null, emailTI.text));
@@ -57,11 +54,17 @@
 		]]>
 	</fx:Script>
 	
+	<base:states>
+		<s:State name="default" />
+		<s:State name="communicating" />
+	</base:states>
+	
 	<base:layout>
 		<s:VerticalLayout />
 	</base:layout>
 	
 	<s:VGroup width="100%" paddingLeft="20" paddingRight="20" paddingTop="20" paddingBottom="20">
+		<s:TextInput id="groupNameTI" width="100%" textAlign="center" prompt="{translate('Gruppenname (optional)')}"/>
 		<s:TextInput id="nameTI" prompt="{translate('Name')}" width="100%" />
 		<s:TextInput id="emailTI" prompt="{translate('E-Mail')}" width="100%" />
 		<s:Button id="addPlayerButton" label="{translate('Hinzufügen')}" click="onAddPlayerButtonClick(event)" width="100%"/>
@@ -75,11 +78,13 @@
 
 	<s:VGroup width="100%" paddingLeft="20" paddingRight="20" paddingTop="20" paddingBottom="20">
 		<s:Button id="submitBtn"
+				  includeIn="default"
 				  label="{translate('Fertig')}"
 				  enabled="false"
 				  click="onSubmitButtonClick(event)"
 				  width="100%"
 				  />
+		<s:BusyIndicator rotationInterval="50" includeIn="communicating" />
 	</s:VGroup>
 	
 </base:GroupBuilderViewBase>

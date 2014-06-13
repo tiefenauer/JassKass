@@ -17,34 +17,22 @@
 			
 			import info.tiefenauer.jasskass.app.util.translate;
 			import info.tiefenauer.jasskass.profile.model.interfaces.IJassGroup;
-			protected function onNewJassBtnClick(event:MouseEvent):void{
-				dispatchEvent(new Event(NEW_JASS_BUTTON_CLICKED));
-			}
-			
-			protected function onJassListSelectionChange(event:IndexChangeEvent):void{
-				dispatchEvent(new Event(JASS_SELECTED));
-			}
-			
+
 			//------------------
 			// Getter/Setter
 			//------------------
-			public function get jasses():List{
-				return jassList;
-			}
-			public function set jassGroup(value:IJassGroup):void{
-				if (value){
+			override public function set jassGroup(value:IJassGroup):void{
+				super.jassGroup = value;
+				if (value)
 					setCurrentState('default');
-				}
-				else {
+				else 
 					setCurrentState('join');
-				}
 			}
-			public function get filterSelection():ButtonBar{
-				return sortButtonBar;
+			override public function set jasses(value:ArrayCollection):void{
+				super.jasses = value;
+				value.refresh();
 			}
-			public function get groupKey():String{
-				return codeTI.text;
-			}
+			
 			//------------------
 			// Event handlers
 			//------------------
@@ -52,18 +40,27 @@
 				sortButtonBar.dataProvider = new ArrayCollection([translate('Datum aufsteigend'), translate('Datum absteigend')]);
 				sortButtonBar.selectedIndex = 0;
 			}
+			protected function onNewJassBtnClick(event:MouseEvent):void{
+				onNewJassClicked.dispatch();
+			}
+			protected function onJassListSelectionChange(event:IndexChangeEvent):void{
+				onJassSelected.dispatch(jassList.selectedItem);
+			}
 			protected function onButtonBarSelectionChanged(event:IndexChangeEvent):void{
-				dispatchEvent(new Event(FILTER_SELECTED));
+				onFilterSelectionChanged.dispatch(sortButtonBar.selectedIndex);
 			}
 			protected function onJoinGroupButtonClicked(event:MouseEvent):void{
 				setCurrentState('joining');
-				dispatchEvent(new Event(JOIN_GROUP_BUTTON_CLICKED));
+				onJoinGroupClicked.dispatch(codeTI.text);
 			}
 			protected function onRefreshButtonClick(event:MouseEvent):void{
-				dispatchEvent(new Event(REFRESH_BUTTON_CLICKED));
+				onRefreshClicked.dispatch();
 			}
 			protected function onCodeChanged(event:TextOperationEvent):void{
 				joinGroupButton.enabled = codeTI.text.length > 5;				
+			}
+			protected function onCreateGroupButtonClicked(event:MouseEvent):void{
+				onNewGroupClicked.dispatch();
 			}
 			
 		]]>
@@ -107,7 +104,7 @@
 		
 		<!--- list to display jasses -->
 		<s:List id="jassList"
-				dataProvider="{jassListDataProvider}"
+				dataProvider="{jasses}"
 				itemRenderer="info.tiefenauer.jasskass.jass.views.components.JassItemRenderer"
 				change="onJassListSelectionChange(event)"
 				width="100%"
@@ -150,6 +147,12 @@
 					  click="onJoinGroupButtonClicked(event)"
 					  enabled="false"
 					  enabled.joining="false"
+					  width="100%" 
+					  />
+			
+			<!-- Button to create Group -->
+			<s:Button label="{translate('Gruppe erstellen')}" 
+					  click="onCreateGroupButtonClicked(event)"
 					  width="100%" 
 					  />
 			

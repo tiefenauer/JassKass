@@ -15,7 +15,7 @@ package info.tiefenauer.jasskass.settings.model.enum
 		public static const MATCH:String = 'MATCH';
 		public static const KONTERMATCH:String = 'KONTERMATCH';
 		public static const SIEG:String = 'SIEG';
-		public static const BERGPREIS:String = 'BERGPREIS:String';
+		public static const BERGPREIS:String = 'BERGPREIS';
 		public static const STICHWERT:String = 'STICHWERT';
 		public static const DIFF_FAKTOR:String = 'DIFF_FAKTOR';
 	}

@@ -16,9 +16,11 @@ package info.tiefenauer.jasskass.azure.service
 {
 	import flash.events.Event;
 	
+	import info.tiefenauer.jasskass.jass.model.interfaces.IJassPlayer;
 	import info.tiefenauer.jasskass.kass.model.factory.KassEntryFactory;
 	import info.tiefenauer.jasskass.kass.model.factory.KassFactory;
 	import info.tiefenauer.jasskass.kass.model.interfaces.IKass;
+	import info.tiefenauer.jasskass.kass.model.interfaces.IKassAmount;
 	import info.tiefenauer.jasskass.kass.model.interfaces.IKassEntry;
 	import info.tiefenauer.jasskass.profile.model.factory.JassGroupFactory;
 	import info.tiefenauer.jasskass.profile.model.interfaces.IJassGroup;
@@ -96,12 +98,22 @@ package info.tiefenauer.jasskass.azure.service
 				var responseObj:Object = JSON.parse(urlLoader.data);
 				if (responseObj.kass){
 					var kass:IKass = KassFactory.fromAzureObject(responseObj.kass);
-					if (responseObj.group)
+					if (responseObj.group){
 						kass.group = JassGroupFactory.fromObject(responseObj.group);
+						kass.entries.forEach(function(entry:IKassEntry, entryIx:int, vector:Vector.<IKassEntry>):void{
+							entry.amounts.forEach(function(amount:IKassAmount, amountIx:int, vector:Vector.<IKassAmount>):void{
+								var players:Vector.<IJassPlayer> = kass.group.players.filter(function(player:IJassPlayer, index:int, vector:Vector.<IJassPlayer>):Boolean{
+									return player.id == amount.player.id;
+								});
+								amount.player = players.length > 0?players[0]:null;
+							});
+						});
+					}
 					onSuccess.dispatch(kass);
 				}
 			}
 			catch(error:Error) {
+				trace(error);
 				onError.dispatch(error);
 			}
 		}

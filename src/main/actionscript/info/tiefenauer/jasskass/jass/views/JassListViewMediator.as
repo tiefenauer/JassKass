@@ -4,20 +4,20 @@
  */
 package info.tiefenauer.jasskass.jass.views
 {
-	import flash.events.Event;
-	
 	import mx.collections.ArrayCollection;
 	
+	import info.tiefenauer.jasskass.app.util.global.$;
 	import info.tiefenauer.jasskass.app.views.SimpleMediator;
 	import info.tiefenauer.jasskass.jass.event.JassEvent;
 	import info.tiefenauer.jasskass.jass.model.JassProxyEvent;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJass;
 	import info.tiefenauer.jasskass.jass.model.interfaces.IJassProxy;
 	import info.tiefenauer.jasskass.jass.views.base.JassListViewBase;
-	import info.tiefenauer.jasskass.jass.views.interfaces.IJassListView;
 	import info.tiefenauer.jasskass.profile.events.JassGroupEvent;
 	import info.tiefenauer.jasskass.profile.events.JoinGroupEvent;
+	import info.tiefenauer.jasskass.profile.model.JassGroup;
 	import info.tiefenauer.jasskass.profile.model.interfaces.IJassGroupProxy;
+	import info.tiefenauer.jasskass.profile.views.phone.GroupBuilderView;
 	
 	/**
 	 * Mediator for JassListView 
@@ -26,7 +26,7 @@ package info.tiefenauer.jasskass.jass.views
 	 */
 	public class JassListViewMediator extends SimpleMediator
 	{
-		[Inject] public var view:IJassListView;
+		[Inject] public var view:JassListViewBase;
 		[Inject] public var jassProxy:IJassProxy;
 		[Inject] public var jassGroupProxy:IJassGroupProxy;
 
@@ -35,18 +35,19 @@ package info.tiefenauer.jasskass.jass.views
 		 * 
 		 */
 		override public function initialize():void{
-			addViewListener(JassListViewBase.NEW_JASS_BUTTON_CLICKED, onNewJassButtonClicked);
-			addViewListener(JassListViewBase.JASS_SELECTED, onJassSelected);
-			addViewListener(JassListViewBase.FILTER_SELECTED, onFilterSelected);
-			addViewListener(JassListViewBase.JOIN_GROUP_BUTTON_CLICKED, onJoinGroupClicked);
-			addViewListener(JassListViewBase.REFRESH_BUTTON_CLICKED, onRefreshButtonClicked);
+			view.onJassSelected.addOnce(onJassSelected);
+			view.onNewJassClicked.add(onNewJassButtonClicked);
+			view.onNewGroupClicked.add(onNewGroupClicked);
+			view.onFilterSelectionChanged.add(onFilterSelected);
+			view.onJoinGroupClicked.add(onJoinGroupClicked);
+			view.onRefreshClicked.add(onRefreshButtonClicked);
 			
 			addContextListener(JassProxyEvent.JASSES_CHANGED, onJassesChanged);
 			addContextListener(JoinGroupEvent.GROUP_JOINED, onGroupJoined);
 			addContextListener(JoinGroupEvent.GROUP_NOT_FOUND, onGroupNotFound);
 			
 			view.jassGroup = jassGroupProxy.currentJassGroup;
-			view.jasses.dataProvider = sort(view.filterSelection.selectedIndex);
+			view.jasses = sort(0);
 		}
 		
 		//--------------------------
@@ -107,22 +108,25 @@ package info.tiefenauer.jasskass.jass.views
 		//---------------------------
 		// View Event handlers
 		//---------------------------
-		private function onNewJassButtonClicked(event:Event):void{
+		private function onNewJassButtonClicked():void{
 			if (jassGroupProxy.currentJassGroup)
 				dispatch(new JassGroupEvent(JassGroupEvent.NEW_JASS_WITH_GROUP, jassGroupProxy.currentJassGroup));
 			else
 				dispatch(new JassEvent(JassEvent.NEW_ADHOC_JASS));
 		}
-		private function onJassSelected(event:Event):void{
-			dispatch(new JassEvent(JassEvent.SHOW_JASS_DETAIL, view.jasses.selectedItem));
+		private function onNewGroupClicked():void{
+			app.activeNavigator.pushView($(GroupBuilderView), new JassGroup());
 		}
-		private function onFilterSelected(event:Event):void{
-			view.jasses.dataProvider = sort(view.filterSelection.selectedIndex);
+		private function onJassSelected(jass:IJass):void{
+			dispatch(new JassEvent(JassEvent.SHOW_JASS_DETAIL, jass));
 		}
-		private function onJoinGroupClicked(event:Event):void{
-			dispatch(new JoinGroupEvent(JoinGroupEvent.JOIN_GROUP, view.groupKey));
+		private function onFilterSelected(selectedIndex:int):void{
+			view.jasses = sort(selectedIndex);
 		}
-		private function onRefreshButtonClicked(event:Event):void{
+		private function onJoinGroupClicked(groupCode:String):void{
+			dispatch(new JoinGroupEvent(JoinGroupEvent.JOIN_GROUP, groupCode));
+		}
+		private function onRefreshButtonClicked():void{
 			dispatch(new JassProxyEvent(JassProxyEvent.SYNC_JASSES));
 		}
 		
@@ -130,7 +134,7 @@ package info.tiefenauer.jasskass.jass.views
 		// Contex Event handlers
 		//---------------------------
 		private function onJassesChanged(event:JassProxyEvent):void{
-			view.jasses.dataProvider = sort(view.filterSelection.selectedIndex);
+			view.jasses = sort(0);
 		}
 		private function onGroupJoined(event:JoinGroupEvent):void{
 			view.jassGroup = jassGroupProxy.currentJassGroup;

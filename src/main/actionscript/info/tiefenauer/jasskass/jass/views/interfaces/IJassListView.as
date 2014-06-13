@@ -4,8 +4,7 @@
  */
 package info.tiefenauer.jasskass.jass.views.interfaces
 {
-	import spark.components.ButtonBar;
-	import spark.components.List;
+	import mx.collections.ArrayCollection;
 	
 	import info.tiefenauer.jasskass.profile.model.interfaces.IJassGroup;
 
@@ -16,10 +15,8 @@ package info.tiefenauer.jasskass.jass.views.interfaces
 	[Bindable]
 	public interface IJassListView
 	{
-		function get filterSelection():ButtonBar;
+		function set jasses(value:ArrayCollection):void;
 		function set jassGroup(value:IJassGroup):void;
-		function get jasses():List;
-		function get groupKey():String;
 		function setCurrentState(stateName:String, playTransition:Boolean=true):void;
 	}
 }

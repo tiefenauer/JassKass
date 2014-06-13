@@ -35,6 +35,7 @@ package info.tiefenauer.jasskass.kass.controller
 			kass.group = event.group;
 			kassProxy.addKass(kass);
 			var downloadedEvent:KassEvent = new KassEvent(KassEvent.DOWNLOAD_KASS_DATA_END);
+			downloadedEvent.group = event.group;
 			downloadedEvent.kass = kass;
 			dispatch(downloadedEvent);
 		}

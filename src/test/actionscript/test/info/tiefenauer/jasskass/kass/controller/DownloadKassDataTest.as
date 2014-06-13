@@ -19,8 +19,10 @@ package test.info.tiefenauer.jasskass.kass.controller
 	import info.tiefenauer.jasskass.kass.controller.DownloadKassData;
 	import info.tiefenauer.jasskass.kass.events.KassEvent;
 	import info.tiefenauer.jasskass.kass.model.Kass;
+	import info.tiefenauer.jasskass.kass.model.KassProxy;
 	import info.tiefenauer.jasskass.profile.model.JassGroup;
 	
+	import mockolate.mock;
 	import mockolate.stub;
 	import mockolate.runner.MockolateRule;
 	
@@ -35,6 +37,7 @@ package test.info.tiefenauer.jasskass.kass.controller
 		[Rule] public var rule:MockolateRule = new MockolateRule();
 		[Mock] public var group:JassGroup;
 		[Mock] public var kassService:KassService;
+		[Mock] public var kassProxy:KassProxy;
 		[Mock] public var kass:Kass;
 		
 		/*============================================================================*/
@@ -76,10 +79,12 @@ package test.info.tiefenauer.jasskass.kass.controller
 		public function testExecute():void{
 			stub(group).getter('id').returns('someGroupId');
 			stub(kassService).method('getKass').args(anything()).calls(kassService.onSuccess.dispatch, [kass]);
-			
+			mock(kassProxy).method('addKass').args(kass).once();
+
 			command.event = new KassEvent(KassEvent.DOWNLOAD_KASS_DATA);
 			command.event.group = group;
 			command.service = kassService;
+			command.kassProxy = kassProxy;
 			
 			Async.handleEvent(this, command.eventDispatcher, KassEvent.DOWNLOAD_KASS_DATA_END, function(event:KassEvent, ...args ):void{
 				assertEquals(group, event.group);

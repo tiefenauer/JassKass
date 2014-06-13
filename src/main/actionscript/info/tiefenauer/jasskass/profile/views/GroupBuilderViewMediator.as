@@ -1,12 +1,10 @@
 package info.tiefenauer.jasskass.profile.views
 {
-	import flash.events.Event;
-	
 	import info.tiefenauer.jasskass.app.views.SimpleMediator;
 	import info.tiefenauer.jasskass.profile.events.AzureGroupEvent;
 	import info.tiefenauer.jasskass.profile.events.AzurePlayerEvent;
-	import info.tiefenauer.jasskass.profile.views.base.GroupBuilderViewBase;
-	import info.tiefenauer.jasskass.profile.views.interfaces.IGroupBuilderView;
+	import info.tiefenauer.jasskass.profile.model.interfaces.IJassGroup;
+	import info.tiefenauer.jasskass.profile.views.phone.GroupBuilderView;
 	
 	/**
 	 * Mediator für ProfileViews 
@@ -14,11 +12,11 @@ package info.tiefenauer.jasskass.profile.views
 	 */
 	public class GroupBuilderViewMediator extends SimpleMediator
 	{
-		[Inject] public var view:IGroupBuilderView;
+		[Inject] public var view:GroupBuilderView;
 		
 		override public function initialize():void{
 			super.initialize();
-			addViewListener(GroupBuilderViewBase.SUBMIT_BUTTON_CLICKED, onCreateTeamButtonClicked);
+			view.onSubmitClicked.add(onSubmitClicked);
 			
 			addContextListener(AzureGroupEvent.GROUP_ADDED, onGroupCreated);
 			addContextListener(AzurePlayerEvent.PLAYER_CREATED, onPlayerCreated);
@@ -27,14 +25,16 @@ package info.tiefenauer.jasskass.profile.views
 		//---------------------------------
 		// View Event handlers
 		//---------------------------------
-		private function onCreateTeamButtonClicked(event:Event):void{
-			dispatch(new AzureGroupEvent(AzureGroupEvent.ADD_GROUP, view.jassGroup));
+		private function onSubmitClicked(group:IJassGroup):void{
+			view.setCurrentState('communicating');
+			dispatch(new AzureGroupEvent(AzureGroupEvent.ADD_GROUP, group));
 		}
 		
 		//---------------------------------
 		// Context Event handlers
 		//---------------------------------
 		private function onGroupCreated(event:AzureGroupEvent):void{
+			view.setCurrentState('default');
 			trace('Group created! Group-ID: ' + event.group.id);
 		}
 		private function onPlayerCreated(event:AzurePlayerEvent):void{

@@ -40,7 +40,7 @@ package info.tiefenauer.jasskass.azure.service
 		public function addGroup(group:IJassGroup):void{
 			_endpoint = 'addgroup';
 			_completeHandler = onGroupAdded;
-			_body = JassGroupFactory.toObject(group);
+			_body = JassGroupFactory.toAzureObject(group);
 			POST();
 		}
 		

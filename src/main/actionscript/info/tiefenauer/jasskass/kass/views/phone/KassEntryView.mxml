@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base:KassEntryViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
+						xmlns:s="library://ns.adobe.com/flex/spark" 
+						xmlns:base="info.tiefenauer.jasskass.kass.views.base.*"
+						creationComplete="onCreationComplete(event)"
+						>
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			import spark.formatters.DateTimeFormatter;
+			
+			private var df:DateTimeFormatter = new DateTimeFormatter();
+			
+			private function setTitle():void{
+				df.dateTimePattern = 'dd.MM.yyyy';
+				title = 'Jass vom ' + df.format(kassEntry.date);
+			}
+			protected function onCreationComplete(event:FlexEvent):void{
+				setTitle();
+				if (kassEntry.amounts.length > 0){
+					player1Name.text = kassEntry.amounts[0].player.firstName;
+					player1Amount.text = 'CHF ' + kassEntry.amounts[0].value;
+				}
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:Image width="100%" scaleMode="zoom">
+		<s:source>
+			<s:MultiDPIBitmapSource source120dpi="@Embed('assets/dpi120/bg_notepad.jpg')"
+									source160dpi="@Embed('assets/dpi160/bg_notepad.jpg')"
+									source240dpi="@Embed('assets/dpi240/bg_notepad.jpg')"
+									source320dpi="@Embed('assets/dpi320/bg_notepad.jpg')"
+									source480dpi="@Embed('assets/dpi480/bg_notepad.jpg')"
+									source640dpi="@Embed('assets/dpi640/bg_notepad.jpg')"
+									/>
+		</s:source>
+	</s:Image>
+	
+	<s:VGroup width="100%" height="100%">
+		<s:HGroup width="100%">
+			<s:Label id="player1Name" width="50%" />
+			<s:Label id="player1Amount" width="50%" />
+		</s:HGroup>
+	</s:VGroup>
+</base:KassEntryViewBase>

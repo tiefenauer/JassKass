@@ -7,6 +7,10 @@ package info.tiefenauer.jasskass.jass.views.base
 	import mx.collections.ArrayCollection;
 	
 	import info.tiefenauer.jasskass.app.views.MobileView;
+	import info.tiefenauer.jasskass.jass.model.interfaces.IJass;
+	import info.tiefenauer.jasskass.profile.model.interfaces.IJassGroup;
+	
+	import org.osflash.signals.Signal;
 	
 	/**
 	 * Base Class for JassListViews 
@@ -14,24 +18,30 @@ package info.tiefenauer.jasskass.jass.views.base
 	 */
 	public class JassListViewBase extends MobileView
 	{
-		public static const NAME:String = 'JassListViewBase';
-		// Event types
-		public static const NEW_JASS_BUTTON_CLICKED:String = NAME + 'NewJassButtonClicked';
-		public static const JASS_SELECTED:String = NAME + 'JassSelected';
-		public static const FILTER_SELECTED:String = NAME + 'SortCritChanged';
-		public static const JOIN_GROUP_BUTTON_CLICKED:String = NAME + 'JoinGroupButtonSelected';
-		public static const REFRESH_BUTTON_CLICKED:String = NAME + 'RefreshButtonSelected';
+		// Signals
+		public var onRefreshClicked:Signal = new Signal();
+		public var onNewJassClicked:Signal = new Signal();
+		public var onNewGroupClicked:Signal = new Signal();
+		public var onJoinGroupClicked:Signal = new Signal(String);
+		public var onFilterSelectionChanged:Signal = new Signal(int);
+		public var onJassSelected:Signal = new Signal(IJass);
+		
+		protected var _jassGroup:IJassGroup;
 		
 		//-----------------------------
 		// Getter/Setter
 		//-----------------------------
+		public function set jassGroup(value:IJassGroup):void{
+			_jassGroup = value;
+		}
+		
 		[Bindable]
-		public function get jassListDataProvider():ArrayCollection{
+		public function get jasses():ArrayCollection{
 			if (data is ArrayCollection)
 				return data as ArrayCollection;
 			return null;
 		}
-		public function set jassListDataProvider(value:ArrayCollection):void{
+		public function set jasses(value:ArrayCollection):void{
 			data = value;
 		}
 

@@ -3,16 +3,16 @@ package info.tiefenauer.jasskass.profile.views.base
 	import info.tiefenauer.jasskass.app.views.MobileView;
 	import info.tiefenauer.jasskass.profile.model.interfaces.IJassGroup;
 	
+	import org.osflash.signals.Signal;
+	
 	/**
 	 * Basisklasse für ProfileViews 
 	 * @author Daniel
 	 */
 	public class GroupBuilderViewBase extends MobileView
 	{
-		private static const NAME:String = 'ProfileViewBase';
-		// event types
-		public static const SUBMIT_BUTTON_CLICKED:String = NAME + 'createGroupButtonClicked';
-
+		public var onSubmitClicked:Signal = new Signal(IJassGroup);
+		
 		//--------------------------------
 		// Getter/Setter
 		//--------------------------------

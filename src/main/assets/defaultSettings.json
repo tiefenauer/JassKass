@@ -1,0 +1,34 @@
+[
+   {
+      "value":true,
+      "key":"AUTO_BERGPREIS"
+   },
+   {
+      "value":true,
+      "key":"VIER_BAUERN"
+   },
+   {
+      "value":2,
+      "key":"MATCH"
+   },
+   {
+      "value":2,
+      "key":"KONTERMATCH"
+   },
+   {
+      "value":1,
+      "key":"BERGPREIS"
+   },
+   {
+      "value":2,
+      "key":"SIEG"
+   },
+   {
+      "value":1,
+      "key":"STICHWERT"
+   },
+   {
+      "value":2,
+      "key":"DIFF_FAKTOR"
+   }
+]
